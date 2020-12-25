@@ -1,2 +1,2 @@
-# java-fundamentals-course
+# Java Fundamentals Course
 Interactive fundamental course on Computer Science and Java
