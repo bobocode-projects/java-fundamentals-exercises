@@ -1,4 +1,4 @@
-package com.bobocode.optionals;
+package com.bobocode.optionals.function;
 
 import com.bobocode.model.CreditAccount;
 

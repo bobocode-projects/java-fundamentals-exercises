@@ -1,4 +1,4 @@
-package com.bobocode.lambdas;
+package com.bobocode.lambdas.level2;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 
@@ -6,6 +6,13 @@ import java.math.BigDecimal;
 import java.util.Map;
 import java.util.function.*;
 
+/**
+ * {@link CrazyLambdas} is an exercise class. Each method returns a functional interface and it should be implemented
+ * using either lambda or a method reference. Every method that is not implemented yet throws
+ * {@link ExerciseNotCompletedException}.
+ * <p>
+ * TODO: remove exception and implement each method of this class using lambda or method reference
+ */
 public class CrazyLambdas {
 
     /**

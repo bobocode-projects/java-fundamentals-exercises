@@ -2,24 +2,23 @@ package com.bobocode.streams;
 
 import com.bobocode.model.Account;
 import com.bobocode.streams.exception.EntityNotFoundException;
+import com.bobocode.util.ExerciseNotCompletedException;
+import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Month;
 import java.util.*;
 
 /**
- * Implement methods using Stream API
+ * {@link CrazyStreams} is an exercise class. Each method represent some operation with a collection of accounts that
+ * should be implemented using Stream API. Every method that is not implemented yet throws
+ * {@link ExerciseNotCompletedException}.
+ * <p>
+ * TODO: remove exception throwing and implement each method using Stream API
  */
+@AllArgsConstructor
 public class CrazyStreams {
     private Collection<Account> accounts;
-
-    public static CrazyStreams of(Collection<Account> accounts) {
-        return new CrazyStreams(accounts);
-    }
-
-    private CrazyStreams(Collection<Account> accounts) {
-        this.accounts = accounts;
-    }
 
     /**
      * Returns {@link Optional} that contains an {@link Account} with the max value of balance
@@ -27,7 +26,7 @@ public class CrazyStreams {
      * @return account with max balance wrapped with optional
      */
     public Optional<Account> findRichestPerson() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -37,7 +36,7 @@ public class CrazyStreams {
      * @return a list of accounts
      */
     public List<Account> findAccountsByBirthdayMonth(Month birthdayMonth) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -47,7 +46,7 @@ public class CrazyStreams {
      * @return a map where key is true or false, and value is list of male, and female accounts
      */
     public Map<Boolean, List<Account>> partitionMaleAccounts() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -57,7 +56,7 @@ public class CrazyStreams {
      * @return a map where key is an email domain and value is a list of all account with such email
      */
     public Map<String, List<Account>> groupAccountsByEmailDomain() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -66,7 +65,7 @@ public class CrazyStreams {
      * @return total number of letters of first and last names of all accounts
      */
     public int getNumOfLettersInFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -75,7 +74,7 @@ public class CrazyStreams {
      * @return total balance of all accounts
      */
     public BigDecimal calculateTotalBalance() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -84,7 +83,7 @@ public class CrazyStreams {
      * @return list of accounts sorted by first and last names
      */
     public List<Account> sortByFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -94,7 +93,7 @@ public class CrazyStreams {
      * @return true if there is an account that has an email with provided domain
      */
     public boolean containsAccountWithEmailDomain(String emailDomain) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -105,7 +104,7 @@ public class CrazyStreams {
      * @return account balance
      */
     public BigDecimal getBalanceByEmail(String email) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -114,7 +113,7 @@ public class CrazyStreams {
      * @return map of accounts by its ids
      */
     public Map<Long, Account> collectAccountsById() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -125,7 +124,7 @@ public class CrazyStreams {
      * @return map of account by its ids the were created in a particular year
      */
     public Map<String, BigDecimal> collectBalancesByEmailForAccountsCreatedOn(int year) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -135,7 +134,7 @@ public class CrazyStreams {
      * @return a map where key is a last name and value is a set of first names
      */
     public Map<String, Set<String>> groupFirstNamesByLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -145,7 +144,7 @@ public class CrazyStreams {
      * @return a map where a key is a birthday month and value is comma-separated first names
      */
     public Map<Month, String> groupCommaSeparatedFirstNamesByBirthdayMonth() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -155,7 +154,7 @@ public class CrazyStreams {
      * @return a map where key is a creation month and value is total balance of all accounts created in that month
      */
     public Map<Month, BigDecimal> groupTotalBalanceByCreationMonth() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -165,7 +164,7 @@ public class CrazyStreams {
      * @return a map where key is a letter and value is its count in all first names
      */
     public Map<Character, Long> getCharacterFrequencyInFirstNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -175,7 +174,7 @@ public class CrazyStreams {
      * @return a map where key is a letter and value is its count ignoring case in all first and last names
      */
     public Map<Character, Long> getCharacterFrequencyIgnoreCaseInFirstAndLastNames() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        throw new ExerciseNotCompletedException();
     }
 
 }

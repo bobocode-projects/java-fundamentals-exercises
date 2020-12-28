@@ -34,7 +34,7 @@ public class CrazyStreamsTest {
                 new Account(4L, "Lucas", "Lynn", "lucas.lynn@yahoo.com",
                         LocalDate.parse("1987-05-25"), Sex.MALE, LocalDate.parse("2009-03-05"), BigDecimal.valueOf(16980))
         );
-        streams = CrazyStreams.of(accounts);
+        streams = new CrazyStreams(accounts);
     }
 
     @Test
