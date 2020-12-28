@@ -9,19 +9,11 @@
         <artifactId>java-fundamentals-course</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>6-0-functional-programming</artifactId>
+    <artifactId>3-0-java-core</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.source>11</maven.compiler.source>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.bobocode</groupId>
-            <artifactId>java-fundamentals-util</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
 </project>
