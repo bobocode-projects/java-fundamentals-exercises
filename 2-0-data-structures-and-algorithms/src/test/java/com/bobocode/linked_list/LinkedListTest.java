@@ -1,4 +1,4 @@
-package com.bobocode.LinkedList;
+package com.bobocode.linked_list;
 
 
 import org.junit.jupiter.api.MethodOrderer;

@@ -1,4 +1,4 @@
-package com.bobocode.LinkedList;
+package com.bobocode.linked_list;
 
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
