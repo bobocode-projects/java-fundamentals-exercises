@@ -68,10 +68,10 @@ public class LinkedList<T> implements List<T> {
     }
 
     /**
-     * Retrieves the first element. In case the list is empty it
-     * throws {@link NoSuchElementException}
+     * Returns the first element of the list. Operation is performed in constant time O(1)
      *
-     * @return an element value
+     * @return the first element of the list
+     * @throws java.util.NoSuchElementException if list is empty
      */
     @Override
     public T getFirst() {
@@ -79,10 +79,10 @@ public class LinkedList<T> implements List<T> {
     }
 
     /**
-     * Retrieves the last element. In case the list is empty it
-     * throws {@link NoSuchElementException}
+     * Returns the last element of the list. Operation is performed in constant time O(1)
      *
-     * @return an element value
+     * @return the last element of the list
+     * @throws java.util.NoSuchElementException if list is empty
      */
     @Override
     public T getLast() {
