@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,7 +38,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     void testAddElements() {
         intList = LinkedList.of(43, 233, 54);
 
@@ -46,9 +48,47 @@ public class LinkedListTest {
         assertEquals(54, intList.get(2).intValue());
     }
 
+    @Test
+    @Order(4)
+    void testSize() {
+        intList = LinkedList.of(4, 7, 9, 0, 7);
+
+        int size = intList.size();
+
+        assertEquals(5, size);
+    }
 
     @Test
     @Order(5)
+    void testGetFirstElement() {
+        intList = LinkedList.of(31, 32);
+
+        assertEquals(31, intList.getFirst().intValue());
+    }
+
+    @Test
+    @Order(6)
+    void testGetLastElement() {
+        intList = LinkedList.of(41, 42);
+
+        assertEquals(42, intList.getLast().intValue());
+    }
+
+    @Test
+    @Order(7)
+    void testGetFirstOfEmptyList() {
+        assertThrows(NoSuchElementException.class, () -> intList.getFirst());
+    }
+
+    @Test
+    @Order(8)
+    void testGetLastOfEmptyList() {
+        assertThrows(NoSuchElementException.class, () -> intList.getLast());
+    }
+
+
+    @Test
+    @Order(9)
     void testGetElements() {
         intList = LinkedList.of(25, 87, 45);
 
@@ -62,26 +102,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(16)
-    void testGetFirstElementFromEmptyList() {
-        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(0));
-    }
-
-    @Test
-    @Order(17)
-    void testGetElementByNegativeIndex() {
-        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(-1));
-    }
-
-    @Test
-    @Order(18)
-    void testGetElementByIndexEqualsToListSize() {
-        intList = LinkedList.of(33, 46, 25, 87, 45);
-        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(5));
-    }
-
-    @Test
-    @Order(6)
+    @Order(10)
     void testAddElementByZeroIndexIntoEmptyList() {
         intList.add(0, 45);
 
@@ -90,7 +111,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(7)
+    @Order(11)
     void testAddElementByIndexToTheEndOfList() {
         intList = LinkedList.of(98, 64, 23, 1, 3, 4);
 
@@ -102,7 +123,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(8)
+    @Order(12)
     void testAddElementToTheHeadOfNonEmptyList() {
         intList = LinkedList.of(4, 6, 8, 9, 0, 2);
 
@@ -114,7 +135,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(9)
+    @Order(13)
     void testAddElementByIndex() {
         intList = LinkedList.of(43, 5, 6, 8);
 
@@ -130,14 +151,14 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(10)
+    @Order(14)
     void testAddElementByNegativeIndex() {
         assertThrows(IndexOutOfBoundsException.class, () -> intList.add(-1, 66));
 
     }
 
     @Test
-    @Order(11)
+    @Order(15)
     void testAddElementByIndexLargerThanListSize() {
         intList = LinkedList.of(4, 6, 11, 9);
 
@@ -146,7 +167,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(12)
+    @Order(16)
     void testAddElementByIndexEqualToSize() {
         intList = LinkedList.of(1, 2, 3, 4, 5); // size = 5
 
@@ -157,13 +178,13 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(13)
+    @Order(17)
     void testSetFirstElementOnEmptyTree() {
         assertThrows(IndexOutOfBoundsException.class, () -> intList.set(0, 34));
     }
 
     @Test
-    @Order(14)
+    @Order(18)
     void testSetElementByIndexEqualToSize() {
         intList = LinkedList.of(2, 3, 4); // size = 3
 
@@ -171,7 +192,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(15)
+    @Order(19)
     void testSetElementByIndex() {
         intList = LinkedList.of(34, 78, 9, 8);
 
@@ -187,13 +208,32 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(19)
+    @Order(20)
+    void testGetFirstElementFromEmptyList() {
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(0));
+    }
+
+    @Test
+    @Order(21)
+    void testGetElementByNegativeIndex() {
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(-1));
+    }
+
+    @Test
+    @Order(22)
+    void testGetElementByIndexEqualsToListSize() {
+        intList = LinkedList.of(33, 46, 25, 87, 45);
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(5));
+    }
+
+    @Test
+    @Order(23)
     void testRemoveElementFromEmptyList() {
         assertThrows(IndexOutOfBoundsException.class, () -> intList.remove(234));
     }
 
     @Test
-    @Order(20)
+    @Order(24)
     void testRemoveFirstElement() {
         intList = LinkedList.of(4, 6, 8, 9);
 
@@ -204,7 +244,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(21)
+    @Order(25)
     void testRemoveLastElement() {
         intList = LinkedList.of(4, 6, 8, 9);
 
@@ -215,7 +255,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(22)
+    @Order(26)
     void testRemoveElement() {
         intList = LinkedList.of(1, 2, 3, 4, 5);
 
@@ -227,7 +267,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(23)
+    @Order(27)
     void testContainsOnEmptyList() {
         boolean contains = intList.contains(34);
 
@@ -235,7 +275,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(24)
+    @Order(28)
     void testContains() {
         intList = LinkedList.of(45, 6, 3, 6);
 
@@ -247,7 +287,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(25)
+    @Order(29)
     void testIsEmptyOnEmptyList() {
         boolean empty = intList.isEmpty();
 
@@ -255,7 +295,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(26)
+    @Order(30)
     void testIsEmpty() {
         intList = LinkedList.of(34, 5, 6);
 
@@ -265,7 +305,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(27)
+    @Order(31)
     void testSizeOnEmptyList() {
         int size = intList.size();
 
@@ -273,17 +313,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(3)
-    void testSize() {
-        intList = LinkedList.of(4, 7, 9, 0, 7);
-
-        int size = intList.size();
-
-        assertEquals(5, size);
-    }
-
-    @Test
-    @Order(28)
+    @Order(32)
     void testClearOnEmptyList() {
         intList.clear();
 
@@ -291,7 +321,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(29)
+    @Order(33)
     void testClearChangesTheSize() {
         intList = LinkedList.of(4, 5, 6);
 
@@ -301,7 +331,7 @@ public class LinkedListTest {
     }
 
     @Test
-    @Order(30)
+    @Order(34)
     void testClearRemovesElements() {
         intList = LinkedList.of(4, 5, 6);
 
