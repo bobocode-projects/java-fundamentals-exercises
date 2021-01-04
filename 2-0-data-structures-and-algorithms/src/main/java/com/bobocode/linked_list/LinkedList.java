@@ -1,5 +1,7 @@
 package com.bobocode.linked_list;
 
+import java.util.NoSuchElementException;
+
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
  * inner static class {@link Node<T>}. In order to keep track on nodes, {@link LinkedList} keeps a reference to a head node.
@@ -62,6 +64,28 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public T get(int index) {
+        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+    }
+
+    /**
+     * Retrieves the first element. In case the list is empty it
+     * throws {@link NoSuchElementException}
+     *
+     * @return an element value
+     */
+    @Override
+    public T getFirst() {
+        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+    }
+
+    /**
+     * Retrieves the last element. In case the list is empty it
+     * throws {@link NoSuchElementException}
+     *
+     * @return an element value
+     */
+    @Override
+    public T getLast() {
         throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
     }
 
