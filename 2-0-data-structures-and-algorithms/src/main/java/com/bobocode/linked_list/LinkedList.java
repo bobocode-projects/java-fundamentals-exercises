@@ -1,34 +1,18 @@
 package com.bobocode.linked_list;
 
-
-
-import com.bobocode.util.ExerciseNotCompletedException;
-
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
- * inner static class {@link Node<T>}. In order to keep track on nodes, {@link LinkedList} keeps a reference to a head node.
+ * inner static class {@link Node<T>}.
  *
  * @param <T> generic type parameter
  */
 public class LinkedList<T> implements List<T> {
-    final static class Node<T> {
-        private T element;
-        private Node<T> next;
-
-        private Node(T element) {
-            this.element = element;
-        }
-
-        static <T> Node<T> valueOf(T element) {
-            return new Node<>(element);
-        }
-    }
-
     private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     /**
@@ -39,13 +23,13 @@ public class LinkedList<T> implements List<T> {
      * @return a new list of elements the were passed as method parameters
      */
     public static <T> List<T> of(T... elements) {
-        List<T> list = new LinkedList<>();
-        Stream.of(elements).forEach(list::add);
-        return list;
+        LinkedList<T> linkedList = new LinkedList<>();
+        Stream.of(elements).forEach(linkedList::add);
+        return linkedList;
     }
 
     /**
-     * Adds an element to the end of the list
+     * Adds an element to the end of the list. This operation is performed in constant time O(1)
      *
      * @param element element to add
      */
@@ -65,14 +49,49 @@ public class LinkedList<T> implements List<T> {
     public void add(int index, T element) {
         Node<T> newNode = Node.valueOf(element);
         if (index == 0) {
-            newNode.next = head;
-            head = newNode;
+            addAsHead(newNode);
+        } else if (index == size) {
+            addAsTail(newNode);
         } else {
-            Node<T> node = findNodeByIndex(index - 1);
-            newNode.next = node.next;
-            node.next = newNode;
+            add(index, newNode);
         }
         size++;
+    }
+
+    private void addAsHead(Node<T> newNode) {
+        newNode.next = head;
+        head = newNode;
+        if (head.next == null) {
+            tail = head;
+        }
+    }
+
+    private void addAsTail(Node<T> newNode) {
+        tail.next = newNode;
+        tail = newNode;
+    }
+
+    private void add(int index, Node<T> newNode) {
+        Node<T> node = findNodeByIndex(index - 1);
+        newNode.next = node.next;
+        node.next = newNode;
+    }
+
+    private Node<T> findNodeByIndex(int index) {
+        Objects.checkIndex(index, size);
+        if (index == size - 1) {
+            return tail;
+        } else {
+            return nodeAt(index);
+        }
+    }
+
+    private Node<T> nodeAt(int index) {
+        Node<T> currentNode = head;
+        for (int i = 0; i < index; i++) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
     }
 
     /**
@@ -85,7 +104,7 @@ public class LinkedList<T> implements List<T> {
     @Override
     public void set(int index, T element) {
         Node<T> node = findNodeByIndex(index);
-        node.element = element;
+        node.value = element;
     }
 
     /**
@@ -98,16 +117,37 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T get(int index) {
         Node<T> node = findNodeByIndex(index);
-        return node.element;
+        return node.value;
     }
 
-    private Node<T> findNodeByIndex(int index) {
-        Objects.checkIndex(index, size);
-        Node<T> currentNode = head;
-        for (int i = 0; i < index; i++) {
-            currentNode = currentNode.next;
+    /**
+     * Returns the first element of the list. Operation is performed in constant time O(1)
+     *
+     * @return the first element of the list
+     * @throws java.util.NoSuchElementException if list is empty
+     */
+    @Override
+    public T getFirst() {
+        checkElementsExist();
+        return head.value;
+    }
+
+    /**
+     * Returns the last element of the list. Operation is performed in constant time O(1)
+     *
+     * @return the last element of the list
+     * @throws java.util.NoSuchElementException if list is empty
+     */
+    @Override
+    public T getLast() {
+        checkElementsExist();
+        return tail.value;
+    }
+
+    private void checkElementsExist() {
+        if (head == null) {
+            throw new NoSuchElementException();
         }
-        return currentNode;
     }
 
     /**
@@ -115,17 +155,28 @@ public class LinkedList<T> implements List<T> {
      * throws {@link IndexOutOfBoundsException}
      *
      * @param index element index
+     * @return an element value
      */
     @Override
     public void remove(int index) {
         if (index == 0) {
             Objects.checkIndex(index, size);
-            head = head.next;
+            removeHead();
         } else {
             Node<T> previousNode = findNodeByIndex(index - 1);
             previousNode.next = previousNode.next.next;
+            if (index == size - 1) {
+                tail = previousNode;
+            }
         }
         size--;
+    }
+
+    private void removeHead() {
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
     }
 
     /**
@@ -137,7 +188,7 @@ public class LinkedList<T> implements List<T> {
     public boolean contains(T element) {
         Node<T> currentNode = head;
         while (currentNode != null) {
-            if (currentNode.element.equals(element)) {
+            if (currentNode.value.equals(element)) {
                 return true;
             }
             currentNode = currentNode.next;
@@ -170,7 +221,20 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void clear() {
-        head = null;
+        head = tail = null;
         size = 0;
+    }
+
+    static class Node<T> {
+        private T value;
+        private Node<T> next;
+
+        private Node(T value) {
+            this.value = value;
+        }
+
+        public static <T> Node<T> valueOf(T value) {
+            return new Node<>(value);
+        }
     }
 }
