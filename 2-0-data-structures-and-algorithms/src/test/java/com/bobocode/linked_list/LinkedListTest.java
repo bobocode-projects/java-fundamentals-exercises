@@ -76,9 +76,7 @@ public class LinkedListTest {
 
     @Test
     @Order(7)
-    void testGetFirstOfEmptyList() {
-        assertThrows(NoSuchElementException.class, () -> intList.getFirst());
-    }
+    void testGetFirstOfEmptyList() { assertThrows(NoSuchElementException.class, () -> intList.getFirst()); }
 
     @Test
     @Order(8)
