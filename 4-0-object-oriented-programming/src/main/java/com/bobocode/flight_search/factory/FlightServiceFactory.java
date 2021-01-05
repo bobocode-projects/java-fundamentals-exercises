@@ -1,7 +1,7 @@
 package com.bobocode.flight_search.factory;
 
+import com.bobocode.flight_search.data.FlightDao;
 import com.bobocode.flight_search.service.FlightService;
-import com.bobocode.util.ExerciseNotCompletedException;
 
 /**
  * {@link FlightServiceFactory} is used to create an instance of {@link FlightService}
@@ -16,6 +16,7 @@ public class FlightServiceFactory {
      * @return FlightService
      */
     public FlightService creteFlightService() {
-        throw new ExerciseNotCompletedException();
+        return new FlightService(new FlightDao());
     }
 }
+
