@@ -1,5 +1,11 @@
 package com.bobocode.linked_list;
 
+
+
+import com.bobocode.util.ExerciseNotCompletedException;
+
+import java.util.NoSuchElementException;
+
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
  * inner static class {@link Node<T>}. In order to keep track on nodes, {@link LinkedList} keeps a reference to a head node.
@@ -16,7 +22,7 @@ public class LinkedList<T> implements List<T> {
      * @return a new list of elements the were passed as method parameters
      */
     public static <T> List<T> of(T... elements) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -26,7 +32,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -38,7 +44,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(int index, T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -50,7 +56,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void set(int index, T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -62,7 +68,29 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public T get(int index) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
+    }
+
+    /**
+     * Returns the first element of the list. Operation is performed in constant time O(1)
+     *
+     * @return the first element of the list
+     * @throws NoSuchElementException if list is empty
+     */
+    @Override
+    public T getFirst() {
+        throw new ExerciseNotCompletedException(); // todo: implement this method
+    }
+
+    /**
+     * Returns the last element of the list. Operation is performed in constant time O(1)
+     *
+     * @return the last element of the list
+     * @throws java.util.NoSuchElementException if list is empty
+     */
+    @Override
+    public T getLast() {
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -73,7 +101,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void remove(int index) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
 
@@ -84,7 +112,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public boolean contains(T element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -94,7 +122,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -104,7 +132,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
     /**
@@ -112,6 +140,6 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 }
