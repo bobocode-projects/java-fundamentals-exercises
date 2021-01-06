@@ -1,7 +1,7 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Java Functional Programming Basics :muscle:
 Learn Java functional programming
 
-### Into
+### Intro
 You know that **Java is an Object-Oriented programming language**, we use objects everywhere (except primitives 😉) and
 **functions are not first-class citizens**. So you **cannot store function as variables, pass as arguments or return
 as method results❗️**
@@ -81,3 +81,24 @@ public List<Account> findAllGmailAccounts(List<Account> accounts) {
 
 ⚡️ Nowadays **every Java developer uses some functional programming features in an everyday job**. So make sure you've 
 check out the rest of the materials in this module and build strong skills using these language features! 💪
+
+### Learn or skip ? 
+Think you're cool enough to skip this topic? 😎 Hand on a sec...☝️ Can you easily understand and write lambdas like this?
+```java
+runnable -> () -> {
+            Thread t = new Thread(runnable);
+            t.start();
+            return t;
+};
+```
+or stream pipelines like this ? 🧐
+```java
+accounts.stream()
+        .flatMap(a -> Stream.of(a.getFirstName(), a.getLastName()))
+        .map(String::toLowerCase)
+        .flatMapToInt(String::chars)
+        .mapToObj(c -> (char) c)
+        .collect(groupingBy(identity(), counting()));
+```
+No worries if you don't! Be patient, **do the exercises in this module**, and you will be able to do not only this 👆.
+**You will understand and use functional programming techniques far beyond your expectations** 🔥
