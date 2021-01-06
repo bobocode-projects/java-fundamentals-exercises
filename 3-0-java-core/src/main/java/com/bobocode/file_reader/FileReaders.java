@@ -1,7 +1,5 @@
 package com.bobocode.file_reader;
 
-import com.bobocode.util.ExerciseNotCompletedException;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -37,7 +35,7 @@ public class FileReaders {
         try {
             return Paths.get(fileUrl.toURI());
         } catch (URISyntaxException e) {
-            throw new FileReaderException("Invalid file URL",e);
+            throw new FileReaderException("Invalid file URL", e);
         }
     }
 
