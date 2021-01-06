@@ -1,14 +1,11 @@
 package com.bobocode.linked_list;
 
 
-
 import com.bobocode.util.ExerciseNotCompletedException;
-
-import java.util.NoSuchElementException;
 
 /**
  * {@link LinkedList} is a list implementation that is based on singly linked generic nodes. A node is implemented as
- * inner static class {@link Node<T>}. In order to keep track on nodes, {@link LinkedList} keeps a reference to a head node.
+ * inner static class {@link Node<T>}.
  *
  * @param <T> generic type parameter
  */
@@ -26,7 +23,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     /**
-     * Adds an element to the end of the list
+     * Adds an element to the end of the list.
      *
      * @param element element to add
      */
@@ -75,7 +72,7 @@ public class LinkedList<T> implements List<T> {
      * Returns the first element of the list. Operation is performed in constant time O(1)
      *
      * @return the first element of the list
-     * @throws NoSuchElementException if list is empty
+     * @throws java.util.NoSuchElementException if list is empty
      */
     @Override
     public T getFirst() {
