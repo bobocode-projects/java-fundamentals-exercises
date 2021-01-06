@@ -23,6 +23,7 @@
         <module>4-0-object-oriented-programming</module>
         <module>5-0-functional-programming</module>
         <module>java-fundamentals-util</module>
+        <module>6-0-test-driven-development</module>
     </modules>
 
     <dependencies>
