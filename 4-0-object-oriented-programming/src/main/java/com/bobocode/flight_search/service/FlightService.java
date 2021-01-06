@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * {@link FlightService} provides an API that allows to manage flight numbers
  * <p>
- * todo: 1. Using {@link FlightDao} implement method {@link FlightService#registerFlight(String)}
- * todo: 2. Using {@link FlightDao} implement method {@link FlightService#searchFlights(String)}
+ * todo: 1. Using {@link com.bobocode.flight_search.data.FlightDao} implement method {@link FlightService#registerFlight(String)}
+ * todo: 2. Using {@link com.bobocode.flight_search.data.FlightDao} implement method {@link FlightService#searchFlights(String)}
  */
 public class FlightService {
 
