@@ -1,75 +1,88 @@
 package com.bobocode.stack;
 
 import com.bobocode.stack.exception.EmptyStackException;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StackTest {
 
-    private Stack<Integer> intStack = new NodeStack<>();
+    private Stack<Integer> intStack = new LinkedStack<>();
 
     @Test
-    void testPushElementOntoEmptyStack() {
+    @Order(1)
+    void pushAndPopElementOntoEmptyStack() {
         intStack.push(234);
+
+        assertThat(intStack.pop()).isEqualTo(243);
     }
 
     @Test
-    void testPopElementFromEmptyStack() {
+    @Order(2)
+    void popElementFromEmptyStack() {
         assertThrows(EmptyStackException.class, () -> intStack.pop());
     }
 
     @Test
-    void testPushElements() {
-        intStack = NodeStack.of(23, 35, 72);
+    @Order(3)
+    void pushElements() {
+        intStack = LinkedStack.of(23, 35, 72);
 
         intStack.push(55);
 
-        assertThat(intStack.pop(), is(55));
+        assertThat(intStack.pop()).isEqualTo(55);
     }
 
     @Test
-    void testPopElements() {
-        intStack = NodeStack.of(87, 53, 66);
+    @Order(4)
+    void popElements() {
+        intStack = LinkedStack.of(87, 53, 66);
 
         intStack.pop();
         intStack.push(234);
         Integer lastElement = intStack.pop();
 
-        assertThat(lastElement, is(234));
+        assertThat(lastElement).isEqualTo(234);
     }
 
     @Test
-    void testSize(){
-        intStack = NodeStack.of(87, 53, 66);
+    @Order(5)
+    void size() {
+        intStack = LinkedStack.of(87, 53, 66);
 
         int actualSize = intStack.size();
 
-        assertThat(actualSize, is(3));
+        assertThat(actualSize).isEqualTo(3);
     }
 
     @Test
-    void testSizeOnEmptyStack(){
+    @Order(6)
+    void sizeOnEmptyStack() {
         int actualSize = intStack.size();
 
-        assertThat(actualSize, is(0));
+        assertThat(actualSize).isEqualTo(0);
     }
 
     @Test
-    void testIsEmpty(){
-        intStack = NodeStack.of(87, 53, 66);
+    @Order(7)
+    void isEmpty() {
+        intStack = LinkedStack.of(87, 53, 66);
 
         boolean stackEmpty = intStack.isEmpty();
 
-        assertThat(stackEmpty, is(false));
+        assertThat(stackEmpty).isEqualTo(false);
     }
 
     @Test
-    void testIsEmptyOnEmptyStack(){
+    @Order(8)
+    void isEmptyOnEmptyStack() {
         boolean stackEmpty = intStack.isEmpty();
 
-        assertThat(stackEmpty, is(true));
+        assertThat(stackEmpty).isEqualTo(true);
     }
 }

@@ -4,12 +4,12 @@ import com.bobocode.stack.exception.EmptyStackException;
 import com.bobocode.util.ExerciseNotCompletedException;
 
 /**
- * {@link NodeStack} represents a last-in-first-out (LIFO) stack of objects that is based on singly linked generic nodes.
+ * {@link LinkedStack} represents a last-in-first-out (LIFO) stack of objects that is based on singly linked generic nodes.
  * A node is implemented as inner static class {@link Node<T>}.
  *
  * @param <T> generic type parameter
  */
-public class NodeStack<T> implements Stack<T> {
+public class LinkedStack<T> implements Stack<T> {
 
     /**
      * This method creates a stack of provided elements
@@ -18,7 +18,7 @@ public class NodeStack<T> implements Stack<T> {
      * @param <T>      generic type
      * @return a new stack of elements that were passed as method parameters
      */
-    public static <T> NodeStack<T> of(T... elements) {
+    public static <T> LinkedStack<T> of(T... elements) {
         throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
