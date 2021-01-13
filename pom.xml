@@ -23,6 +23,7 @@
         <module>4-0-object-oriented-programming</module>
         <module>5-0-functional-programming</module>
         <module>java-fundamentals-util</module>
+        <module>6-0-test-driven-development</module>
     </modules>
 
     <dependencies>
@@ -32,10 +33,21 @@
             <version>5.7.0</version>
         </dependency>
         <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.18.0</version>
+            <version>3.18.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.3</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
