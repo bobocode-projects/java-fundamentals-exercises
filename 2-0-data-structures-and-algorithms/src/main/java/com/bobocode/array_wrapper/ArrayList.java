@@ -7,22 +7,22 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
- * {@link ArrayWrapper} is an implementation of {@link List} interface. This resizable data structure
+ * {@link ArrayList} is an implementation of {@link List} interface. This resizable data structure
  * based on an array and is simplified version of {@link java.util.ArrayList}.
  */
-public class ArrayWrapper<T> implements List<T> {
+public class ArrayList<T> implements List<T> {
 
     public static final int DEFAULT_CAPACITY = 5;
     private Object[] elementData;
     private int size;
 
     /**
-     * This constructor creates an instance of {@link ArrayWrapper} with a specific capacity of an array inside.
+     * This constructor creates an instance of {@link ArrayList} with a specific capacity of an array inside.
      *
      * @param initCapacity - the initial capacity of the list
      * @throws IllegalArgumentException – if the specified initial capacity is negative or 0.
      */
-    public ArrayWrapper(int initCapacity) {
+    public ArrayList(int initCapacity) {
         if (initCapacity > 0) {
             elementData = new Object[initCapacity];
         } else {
@@ -31,21 +31,21 @@ public class ArrayWrapper<T> implements List<T> {
     }
 
     /**
-     * This constructor creates an instance of {@link ArrayWrapper} with a default capacity of an array inside.
+     * This constructor creates an instance of {@link ArrayList} with a default capacity of an array inside.
      * A default size of inner array is 5;
      */
-    public ArrayWrapper() {
+    public ArrayList() {
         elementData = new Object[DEFAULT_CAPACITY];
     }
 
     /**
-     * Creates and returns an instance of {@link ArrayWrapper} with provided elements
+     * Creates and returns an instance of {@link ArrayList} with provided elements
      *
      * @param elements to add
      * @return new instance
      */
     public static <T> List<T> of(T... elements) {
-        List<T> list = new ArrayWrapper<T>(elements.length);
+        List<T> list = new ArrayList<T>(elements.length);
         for (T element : elements) {
             list.add(element);
         }
