@@ -1,7 +1,5 @@
 package com.bobocode.stack;
 
-import com.bobocode.stack.exception.EmptyStackException;
-
 import java.util.Objects;
 import java.util.stream.Stream;
 
