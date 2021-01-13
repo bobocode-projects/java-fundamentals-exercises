@@ -164,12 +164,11 @@ public class ArrayList<T> implements List<T> {
      * @return If element exists method returns true, otherwise it returns false
      */
     @Override
-    @SuppressWarnings("unchecked")
     public boolean contains(T element) {
         if (isEmpty()) {
             return false;
         } else {
-            for (T elem : (T[]) elementData) {
+            for (Object elem : elementData) {
                 if (elem.equals(element)) {
                     return true;
                 }
