@@ -1,4 +1,4 @@
-package com.bobocode.array_wrapper;
+package com.bobocode.array_list;
 
 import com.bobocode.linked_list.List;
 
@@ -122,7 +122,9 @@ public class ArrayList<T> implements List<T> {
     @Override
     @SuppressWarnings("unchecked")
     public T getLast() {
-
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
         return (T) elementData[size - 1];
     }
 
