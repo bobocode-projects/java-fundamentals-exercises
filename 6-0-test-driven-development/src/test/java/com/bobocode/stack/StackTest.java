@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class StackTest {
+public class StackTest {
 
     private Stack<Integer> intStack = new LinkedStack<>();
 
