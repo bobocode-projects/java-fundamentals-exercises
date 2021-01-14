@@ -16,8 +16,8 @@ class StackTest {
 
     @Test
     @Order(1)
-    void pushAndPopElementOntoEmptyStack() {
-        intStack.push(234);
+    void pushElementOntoEmptyStack() {
+        intStack.push(243);
 
         assertThat(intStack.pop()).isEqualTo(243);
     }
