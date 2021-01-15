@@ -2,61 +2,57 @@
 Learn Java functional programming
 
 ### Intro
-You know that **Java is an Object-Oriented programming language**, we use objects everywhere (except primitives 😉) and
-**functions are not first-class citizens**. So you **cannot store function as variables, pass as arguments or return
-as method results❗️**
+Do you remember pattern "Strategy" from "Design patterns"(GOF). Programmers use it quite often, for instance to search
+account by some criteria. We will use this case as an example. 
 
-Yes, however... 🙂
+In a simple implementation, there should be an "engine" which is able to look through all accounts and to test them on some criteria. 
+If account passes criteria, it is moved to results.
+Question: how to pass criteria to engine? In fact criteria is a couple of if-statement, which should reside in
+a method(actually the only scope, where if-statement can reside in Java). Java does not allow to pass a method as an 
+argument - method should be put in some object. Since you already know about interfaces Comparator and Runnable, objects
+with the only method are not weird to you.
 
-Having functions as **first-class citizens is useful!** When building real application quite often **you need to pass
-some logic around as function.** But in Java you have to create an object, usually anonymous.
+So we may create a class with a single method and to pass instance of this class to the search "engine". But in this 
+case we get a lot of small classes with the only method with possibly only one if-statement. This approach complicates
+navigation on already large project - not attractive.
 
-### Case Study: Search by criteria
-Suppose you have a list of accounts, and you need to build a search method that will allow you to find account by
-a certain criteria. In java, you will need to create something like this
+Also we may create an instance of anonymous class right before passing it to search engine. It looks like this:
 ```java
 interface Criteria<T> {
     boolean passed(T obj);
 }
 ```
-then you can use that in your search method like this:
 ```java
-public List<Account> searchBy(Criteria criteria){
-    List<Account> foundAccount = new ArrayList<>();
-    for (Account a: accounts){
-        if (criteria.passed(a)){
-            foundAccount.add(a);
-        }
-    }
-    return foundAccounts;
-}
-```
-Agree? Then if you want to use this method, it will look like this
-```java
-searchBy(new Criteria<Account>() {
+... = searchEngine.searchBy(new Criteria<Account>() {
     @Override
     public boolean passed(Account a) {
         return a.getEmail().endsWith("@gmail.com");
     }
 });
 ```
-Most probably you've seen similar examples where you pass a `Runnable` implementation to execute some logic in
-a new thread, or you pass `Comparator` implementation to sort a list of objects. That's why having a function
-as first-class citizens is not a bad idea. In all cases mentioned **we pass objects, but what we want to pass
-is a function❗️** How would passing a function look like? 🤔 Maybe something like
+Already better but to verbose.
+
+Java 8 introduced new syntax to overcome such verbosity - lambdas. Here is the beginning of functional programming in Java.
+Implementation with lambdas look like this:
 ```java
-searchBy(a -> a.getEmail().endsWith("@gmail.com"));
+... = searchEngine.searchBy(a -> a.getEmail().endsWith("@gmail.com"));
 ```
+One row - that is it.
+
+Lambdas caused creation of other APIs 
+* Functional Interfaces
+* Stream API
+* Optional API
+
+which eliminates a lot of boiler-plate code and even makes parallel calculations easier.
+
+Already mentioned "functional programming" is another programming paradigm(like already familiar procedural and OO).
+Looks through this article to understand connection between lambdas and functional programming.
+
 ### Summary
 The main idea is to keep Java OO language but **enable some functional programming features**. It does two things:
 * makes the code more concise
 * allows easier parallelization
-
-Java SE 8+ provides a rich API that enables functional programming features based on
-* Functional Interfaces
-* Lambdas
-* Stream API
-* Optional API
 
 Once you've mastered all those stuff, instead of this
 ```java
