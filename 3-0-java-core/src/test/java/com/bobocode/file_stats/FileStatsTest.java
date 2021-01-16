@@ -1,36 +1,40 @@
 package com.bobocode.file_stats;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class FileStatsTest {
 
     @Test
-    void testCreateFileStatsFromExistingFile() {
+    @Order(1)
+    void createFileStatsFromExistingFile() {
         FileStats fileStats = FileStats.from("sotl.txt");
     }
 
     @Test
-    void testCreateFileStatsFromNonExistingFile() {
-        Assertions.assertThrows(FileStatsException.class, () -> FileStats.from("blahblah.txt"));
+    @Order(2)
+    void createFileStatsFromNonExistingFile() {
+        assertThatThrownBy(() -> FileStats.from("blahblah.txt")).isInstanceOf(FileStatsException.class);
     }
 
     @Test
-    void testGetCharCount() {
+    @Order(3)
+    void getCharCount() {
         FileStats lambdaArticleFileStats = FileStats.from("sotl.txt");
         FileStats springCloudArticleFileStats = FileStats.from("scosb.txt");
 
         int aCharCountInLambdaArticle = lambdaArticleFileStats.getCharCount('a');
         int bCharCountInSpringArticle = springCloudArticleFileStats.getCharCount('b');
 
-        assertEquals(2345, aCharCountInLambdaArticle);
-        assertEquals(4, bCharCountInSpringArticle);
+        assertThat(aCharCountInLambdaArticle).isEqualTo(2345);
+        assertThat(bCharCountInSpringArticle).isEqualTo(4);
     }
 
     @Test
-    void testGetMostPopularCharacter() {
+    @Order(4)
+    void getMostPopularCharacter() {
         FileStats lambdaArticleFileStats = FileStats.from("sotl.txt");
         FileStats springCloudArticleFileStats = FileStats.from("scosb.txt");
 
@@ -39,12 +43,13 @@ public class FileStatsTest {
 
         System.out.println(mostPopularCharacterInSpringArticle);
 
-        assertEquals('e', mostPopularCharacterInLambdaArticle);
-        assertEquals('e', mostPopularCharacterInSpringArticle);
+        assertThat(mostPopularCharacterInLambdaArticle).isEqualTo('e');
+        assertThat(mostPopularCharacterInSpringArticle).isEqualTo('e');
     }
 
     @Test
-    void testContainsCharacter() {
+    @Order(5)
+    void containsCharacter() {
         FileStats lambdaArticleFileStats = FileStats.from("sotl.txt");
         FileStats springCloudArticleFileStats = FileStats.from("scosb.txt");
 
@@ -53,9 +58,9 @@ public class FileStatsTest {
         boolean springArticleContainsExistingCharacter = springCloudArticleFileStats.containsCharacter('b');
         boolean springArticleContainsWhitespace = springCloudArticleFileStats.containsCharacter(' ');
 
-        assertTrue(lambdaArticleContainsExistingCharacter);
-        assertFalse(lambdaArticleContainsWhitespace);
-        assertTrue(springArticleContainsExistingCharacter);
-        assertFalse(springArticleContainsWhitespace);
+        assertThat(lambdaArticleContainsExistingCharacter).isTrue();
+        assertThat(lambdaArticleContainsWhitespace).isFalse();
+        assertThat(springArticleContainsExistingCharacter).isTrue();
+        assertThat(springArticleContainsWhitespace).isFalse();
     }
 }
