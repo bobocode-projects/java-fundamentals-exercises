@@ -155,21 +155,25 @@ public class LinkedList<T> implements List<T> {
      * throws {@link IndexOutOfBoundsException}
      *
      * @param index element index
-     * @return an element value
+     * @return deleted element
      */
     @Override
-    public void remove(int index) {
+    public T remove(int index) {
+        T deletedElement = null;
         if (index == 0) {
             Objects.checkIndex(index, size);
+            deletedElement = head.value;
             removeHead();
         } else {
             Node<T> previousNode = findNodeByIndex(index - 1);
+            deletedElement = previousNode.next.value;
             previousNode.next = previousNode.next.next;
             if (index == size - 1) {
                 tail = previousNode;
             }
         }
         size--;
+        return deletedElement;
     }
 
     private void removeHead() {

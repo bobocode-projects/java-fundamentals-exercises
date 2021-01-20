@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class ArrayList<T> implements List<T> {
 
-    public static final int DEFAULT_CAPACITY = 5;
+    private static final int DEFAULT_CAPACITY = 5;
     private Object[] elementData;
     private int size;
 
@@ -53,7 +53,7 @@ public class ArrayList<T> implements List<T> {
     }
 
     /**
-     * Adds an element to the array and returns index of position.
+     * Adds an element to the array.
      *
      * @param element element to add
      */
@@ -65,8 +65,8 @@ public class ArrayList<T> implements List<T> {
     }
 
     private void increaseDataArrayIfFull() {
-        if (elementData.length <= size) {
-            elementData = getTrimmedArrayToSize(elementData.length * 2);
+        if (elementData.length == size) {
+            elementData = Arrays.copyOf(elementData, size * 2);
         }
     }
 
@@ -146,15 +146,16 @@ public class ArrayList<T> implements List<T> {
      * throws {@link IndexOutOfBoundsException}
      *
      * @param index element index
+     * @return deleted element
      */
     @Override
-    public void remove(int index) {
-        if (index == size - 1) {
-            elementData = getTrimmedArrayToSize(size - 1);
-        } else {
-            System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
-        }
+    @SuppressWarnings("unchecked")
+    public T remove(int index) {
+        Objects.checkIndex(index, size);
+        T deletedElement = (T) elementData[index];
+        System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
         size--;
+        return deletedElement;
     }
 
     /**
