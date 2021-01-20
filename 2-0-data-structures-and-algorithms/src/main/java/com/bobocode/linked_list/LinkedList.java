@@ -95,9 +95,10 @@ public class LinkedList<T> implements List<T> {
      * throws {@link IndexOutOfBoundsException}
      *
      * @param index element index
+     * @return deleted element
      */
     @Override
-    public void remove(int index) {
+    public T remove(int index) {
         throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
