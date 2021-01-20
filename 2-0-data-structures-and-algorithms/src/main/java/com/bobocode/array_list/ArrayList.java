@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class ArrayList<T> implements List<T> {
 
-    public static final int DEFAULT_CAPACITY = 5;
+    private static final int DEFAULT_CAPACITY = 5;
     private Object[] elementData;
     private int size;
 
@@ -65,8 +65,8 @@ public class ArrayList<T> implements List<T> {
     }
 
     private void increaseDataArrayIfFull() {
-        if (elementData.length <= size) {
-            elementData = getTrimmedArrayToSize(elementData.length * 2);
+        if (elementData.length == size) {
+            elementData = Arrays.copyOf(elementData, size * 2);
         }
     }
 
