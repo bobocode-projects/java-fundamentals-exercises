@@ -1,10 +1,7 @@
 package com.bobocode.bst;
 
 import com.bobocode.util.ExerciseNotCompletedException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -25,68 +22,39 @@ import static org.hamcrest.Matchers.empty;*/
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BinarySearchTreeTest {
 
+    private static final Integer[] someElements = {10, 9, 11, 8, 12, 7};
+
     @Test
-    void insertIntoEmptyTree() {
+    @Order(1)
+    void createOfElements() {
+        BinarySearchTree<Integer> bst = createOf(someElements);
+        for (var e: someElements) {
+            assertThat(bst.search(e)).isTrue();
+        }
+        assertThat(bst.size()).isEqualTo(someElements.length);
+    }
+
+    @Test
+    @Order(2)
+    void insertUniqueElements() {
         BinarySearchTree<Integer> bst = createOf();
-        boolean inserted = bst.insert(123);
-
-        assertThat(inserted).isTrue();
+        for (var e: someElements) {
+            assertThat(bst.search(e)).isFalse(); //does not exist
+            assertThat(bst.insert(e)).isTrue(); //do insert
+            assertThat(bst.search(e)).isTrue(); //and exist
+        }
+        assertThat(bst.size()).isEqualTo(someElements.length);
     }
 
     @Test
-    void insertTwoElementsWithSameValue() {
-        BinarySearchTree<Integer> bst = createOf(25);
-        boolean inserted = bst.insert(25);
-
-        assertThat(inserted).isFalse();
-    }
-
-    //TODO: rename test and method
-    @Test
-    void insertElements() {
-        BinarySearchTree<Integer> bst = createOf(10, 9, 11, 8, 12, 7);
-        //TODO: should insert
-        //bst.insert()
-
-        assertThat(bst.search(10)).isTrue();
-        assertThat(bst.search(9)).isTrue();
-        assertThat(bst.search(11)).isTrue();
-        assertThat(bst.search(8)).isTrue();
-        assertThat(bst.search(12)).isTrue();
-        assertThat(bst.search(7)).isTrue();
-    }
-
-    //TODO: should be separate test??
-    @Test
-    void searchRootElement() {
-        BinarySearchTree<Integer> bst = createOf(44);
-
-        boolean foundExistingElement = bst.search(44);
-        boolean foundNotExistingElement = bst.search(23423);
-
-        assertThat(foundExistingElement).isTrue();
-        assertThat(foundNotExistingElement).isFalse();
-    }
-
-    @Test
-    void searchInEmptyTree() {
-        BinarySearchTree<Integer> bst = createOf();
-        boolean found = bst.search(55);
-
-        assertThat(found).isFalse();
-    }
-
-    @Test
-    void searchElements() {
-        BinarySearchTree<Integer> bst = createOf(234, 54, 12, 544, 21, 10);
-
-        assertThat(bst.search(234)).isTrue();
-        assertThat(bst.search(54)).isTrue();
-        assertThat(bst.search(12)).isTrue();
-        assertThat(bst.search(544)).isTrue();
-        assertThat(bst.search(21)).isTrue();
-        assertThat(bst.search(10)).isTrue();
-        assertThat(bst.search(1000)).isFalse();
+    @Order(3)
+    void insertNonUniqueElements() {
+        BinarySearchTree<Integer> bst = createOf(someElements);
+        for (var e: someElements) {
+            assertThat(bst.insert(e)).isFalse(); //do not insert
+            assertThat(bst.search(e)).isTrue(); //but exists
+        }
+        assertThat(bst.size()).isEqualTo(someElements.length);
     }
 
     @Test
