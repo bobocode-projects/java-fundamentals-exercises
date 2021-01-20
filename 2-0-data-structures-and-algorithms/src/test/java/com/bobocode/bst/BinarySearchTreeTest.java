@@ -2,15 +2,19 @@ package com.bobocode.bst;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.*;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
-//import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 /*import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -26,10 +30,10 @@ class BinarySearchTreeTest {
 
     @Test
     @Order(1)
-    void createOfElements() {
-        BinarySearchTree<Integer> bst = createOf(someElements);
+    void createWithElements() {
+        BinarySearchTree<Integer> bst = createTreeWith(someElements);
         for (var e: someElements) {
-            assertThat(bst.search(e)).isTrue();
+            assertThat(bst.contains(e)).isTrue();
         }
         assertThat(bst.size()).isEqualTo(someElements.length);
     }
@@ -37,127 +41,82 @@ class BinarySearchTreeTest {
     @Test
     @Order(2)
     void insertUniqueElements() {
-        BinarySearchTree<Integer> bst = createOf();
-        for (var e: someElements) {
-            assertThat(bst.search(e)).isFalse(); //does not exist
+        BinarySearchTree<Integer> bst = createTreeWith();
+        for (int i = 0; i < someElements.length; i++) {
+            var e = someElements[i];
+            assertThat(bst.contains(e)).isFalse(); //does not contain
+            assertThat(bst.size()).isEqualTo(i);
+
             assertThat(bst.insert(e)).isTrue(); //do insert
-            assertThat(bst.search(e)).isTrue(); //and exist
+
+            assertThat(bst.contains(e)).isTrue(); //and contains
+            assertThat(bst.size()).isEqualTo(i + 1);
         }
-        assertThat(bst.size()).isEqualTo(someElements.length);
     }
 
     @Test
     @Order(3)
     void insertNonUniqueElements() {
-        BinarySearchTree<Integer> bst = createOf(someElements);
+        BinarySearchTree<Integer> bst = createTreeWith(someElements);
         for (var e: someElements) {
-            assertThat(bst.insert(e)).isFalse(); //do not insert
-            assertThat(bst.search(e)).isTrue(); //but exists
+            assertThat(bst.insert(e)).isFalse(); //does not insert
+            assertThat(bst.contains(e)).isTrue(); //but contains
         }
         assertThat(bst.size()).isEqualTo(someElements.length);
     }
 
-    @Test
-    void sizeOfEmptyTree() {
-        BinarySearchTree<Integer> bst = createOf();
-        int actualTreeSize = bst.size();
-
-        assertThat(actualTreeSize).isEqualTo(0);
+    @ParameterizedTest
+    @MethodSource("depthArguments")
+    @Order(4)
+    void depth(Integer[] elements, int depth) {
+        BinarySearchTree<Integer> bst = createTreeWith(elements);
+        assertThat(bst.depth()).isEqualTo(depth);
     }
 
     @Test
-    void size() {
-        BinarySearchTree<Integer> bst = createOf(1, 2, 3, 4, 1);
-        int actualTreeSize = bst.size();
-
-        assertThat(actualTreeSize).isEqualTo(4);
-    }
-
-    @Test
-    void heightOfEmptyTree() {
-        BinarySearchTree<Integer> bst = createOf();
-        int actualHeight = bst.height();
-
-        assertThat(actualHeight).isEqualTo(0);
-    }
-
-    @Test
-    void heightOfOneElementTree() {
-        BinarySearchTree<Integer> bst = createOf(24);
-
-        int actualHeight = bst.height();
-
-        //todo: check value, this was initially
-        assertThat(actualHeight).isEqualTo(0);
-    }
-
-    /**
-     * .......10
-     * ....../  \
-     * .....5   15
-     * ..../      \
-     * ...1       20
-     */
-    @Test
-    void height() {
-        BinarySearchTree<Integer> bst = createOf(10, 5, 15, 1, 20);
-
-        int actualHeight = bst.height();
-        //todo: change contract, height should be 3
-        assertThat(actualHeight).isEqualTo(2);
-    }
-
-    /**
-     * ..1
-     * ...\
-     * ....2
-     * .....\
-     * ..... 3
-     * .......\
-     * ........4
-     * .........\
-     * ..........5
-     */
-    @Test
-    void heightOfLikedListTree() {
-        BinarySearchTree<Integer> bst = createOf(1, 2, 3, 4, 5);
-
-        int actualHeight = bst.height();
-
-        //todo: contr. will be changed
-        assertThat(actualHeight).isEqualTo(4);
-    }
-
-    @Test
-    void heightOfSingleElementTree() {
-        BinarySearchTree<Integer> bst = createOf(1);
-
-        int actualHeight = bst.height();
-        //todo: contr. will be changed
-        assertThat(actualHeight).isEqualTo(0);
-    }
-
-    @Test
-    void inorderTraversalOfEmptyTree() {
-        BinarySearchTree<Integer> bst = createOf();
-        List<Integer> treeElementsList = new ArrayList<>(bst.size());
-        bst.inOrderTraversal(treeElementsList::add);
-
-        assertThat(treeElementsList).isEmpty();
-    }
-
-    @Test
+    @Order(5)
     void inorderTraversal() {
-        BinarySearchTree<Integer> bst = createOf(324, 23, 14, 1551, 2);
+        BinarySearchTree<Integer> bst = createTreeWith(someElements);
+        Integer[] sortedElements = Arrays.copyOf(someElements, someElements.length);
+        Arrays.sort(sortedElements);
 
-        List<Integer> treeElementsList = new ArrayList<>(bst.size());
-        bst.inOrderTraversal(treeElementsList::add);
+        List<Integer> traversedElements = new ArrayList<>(bst.size());
+        bst.inOrderTraversal(traversedElements::add);
 
-        assertThat(bst.size()).isEqualTo(treeElementsList.size());
-        assertThat(treeElementsList).contains(2, 14, 23, 324, 1551);
+        //assertThat(bst.size()).isEqualTo(treeElementsList.size());
+        //assertThat(treeElementsList).contains(2, 14, 23, 324, 1551);
+        assertThat(traversedElements).isEqualTo(List.of(sortedElements));
     }
 
-    private BinarySearchTree<Integer> createOf(Integer... elements) {
+    public static Stream<Arguments> depthArguments() {
+        return Stream.of(
+                //empty tree
+                arguments(new Integer[]{}, 0),
+                //tree with a single element
+                arguments(new Integer[]{24}, 0),
+                /*
+                 * .......10
+                 * ....../  \
+                 * .....5   15
+                 * ..../      \
+                 * ...1       20
+                 */
+                arguments(new Integer[]{10, 5, 15, 1, 20}, 2),
+                /*
+                 * ..1
+                 * ...\
+                 * ....2
+                 * .....\
+                 * ..... 3
+                 * .......\
+                 * ........4
+                 * .........\
+                 * ..........5
+                 */
+                arguments(new Integer[]{1, 2, 3, 4, 5}, 4));
+    }
+
+    private BinarySearchTree<Integer> createTreeWith(Integer... elements) {
          return Mockito.mock(BinarySearchTree.class,
                 (InvocationOnMock i) -> {throw new ExerciseNotCompletedException();}); //todo
     }
