@@ -2,24 +2,34 @@ package com.bobocode.bst;
 
 import java.util.function.Consumer;
 
-/**
- * Binary search tree should have an API that allow provides the following functionality:
- * - insert an element and return true if it was inserted successfully
- * - search an element and return true it element exists
- * - get tree size
- * - get tree height
- * - perform in-order traversal by passing element @{@link Consumer} as a parameter
- */
 public interface BinarySearchTree<T extends Comparable> {
-
+    /**
+     * insert an element
+     * @return true if element did not exist in the tree and was inserted
+     */
     boolean insert(T element);
 
+    //todo: rename
+    /**
+     * @return true if element exists in the tree
+     */
     boolean search(T element);
 
+    /**
+     * @return number of elements in the tree
+     */
     int size();
 
+    //todo: rename to depth
+    /**
+     * @return 1 + max. number of nodes between root node and any other node(0 - if no elements in the tree; 1 - if there is only root)
+     */
     int height();
 
+    /**
+     * traverse the tree in element's natural order
+     * @param consumer accepts ref. to node during traversing
+     */
     void inOrderTraversal(Consumer<T> consumer);
 
 }
