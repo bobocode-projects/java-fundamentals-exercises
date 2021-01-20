@@ -14,7 +14,7 @@ public interface List<E> {
 
     E getLast();
 
-    void remove(int index);
+    E remove(int index);
 
     boolean contains(E element);
 

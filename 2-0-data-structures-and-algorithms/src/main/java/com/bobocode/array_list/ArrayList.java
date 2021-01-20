@@ -53,7 +53,7 @@ public class ArrayList<T> implements List<T> {
     }
 
     /**
-     * Adds an element to the array and returns index of position.
+     * Adds an element to the array.
      *
      * @param element element to add
      */
@@ -146,9 +146,10 @@ public class ArrayList<T> implements List<T> {
      * throws {@link IndexOutOfBoundsException}
      *
      * @param index element index
+     * @return deleted element
      */
     @Override
-    public void remove(int index) {
+    public T remove(int index) {
         if (index == size - 1) {
             elementData = getTrimmedArrayToSize(size - 1);
         } else {
