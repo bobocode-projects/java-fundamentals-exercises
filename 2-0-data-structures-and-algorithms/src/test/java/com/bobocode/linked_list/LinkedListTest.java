@@ -8,10 +8,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LinkedListTest {
@@ -76,7 +73,9 @@ public class LinkedListTest {
 
     @Test
     @Order(7)
-    void testGetFirstOfEmptyList() { assertThrows(NoSuchElementException.class, () -> intList.getFirst()); }
+    void testGetFirstOfEmptyList() {
+        assertThrows(NoSuchElementException.class, () -> intList.getFirst());
+    }
 
     @Test
     @Order(8)
@@ -202,7 +201,6 @@ public class LinkedListTest {
         assertEquals(78, intList.get(1).intValue());
         assertEquals(8, intList.get(3).intValue());
         assertEquals(4, intList.size());
-
     }
 
     @Test
@@ -235,10 +233,11 @@ public class LinkedListTest {
     void testRemoveFirstElement() {
         intList = LinkedList.of(4, 6, 8, 9);
 
-        intList.remove(0);
+        int deletedElement = intList.remove(0);
 
         assertEquals(6, intList.get(0).intValue());
         assertEquals(3, intList.size());
+        assertEquals(4, deletedElement);
     }
 
     @Test
@@ -246,10 +245,11 @@ public class LinkedListTest {
     void testRemoveLastElement() {
         intList = LinkedList.of(4, 6, 8, 9);
 
-        intList.remove(intList.size() - 1);
+        int deletedElement = intList.remove(intList.size() - 1);
 
         assertEquals(8, intList.get(intList.size() - 1).intValue());
         assertEquals(3, intList.size());
+        assertEquals(9, deletedElement);
     }
 
     @Test
@@ -258,10 +258,11 @@ public class LinkedListTest {
         intList = LinkedList.of(1, 2, 3, 4, 5);
 
         int elementIndex = 2;
-        intList.remove(elementIndex); // element = 3
+        int deletedElement = intList.remove(elementIndex); // element = 3
 
         assertEquals(4, intList.get(elementIndex).intValue());
         assertEquals(4, intList.size());
+        assertEquals(3, deletedElement);
     }
 
     @Test
