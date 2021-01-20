@@ -149,13 +149,13 @@ public class ArrayList<T> implements List<T> {
      * @return deleted element
      */
     @Override
+    @SuppressWarnings("unchecked")
     public T remove(int index) {
-        if (index == size - 1) {
-            elementData = getTrimmedArrayToSize(size - 1);
-        } else {
-            System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
-        }
+        Objects.checkIndex(index, size);
+        T deletedElement = (T) elementData[index];
+        System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
         size--;
+        return deletedElement;
     }
 
     /**
