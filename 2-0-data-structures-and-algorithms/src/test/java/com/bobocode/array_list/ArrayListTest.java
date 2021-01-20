@@ -253,11 +253,12 @@ public class ArrayListTest {
     public void removeElementByIndex() {
         arrayList = ArrayList.of(15, 69, 58, 78, 100);
 
-        arrayList.remove(2);
+        int removedElement = arrayList.remove(2);
 
         assertThat(arrayList.get(2)).isEqualTo(78);
         assertThat(arrayList.get(1)).isEqualTo(69);
         assertThat(arrayList.size()).isEqualTo(4);
+        assertThat(removedElement).isEqualTo(58);
     }
 
     @Test
@@ -274,10 +275,11 @@ public class ArrayListTest {
     public void removeLastElementByIndex() {
         arrayList = ArrayList.of(15, 69, 58, 78, 100);
 
-        arrayList.remove(4);
+        int removedElement = arrayList.remove(4);
 
         assertThat(arrayList.get(3)).isEqualTo(78);
         assertThat(arrayList.size()).isEqualTo(4);
+        assertThat(removedElement).isEqualTo(100);
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(4));
     }
