@@ -117,7 +117,6 @@ class BinarySearchTreeTest {
     }
 
     private BinarySearchTree<Integer> createTreeWith(Integer... elements) {
-         return Mockito.mock(BinarySearchTree.class,
-                (InvocationOnMock i) -> {throw new ExerciseNotCompletedException();}); //todo
+         return RecursiveBinarySearchTree.of(elements);
     }
 }
