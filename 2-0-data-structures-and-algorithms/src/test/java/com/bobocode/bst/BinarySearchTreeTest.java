@@ -1,12 +1,9 @@
 package com.bobocode.bst;
 
-import com.bobocode.util.ExerciseNotCompletedException;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -108,7 +105,6 @@ class BinarySearchTreeTest {
                 arguments(new Integer[]{1, 2, 3, 4, 5}, 4));
     }
 
-    @SuppressWarnings("unchecked")
     private BinarySearchTree<Integer> createTreeWith(Integer... elements) {
          return RecursiveBinarySearchTree.of(elements);
     }
