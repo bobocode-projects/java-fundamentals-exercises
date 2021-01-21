@@ -11,7 +11,7 @@ You're supposed to know about [Binary Search Tree](https://en.wikipedia.org/wiki
 ### How to start :question:
 * Just clone the repository and start implementing `BinarySearchTree` interface
 * Unit test are already prepared for you - use them to check your implementation
-* Don't worry if you got stuck, checkout the [exercise/completed](https://github.com/bobocode-projects/tdd-exercises/tree/exercise/completed/binary-search-tree) branch and see the final implementation
+* Don't worry if you got stuck, checkout branch **completed** and see the final implementation
 
 ### Related materials :information_source:
  * [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
