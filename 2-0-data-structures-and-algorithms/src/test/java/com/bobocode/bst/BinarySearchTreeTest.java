@@ -16,13 +16,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-/*import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;*/
 
-//todo: add Order
-//todo: checklist https://bobocode.atlassian.net/l/c/MeYPQPHx
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BinarySearchTreeTest {
 
@@ -83,8 +77,6 @@ class BinarySearchTreeTest {
         List<Integer> traversedElements = new ArrayList<>(bst.size());
         bst.inOrderTraversal(traversedElements::add);
 
-        //assertThat(bst.size()).isEqualTo(treeElementsList.size());
-        //assertThat(treeElementsList).contains(2, 14, 23, 324, 1551);
         assertThat(traversedElements).isEqualTo(List.of(sortedElements));
     }
 
@@ -116,6 +108,7 @@ class BinarySearchTreeTest {
                 arguments(new Integer[]{1, 2, 3, 4, 5}, 4));
     }
 
+    @SuppressWarnings("unchecked")
     private BinarySearchTree<Integer> createTreeWith(Integer... elements) {
          return RecursiveBinarySearchTree.of(elements);
     }
