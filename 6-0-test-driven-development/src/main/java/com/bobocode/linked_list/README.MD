@@ -21,7 +21,7 @@ You're supposed to know [The Three laws of TDD](https://github.com/bobocode-proj
 * Don't worry if you got stuck, checkout the **exercise/completed** branch and see the final implementation
  
 ### Related materials ℹ
- * [Linked Lists](https://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/linked%20lists.html)
+ * [Linked Lists]() todo: add link on LinkedList materials
  * [Як виробити звичку писати тести? (Bobocode channel <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=20/>)](https://youtu.be/L_CiX9C51BI)
  * [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U&t=3476s)
 
