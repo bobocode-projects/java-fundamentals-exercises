@@ -1,27 +1,26 @@
 package com.bobocode.linked_list;
 
 
-public interface List<E> {
-    void add(E element);
+public interface List<T> {
+    void add(T element);
 
-    void add(int index, E element);
+    void add(int index, T element);
 
-    void set(int index, E element);
+    void set(int index, T element);
 
-    E get(int index);
+    T get(int index);
 
-    E getFirst();
+    T getFirst();
 
-    E getLast();
+    T getLast();
 
-    E remove(int index);
+    T remove(int index);
 
-    boolean contains(E element);
+    boolean contains(T element);
 
     boolean isEmpty();
 
     int size();
 
     void clear();
-
 }
