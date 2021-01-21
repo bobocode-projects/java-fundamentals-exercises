@@ -10,7 +10,7 @@ public class StackTest {
     private Stack<Integer> intStack = new LinkedStack<>();
 
     @Test
-    void pushAndPopElementOntoEmptyStack() {
+    void pushElementOntoEmptyStack() {
         intStack.push(243);
 
         assertThat(intStack.pop()).isEqualTo(243);
