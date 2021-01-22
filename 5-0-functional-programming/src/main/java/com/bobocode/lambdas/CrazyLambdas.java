@@ -1,4 +1,4 @@
-package com.bobocode.lambdas.level2;
+package com.bobocode.lambdas;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 
