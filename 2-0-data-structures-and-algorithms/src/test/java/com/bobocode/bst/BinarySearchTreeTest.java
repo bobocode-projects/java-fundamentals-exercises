@@ -22,7 +22,7 @@ class BinarySearchTreeTest {
     @Test
     @Order(1)
     void createWithElements() {
-        BinarySearchTree<Integer> bst = createTreeWith(someElements);
+        BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(someElements);
         for (var e: someElements) {
             assertThat(bst.contains(e)).isTrue();
         }
@@ -32,7 +32,7 @@ class BinarySearchTreeTest {
     @Test
     @Order(2)
     void insertUniqueElements() {
-        BinarySearchTree<Integer> bst = createTreeWith();
+        BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of();
         for (int i = 0; i < someElements.length; i++) {
             var e = someElements[i];
             assertThat(bst.contains(e)).isFalse(); //does not contain
@@ -48,7 +48,7 @@ class BinarySearchTreeTest {
     @Test
     @Order(3)
     void insertNonUniqueElements() {
-        BinarySearchTree<Integer> bst = createTreeWith(someElements);
+        BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(someElements);
         for (var e: someElements) {
             assertThat(bst.insert(e)).isFalse(); //does not insert
             assertThat(bst.contains(e)).isTrue(); //but contains
@@ -60,14 +60,14 @@ class BinarySearchTreeTest {
     @MethodSource("depthArguments")
     @Order(4)
     void depth(Integer[] elements, int depth) {
-        BinarySearchTree<Integer> bst = createTreeWith(elements);
+        BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(elements);
         assertThat(bst.depth()).isEqualTo(depth);
     }
 
     @Test
     @Order(5)
     void inorderTraversal() {
-        BinarySearchTree<Integer> bst = createTreeWith(someElements);
+        BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(someElements);
         Integer[] sortedElements = Arrays.copyOf(someElements, someElements.length);
         Arrays.sort(sortedElements);
 
@@ -103,9 +103,5 @@ class BinarySearchTreeTest {
                  * ..........5
                  */
                 arguments(new Integer[]{1, 2, 3, 4, 5}, 4));
-    }
-
-    private BinarySearchTree<Integer> createTreeWith(Integer... elements) {
-         return RecursiveBinarySearchTree.of(elements);
     }
 }
