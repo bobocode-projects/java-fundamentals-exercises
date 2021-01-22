@@ -1,7 +1,5 @@
 package com.bobocode.intro;
 
-import com.bobocode.util.ExerciseNotCompletedException;
-
 /**
  * Welcome! This is an introduction class that will show you a simple example of Bobocode exercise.
  * <p>
@@ -19,6 +17,6 @@ public class Introduction {
      * @return "The key to efficient learning is practice!"
      */
     public String welcomeMessage() {
-        throw new ExerciseNotCompletedException(); // todo:
+        return "The key to efficient learning is practice!";
     }
 }
