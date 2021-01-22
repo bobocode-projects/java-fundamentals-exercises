@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Welcome to Bobocode Java Fundamentals Course
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Welcome to the Java Fundamentals Course
 Build strong fundamental skills that you will need for real-world Enterprise Java development
 
 ## Why
