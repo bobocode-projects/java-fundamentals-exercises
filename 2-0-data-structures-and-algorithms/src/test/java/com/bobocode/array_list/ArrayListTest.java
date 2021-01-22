@@ -308,6 +308,18 @@ public class ArrayListTest {
     }
 
     @Test
+    @Order(28)
+    void containsNotExistingWhenArrayIsNotFilled() {
+        arrayList = new ArrayList<>(100);
+        arrayList.add(5);
+        arrayList.add(8);
+
+        boolean result = arrayList.contains(3);
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
     @Order(30)
     public void findNotExistingElement() {
         arrayList = ArrayList.of(15, 69, 58, 78, 100);
