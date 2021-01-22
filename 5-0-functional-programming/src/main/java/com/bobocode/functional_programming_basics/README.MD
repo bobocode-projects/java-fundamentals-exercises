@@ -4,11 +4,11 @@ This is the tutorial on functional programming basics
 ### Pre-conditions ❗
 You're supposed to be familiar with OOP, have basic knowledge of JDK, and be able to write Java code. 
 ### Related exercises 💪
-* [Sum of squares](https://github.com/bobocode-projects/java-functional-features-exercises/tree/master/sum-of-squares)
-### See also :point_down:
-* [Tutorial on Lambdas](https://github.com/bobocode-projects/java-functional-features-tutorial/tree/master/lambdas)
-* [Tutorial on Stream API](https://github.com/bobocode-projects/java-8-tutorial/tree/master/stream-api)
-* [Tutorial on Optional](https://github.com/bobocode-projects/java-functional-features-tutorial/tree/master/optional)
+* [Sum of squares](to do)
+### See also 🔽
+* [Tutorial on Lambdas](to do)
+* [Tutorial on Stream API](to do)
+* [Tutorial on Optional](to do)
 ##
 The concept of **functional programming** is based on [λ-calculus](https://en.wikipedia.org/wiki/Lambda_calculus). Which
 brings the idea of program that **does not use mutable variables**. Why is it so important? Because all race conditions,
