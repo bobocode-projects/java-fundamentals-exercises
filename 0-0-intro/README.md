@@ -15,3 +15,7 @@ Go ahead and complete this exercise by implementing a method in `Introduction` c
 ## How to start ❓
 * [clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this [repository](https://github.com/bobocode-projects/java-fundamentals-course) to your comuter
 * **open** the project via IDE
+
+## Have a question? 🧐
+* check out the [completed solution discussion](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
+* or contact us via info@bobocode.com
