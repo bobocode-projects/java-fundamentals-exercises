@@ -16,7 +16,7 @@
     </properties>
 
     <modules>
-        <module>0-0-java-programming-intro</module>
+        <module>0-0-intro</module>
         <module>1-0-java-basics</module>
         <module>2-0-data-structures-and-algorithms</module>
         <module>3-0-java-core</module>
@@ -52,17 +52,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.18.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.16</version>
@@ -83,6 +72,16 @@
             <artifactId>mockito-inline</artifactId>
             <version>3.6.28</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>io.codearte.jfairy</groupId>
+            <artifactId>jfairy</artifactId>
+            <version>0.5.7</version>
         </dependency>
     </dependencies>
 

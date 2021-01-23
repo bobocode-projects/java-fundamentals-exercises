@@ -309,6 +309,18 @@ public class ArrayListTest {
 
     @Test
     @Order(30)
+    void containsNotExistingWhenArrayIsNotFilled() {
+        arrayList = new ArrayList<>(100);
+        arrayList.add(5);
+        arrayList.add(8);
+
+        boolean result = arrayList.contains(3);
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    @Order(31)
     public void findNotExistingElement() {
         arrayList = ArrayList.of(15, 69, 58, 78, 100);
 
@@ -316,13 +328,13 @@ public class ArrayListTest {
     }
 
     @Test
-    @Order(31)
+    @Order(32)
     public void isEmptyOnEmptyList() {
         assertThat(arrayList.isEmpty()).isEqualTo(true);
     }
 
     @Test
-    @Order(32)
+    @Order(33)
     public void isEmpty() {
         arrayList = ArrayList.of(34, 5, 6);
 
@@ -330,13 +342,13 @@ public class ArrayListTest {
     }
 
     @Test
-    @Order(33)
+    @Order(34)
     public void clearOnEmptyList() {
         assertThat(arrayList.isEmpty()).isEqualTo(true);
     }
 
     @Test
-    @Order(34)
+    @Order(35)
     public void clearChangesTheSize() {
         arrayList = ArrayList.of(4, 5, 6);
 
@@ -346,7 +358,7 @@ public class ArrayListTest {
     }
 
     @Test
-    @Order(35)
+    @Order(36)
     public void clearRemovesElements() {
         arrayList = ArrayList.of(4, 5, 6);
 
