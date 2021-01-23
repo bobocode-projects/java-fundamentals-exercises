@@ -22,8 +22,8 @@
         <module>3-0-java-core</module>
         <module>4-0-object-oriented-programming</module>
         <module>5-0-functional-programming</module>
-        <module>java-fundamentals-util</module>
         <module>6-0-test-driven-development</module>
+        <module>java-fundamentals-util</module>
     </modules>
 
     <dependencies>
@@ -77,11 +77,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.21</version>
-        </dependency>
-        <dependency>
-            <groupId>io.codearte.jfairy</groupId>
-            <artifactId>jfairy</artifactId>
-            <version>0.5.7</version>
         </dependency>
     </dependencies>
 
