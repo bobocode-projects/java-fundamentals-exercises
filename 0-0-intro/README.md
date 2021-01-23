@@ -7,3 +7,11 @@ Each exercise has thee major parts:
 * **a completed solution** - a branch `completed` that holds implemented task ✅
 
 Go ahead and complete this exercise by implementing a method in `Introduction` class 💪
+
+## You should have installed on your local machine ❗️
+* [JDK 11+](https://jdk.java.net/15/)
+* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+## How to start ❓
+* [clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this [repository](https://github.com/bobocode-projects/java-fundamentals-course) to your comuter
+* **open** the project via IDE
