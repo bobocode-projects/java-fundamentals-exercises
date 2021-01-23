@@ -1,11 +1,11 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Java Functional Programming 
 &nbsp;
-## Master Java funtional features and write more consice and easy to parallel code 💪
+### Master Java funtional features and write more consice and easy to parallel code 💪
 &nbsp;
 
 ### Why should you care?
 ⚡️ Nowadays **every Java developer uses some functional programming features in an everyday job**. So make sure you've 
-check out the rest of the materials in this module and build strong skills using these language features! 
+checked out the rest of the materials in this module and build strong skills using these language features! 
 
 The main idea is to keep Java OO language but **enable some functional programming features**. It does two things:
 * makes the code more concise
@@ -39,9 +39,9 @@ public List<Account> findAllGmailAccounts(List<Account> accounts) {
 }
 ```
 Among other you will be able to
-* use **Funtional Interfaces** and **Lambdas** in order to **pass around functions** like first-class citizens
-* **process data collections** in a **concise** and **easy to uderstnad** way using **Stream API**
-* write **null-safe code** using **Optional API**
+* use **Funtional Interfaces** and **Lambdas** in order to **pass around functions** like first-class citizens ✅
+* **process data collections** in a **concise** and **easy to uderstnad** way using **Stream API** ✅
+* write **null-safe code** using **Optional API** ✅
 
 ### Learn or skip ? 
 Think you're cool enough to skip this topic? 😎 Hand on a sec...☝️ Can you easily understand and write lambdas like this?
