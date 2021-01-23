@@ -1,7 +1,7 @@
 package com.bobocode.bst;
 
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -10,27 +10,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BinarySearchTreeTest {
 
     private static final Integer[] someElements = {10, 9, 11, 8, 12, 7};
 
     @Test
-    @Order(1)
     void createWithElements() {
         BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(someElements);
-        for (var e: someElements) {
+        for (var e : someElements) {
             assertThat(bst.contains(e)).isTrue();
         }
         assertThat(bst.size()).isEqualTo(someElements.length);
     }
 
     @Test
-    @Order(2)
     void insertUniqueElements() {
         BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of();
         for (int i = 0; i < someElements.length; i++) {
@@ -46,10 +42,9 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    @Order(3)
     void insertNonUniqueElements() {
         BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(someElements);
-        for (var e: someElements) {
+        for (var e : someElements) {
             assertThat(bst.insert(e)).isFalse(); //does not insert
             assertThat(bst.contains(e)).isTrue(); //but contains
         }
@@ -58,14 +53,12 @@ class BinarySearchTreeTest {
 
     @ParameterizedTest
     @MethodSource("depthArguments")
-    @Order(4)
     void depth(Integer[] elements, int depth) {
         BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(elements);
         assertThat(bst.depth()).isEqualTo(depth);
     }
 
     @Test
-    @Order(5)
     void inorderTraversal() {
         BinarySearchTree<Integer> bst = RecursiveBinarySearchTree.of(someElements);
         Integer[] sortedElements = Arrays.copyOf(someElements, someElements.length);
