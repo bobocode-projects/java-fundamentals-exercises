@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class QueueTest {
+public class LinkedQueueTest {
 
     private final Queue<Integer> integerQueue = new LinkedQueue<>();
 
