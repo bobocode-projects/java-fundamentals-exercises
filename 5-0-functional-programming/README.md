@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Java Functional Programming 
 &nbsp;
-### Master Java funtional features and write more consice and easy to parallel code 💪
+### Master Java functional features and write more consice and easy to parallel code 💪
 &nbsp;
 
 ### Why should you care?
