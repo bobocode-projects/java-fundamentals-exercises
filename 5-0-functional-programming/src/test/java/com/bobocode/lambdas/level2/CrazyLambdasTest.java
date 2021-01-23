@@ -1,6 +1,6 @@
 package com.bobocode.lambdas.level2;
 
-import com.bobocode.lambdas.level2.CrazyLambdas;
+import com.bobocode.lambdas.CrazyLambdas;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
