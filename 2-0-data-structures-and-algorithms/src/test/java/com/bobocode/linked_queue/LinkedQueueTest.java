@@ -5,15 +5,12 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LinkedQueueTest {
 
-    private final Queue<Integer> integerQueue = new LinkedQueue<>();
+    private Queue<Integer> integerQueue = new LinkedQueue<>();
 
     @Test
     @Order(1)
@@ -90,6 +87,12 @@ public class LinkedQueueTest {
 
     @Test
     @Order(8)
+    void isEmptyOnEmptyQueue() {
+        assertTrue(integerQueue.isEmpty());
+    }
+
+    @Test
+    @Order(9)
     void isEmpty() {
         integerQueue.add(3);
         integerQueue.add(9);
@@ -97,10 +100,4 @@ public class LinkedQueueTest {
         assertFalse(integerQueue.isEmpty());
 
     }
-
-    @Test
-    void isEmptyOnEmptyQueue() {
-        assertTrue(integerQueue.isEmpty());
-    }
-
 }
