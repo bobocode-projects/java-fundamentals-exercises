@@ -11,7 +11,6 @@ import java.util.Objects;
  * based on an array and is simplified version of {@link java.util.ArrayList}.
  */
 public class ArrayList<T> implements List<T> {
-
     private static final int DEFAULT_CAPACITY = 5;
     private Object[] elementData;
     private int size;
@@ -23,11 +22,10 @@ public class ArrayList<T> implements List<T> {
      * @throws IllegalArgumentException – if the specified initial capacity is negative or 0.
      */
     public ArrayList(int initCapacity) {
-        if (initCapacity > 0) {
-            elementData = new Object[initCapacity];
-        } else {
+        if (initCapacity <= 0) {
             throw new IllegalArgumentException();
         }
+        elementData = new Object[initCapacity];
     }
 
     /**
@@ -35,7 +33,7 @@ public class ArrayList<T> implements List<T> {
      * A default size of inner array is 5;
      */
     public ArrayList() {
-        elementData = new Object[DEFAULT_CAPACITY];
+        this(DEFAULT_CAPACITY);
     }
 
     /**
@@ -45,10 +43,9 @@ public class ArrayList<T> implements List<T> {
      * @return new instance
      */
     public static <T> List<T> of(T... elements) {
-        List<T> list = new ArrayList<>(elements.length);
-        for (T element : elements) {
-            list.add(element);
-        }
+        ArrayList<T> list = new ArrayList<>(elements.length);
+        list.elementData = Arrays.copyOf(elements, elements.length);
+        list.size = elements.length;
         return list;
     }
 
@@ -166,13 +163,9 @@ public class ArrayList<T> implements List<T> {
      */
     @Override
     public boolean contains(T element) {
-        if (isEmpty()) {
-            return false;
-        } else {
-            for (Object elem : elementData) {
-                if (elem.equals(element)) {
-                    return true;
-                }
+        for (int i = 0; i < size; i++) {
+            if (elementData[i].equals(element)) {
+                return true;
             }
         }
         return false;
@@ -186,11 +179,6 @@ public class ArrayList<T> implements List<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
-    }
-
-    @SuppressWarnings("unchecked")
-    private T[] getTrimmedArrayToSize(int size) {
-        return (T[]) Arrays.copyOf(elementData, size);
     }
 
     /**
