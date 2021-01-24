@@ -46,9 +46,8 @@ class SumOfSquaresTest {
 
     @Test
     @Order(5)
-    void calculateSWithInvalidRange() {
+    void calculateWithInvalidRange() {
         assertThatExceptionOfType(InvalidRangeException.class)
                 .isThrownBy(()-> SumOfSquares.calculateSumOfSquaresInRange(4, 1));
     }
-
 }
