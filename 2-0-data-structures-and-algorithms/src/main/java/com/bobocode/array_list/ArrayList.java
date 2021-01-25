@@ -42,7 +42,7 @@ public class ArrayList<T> implements List<T> {
      * @param elements to add
      * @return new instance
      */
-    public static <T> List<T> of(T... elements) {
+    public static <T> ArrayList<T> of(T... elements) {
         ArrayList<T> list = new ArrayList<>(elements.length);
         list.elementData = Arrays.copyOf(elements, elements.length);
         list.size = elements.length;

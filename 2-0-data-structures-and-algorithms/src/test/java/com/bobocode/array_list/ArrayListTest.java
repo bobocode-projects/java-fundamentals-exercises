@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ArrayListTest {
 
-    private List<Integer> arrayList = new ArrayList<>();
+    private ArrayList<Integer> arrayList = new ArrayList<>();
 
     @Test
     @Order(1)
@@ -23,9 +25,11 @@ public class ArrayListTest {
         arrayList.add(15);
         arrayList.add(20);
 
-        assertThat(arrayList.get(0)).isEqualTo(10);
-        assertThat(arrayList.get(1)).isEqualTo(15);
-        assertThat(arrayList.get(2)).isEqualTo(20);
+        Object[] internalArray = getInternalArray();
+
+        assertThat(internalArray[0]).isEqualTo(10);
+        assertThat(internalArray[1]).isEqualTo(15);
+        assertThat(internalArray[2]).isEqualTo(20);
     }
 
     @Test
@@ -37,11 +41,9 @@ public class ArrayListTest {
     @Test
     @Order(3)
     void size() {
-        arrayList.add(10);
-        arrayList.add(15);
-        arrayList.add(20);
+        setInternalSize(25);
 
-        assertThat(arrayList.size()).isEqualTo(3);
+        assertThat(arrayList.size()).isEqualTo(25);
     }
 
 
@@ -61,7 +63,7 @@ public class ArrayListTest {
     @Test
     @Order(5)
     public void getFirstElement() {
-        arrayList = ArrayList.of(31, 32);
+        List<Integer> arrayList = ArrayList.of(31, 32);
 
         assertThat(arrayList.getFirst()).isEqualTo(31);
 
@@ -70,7 +72,7 @@ public class ArrayListTest {
     @Test
     @Order(6)
     public void getLastElement() {
-        arrayList = ArrayList.of(21, 34);
+        List<Integer> arrayList = ArrayList.of(21, 34);
 
         assertThat(arrayList.getLast()).isEqualTo(34);
     }
@@ -113,7 +115,7 @@ public class ArrayListTest {
     @Test
     @Order(11)
     public void addElements() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
+        List<Integer> arrayList = ArrayList.of(15, 69, 58, 78);
 
         assertThat(arrayList.get(0)).isEqualTo(15);
         assertThat(arrayList.get(1)).isEqualTo(69);
@@ -366,5 +368,42 @@ public class ArrayListTest {
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(0));
+    }
+
+    private Object[] getInternalArray() {
+        Field internalArrayField = Arrays.stream(arrayList.getClass().getDeclaredFields())
+                .filter(field -> field.getType().isArray())
+                .findAny()
+                .orElseThrow();
+
+        internalArrayField.setAccessible(true);
+
+        try {
+            return (Object[]) internalArrayField.get(arrayList);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setInternalSize(int size) {
+        Field sizeField = getAccessibleFieldByName("size");
+        sizeField.setAccessible(true);
+
+        try {
+            sizeField.set(arrayList, size);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Field getAccessibleFieldByName(String name) {
+        Field field;
+        try {
+            field = ArrayList.class.getDeclaredField("size");
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+        field.setAccessible(true);
+        return field;
     }
 }
