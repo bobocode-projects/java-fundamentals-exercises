@@ -63,7 +63,7 @@ public class ArrayListTest {
     @Test
     @Order(5)
     public void getFirstElement() {
-        List<Integer> arrayList = ArrayList.of(31, 32);
+        arrayList = ArrayList.of(31, 32);
 
         assertThat(arrayList.getFirst()).isEqualTo(31);
 
@@ -72,7 +72,7 @@ public class ArrayListTest {
     @Test
     @Order(6)
     public void getLastElement() {
-        List<Integer> arrayList = ArrayList.of(21, 34);
+        arrayList = ArrayList.of(21, 34);
 
         assertThat(arrayList.getLast()).isEqualTo(34);
     }
@@ -115,7 +115,7 @@ public class ArrayListTest {
     @Test
     @Order(11)
     public void addElements() {
-        List<Integer> arrayList = ArrayList.of(15, 69, 58, 78);
+        arrayList = ArrayList.of(15, 69, 58, 78);
 
         assertThat(arrayList.get(0)).isEqualTo(15);
         assertThat(arrayList.get(1)).isEqualTo(69);
