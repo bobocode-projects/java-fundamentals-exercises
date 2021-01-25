@@ -25,7 +25,7 @@ public class FunctionsTest {
 
         int actualResult = squareFunction.apply(5);
 
-        assertEquals(25, actualResult);
+        assertThat(result).isEqualTo(25);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class FunctionsTest {
 
         int actualResult = absFunction.apply(-192);
 
-        assertEquals(192, actualResult);
+        assertThat(result).isEqualTo(192);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class FunctionsTest {
 
         int actualResult = incrementFunction.apply(399);
 
-        assertEquals(400, actualResult);
+        assertThat(result).isEqualTo(400);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class FunctionsTest {
 
         int actualResult = decrementFunction.apply(800);
 
-        assertEquals(799, actualResult);
+        assertThat(result).isEqualTo(799);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class FunctionsTest {
 
         int actualResult = signFunction.apply(-123);
 
-        assertEquals(-1, actualResult);
+        assertThat(result).isEqualTo(-1);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class FunctionsTest {
 
         int actualResult = signFunction.apply(23);
 
-        assertEquals(1, actualResult);
+        assertThat(result).isEqualTo(1);
     }
 
     @Test
@@ -85,12 +85,12 @@ public class FunctionsTest {
 
         int actualResult = signFunction.apply(0);
 
-        assertEquals(0, actualResult);
+        assertThat(result).isEqualTo(0);
     }
 
     @Test
     @Order(8)
-    void getGetUnknownFunction() {
+    void getUnknownFunction() {
         assertThrows(InvalidFunctionNameException.class, () -> integerFunctionMap.getFunction("sqrt"));
     }
 }
