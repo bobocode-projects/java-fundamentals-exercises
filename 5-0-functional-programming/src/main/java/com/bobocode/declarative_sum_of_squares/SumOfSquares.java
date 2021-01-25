@@ -16,7 +16,7 @@ public class SumOfSquares {
      * This method calculates the sum of squares of integer in the range
      *
      * @param startInclusive first element in range
-     * @param endInclusive last element in range
+     * @param endInclusive   last element in range
      * @return the sum of squares of each element in the range
      */
     static int calculateSumOfSquaresInRange(int startInclusive, int endInclusive) {
