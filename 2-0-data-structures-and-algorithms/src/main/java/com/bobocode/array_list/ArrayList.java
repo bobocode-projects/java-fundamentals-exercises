@@ -147,10 +147,13 @@ public class ArrayList<T> implements List<T> {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public T remove(int index) {
+    public T remove(int index) {// 4,5,3,6,7,7 -> remove(3)
         Objects.checkIndex(index, size);
         T deletedElement = (T) elementData[index];
-        System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
+        if (index < size - 1) {
+            System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
+        }
+        elementData[size - 1] = null;
         size--;
         return deletedElement;
     }
