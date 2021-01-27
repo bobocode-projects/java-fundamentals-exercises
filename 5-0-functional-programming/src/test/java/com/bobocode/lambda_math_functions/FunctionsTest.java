@@ -1,12 +1,19 @@
 package com.bobocode.lambda_math_functions;
 
-@TestMethodOrder( MethodOrderer.OrderAnnotation.class)
+import org.junit.jupiter.api.*;
+
+import java.util.function.Function;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FunctionsTest {
-    private com.bobocode.FunctionMap<Integer, Integer> integerFunctionMap;
+    private FunctionMap<Integer, Integer> integerFunctionMap;
 
     @BeforeEach
     public void init() {
-        integerFunctionMap = com.bobocode.Functions.intFunctionMap();
+        integerFunctionMap = Functions.intFunctionMap();
     }
 
     @Test
@@ -14,7 +21,7 @@ public class FunctionsTest {
     void squareFunction() {
         Function<Integer, Integer> squareFunction = integerFunctionMap.getFunction("square");
 
-        int actualResult = squareFunction.apply(5);
+        int result = squareFunction.apply(5);
 
         assertThat(result).isEqualTo(25);
     }
@@ -24,7 +31,7 @@ public class FunctionsTest {
     void absFunction() {
         Function<Integer, Integer> absFunction = integerFunctionMap.getFunction("abs");
 
-        int actualResult = absFunction.apply(-192);
+        int result = absFunction.apply(-192);
 
         assertThat(result).isEqualTo(192);
     }
@@ -34,7 +41,7 @@ public class FunctionsTest {
     void incrementFunction() {
         Function<Integer, Integer> incrementFunction = integerFunctionMap.getFunction("increment");
 
-        int actualResult = incrementFunction.apply(399);
+        int result = incrementFunction.apply(399);
 
         assertThat(result).isEqualTo(400);
     }
@@ -44,7 +51,7 @@ public class FunctionsTest {
     void destDecrementFunction() {
         Function<Integer, Integer> decrementFunction = integerFunctionMap.getFunction("decrement");
 
-        int actualResult = decrementFunction.apply(800);
+        int result = decrementFunction.apply(800);
 
         assertThat(result).isEqualTo(799);
     }
@@ -54,7 +61,7 @@ public class FunctionsTest {
     void signFunctionOnNegativeValue() {
         Function<Integer, Integer> signFunction = integerFunctionMap.getFunction("sgn");
 
-        int actualResult = signFunction.apply(-123);
+        int result = signFunction.apply(-123);
 
         assertThat(result).isEqualTo(-1);
     }
@@ -64,7 +71,7 @@ public class FunctionsTest {
     void signFunctionOnPositiveValue() {
         Function<Integer, Integer> signFunction = integerFunctionMap.getFunction("sgn");
 
-        int actualResult = signFunction.apply(23);
+        int result = signFunction.apply(23);
 
         assertThat(result).isEqualTo(1);
     }
@@ -74,7 +81,7 @@ public class FunctionsTest {
     void signFunctionOnZero() {
         Function<Integer, Integer> signFunction = integerFunctionMap.getFunction("sgn");
 
-        int actualResult = signFunction.apply(0);
+        int result = signFunction.apply(0);
 
         assertThat(result).isEqualTo(0);
     }
@@ -82,6 +89,7 @@ public class FunctionsTest {
     @Test
     @Order(8)
     void getUnknownFunction() {
-        assertThatExceptionOfType(InvalidFunctionNameException.class).isThrownBy(() -> integerFunctionMap.getFunction("sqrt"));
+        assertThatExceptionOfType(InvalidFunctionNameException.class).isThrownBy(()
+                -> integerFunctionMap.getFunction("sqrt"));
     }
 }
