@@ -1,7 +1,5 @@
 package com.bobocode.lambda_math_functions;
 
-import com.bobocode.lambda_math_functions.FunctionMap;
-
 public class Functions {
     /**
      * A static factory method that creates an integer function map with basic functions:

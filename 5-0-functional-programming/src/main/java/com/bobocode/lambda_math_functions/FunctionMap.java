@@ -1,9 +1,10 @@
 package com.bobocode.lambda_math_functions;
 
+import com.bobocode.util.ExerciseNotCompletedException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import com.bobocode.util.ExerciseNotCompletedException;
 
 /**
  * FunctionMap is an API that allows you to store and retrieve functions by string name. FunctionMap are stored in a
