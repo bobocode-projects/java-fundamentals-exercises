@@ -1,9 +1,8 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Array Wrapper exercise :muscle:
-Improve your basic knowledge about data structures and Java Core. 
-This wrapper is a simple version of the `ArrayList` data structure. 
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Array List exercise :muscle:
+Improve your basic knowledge about data structures and Java Core by implementing ArrayList from scratch.  
 ### Task
-`ListOfLongs` interface provides an API with a couple of methods for a wrapper of a default array in Java. Your job is to implement the *todo* section of `ArrayListOfLongs` class. 
-To verify your implementation, run `ListOfLongsTest.java`.
+`List<T>` interface provides an API with a couple of typical methods. Your job is to implement the *todo* section of 
+`ArrayList<T>` class. To verify your implementation, run `ArrayListTest.java`.
  
 ### Pre-conditions :heavy_exclamation_mark:
 You're supposed to be familiar with arrays, cycles, conditions, exceptions and variables.
@@ -14,4 +13,4 @@ You're supposed to be familiar with arrays, cycles, conditions, exceptions and v
 * Don't worry if you got stuck, checkout the **exercise/completed** branch and see the final implementation
  
 ### Related materials :information_source:
- ###to do
+* [Реалізовуємо ArrayList <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/jFBKToSC3ag)
