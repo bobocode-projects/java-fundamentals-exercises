@@ -1,14 +1,5 @@
 package com.bobocode.lambda_math_functions;
 
-import com.bobocode.InvalidFunctionNameException;
-import org.junit.jupiter.api.*;
-
-import java.util.function.Function;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-
 @TestMethodOrder( MethodOrderer.OrderAnnotation.class)
 public class FunctionsTest {
     private com.bobocode.FunctionMap<Integer, Integer> integerFunctionMap;
@@ -91,6 +82,6 @@ public class FunctionsTest {
     @Test
     @Order(8)
     void getUnknownFunction() {
-        assertThrows(InvalidFunctionNameException.class, () -> integerFunctionMap.getFunction("sqrt"));
+        assertThatExceptionOfType(InvalidFunctionNameException.class).isThrownBy(() -> integerFunctionMap.getFunction("sqrt"));
     }
 }
