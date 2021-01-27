@@ -1,7 +1,5 @@
 package com.bobocode.lambda_math_functions;
 
-import com.bobocode.util.ExerciseNotCompletedException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -25,7 +23,7 @@ public class FunctionMap<T, R> {
         if (functionMap.containsKey(name)) {
             return functionMap.get(name);
         } else {
-            throw new ExerciseNotCompletedException();
+            throw new InvalidFunctionNameException(name);
         }
     }
 }
