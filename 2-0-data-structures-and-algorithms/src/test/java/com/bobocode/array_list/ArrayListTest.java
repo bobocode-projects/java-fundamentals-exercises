@@ -1,15 +1,16 @@
 package com.bobocode.array_list;
 
 import com.bobocode.linked_list.List;
+import net.bytebuddy.description.field.FieldList;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ArrayListTest {
@@ -23,9 +24,11 @@ public class ArrayListTest {
         arrayList.add(15);
         arrayList.add(20);
 
-        assertThat(arrayList.get(0)).isEqualTo(10);
-        assertThat(arrayList.get(1)).isEqualTo(15);
-        assertThat(arrayList.get(2)).isEqualTo(20);
+        Object[] elements = (Object[]) getObjectByName("elementData");
+
+        assertThat(elements[0]).isEqualTo(10);
+        assertThat(elements[1]).isEqualTo(15);
+        assertThat(elements[2]).isEqualTo(20);
     }
 
     @Test
@@ -37,20 +40,23 @@ public class ArrayListTest {
     @Test
     @Order(3)
     void size() {
-        arrayList.add(10);
-        arrayList.add(15);
-        arrayList.add(20);
-
+        try {
+            getFieldByName("size").set(arrayList, 3);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         assertThat(arrayList.size()).isEqualTo(3);
     }
-
 
     @Test
     @Order(4)
     public void getElementsByIndex() {
-        arrayList.add(10);
-        arrayList.add(15);
-        arrayList.add(20);
+        try {
+            getFieldByName("elementData").set(arrayList, new Object[]{10, 15, 20});
+            getFieldByName("size").set(arrayList, 3);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThat(arrayList.get(0)).isEqualTo(10);
         assertThat(arrayList.get(1)).isEqualTo(15);
@@ -61,16 +67,25 @@ public class ArrayListTest {
     @Test
     @Order(5)
     public void getFirstElement() {
-        arrayList = ArrayList.of(31, 32);
+        try {
+            getFieldByName("size").set(arrayList, 2);
+            getFieldByName("elementData").set(arrayList, new Object[]{31, 24});
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThat(arrayList.getFirst()).isEqualTo(31);
-
     }
 
     @Test
     @Order(6)
     public void getLastElement() {
-        arrayList = ArrayList.of(21, 34);
+        try {
+            getFieldByName("size").set(arrayList, 2);
+            getFieldByName("elementData").set(arrayList, new Object[]{31, 34});
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThat(arrayList.getLast()).isEqualTo(34);
     }
@@ -94,9 +109,16 @@ public class ArrayListTest {
     public void listWithSpecificCapacity() {
         arrayList = new ArrayList<>(8);
 
-        arrayList.add(10);
-        arrayList.add(15);
-        arrayList.add(20);
+        try {
+            Object[] elements = new Object[8];
+            elements[0] = 10;
+            elements[1] = 15;
+            elements[2] = 20;
+            getFieldByName("size").set(arrayList, elements.length);
+            getFieldByName("elementData").set(arrayList, elements);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThat(arrayList.get(0)).isEqualTo(10);
         assertThat(arrayList.get(1)).isEqualTo(15);
@@ -114,12 +136,14 @@ public class ArrayListTest {
     @Order(11)
     public void addElements() {
         arrayList = ArrayList.of(15, 69, 58, 78);
+        Object[] elements = (Object[]) getObjectByName("elementData");
+        int size = (int) getObjectByName("size");
 
-        assertThat(arrayList.get(0)).isEqualTo(15);
-        assertThat(arrayList.get(1)).isEqualTo(69);
-        assertThat(arrayList.get(2)).isEqualTo(58);
-        assertThat(arrayList.get(3)).isEqualTo(78);
-        assertThat(arrayList.size()).isEqualTo(4);
+        assertThat(elements[0]).isEqualTo(15);
+        assertThat(elements[1]).isEqualTo(69);
+        assertThat(elements[2]).isEqualTo(58);
+        assertThat(elements[3]).isEqualTo(78);
+        assertThat(size).isEqualTo(4);
     }
 
     @Test
@@ -135,8 +159,11 @@ public class ArrayListTest {
         arrayList.add(33);
         arrayList.add(21);
 
-        assertThat(arrayList.get(6)).isEqualTo(21);
-        assertThat(arrayList.size()).isEqualTo(7);
+        int size = (int) getObjectByName("size");
+        Object[] elements = (Object[]) getObjectByName("elementData");
+
+        assertThat(elements[6]).isEqualTo(21);
+        assertThat(size).isEqualTo(7);
     }
 
     @Test
@@ -152,21 +179,32 @@ public class ArrayListTest {
         arrayList.add(33);
         arrayList.add(21);
 
-        assertThat(arrayList.get(6)).isEqualTo(21);
-        assertThat(arrayList.size()).isEqualTo(7);
+        int size = (int) getObjectByName("size");
+        Object[] elements = (Object[]) getObjectByName("elementData");
+
+        assertThat(elements[6]).isEqualTo(21);
+        assertThat(size).isEqualTo(7);
     }
 
     @Test
     @Order(14)
     public void addElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 68);
+        try {
+            getFieldByName("elementData").set(arrayList, new Object[]{15, 69, 58, 78, 68});
+            getFieldByName("size").set(arrayList, 5);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         arrayList.add(50);
         arrayList.add(2, 10);
 
-        assertThat(arrayList.get(2)).isEqualTo(10);
-        assertThat(arrayList.get(5)).isEqualTo(68);
-        assertThat(arrayList.size()).isEqualTo(7);
+        Object[] elements = (Object[]) getObjectByName("elementData");
+        int size = (int) getObjectByName("size");
+
+        assertThat(elements[2]).isEqualTo(10);
+        assertThat(elements[5]).isEqualTo(68);
+        assertThat(size).isEqualTo(7);
     }
 
     @Test
@@ -180,7 +218,12 @@ public class ArrayListTest {
     @Test
     @Order(16)
     public void addElementByIndexLargerThanListSize() {
-        arrayList = ArrayList.of(4, 6, 11, 9);
+//        arrayList = ArrayList.of(4, 6, 11, 9);
+        try {
+            getFieldByName("size").set(arrayList, 4);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.add(5, 88));
@@ -189,7 +232,12 @@ public class ArrayListTest {
     @Test
     @Order(17)
     public void addElementByIndexEqualToSize() {
-        arrayList = ArrayList.of(1, 2, 3, 4, 5); // size = 5
+//        arrayList = ArrayList.of(1, 2, 3, 4, 5); // size = 5
+        try {
+            getFieldByName("size").set(arrayList, 5);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         arrayList.add(5, 111);
 
@@ -214,7 +262,11 @@ public class ArrayListTest {
     @Test
     @Order(20)
     public void getElementByIndexEqualToListSize() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
+        try {
+            getFieldByName("size").set(arrayList, 4);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(4));
@@ -223,19 +275,31 @@ public class ArrayListTest {
     @Test
     @Order(21)
     public void setElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
+        try {
+            getFieldByName("elementData").set(arrayList, new Object[]{15, 69, 58, 78});
+            getFieldByName("size").set(arrayList, 4);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         arrayList.set(2, 10);
 
-        assertThat(arrayList.get(2)).isEqualTo(10);
-        assertThat(arrayList.get(3)).isEqualTo(78);
-        assertThat(arrayList.size()).isEqualTo(4);
+        Object[] elements = (Object[]) getObjectByName("elementData");
+        int size = (int) getObjectByName("size");
+
+        assertThat(elements[2]).isEqualTo(10);
+        assertThat(elements[3]).isEqualTo(78);
+        assertThat(size).isEqualTo(4);
     }
 
     @Test
     @Order(22)
     public void setElementByIndexEqualToSize() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
+        try {
+            getFieldByName("elementData").set(arrayList, new Object[]{15, 69, 58, 78});
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.set(4, 10));
@@ -251,20 +315,34 @@ public class ArrayListTest {
     @Test
     @Order(24)
     public void removeElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
+        try {
+            getFieldByName("elementData").set(arrayList, new Object[]{15, 69, 58, 78, 100});
+            getFieldByName("size").set(arrayList, 5);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         int removedElement = arrayList.remove(2);
 
-        assertThat(arrayList.get(2)).isEqualTo(78);
-        assertThat(arrayList.get(1)).isEqualTo(69);
-        assertThat(arrayList.size()).isEqualTo(4);
+        Object[] elements = (Object[]) getObjectByName("elementData");
+        int size = (int) getObjectByName("size");
+
+        assertThat(elements[2]).isEqualTo(78);
+        assertThat(elements[1]).isEqualTo(69);
+        assertThat(size).isEqualTo(4);
         assertThat(removedElement).isEqualTo(58);
     }
 
     @Test
     @Order(25)
     public void removeElementByIndexEqualToSize() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
+        try {
+            Object[] elements = new Object[]{15, 69, 58, 78};
+            getFieldByName("elementData").set(arrayList, elements);
+            getFieldByName("size").set(arrayList, elements.length);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.remove(4));
@@ -273,12 +351,22 @@ public class ArrayListTest {
     @Test
     @Order(26)
     public void removeLastElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
+        Object[] initArray = new Object[]{15, 69, 58, 78, 100};
+
+        try {
+            getFieldByName("elementData").set(arrayList, initArray);
+            getFieldByName("size").set(arrayList, initArray.length);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         int removedElement = arrayList.remove(4);
 
-        assertThat(arrayList.get(3)).isEqualTo(78);
-        assertThat(arrayList.size()).isEqualTo(4);
+        Object[] elements = (Object[]) getObjectByName("elementData");
+        int size = (int) getObjectByName("size");
+
+        assertThat(elements[3]).isEqualTo(78);
+        assertThat(size).isEqualTo(4);
         assertThat(removedElement).isEqualTo(100);
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(4));
@@ -287,7 +375,11 @@ public class ArrayListTest {
     @Test
     @Order(27)
     public void removeElementByIndexOutOfBounds() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
+        try {
+            getFieldByName("elementData").set(arrayList, new Object[]{15, 69, 58, 78, 100});
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.remove(6));
@@ -302,7 +394,14 @@ public class ArrayListTest {
     @Test
     @Order(29)
     public void containsElement() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
+        Object[] initArray = new Object[]{15, 69, 58, 78, 100};
+
+        try {
+            getFieldByName("elementData").set(arrayList, initArray);
+            getFieldByName("size").set(arrayList, initArray.length);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThat(arrayList.contains(58)).isEqualTo(true);
     }
@@ -310,9 +409,14 @@ public class ArrayListTest {
     @Test
     @Order(30)
     void containsNotExistingWhenArrayIsNotFilled() {
-        arrayList = new ArrayList<>(100);
-        arrayList.add(5);
-        arrayList.add(8);
+        try {
+            Object[] elements = new Object[100];
+            elements[0] = 5;
+            elements[1] = 8;
+            getFieldByName("elementData").set(arrayList, elements);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         boolean result = arrayList.contains(3);
 
@@ -322,8 +426,13 @@ public class ArrayListTest {
     @Test
     @Order(31)
     public void findNotExistingElement() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
-
+        Object[] initArray = new Object[] {15, 69, 58, 78, 100};
+        try {
+            getFieldByName("elementData").set(arrayList, initArray);
+            getFieldByName("size").set(arrayList, initArray.length);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         assertThat(arrayList.contains(200)).isEqualTo(false);
     }
 
@@ -336,7 +445,11 @@ public class ArrayListTest {
     @Test
     @Order(33)
     public void isEmpty() {
-        arrayList = ArrayList.of(34, 5, 6);
+        try {
+            getFieldByName("size").set(arrayList, 3);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
         assertThat(arrayList.isEmpty()).isEqualTo(false);
     }
@@ -350,8 +463,11 @@ public class ArrayListTest {
     @Test
     @Order(35)
     public void clearChangesTheSize() {
-        arrayList = ArrayList.of(4, 5, 6);
-
+        try {
+            getFieldByName("size").set(arrayList, 100);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         arrayList.clear();
 
         assertThat(arrayList.size()).isEqualTo(0);
@@ -360,11 +476,40 @@ public class ArrayListTest {
     @Test
     @Order(36)
     public void clearRemovesElements() {
-        arrayList = ArrayList.of(4, 5, 6);
-
+        try {
+            getFieldByName("elementData").set(arrayList, new Object[]{4, 5, 6});
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         arrayList.clear();
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(0));
+    }
+
+    private Object getObjectByName(String name) {
+
+        Object element = null;
+
+        try {
+            Field field = arrayList.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+            element = field.get(arrayList);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return element;
+    }
+
+    private Field getFieldByName(String name) {
+        Field field = null;
+        try {
+            field = arrayList.getClass().getDeclaredField(name);
+            field.setAccessible(true);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        return field;
     }
 }
