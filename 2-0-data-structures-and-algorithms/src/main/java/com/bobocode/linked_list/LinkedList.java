@@ -18,7 +18,7 @@ public class LinkedList<T> implements List<T> {
      * @param <T>      generic type
      * @return a new list of elements the were passed as method parameters
      */
-    public static <T> List<T> of(T... elements) {
+    public static <T> LinkedList<T> of(T... elements) {
         throw new ExerciseNotCompletedException(); // todo: implement this method
     }
 
