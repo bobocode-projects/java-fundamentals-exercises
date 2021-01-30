@@ -214,7 +214,7 @@ class ArrayListTest {
     @Order(21)
     void setElementByIndex() {
         fillTestArray(15, 69, 58, 78);
-        Object[]internalArray = getTestArray();
+        Object[] internalArray = getTestArray();
 
         arrayList.set(2, 10);
 
@@ -356,42 +356,25 @@ class ArrayListTest {
 
     @SneakyThrows
     private void setTestSize(int size) {
-        try {
-            Field sizeField = arrayList.getClass().getDeclaredField("size");
-            sizeField.setAccessible(true);
-            sizeField.set(arrayList, size);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        Field sizeField = arrayList.getClass().getDeclaredField("size");
+        sizeField.setAccessible(true);
+        sizeField.set(arrayList, size);
     }
 
     @SneakyThrows
     private int getTestSize() {
-        int size = 0;
-        try {
-            Field testSize = arrayList.getClass().getDeclaredField("size");
-            testSize.setAccessible(true);
-            size = (int) testSize.get(arrayList);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        return size;
+        Field testSize = arrayList.getClass().getDeclaredField("size");
+        testSize.setAccessible(true);
+        return (int) testSize.get(arrayList);
     }
 
     @SneakyThrows
     private Object[] getTestArray() {
-        Object[] array = null;
-        try {
-            Field field = arrayList.getClass().getDeclaredField(getTestArrayName());
-            field.setAccessible(true);
-            array = (Object[]) field.get(arrayList);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return array;
+        Field field = arrayList.getClass().getDeclaredField(getTestArrayName());
+        field.setAccessible(true);
+        return (Object[]) field.get(arrayList);
     }
 
-    @SneakyThrows
     private String getTestArrayName() {
         Field[] fields = arrayList.getClass().getDeclaredFields();
         String name = null;
@@ -406,15 +389,11 @@ class ArrayListTest {
 
     @SneakyThrows
     private void fillTestArray(Object... elements) {
-        try {
-            Field arrayField = arrayList.getClass().getDeclaredField(getTestArrayName());
-            Field sizeField = arrayList.getClass().getDeclaredField("size");
-            arrayField.setAccessible(true);
-            sizeField.setAccessible(true);
-            arrayField.set(arrayList, elements);
-            sizeField.set(arrayList, elements.length);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        Field arrayField = arrayList.getClass().getDeclaredField(getTestArrayName());
+        Field sizeField = arrayList.getClass().getDeclaredField("size");
+        arrayField.setAccessible(true);
+        sizeField.setAccessible(true);
+        arrayField.set(arrayList, elements);
+        sizeField.set(arrayList, elements.length);
     }
 }
