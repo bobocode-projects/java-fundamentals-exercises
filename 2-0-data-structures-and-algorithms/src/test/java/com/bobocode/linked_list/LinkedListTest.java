@@ -36,7 +36,9 @@ public class LinkedListTest {
     void properNodeName() {
         Class<?> innerClass = getInnerClass();
 
-        assertThat(innerClass.getSimpleName()).isEqualTo("Node");
+        String name = innerClass.getSimpleName();
+
+        assertThat(name).isEqualTo("Node");
     }
 
     @Test
@@ -44,13 +46,13 @@ public class LinkedListTest {
     void properNodeFields() {
         Class<?> innerClass = getInnerClass();
 
-        boolean hasGenericField = Arrays.stream(innerClass.getDeclaredFields())
+        boolean hasElementField = Arrays.stream(innerClass.getDeclaredFields())
                 .anyMatch(ELEMENT_FIELD);
 
         boolean hasNodeField = Arrays.stream(innerClass.getDeclaredFields())
                 .anyMatch(NODE_FIELD);
 
-        assertThat(hasGenericField).isTrue();
+        assertThat(hasElementField).isTrue();
         assertThat(hasNodeField).isTrue();
     }
 
@@ -83,7 +85,7 @@ public class LinkedListTest {
 
     @Test
     @Order(5)
-    void addElementByIndex() {
+    void addByIndex() {
         addInternalElements(43, 5, 6, 8);
 
         int newElementIdx = 2;
@@ -102,7 +104,7 @@ public class LinkedListTest {
 
     @Test
     @Order(6)
-    void addElementByZeroIndexIntoEmptyList() {
+    void addByZeroIndexWhenListIsEmpty() {
         intList.add(0, 45);
 
         int element = getInternalElement(0);
@@ -114,7 +116,7 @@ public class LinkedListTest {
 
     @Test
     @Order(7)
-    void addElementByIndexToTheEndOfList() {
+    void addByIndexToTheEndOfList() {
         addInternalElements(98, 64, 23, 1, 3, 4);
 
         int newElementIndex = getInternalSize();
@@ -126,7 +128,7 @@ public class LinkedListTest {
 
     @Test
     @Order(8)
-    void addElementToTheHeadOfNonEmptyList() {
+    void addToHeadWhenListIsEmpty() {
         addInternalElements(4, 6, 8, 9, 0, 2);
 
         intList.add(0, 53);
@@ -142,14 +144,14 @@ public class LinkedListTest {
 
     @Test
     @Order(9)
-    void addElementByNegativeIndex() {
+    void addThrowsExceptionWenIndexIsNegative() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> intList.add(-1, 66));
     }
 
     @Test
     @Order(10)
-    void addElementByIndexLargerThanListSize() {
+    void addThrowsExceptionWhenIndexLargerThanSize() {
         addInternalElements(4, 6, 11, 9);
 
         int newElementIdx = 5;
@@ -160,7 +162,7 @@ public class LinkedListTest {
 
     @Test
     @Order(11)
-    void addElementByIndexEqualToSize() {
+    void addWhenIndexEqualToSize() {
         addInternalElements(1, 2, 3, 4, 5); // size = 5
 
         intList.add(5, 111);
@@ -174,7 +176,7 @@ public class LinkedListTest {
 
     @Test
     @Order(12)
-    void addElements() {
+    void of() {
         intList = LinkedList.of(43, 233, 54);
 
         assertThat(getInternalElement(0)).isEqualTo(43);
@@ -184,7 +186,7 @@ public class LinkedListTest {
 
     @Test
     @Order(13)
-    void addElementsChangeSize() {
+    void ofChangeSize() {
         intList = LinkedList.of(43, 233, 54);
 
         int size = getInternalSize();
@@ -194,7 +196,7 @@ public class LinkedListTest {
 
     @Test
     @Order(14)
-    void setElementByIndex() {
+    void setByIndex() {
         addInternalElements(34, 78, 9, 8);
 
         int index = 2; //element = 78
@@ -213,14 +215,14 @@ public class LinkedListTest {
 
     @Test
     @Order(15)
-    void setFirstElementOfEmptyList() {
+    void setFirstElementWhenListIsEmpty() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> intList.set(0, 34));
     }
 
     @Test
     @Order(16)
-    void setElementByIndexEqualToSize() {
+    void setByIndexEqualToSize() {
         addInternalElements(2, 3, 4); // size = 3
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
@@ -229,7 +231,7 @@ public class LinkedListTest {
 
     @Test
     @Order(17)
-    void getElements() {
+    void get() {
         addInternalElements(25, 87, 45);
 
         int firstElement = intList.get(0);
@@ -244,7 +246,7 @@ public class LinkedListTest {
 
     @Test
     @Order(18)
-    void getElementByZeroIndexFromSingleElementList() {
+    void getByZeroIndexWhenListHasSingleElement() {
         addInternalElements(25);
 
         int element = intList.get(0);
@@ -254,21 +256,21 @@ public class LinkedListTest {
 
     @Test
     @Order(19)
-    void getElementByZeroIndexFromEmptyList() {
+    void getByZeroIndexWhenListIsEmpty() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> intList.get(0));
     }
 
     @Test
     @Order(20)
-    void getElementByNegativeIndex() {
+    void getWhenIndexIsNegative() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> intList.get(-1));
     }
 
     @Test
     @Order(21)
-    void getElementByIndexEqualsToListSize() {
+    void getWhenIndexIsEqualToListSize() {
         addInternalElements(33, 46, 25, 87, 45);
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
@@ -297,14 +299,14 @@ public class LinkedListTest {
 
     @Test
     @Order(24)
-    void getFirstOfEmptyList() {
+    void getFirstWhenListIsEmpty() {
         assertThatExceptionOfType(NoSuchElementException.class)
                 .isThrownBy(() -> intList.getFirst());
     }
 
     @Test
     @Order(25)
-    void getLastOfEmptyList() {
+    void getLastWhenListIsEmpty() {
         assertThatExceptionOfType(NoSuchElementException.class)
                 .isThrownBy(() -> intList.getLast());
     }
@@ -312,7 +314,7 @@ public class LinkedListTest {
 
     @Test
     @Order(26)
-    void removeElement() {
+    void remove() {
         addInternalElements(1, 2, 3, 4, 5);
 
         int elementIndex = 2;
@@ -328,7 +330,7 @@ public class LinkedListTest {
 
     @Test
     @Order(27)
-    void removeFirstElement() {
+    void removeFirst() {
         addInternalElements(4, 6, 8, 9);
 
         int deletedElement = intList.remove(0);
@@ -343,7 +345,7 @@ public class LinkedListTest {
 
     @Test
     @Order(28)
-    void removeLastElement() {
+    void removeLast() {
         addInternalElements(4, 6, 8, 9);
 
         int deletedElement = intList.remove(getInternalSize() - 1);
@@ -358,7 +360,7 @@ public class LinkedListTest {
 
     @Test
     @Order(29)
-    void removeElementFromEmptyList() {
+    void removeWhenListIsEmpty() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> intList.remove(234));
     }
@@ -375,7 +377,7 @@ public class LinkedListTest {
 
     @Test
     @Order(31)
-    void sizeOnEmptyList() {
+    void sizeWhenListIsEmpty() {
         int size = getInternalSize();
 
         assertThat(size).isEqualTo(0);
@@ -395,7 +397,7 @@ public class LinkedListTest {
 
     @Test
     @Order(33)
-    void containsOnEmptyList() {
+    void containsWhenListIsEmpty() {
         boolean contains = intList.contains(34);
 
         assertThat(contains).isFalse();
@@ -413,7 +415,7 @@ public class LinkedListTest {
 
     @Test
     @Order(35)
-    void isEmptyOnEmptyList() {
+    void isEmptyWhenListIsEmpty() {
         boolean empty = intList.isEmpty();
 
         assertThat(empty).isTrue();
@@ -421,7 +423,7 @@ public class LinkedListTest {
 
     @Test
     @Order(36)
-    void clearOnEmptyList() {
+    void clearWhenListIsEmpty() {
         intList.clear();
 
         int size = getInternalSize();
@@ -431,7 +433,7 @@ public class LinkedListTest {
 
     @Test
     @Order(37)
-    void clearChangesTheSize() {
+    void clearChangesSize() {
         addInternalElements(4, 5, 6);
 
         intList.clear();
@@ -443,13 +445,13 @@ public class LinkedListTest {
 
     @Test
     @Order(38)
-    void clearRemovesElements() {
+    void clearRemovesAllElements() {
         addInternalElements(4, 5, 6);
 
         intList.clear();
 
-        assertThatExceptionOfType(IndexOutOfBoundsException.class)
-                .isThrownBy(() -> intList.get(0));
+        assertThatExceptionOfType(NoSuchElementException.class)
+                .isThrownBy(() -> getInternalElement(0));
     }
 
     @SneakyThrows
@@ -502,20 +504,32 @@ public class LinkedListTest {
         sizeField.setInt(intList, size);
     }
 
-    private Object createNodeObjectWithInternalElement(Class<?> nodeClass, int element) throws InstantiationException, IllegalAccessException, java.lang.reflect.InvocationTargetException {
-        Object nodeObject = null;
-        Constructor<?>[] constructors = nodeClass.getDeclaredConstructors();
+    @SneakyThrows
+    private Object createNodeObjectWithInternalElement(Class<?> nodeClass, int element) {
+        Object nodeObject;
+        Constructor<?>[] declaredConstructors = nodeClass.getDeclaredConstructors();
+        Constructor<?> constructor;
 
-        for (Constructor<?> constructor : constructors) {
+        if (declaredConstructors.length > 0){
+            constructor = declaredConstructors[0];
             constructor.setAccessible(true);
             if (constructor.getParameterTypes().length == 1) {
                 nodeObject = constructor.newInstance(element);
             } else {
-                nodeObject = constructor.newInstance();
-                Field nodeElement = getAccessibleFieldByPredicate(nodeObject, ELEMENT_FIELD);
-                nodeElement.setInt(nodeObject, element);
+                nodeObject = createNodeByConstructorWithoutParameters(element, constructor);
             }
+        } else {
+            constructor = nodeClass.getConstructor();
+            nodeObject = createNodeByConstructorWithoutParameters(element, constructor);
         }
+        return nodeObject;
+    }
+
+    private Object createNodeByConstructorWithoutParameters(int element, Constructor<?> constructor) throws InstantiationException, IllegalAccessException, java.lang.reflect.InvocationTargetException {
+        Object nodeObject;
+        nodeObject = constructor.newInstance();
+        Field nodeElement = getAccessibleFieldByPredicate(nodeObject, ELEMENT_FIELD);
+        nodeElement.setInt(nodeObject, element);
         return nodeObject;
     }
 
