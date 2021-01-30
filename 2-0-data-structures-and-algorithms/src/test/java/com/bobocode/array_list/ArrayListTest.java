@@ -1,56 +1,54 @@
 package com.bobocode.array_list;
 
 import com.bobocode.linked_list.List;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ArrayListTest {
+class ArrayListTest {
 
     private List<Integer> arrayList = new ArrayList<>();
 
     @Test
     @Order(1)
-    public void add() {
+    void add() {
         arrayList.add(10);
         arrayList.add(15);
         arrayList.add(20);
 
-        assertThat(arrayList.get(0)).isEqualTo(10);
-        assertThat(arrayList.get(1)).isEqualTo(15);
-        assertThat(arrayList.get(2)).isEqualTo(20);
+        Object[] internalArray = getTestArray();
+
+        assertThat(internalArray[0]).isEqualTo(10);
+        assertThat(internalArray[1]).isEqualTo(15);
+        assertThat(internalArray[2]).isEqualTo(20);
     }
 
     @Test
     @Order(2)
-    public void sizeOfEmptyArrayWrapper() {
+    void sizeOfEmptyArrayWrapper() {
         assertThat(arrayList.size()).isEqualTo(0);
     }
 
     @Test
     @Order(3)
     void size() {
-        arrayList.add(10);
-        arrayList.add(15);
-        arrayList.add(20);
-
+        setTestSize(3);
         assertThat(arrayList.size()).isEqualTo(3);
     }
 
-
     @Test
     @Order(4)
-    public void getElementsByIndex() {
-        arrayList.add(10);
-        arrayList.add(15);
-        arrayList.add(20);
+    void getElementsByIndex() {
+        fillTestArray(10, 15, 20);
 
         assertThat(arrayList.get(0)).isEqualTo(10);
         assertThat(arrayList.get(1)).isEqualTo(15);
@@ -60,72 +58,63 @@ public class ArrayListTest {
 
     @Test
     @Order(5)
-    public void getFirstElement() {
-        arrayList = ArrayList.of(31, 32);
-
+    void getFirstElement() {
+        fillTestArray(31, 24);
         assertThat(arrayList.getFirst()).isEqualTo(31);
-
     }
 
     @Test
     @Order(6)
-    public void getLastElement() {
-        arrayList = ArrayList.of(21, 34);
-
+    void getLastElement() {
+        fillTestArray(31, 34);
         assertThat(arrayList.getLast()).isEqualTo(34);
     }
 
     @Test
     @Order(7)
-    public void getFirstOfEmptyList() {
+    void getFirstOfEmptyList() {
         assertThatExceptionOfType(NoSuchElementException.class)
                 .isThrownBy(() -> arrayList.getFirst());
     }
 
     @Test
     @Order(8)
-    public void getLastOfEmptyList() {
+    void getLastOfEmptyList() {
         assertThatExceptionOfType(NoSuchElementException.class)
                 .isThrownBy(() -> arrayList.getLast());
     }
 
     @Test
     @Order(9)
-    public void listWithSpecificCapacity() {
+    void createListWithSpecificArrayCapacity() {
         arrayList = new ArrayList<>(8);
-
-        arrayList.add(10);
-        arrayList.add(15);
-        arrayList.add(20);
-
-        assertThat(arrayList.get(0)).isEqualTo(10);
-        assertThat(arrayList.get(1)).isEqualTo(15);
-        assertThat(arrayList.get(2)).isEqualTo(20);
+        assertThat(getTestArray().length).isEqualTo(8);
     }
 
     @Test
     @Order(10)
-    public void listWithWrongCapacity() {
+    void createListWithWrongCapacity() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> arrayList = new ArrayList<>(-2));
     }
 
     @Test
     @Order(11)
-    public void addElements() {
+    void addElements() {
         arrayList = ArrayList.of(15, 69, 58, 78);
 
-        assertThat(arrayList.get(0)).isEqualTo(15);
-        assertThat(arrayList.get(1)).isEqualTo(69);
-        assertThat(arrayList.get(2)).isEqualTo(58);
-        assertThat(arrayList.get(3)).isEqualTo(78);
-        assertThat(arrayList.size()).isEqualTo(4);
+        assertThat(getTestArray()[0]).isEqualTo(15);
+        assertThat(getTestArray()[1]).isEqualTo(69);
+        assertThat(getTestArray()[2]).isEqualTo(58);
+        assertThat(getTestArray()[3]).isEqualTo(78);
+        assertThat(getTestSize()).isEqualTo(4);
     }
 
     @Test
     @Order(12)
-    public void resizeDefaultCapacity() {
+    void addShouldResizeDefaultCapacityWhenArrayIsFull() {
         arrayList = new ArrayList<>();
+        int defaultCapacity = getTestArray().length;
 
         arrayList.add(15);
         arrayList.add(69);
@@ -135,13 +124,13 @@ public class ArrayListTest {
         arrayList.add(33);
         arrayList.add(21);
 
-        assertThat(arrayList.get(6)).isEqualTo(21);
-        assertThat(arrayList.size()).isEqualTo(7);
+        assertThat(getTestArray().length).isGreaterThan(defaultCapacity);
+        assertThat(getTestSize()).isEqualTo(7);
     }
 
     @Test
     @Order(13)
-    public void resizeSpecificCapacity() {
+    void addShouldResizeSpecificCapacityWhenArrayIsFull() {
         arrayList = new ArrayList<>(4);
 
         arrayList.add(15);
@@ -152,142 +141,142 @@ public class ArrayListTest {
         arrayList.add(33);
         arrayList.add(21);
 
-        assertThat(arrayList.get(6)).isEqualTo(21);
-        assertThat(arrayList.size()).isEqualTo(7);
+        assertThat(getTestArray().length).isGreaterThan(4);
+        assertThat(getTestSize()).isEqualTo(7);
     }
 
     @Test
     @Order(14)
-    public void addElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 68);
+    void addElementByIndex() {
+        fillTestArray(15, 69, 58, 78, 68);
 
         arrayList.add(50);
         arrayList.add(2, 10);
 
-        assertThat(arrayList.get(2)).isEqualTo(10);
-        assertThat(arrayList.get(5)).isEqualTo(68);
-        assertThat(arrayList.size()).isEqualTo(7);
+        Object[] internalArray = getTestArray();
+
+        assertThat(internalArray[2]).isEqualTo(10);
+        assertThat(internalArray[5]).isEqualTo(68);
+        assertThat(getTestSize()).isEqualTo(7);
     }
 
     @Test
     @Order(15)
-    public void addElementByNegativeIndex() {
+    void addElementByNegativeIndex() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.add(-1, 66));
-
     }
 
     @Test
     @Order(16)
-    public void addElementByIndexLargerThanListSize() {
-        arrayList = ArrayList.of(4, 6, 11, 9);
-
+    void addElementByIndexLargerThanListSize() {
+        setTestSize(4);
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.add(5, 88));
     }
 
     @Test
     @Order(17)
-    public void addElementByIndexEqualToSize() {
-        arrayList = ArrayList.of(1, 2, 3, 4, 5); // size = 5
+    void addElementByIndexEqualToSize() {
+        fillTestArray(1, 2, 3, 4, 5);
 
         arrayList.add(5, 111);
 
-        assertThat(arrayList.get(5)).isEqualTo(111);
-        assertThat(arrayList.size()).isEqualTo(6);
+        Object[] internalArray = getTestArray();
+
+        assertThat(internalArray[5]).isEqualTo(111);
+        assertThat(getTestSize()).isEqualTo(6);
     }
 
     @Test
     @Order(18)
-    public void getFirstElementFromEmptyList() {
+    void getFirstElementFromEmptyList() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(0));
     }
 
     @Test
     @Order(19)
-    public void getElementByNegativeIndex() {
+    void getElementByNegativeIndex() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(-1));
     }
 
     @Test
     @Order(20)
-    public void getElementByIndexEqualToListSize() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
-
+    void getElementByIndexThrowsExceptionWhenIndexIsOutOfBound() {
+        fillTestArray(1, 2, 3, 4);
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(4));
     }
 
     @Test
     @Order(21)
-    public void setElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
+    void setElementByIndex() {
+        fillTestArray(15, 69, 58, 78);
+        Object[] internalArray = getTestArray();
 
         arrayList.set(2, 10);
 
-        assertThat(arrayList.get(2)).isEqualTo(10);
-        assertThat(arrayList.get(3)).isEqualTo(78);
-        assertThat(arrayList.size()).isEqualTo(4);
+        assertThat(internalArray[2]).isEqualTo(10);
+        assertThat(internalArray[3]).isEqualTo(78);
+        assertThat(getTestSize()).isEqualTo(4);
     }
 
     @Test
     @Order(22)
-    public void setElementByIndexEqualToSize() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
-
+    void setElementByIndexThrowsExceptionWhenIndexIsOutOfBound() {
+        fillTestArray(15, 69, 58, 78);
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.set(4, 10));
     }
 
     @Test
     @Order(23)
-    public void setFirstElementOnEmptyTree() {
+    void setFirstElementOnEmptyTree() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.set(0, 34));
     }
 
     @Test
     @Order(24)
-    public void removeElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
+    void removeElementByIndex() {
+        fillTestArray(15, 69, 58, 78, 100);
+        Object[] internalArray = getTestArray();
 
         int removedElement = arrayList.remove(2);
 
-        assertThat(arrayList.get(2)).isEqualTo(78);
-        assertThat(arrayList.get(1)).isEqualTo(69);
-        assertThat(arrayList.size()).isEqualTo(4);
+        assertThat(internalArray[2]).isEqualTo(78);
+        assertThat(internalArray[1]).isEqualTo(69);
+        assertThat(getTestSize()).isEqualTo(4);
         assertThat(removedElement).isEqualTo(58);
     }
 
     @Test
     @Order(25)
-    public void removeElementByIndexEqualToSize() {
-        arrayList = ArrayList.of(15, 69, 58, 78);
-
+    void removeElementByIndexThrowsExceptionWhenIndexEqualsSize() {
+        fillTestArray(15, 69, 58, 78);
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.remove(4));
     }
 
     @Test
     @Order(26)
-    public void removeLastElementByIndex() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
+    void removeLastElementByIndex() {
+        fillTestArray(15, 69, 58, 78, 100);
+        Object[] internalArray = getTestArray();
 
         int removedElement = arrayList.remove(4);
 
-        assertThat(arrayList.get(3)).isEqualTo(78);
-        assertThat(arrayList.size()).isEqualTo(4);
+        assertThat(internalArray[3]).isEqualTo(78);
+        assertThat(getTestSize()).isEqualTo(4);
         assertThat(removedElement).isEqualTo(100);
-        assertThatExceptionOfType(IndexOutOfBoundsException.class)
-                .isThrownBy(() -> arrayList.get(4));
     }
 
     @Test
     @Order(27)
-    public void removeElementByIndexOutOfBounds() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
+    void removeElementByIndexThrowsExceptionWhenIndexIsOutOfBounds() {
+        fillTestArray(15, 69, 58, 78, 100);
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.remove(6));
@@ -295,15 +284,14 @@ public class ArrayListTest {
 
     @Test
     @Order(28)
-    public void containsOnEmptyList() {
+    void containsOnEmptyList() {
         assertThat(arrayList.contains(8)).isEqualTo(false);
     }
 
     @Test
     @Order(29)
-    public void containsElement() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
-
+    void containsElement() {
+        fillTestArray(15, 69, 58, 78, 100);
         assertThat(arrayList.contains(58)).isEqualTo(true);
     }
 
@@ -311,8 +299,9 @@ public class ArrayListTest {
     @Order(30)
     void containsNotExistingWhenArrayIsNotFilled() {
         arrayList = new ArrayList<>(100);
-        arrayList.add(5);
-        arrayList.add(8);
+        Object[] internalArray = getTestArray();
+        internalArray[0] = 5;
+        internalArray[1] = 10;
 
         boolean result = arrayList.contains(3);
 
@@ -321,37 +310,34 @@ public class ArrayListTest {
 
     @Test
     @Order(31)
-    public void findNotExistingElement() {
-        arrayList = ArrayList.of(15, 69, 58, 78, 100);
-
+    void findNotExistingElement() {
+        fillTestArray(15, 69, 58, 78, 100);
         assertThat(arrayList.contains(200)).isEqualTo(false);
     }
 
     @Test
     @Order(32)
-    public void isEmptyOnEmptyList() {
+    void isEmptyOnEmptyList() {
         assertThat(arrayList.isEmpty()).isEqualTo(true);
     }
 
     @Test
     @Order(33)
-    public void isEmpty() {
-        arrayList = ArrayList.of(34, 5, 6);
-
+    void isEmpty() {
+        setTestSize(3);
         assertThat(arrayList.isEmpty()).isEqualTo(false);
     }
 
     @Test
     @Order(34)
-    public void clearOnEmptyList() {
+    void clearOnEmptyList() {
         assertThat(arrayList.isEmpty()).isEqualTo(true);
     }
 
     @Test
     @Order(35)
-    public void clearChangesTheSize() {
-        arrayList = ArrayList.of(4, 5, 6);
-
+    void clearChangesTheSize() {
+        setTestSize(100);
         arrayList.clear();
 
         assertThat(arrayList.size()).isEqualTo(0);
@@ -359,12 +345,55 @@ public class ArrayListTest {
 
     @Test
     @Order(36)
-    public void clearRemovesElements() {
-        arrayList = ArrayList.of(4, 5, 6);
+    void clearRemovesElements() {
+        fillTestArray(4, 5, 6);
 
         arrayList.clear();
 
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.get(0));
+    }
+
+    @SneakyThrows
+    private void setTestSize(int size) {
+        Field sizeField = arrayList.getClass().getDeclaredField("size");
+        sizeField.setAccessible(true);
+        sizeField.set(arrayList, size);
+    }
+
+    @SneakyThrows
+    private int getTestSize() {
+        Field testSize = arrayList.getClass().getDeclaredField("size");
+        testSize.setAccessible(true);
+        return (int) testSize.get(arrayList);
+    }
+
+    @SneakyThrows
+    private Object[] getTestArray() {
+        Field field = arrayList.getClass().getDeclaredField(getTestArrayName());
+        field.setAccessible(true);
+        return (Object[]) field.get(arrayList);
+    }
+
+    private String getTestArrayName() {
+        Field[] fields = arrayList.getClass().getDeclaredFields();
+        String name = null;
+        for (Field field : fields) {
+            if (field.getType().isArray()) {
+                field.setAccessible(true);
+                name = field.getName();
+            }
+        }
+        return name;
+    }
+
+    @SneakyThrows
+    private void fillTestArray(Object... elements) {
+        Field arrayField = arrayList.getClass().getDeclaredField(getTestArrayName());
+        Field sizeField = arrayList.getClass().getDeclaredField("size");
+        arrayField.setAccessible(true);
+        sizeField.setAccessible(true);
+        arrayField.set(arrayList, elements);
+        sizeField.set(arrayList, elements.length);
     }
 }
