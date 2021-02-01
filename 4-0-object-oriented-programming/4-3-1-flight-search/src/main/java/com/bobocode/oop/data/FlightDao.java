@@ -1,4 +1,4 @@
-package com.bobocode.flight_search.data;
+package com.bobocode.oop.data;
 
 import com.bobocode.flight_search.service.Flights;
 

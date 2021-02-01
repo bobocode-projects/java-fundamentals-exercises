@@ -1,5 +1,5 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Flight search exercise :muscle:
-Improve your OOP skills
+Improve your OOP skills and learn the power on polymorphism
 ### Task
 `FlighService` and package `service` represent a component of the system that holds a business logic. `FlightDao` 
 and package `data` represent a component of the system that implements data access layer. Your job is to implement 

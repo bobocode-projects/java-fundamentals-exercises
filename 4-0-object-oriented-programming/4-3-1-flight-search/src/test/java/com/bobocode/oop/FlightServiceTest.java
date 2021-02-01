@@ -1,7 +1,7 @@
-package com.bobocode.flight_search;
+package com.bobocode.oop;
 
-import com.bobocode.flight_search.factory.FlightServiceFactory;
-import com.bobocode.flight_search.service.FlightService;
+import com.bobocode.oop.factory.FlightServiceFactory;
+import com.bobocode.oop.service.FlightService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

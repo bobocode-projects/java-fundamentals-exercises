@@ -1,7 +1,7 @@
-package com.bobocode.flight_search.factory;
+package com.bobocode.oop.factory;
 
-import com.bobocode.flight_search.data.FlightDao;
-import com.bobocode.flight_search.service.FlightService;
+import com.bobocode.oop.data.FlightDao;
+import com.bobocode.oop.service.FlightService;
 
 /**
  * {@link FlightServiceFactory} is used to create an instance of {@link FlightService}
@@ -19,4 +19,3 @@ public class FlightServiceFactory {
         return new FlightService(new FlightDao());
     }
 }
-
