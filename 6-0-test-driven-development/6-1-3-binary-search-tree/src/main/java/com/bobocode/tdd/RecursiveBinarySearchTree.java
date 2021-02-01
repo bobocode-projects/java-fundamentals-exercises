@@ -1,4 +1,4 @@
-package com.bobocode.bst;
+package com.bobocode.tdd;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 
