@@ -1,4 +1,4 @@
-package com.bobocode.file_stats;
+package com.bobocode.se;
 
 public class FileStatsException extends RuntimeException{
     public FileStatsException(String message) {

@@ -1,4 +1,4 @@
-package com.bobocode.file_stats;
+package com.bobocode.se;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

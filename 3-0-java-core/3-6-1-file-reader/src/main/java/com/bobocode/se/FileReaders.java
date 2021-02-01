@@ -1,4 +1,4 @@
-package com.bobocode.file_reader;
+package com.bobocode.se;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 
