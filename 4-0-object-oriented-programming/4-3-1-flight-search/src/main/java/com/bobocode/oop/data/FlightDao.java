@@ -1,6 +1,6 @@
 package com.bobocode.oop.data;
 
-import com.bobocode.flight_search.service.Flights;
+import com.bobocode.oop.service.Flights;
 
 import java.util.HashSet;
 import java.util.Set;

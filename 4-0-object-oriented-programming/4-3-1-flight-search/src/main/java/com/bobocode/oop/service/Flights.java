@@ -1,4 +1,4 @@
-package com.bobocode.flight_search.service;
+package com.bobocode.oop.service;
 
 import java.util.Set;
 
