@@ -1,4 +1,4 @@
-package com.bobocode.stack;
+package com.bobocode.tdd;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.bobocode.bst;
+package com.bobocode.tdd;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

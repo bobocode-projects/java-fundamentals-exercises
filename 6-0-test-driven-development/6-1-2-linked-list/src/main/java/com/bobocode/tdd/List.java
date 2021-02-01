@@ -1,4 +1,4 @@
-package com.bobocode.linked_list;
+package com.bobocode.tdd;
 
 
 public interface List<T> {
