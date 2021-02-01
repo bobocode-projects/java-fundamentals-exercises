@@ -1,4 +1,4 @@
-package com.bobocode.bst;
+package com.bobocode.tdd;
 
 import java.util.Objects;
 import java.util.function.Consumer;

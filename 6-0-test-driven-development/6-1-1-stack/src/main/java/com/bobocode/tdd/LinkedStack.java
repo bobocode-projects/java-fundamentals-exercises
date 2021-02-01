@@ -1,4 +1,6 @@
-package com.bobocode.stack;
+package com.bobocode.tdd;
+
+import com.bobocode.tdd.exception.EmptyStackException;
 
 import java.util.Objects;
 import java.util.stream.Stream;

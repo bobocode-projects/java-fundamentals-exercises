@@ -1,4 +1,4 @@
-package com.bobocode.stack;
+package com.bobocode.tdd.exception;
 
 public class EmptyStackException extends RuntimeException{
 

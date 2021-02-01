@@ -1,5 +1,6 @@
 package com.bobocode.tdd;
 
+import com.bobocode.tdd.exception.EmptyStackException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
