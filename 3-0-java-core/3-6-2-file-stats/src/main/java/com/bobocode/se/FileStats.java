@@ -1,4 +1,4 @@
-package com.bobocode.file_stats;
+package com.bobocode.se;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

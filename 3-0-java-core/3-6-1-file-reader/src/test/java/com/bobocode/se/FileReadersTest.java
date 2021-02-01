@@ -1,10 +1,8 @@
-package com.bobocode.file_reader;
+package com.bobocode.se;
 
-import com.bobocode.file_reader.FileReaders;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class FileReadersTest {
 

@@ -1,4 +1,4 @@
-package com.bobocode.file_reader;
+package com.bobocode.se;
 
 public class FileReaderException extends RuntimeException {
     public FileReaderException(String message, Exception e) {
