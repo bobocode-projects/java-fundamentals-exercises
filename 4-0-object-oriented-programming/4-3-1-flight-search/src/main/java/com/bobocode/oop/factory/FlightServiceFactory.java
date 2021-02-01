@@ -1,6 +1,6 @@
-package com.bobocode.flight_search.factory;
+package com.bobocode.oop.factory;
 
-import com.bobocode.flight_search.service.FlightService;
+import com.bobocode.oop.service.FlightService;
 import com.bobocode.util.ExerciseNotCompletedException;
 
 /**
