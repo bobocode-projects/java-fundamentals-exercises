@@ -2,7 +2,7 @@ package com.bobocode.bst;
 
 import java.util.function.Consumer;
 
-public interface BinarySearchTree<T extends Comparable> {
+public interface BinarySearchTree<T extends Comparable<T>> {
     /**
      * insert an element
      * @return true if element did not exist in the tree and was inserted successfully

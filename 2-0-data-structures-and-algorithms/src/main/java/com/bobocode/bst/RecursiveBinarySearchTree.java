@@ -2,13 +2,11 @@ package com.bobocode.bst;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 
-import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.stream.Stream;
 
-public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySearchTree<T> {
+public class RecursiveBinarySearchTree<T extends Comparable<T>> implements BinarySearchTree<T> {
 
-    public static <T extends Comparable> RecursiveBinarySearchTree<T> of(T... elements) {
+    public static <T extends Comparable<T>> RecursiveBinarySearchTree<T> of(T... elements) {
         throw new ExerciseNotCompletedException();
     }
 
