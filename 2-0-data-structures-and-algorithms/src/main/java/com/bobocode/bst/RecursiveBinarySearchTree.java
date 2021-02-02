@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySearchTree<T> {
+public class RecursiveBinarySearchTree<T extends Comparable<T>> implements BinarySearchTree<T> {
     private static class Node<T> {
         T element;
         Node<T> left;
@@ -14,15 +14,15 @@ public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySe
             this.element = element;
         }
 
-        public static <T> Node valueOf(T element) {
-            return new Node(element);
+        public static <T> Node<T> valueOf(T element) {
+            return new Node<>(element);
         }
     }
 
     private Node<T> root;
     private int size = 0;
 
-    public static <T extends Comparable> RecursiveBinarySearchTree<T> of(T... elements) {
+    public static <T extends Comparable<T>> RecursiveBinarySearchTree<T> of(T... elements) {
         RecursiveBinarySearchTree<T> bst = new RecursiveBinarySearchTree<>();
         Stream.of(elements).forEach(bst::insert);
         return bst;
