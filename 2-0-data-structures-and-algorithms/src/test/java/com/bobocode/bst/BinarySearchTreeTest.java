@@ -367,7 +367,11 @@ class BinarySearchTreeTest {
     @SneakyThrows
     private Object newNode(int element) {
         Object nodeInstance;
-        Constructor<?> constructor = getInnerClass().getDeclaredConstructors()[0];
+        Constructor<?>[] constructors = getInnerClass().getDeclaredConstructors();
+        Constructor<?> constructor = Arrays.stream(constructors)
+                .filter(c -> c.getParameters().length == 1)
+                .findAny()
+                .orElseThrow();
         constructor.setAccessible(true);
         nodeInstance = constructor.newInstance(element);
         return nodeInstance;
