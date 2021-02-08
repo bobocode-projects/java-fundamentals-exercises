@@ -368,12 +368,17 @@ class BinarySearchTreeTest {
     private Object newNode(int element) {
         Object nodeInstance;
         Constructor<?>[] constructors = getInnerClass().getDeclaredConstructors();
-        Constructor<?> constructor = Arrays.stream(constructors)
-                .filter(c -> c.getParameters().length == 1)
-                .findAny()
-                .orElseThrow();
+        Constructor<?> constructor;
+
+        constructor = constructors[0];
         constructor.setAccessible(true);
-        nodeInstance = constructor.newInstance(element);
+        if (constructor.getParameters().length == 1) {
+            nodeInstance = constructor.newInstance(element);
+        } else {
+            nodeInstance = constructor.newInstance();
+            Field nodeElement = getNodesField(nodeInstance, ELEMENT_FIELD);
+            nodeElement.set(nodeInstance, element);
+        }
         return nodeInstance;
     }
 
