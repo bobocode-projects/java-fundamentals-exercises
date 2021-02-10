@@ -11,8 +11,8 @@ import java.util.stream.Stream;
  * @param <T> generic type parameter
  */
 public class LinkedList<T> implements List<T> {
-    private Node<T> head;
-    private Node<T> tail;
+    private Node<T> first;
+    private Node<T> last;
     private int size;
 
     /**
@@ -35,7 +35,14 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void add(T element) {
-        add(size, element);
+        Node<T> newNode = new Node<>(element);
+        if (size == 0) {
+            first = last = newNode;
+        } else {
+            last.next = newNode;
+            last = newNode;
+        }
+        size++;
     }
 
     /**
@@ -59,16 +66,16 @@ public class LinkedList<T> implements List<T> {
     }
 
     private void addAsHead(Node<T> newNode) {
-        newNode.next = head;
-        head = newNode;
-        if (head.next == null) {
-            tail = head;
+        newNode.next = first;
+        first = newNode;
+        if (first.next == null) {
+            last = first;
         }
     }
 
     private void addAsTail(Node<T> newNode) {
-        tail.next = newNode;
-        tail = newNode;
+        last.next = newNode;
+        last = newNode;
     }
 
     private void add(int index, Node<T> newNode) {
@@ -80,14 +87,14 @@ public class LinkedList<T> implements List<T> {
     private Node<T> findNodeByIndex(int index) {
         Objects.checkIndex(index, size);
         if (index == size - 1) {
-            return tail;
+            return last;
         } else {
             return nodeAt(index);
         }
     }
 
     private Node<T> nodeAt(int index) {
-        Node<T> currentNode = head;
+        Node<T> currentNode = first;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
         }
@@ -129,7 +136,7 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T getFirst() {
         checkElementsExist();
-        return head.value;
+        return first.value;
     }
 
     /**
@@ -141,11 +148,11 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T getLast() {
         checkElementsExist();
-        return tail.value;
+        return last.value;
     }
 
     private void checkElementsExist() {
-        if (head == null) {
+        if (first == null) {
             throw new NoSuchElementException();
         }
     }
@@ -161,14 +168,14 @@ public class LinkedList<T> implements List<T> {
     public T remove(int index) {
         T deletedElement;
         if (index == 0) {
-            deletedElement = head.value;
+            deletedElement = first.value;
             removeHead();
         } else {
             Node<T> previousNode = findNodeByIndex(index - 1);
             deletedElement = previousNode.next.value;
             previousNode.next = previousNode.next.next;
             if (index == size - 1) {
-                tail = previousNode;
+                last = previousNode;
             }
         }
         size--;
@@ -176,9 +183,9 @@ public class LinkedList<T> implements List<T> {
     }
 
     private void removeHead() {
-        head = head.next;
-        if (head == null) {
-            tail = null;
+        first = first.next;
+        if (first == null) {
+            last = null;
         }
     }
 
@@ -189,7 +196,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public boolean contains(T element) {
-        Node<T> currentNode = head;
+        Node<T> currentNode = first;
         while (currentNode != null) {
             if (currentNode.value.equals(element)) {
                 return true;
@@ -206,7 +213,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public boolean isEmpty() {
-        return head == null;
+        return first == null;
     }
 
     /**
@@ -224,7 +231,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public void clear() {
-        head = tail = null;
+        first = last = null;
         size = 0;
     }
 
