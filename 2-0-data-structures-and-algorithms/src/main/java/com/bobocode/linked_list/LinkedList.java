@@ -166,9 +166,8 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public T remove(int index) {
-        T deletedElement = null;
+        T deletedElement;
         if (index == 0) {
-            Objects.checkIndex(index, size);
             deletedElement = first.value;
             removeHead();
         } else {
