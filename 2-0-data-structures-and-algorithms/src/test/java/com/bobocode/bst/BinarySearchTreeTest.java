@@ -43,7 +43,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(1)
     void properNodeClassNameCheck() {
-        tree = new RecursiveBinarySearchTree<>();
         Class<?> innerClass = getInnerClass();
         String name = innerClass.getSimpleName();
 
@@ -53,7 +52,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(2)
     void properTreeFieldsCheck() {
-        tree = new RecursiveBinarySearchTree<>();
         Class<?> treeClass = tree.getClass();
 
         boolean hasSizeField = Arrays.stream(treeClass.getDeclaredFields())
@@ -69,7 +67,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(3)
     void properNodeFieldsCheck() {
-        tree = new RecursiveBinarySearchTree<>();
         Class<?> innerClass = getInnerClass();
 
         boolean isElement = Arrays.stream(innerClass.getDeclaredFields())
@@ -99,7 +96,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(5)
     void insert() {
-        tree = new RecursiveBinarySearchTree<>();
         for (Integer e : someElements) {
             assertThat(contains(getRootObject(), e)).isFalse(); //does not contain
             assertThat(tree.insert(e)).isTrue(); //do insert
@@ -110,7 +106,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(6)
     void insertToRootIfTreeIsEmpty() {
-        tree = new RecursiveBinarySearchTree<>();
         assertThat(getRootObject()).isNull();
         tree.insert(10);
         assertThat(getRootObject()).isNotNull();
@@ -119,8 +114,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(7)
     void insertLeftIfLessThanRoot() {
-        tree = new RecursiveBinarySearchTree<>();
-
         tree.insert(10); //root
         tree.insert(5); //left
 
@@ -130,8 +123,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(8)
     void insertRightIfGreaterThanRoot() {
-        tree = new RecursiveBinarySearchTree<>();
-
         tree.insert(10); //root
         tree.insert(15); //right
 
@@ -177,15 +168,12 @@ class BinarySearchTreeTest {
     @Test
     @Order(13)
     void containsThrowsExceptionIFParameterIsNull() {
-        tree = new RecursiveBinarySearchTree<>();
         assertThatNullPointerException().isThrownBy(() -> tree.contains(null));
     }
 
     @Test
     @Order(14)
     void sizeIsGrowingWhenInserting() {
-        tree = new RecursiveBinarySearchTree<>();
-
         tree.insert(10);
         tree.insert(15);
         tree.insert(20);
@@ -218,7 +206,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(17)
     void depthGrowWhenInsert() {
-        tree = new RecursiveBinarySearchTree<>();
 
         tree.insert(13);
         tree.insert(11);
@@ -232,7 +219,6 @@ class BinarySearchTreeTest {
     @Test
     @Order(18)
     void depthIsZeroIfRootIsNull() {
-        tree = new RecursiveBinarySearchTree<>();
         assertThat(tree.depth()).isEqualTo(0);
     }
 
