@@ -64,4 +64,5 @@ public class LinkedStack<T> implements Stack<T> {
     public boolean isEmpty() {
         throw new ExerciseNotCompletedException(); // todo: implement this method;
     }
+
 }
