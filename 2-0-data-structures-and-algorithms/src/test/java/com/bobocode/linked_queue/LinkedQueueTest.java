@@ -91,7 +91,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(4)
-    void checkSizeInEmptyQueue() {
+    void sizeReturnsZeroWhenQueueIsEmpty() {
         int size = getInternalSize();
 
         assertThat(size).isEqualTo(0);
@@ -99,7 +99,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(5)
-    void riseSizeAfterAdd() {
+    void addRisesSize() {
         addIntElementToQueue(1);
         addIntElementToQueue(2);
         addIntElementToQueue(3);
@@ -110,7 +110,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(5)
-    void expenseSizeAfterPoll() {
+    void addExpensesSize() {
         addIntElementToQueue(1);
         addIntElementToQueue(2);
         addIntElementToQueue(3);
@@ -127,7 +127,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(6)
-    void isEmptyWhenQueueIsEmpty() {
+    void isEmptyReturnsFalseWhenQueueIsEmpty() {
         boolean isEmpty = this.integerQueue.isEmpty();
         boolean isEmptyByReflection = isEmptyQueue();
 
@@ -136,7 +136,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(7)
-    void isEmptyAfterPollLastElement() {
+    void isEmptyReturnsFalseWhenIsPolledLastElement() {
         addIntElementToQueue(1);
         addIntElementToQueue(2);
 
@@ -152,7 +152,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(8)
-    void pollFromEmptyQueue() {
+    void pollNullWhenQueueIsEmpty() {
         boolean isEmpty = isEmptyQueue();
         Integer firstElement = this.integerQueue.poll();
 
@@ -162,7 +162,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(9)
-    void pollFromNonEmptyQueue() {
+    void poll() {
         addIntElementToQueue(11);
         addIntElementToQueue(111);
 
@@ -175,7 +175,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(10)
-    void pollLastElement() {
+    void pollMakesQueueEmptyWhenSingleElement() {
         addIntElementToQueue(12);
         addIntElementToQueue(10);
 
@@ -199,7 +199,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(11)
-    void addElementIntoEmptyQueue() {
+    void addFillsQueueWhenItIsEmpty() {
         int sizeBeforeAdd = getInternalSize();
         boolean isEmptyBeforeAdd = isEmptyQueue();
 
@@ -219,7 +219,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(12)
-    void addElementIntoNotEmptyQueue() {
+    void addFillsQueueWhenItIsNotEmpty() {
         addIntElementToQueue(12);
 
         int sizeBeforeAdd = getInternalSize();
