@@ -302,10 +302,7 @@ public class LinkedQueueTest {
 
     @SneakyThrows
     private void addIntElementToQueue(int value) {
-        Class<?> innerClass = getInnerStaticNodeClass();
-        Constructor constructor = innerClass.getDeclaredConstructor(Object.class);
-        constructor.setAccessible(true);
-        Object nodeObj = constructor.newInstance(value);
+        Object nodeObj = createNode(value);
 
         Object head = getAccessibleFieldByPredicate(this.integerQueue,
                 HEAD_FIELD)
@@ -334,6 +331,25 @@ public class LinkedQueueTest {
             tmpInt++;
             setInternalSize(tmpInt);
         }
+    }
+
+    @SneakyThrows
+    private Object createNode(int value) {
+        Object nodeObject;
+        Class<?> innerClass = getInnerStaticNodeClass();
+        Constructor<?>[] declaredConstructors  = innerClass.getDeclaredConstructors();
+        Constructor<?> constructor = declaredConstructors[0];
+        constructor.setAccessible(true);
+
+        if (constructor.getParameterTypes().length == 1) {
+            nodeObject = constructor.newInstance(value);
+        } else {
+            nodeObject = constructor.newInstance();
+            Field nodeElement = getAccessibleFieldByPredicate(nodeObject, ELEMENT_FIELD);
+            nodeElement.set(nodeObject, value);
+        }
+
+        return nodeObject;
     }
 
     @SneakyThrows
