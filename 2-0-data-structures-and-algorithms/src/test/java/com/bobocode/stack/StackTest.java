@@ -190,7 +190,7 @@ class StackTest {
     void sizeIncreasesWhenUseOfMethod() {
         intStack = LinkedStack.of(1, 2, 3, 4, 5, 6, 7, 8);
 
-        assertThat(getInnerSize()).isEqualTo(8);
+        assertThat(intStack.size()).isEqualTo(8);
     }
 
     @Test
@@ -200,7 +200,7 @@ class StackTest {
         intStack.push(2);
         intStack.push(3);
 
-        assertThat(getInnerSize()).isEqualTo(3);
+        assertThat(intStack.size()).isEqualTo(3);
     }
 
     @Test
@@ -209,7 +209,7 @@ class StackTest {
         fillTestStack(1, 2, 3, 4, 5);
         intStack.pop();
 
-        assertThat(getInnerSize()).isEqualTo(4);
+        assertThat(intStack.size()).isEqualTo(4);
     }
 
     @Test
