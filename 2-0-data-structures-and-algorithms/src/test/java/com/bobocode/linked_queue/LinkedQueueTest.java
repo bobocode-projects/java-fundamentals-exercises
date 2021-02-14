@@ -136,7 +136,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(7)
-    void isEmptyReturnsFalseWhenIsPolledLastElement() {
+    void isEmptyReturnsFalseWhenLastElementIsPolled() {
         addIntElementToQueue(1);
         addIntElementToQueue(2);
 
