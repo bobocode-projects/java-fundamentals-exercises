@@ -69,7 +69,7 @@ class StackTest {
 
     @Test
     @Order(4)
-    void ofAddElements() {
+    void of() {
         intStack = LinkedStack.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         for (int i = 1; i <= 10; i++) {
@@ -79,19 +79,15 @@ class StackTest {
 
     @Test
     @Order(5)
-    void pushElements() {
+    void push() {
         intStack.push(55);
-        intStack.push(59);
-        intStack.push(74);
 
         assertThat(contains(55)).isTrue();
-        assertThat(contains(59)).isTrue();
-        assertThat(contains(74)).isTrue();
     }
 
     @Test
     @Order(6)
-    void pushElementOntoEmptyStack() {
+    void pushAddsElementWhenStackIsEmpty() {
         intStack.push(243);
 
         assertThat(contains(243)).isTrue();
@@ -99,7 +95,7 @@ class StackTest {
 
     @Test
     @Order(7)
-    void pushElementToEmptyStackIsHead() {
+    void pushAddsElementToHeadWhenStackIsEmpty() {
         intStack.push(10);
 
         Object head = getHeadObject();
@@ -110,7 +106,7 @@ class StackTest {
 
     @Test
     @Order(8)
-    void pushAnotherElementToStackIsHead() {
+    void pushAddsElementToHeadWhenStackIsNotEmpty() {
         intStack.push(10);
         intStack.push(15);
         intStack.push(20);
@@ -123,7 +119,7 @@ class StackTest {
 
     @Test
     @Order(9)
-    void pushPutHeadElementToNext() {
+    void pushPutsHeadToNextOfNewHead() {
         fillTestStack(10, 15, 20);
 
         assertThat(getNodeElementInt(getHeadObject())).isEqualTo(20);
@@ -139,19 +135,19 @@ class StackTest {
 
     @Test
     @Order(10)
-    void pushThrowsExceptionIfElementIsNull() {
+    void pushThrowsExceptionWhenElementIsNull() {
         assertThatNullPointerException().isThrownBy(() -> intStack.push(null));
     }
 
     @Test
     @Order(11)
-    void popElementFromEmptyStack() {
+    void popElementWhenStackIsEmpty() {
         assertThrows(EmptyStackException.class, () -> intStack.pop());
     }
 
     @Test
     @Order(12)
-    void popElements() {
+    void pop() {
         fillTestStack(55, 17, 66, 234);
 
         int lastElement = intStack.pop();
@@ -161,7 +157,7 @@ class StackTest {
 
     @Test
     @Order(13)
-    void popPreviousElementBecomesHead() {
+    void popResetsHeadFromNextOfOldHead() {
         fillTestStack(10, 15, 20);
         Object head = getHeadObject();
 
@@ -175,7 +171,7 @@ class StackTest {
 
     @Test
     @Order(14)
-    void sizeOnEmptyStack() {
+    void sizeWhenStackIsEmpty() {
         int actualSize = getInnerSize();
 
         assertThat(actualSize).isEqualTo(0);
@@ -186,14 +182,12 @@ class StackTest {
     void size() {
         fillTestStack(1, 5, 7);
 
-        int actualSize = getInnerSize();
-
-        assertThat(actualSize).isEqualTo(3);
+        assertThat(intStack.size()).isEqualTo(3);
     }
 
     @Test
     @Order(16)
-    void sizeIncreaseWhenUseOfMethod() {
+    void sizeIncreasesWhenUseOfMethod() {
         intStack = LinkedStack.of(1, 2, 3, 4, 5, 6, 7, 8);
 
         assertThat(getInnerSize()).isEqualTo(8);
@@ -201,7 +195,7 @@ class StackTest {
 
     @Test
     @Order(17)
-    void sizeIncreaseWhenPush() {
+    void sizeIncreasesWhenPush() {
         intStack.push(1);
         intStack.push(2);
         intStack.push(3);
@@ -211,7 +205,7 @@ class StackTest {
 
     @Test
     @Order(18)
-    void sizeDecreaseWhenPop() {
+    void sizeDecreasesWhenPop() {
         fillTestStack(1, 2, 3, 4, 5);
         intStack.pop();
 
@@ -230,7 +224,7 @@ class StackTest {
 
     @Test
     @Order(20)
-    void isEmptyOnEmptyStack() {
+    void isEmptyWhenStackIsEmpty() {
         boolean stackEmpty = intStack.isEmpty();
         assertThat(stackEmpty).isEqualTo(true);
     }
@@ -313,7 +307,7 @@ class StackTest {
             return constructor.newInstance(element);
         } else {
             Object node = constructor.newInstance();
-            getNodeElementField(node).set(intStack, element);
+            getNodeElementField(node).set(node, element);
             return node;
         }
     }
