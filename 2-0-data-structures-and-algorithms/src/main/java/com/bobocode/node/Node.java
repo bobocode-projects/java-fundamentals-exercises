@@ -8,5 +8,10 @@ package com.bobocode.node;
  * @param <T> a generic type T
  */
 public class Node<T> {
-    // todo:
+    T element;
+    Node<T> next;
+
+    public Node(T element) {
+        this.element = element;
+    }
 }
