@@ -91,72 +91,60 @@ public class LinkedQueueTest {
 
     @Test
     @Order(4)
-    void sizeReturnsZeroWhenQueueIsEmpty() {
-        int size = getInternalSize();
-
-        assertThat(size).isEqualTo(0);
-    }
-
-    @Test
-    @Order(5)
-    void addRisesSize() {
+    void addFillsQueueWhenItIsEmpty() {
         integerQueue.add(1);
-        integerQueue.add(2);
-        integerQueue.add(3);
+        integerQueue.add(228);
         int size = getInternalSize();
+        boolean isEmpty = isEmptyQueue();
+        Integer firstElement = (Integer) pollElementFromQueue();
+        Integer secondElement = (Integer) pollElementFromQueue();
 
-        assertThat(size).isEqualTo(3);
+        assertThat(size).isEqualTo(2);
+        assertThat(isEmpty).isEqualTo(false);
+        assertThat(firstElement).isEqualTo(1);
+        assertThat(secondElement).isEqualTo(228);
     }
 
     @Test
     @Order(5)
-    void addExpensesSize() {
-        addIntElementToQueue(1);
-        addIntElementToQueue(2);
-        addIntElementToQueue(3);
-        addIntElementToQueue(4);
+    void addFillsQueueWhenItIsNotEmpty() {
+        addIntElementToQueue(12);
+        integerQueue.add(111);
+        int size = getInternalSize();
+        boolean isEmpty = isEmptyQueue();
+        Integer firstElement = (Integer) pollElementFromQueue();
+        Integer secondElement = (Integer) pollElementFromQueue();
 
-        int sizeBeforePollOperation = getInternalSize();
-        this.integerQueue.poll();
-        this.integerQueue.poll();
-        int sizeAfterPollOperation = getInternalSize();
-
-        assertThat(sizeBeforePollOperation).isEqualTo(4);
-        assertThat(sizeAfterPollOperation).isEqualTo(2);
+        assertThat(size).isEqualTo(2);
+        assertThat(isEmpty).isEqualTo(false);
+        assertThat(firstElement).isEqualTo(12);
+        assertThat(secondElement).isEqualTo(111);
     }
 
     @Test
     @Order(6)
-    void isEmptyReturnsFalseWhenQueueIsEmpty() {
-        boolean isEmpty = this.integerQueue.isEmpty();
-        boolean isEmptyByReflection = isEmptyQueue();
+    void addIncreasesQueueSize() {
+        integerQueue.add(1);
+        integerQueue.add(2);
+        int size = this.integerQueue.size();
 
-        assertThat(isEmpty).isEqualTo(isEmptyByReflection);
+        assertThat(size).isEqualTo(2);
     }
 
     @Test
     @Order(7)
-    void isEmptyReturnsFalseWhenLastElementIsPolled() {
-        addIntElementToQueue(1);
-        addIntElementToQueue(2);
+    void isEmptyReturnsFalseWhenElementIsAdded() {
+        integerQueue.add(1);
+        boolean isEmpty = integerQueue.isEmpty();
 
-        boolean isEmptyBeforePoll = isEmptyQueue();
-        this.integerQueue.poll();
-        this.integerQueue.poll();
-        boolean isEmptyAfterPoll = isEmptyQueue();
-
-        assertThat(isEmptyBeforePoll).isEqualTo(false);
-        assertThat(isEmptyAfterPoll).isEqualTo(true);
+        assertThat(isEmpty).isEqualTo(false);
     }
-
 
     @Test
     @Order(8)
-    void pollNullWhenQueueIsEmpty() {
-        boolean isEmpty = isEmptyQueue();
+    void pollReturnsNullWhenQueueIsEmpty() {
         Integer firstElement = this.integerQueue.poll();
 
-        assertThat(isEmpty).isEqualTo(true);
         assertThat(firstElement).isEqualTo(null);
     }
 
@@ -165,81 +153,67 @@ public class LinkedQueueTest {
     void poll() {
         addIntElementToQueue(11);
         addIntElementToQueue(111);
-
-        boolean isEmpty = isEmptyQueue();
         Integer firstElement = this.integerQueue.poll();
+        Integer secondElement = this.integerQueue.poll();
+        int size = getInternalSize();
+        boolean isEmpty = isEmptyQueue();
 
-        assertThat(isEmpty).isEqualTo(false);
+        assertThat(size).isEqualTo(0);
+        assertThat(isEmpty).isEqualTo(true);
         assertThat(firstElement).isEqualTo(11);
+        assertThat(secondElement).isEqualTo(111);
     }
 
     @Test
     @Order(10)
-    void pollMakesQueueEmptyWhenSingleElement() {
-        addIntElementToQueue(12);
-        addIntElementToQueue(10);
+    void pollDecreasesQueueSize() {
+        addIntElementToQueue(11);
+        addIntElementToQueue(111);
+        this.integerQueue.poll();
+        int size = this.integerQueue.size();
 
-        int sizeBeforePollOperation = getInternalSize();
-        boolean isEmptyBeforePoll = isEmptyQueue();
-        Integer firstElement = this.integerQueue.poll();
-        Integer secondElement = this.integerQueue.poll();
-        boolean isEmptyAfterPoll = isEmptyQueue();
-        int sizeAfterPollOperation = getInternalSize();
-
-        assertThat(isEmptyBeforePoll).isEqualTo(false);
-        assertThat(isEmptyAfterPoll).isEqualTo(true);
-
-        assertThat(sizeBeforePollOperation).isEqualTo(2);
-        assertThat(sizeAfterPollOperation).isEqualTo(0);
-
-        assertThat(firstElement).isEqualTo(12);
-        assertThat(secondElement).isEqualTo(10);
+        assertThat(size).isEqualTo(1);
     }
-
 
     @Test
     @Order(11)
-    void addFillsQueueWhenItIsEmpty() {
-        int sizeBeforeAdd = getInternalSize();
-        boolean isEmptyBeforeAdd = isEmptyQueue();
+    void pollMakesSizeZeroWhenQueueHasSingleElement() {
+        addIntElementToQueue(12);
+        Integer element = this.integerQueue.poll();
+        int size = this.integerQueue.size();
 
-        integerQueue.add(228);
-        int sizeAfterAdd = getInternalSize();
-        boolean isEmptyAfterAdd = isEmptyQueue();
-        Integer elementValue = (Integer) pollElementFromQueue();
-
-        assertThat(sizeBeforeAdd).isEqualTo(0);
-        assertThat(sizeAfterAdd).isEqualTo(1);
-
-        assertThat(isEmptyBeforeAdd).isEqualTo(true);
-        assertThat(isEmptyAfterAdd).isEqualTo(false);
-
-        assertThat(elementValue).isEqualTo(228);
+        assertThat(size).isEqualTo(0);
+        assertThat(element).isEqualTo(12);
     }
 
     @Test
     @Order(12)
-    void addFillsQueueWhenItIsNotEmpty() {
-        addIntElementToQueue(12);
+    void isEmptyReturnsTrueWhenLastElementIsPolled() {
+        addIntElementToQueue(1);
+        addIntElementToQueue(2);
+        this.integerQueue.poll();
+        this.integerQueue.poll();
+        boolean isEmpty = this.integerQueue.isEmpty();
 
-        int sizeBeforeAdd = getInternalSize();
-        boolean isEmptyBeforeAdd = isEmptyQueue();
-
-        integerQueue.add(111);
-        int sizeAfterAdd = getInternalSize();
-        boolean isEmptyAfterAdd = isEmptyQueue();
-        Integer firstValue = (Integer) pollElementFromQueue();
-        Integer secondValue = (Integer) pollElementFromQueue();
-
-        assertThat(sizeBeforeAdd).isEqualTo(1);
-        assertThat(sizeAfterAdd).isEqualTo(2);
-
-        assertThat(isEmptyBeforeAdd).isEqualTo(false);
-        assertThat(isEmptyAfterAdd).isEqualTo(false);
-
-        assertThat(firstValue).isEqualTo(12);
-        assertThat(secondValue).isEqualTo(111);
+        assertThat(isEmpty).isEqualTo(true);
     }
+
+    @Test
+    @Order(13)
+    void sizeReturnsZeroWhenQueueIsEmpty() {
+        int size = this.integerQueue.size();
+
+        assertThat(size).isEqualTo(0);
+    }
+
+    @Test
+    @Order(14)
+    void isEmptyReturnsTrueWhenQueueIsEmpty() {
+        boolean isEmpty = this.integerQueue.isEmpty();
+
+        assertThat(isEmpty).isEqualTo(true);
+    }
+
 
     private Class<?> getInnerStaticNodeClass() {
         return Arrays.stream(integerQueue.getClass().getDeclaredClasses())
@@ -337,7 +311,7 @@ public class LinkedQueueTest {
     private Object createNode(int value) {
         Object nodeObject;
         Class<?> innerClass = getInnerStaticNodeClass();
-        Constructor<?>[] declaredConstructors  = innerClass.getDeclaredConstructors();
+        Constructor<?>[] declaredConstructors = innerClass.getDeclaredConstructors();
         Constructor<?> constructor = declaredConstructors[0];
         constructor.setAccessible(true);
 
