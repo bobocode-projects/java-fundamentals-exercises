@@ -100,9 +100,9 @@ public class LinkedQueueTest {
     @Test
     @Order(5)
     void addRisesSize() {
-        addIntElementToQueue(1);
-        addIntElementToQueue(2);
-        addIntElementToQueue(3);
+        integerQueue.add(1);
+        integerQueue.add(2);
+        integerQueue.add(3);
         int size = getInternalSize();
 
         assertThat(size).isEqualTo(3);
@@ -117,8 +117,8 @@ public class LinkedQueueTest {
         addIntElementToQueue(4);
 
         int sizeBeforePollOperation = getInternalSize();
-        pollElementFromQueue();
-        pollElementFromQueue();
+        this.integerQueue.poll();
+        this.integerQueue.poll();
         int sizeAfterPollOperation = getInternalSize();
 
         assertThat(sizeBeforePollOperation).isEqualTo(4);
@@ -141,8 +141,8 @@ public class LinkedQueueTest {
         addIntElementToQueue(2);
 
         boolean isEmptyBeforePoll = isEmptyQueue();
-        pollElementFromQueue();
-        pollElementFromQueue();
+        this.integerQueue.poll();
+        this.integerQueue.poll();
         boolean isEmptyAfterPoll = isEmptyQueue();
 
         assertThat(isEmptyBeforePoll).isEqualTo(false);
