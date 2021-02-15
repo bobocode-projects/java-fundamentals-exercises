@@ -100,4 +100,5 @@ public class LinkedStack<T> implements Stack<T> {
     public boolean isEmpty() {
         return head == null;
     }
+
 }
