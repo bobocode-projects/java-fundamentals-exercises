@@ -126,22 +126,13 @@ public class LinkedQueueTest {
     void addIncreasesQueueSize() {
         integerQueue.add(1);
         integerQueue.add(2);
-        int size = this.integerQueue.size();
+        int size = getInternalSize();
 
         assertThat(size).isEqualTo(2);
     }
 
     @Test
     @Order(7)
-    void isEmptyReturnsFalseWhenElementIsAdded() {
-        integerQueue.add(1);
-        boolean isEmpty = integerQueue.isEmpty();
-
-        assertThat(isEmpty).isEqualTo(false);
-    }
-
-    @Test
-    @Order(8)
     void pollReturnsNullWhenQueueIsEmpty() {
         Integer firstElement = this.integerQueue.poll();
 
@@ -149,61 +140,66 @@ public class LinkedQueueTest {
     }
 
     @Test
-    @Order(9)
-    void poll() {
+    @Order(8)
+    void pollDeletesElementFromHead() {
         addIntElementToQueue(11);
         addIntElementToQueue(111);
         Integer firstElement = this.integerQueue.poll();
         Integer secondElement = this.integerQueue.poll();
-        int size = getInternalSize();
         boolean isEmpty = isEmptyQueue();
 
-        assertThat(size).isEqualTo(0);
         assertThat(isEmpty).isEqualTo(true);
         assertThat(firstElement).isEqualTo(11);
         assertThat(secondElement).isEqualTo(111);
     }
 
     @Test
-    @Order(10)
+    @Order(9)
     void pollDecreasesQueueSize() {
         addIntElementToQueue(11);
         addIntElementToQueue(111);
         this.integerQueue.poll();
-        int size = this.integerQueue.size();
+        int size = getInternalSize();
 
         assertThat(size).isEqualTo(1);
     }
 
     @Test
-    @Order(11)
+    @Order(10)
     void pollMakesSizeZeroWhenQueueHasSingleElement() {
         addIntElementToQueue(12);
         Integer element = this.integerQueue.poll();
-        int size = this.integerQueue.size();
+        int size = getInternalSize();
 
         assertThat(size).isEqualTo(0);
         assertThat(element).isEqualTo(12);
     }
 
     @Test
-    @Order(12)
-    void isEmptyReturnsTrueWhenLastElementIsPolled() {
+    @Order(11)
+    void pollMakesQueueEmptyWhenQueueHasSingleElement() {
         addIntElementToQueue(1);
-        addIntElementToQueue(2);
         this.integerQueue.poll();
-        this.integerQueue.poll();
-        boolean isEmpty = this.integerQueue.isEmpty();
+        boolean isEmpty = isEmptyQueue();
 
         assertThat(isEmpty).isEqualTo(true);
     }
 
     @Test
-    @Order(13)
+    @Order(12)
     void sizeReturnsZeroWhenQueueIsEmpty() {
         int size = this.integerQueue.size();
 
         assertThat(size).isEqualTo(0);
+    }
+
+    @Test
+    @Order(13)
+    void size() {
+        addIntElementToQueue(1);
+        int size = this.integerQueue.size();
+
+        assertThat(size).isEqualTo(1);
     }
 
     @Test
@@ -212,6 +208,15 @@ public class LinkedQueueTest {
         boolean isEmpty = this.integerQueue.isEmpty();
 
         assertThat(isEmpty).isEqualTo(true);
+    }
+
+    @Test
+    @Order(15)
+    void isEmpty() {
+        addIntElementToQueue(1);
+        boolean isEmpty = integerQueue.isEmpty();
+
+        assertThat(isEmpty).isEqualTo(false);
     }
 
 
