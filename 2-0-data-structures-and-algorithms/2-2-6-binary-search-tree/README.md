@@ -1,20 +1,21 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Binary Search Tree exercise :muscle:
-Improve your skill implementing Binary Search Tree
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Binary Search Tree
+Learn tree data structures and build strong skills implementing binary search tree using recursion 💪
 
-### Task
-**Binary Search Tree (BST)** is an ordered (sorted) data structure. You job is to implement the interface `BinarySearchTree`
- 
-### Pre-conditions :heavy_exclamation_mark:
-You're supposed to know about [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree).
- Knowledge about [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)) also may be helpful.
+### Pre-conditions ❗️
+* You're supposed to be familiar with trees like [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
+* You should understand the [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))
 
-### How to start :question:
-* Just clone the repository and start implementing `BinarySearchTree` interface
-* Unit test are already prepared for you - use them to check your implementation
-* Don't worry if you got stuck, checkout branch **completed** and see the final implementation
+### Objectives
+* implement a generic class `Node<T>` with left and right child nodes ✅
+* **insert  an element** to the tree using recursion ✅
+* **search an element** in the tree ✅
+* **traverse tree elements** in a ascending order ✅
+* calculate tree **depth** ✅
+* maintain tree **size** ✅
 
-### Related materials :information_source:
- * [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
- * [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))
- * [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U&t=3476s)
 
+### Related Materials ℹ️
+* [Реалізовуємо Бінарне Дерево Пошуку – Для чого потрібні дерева? <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/alxzyWswCVg)
+
+---
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
