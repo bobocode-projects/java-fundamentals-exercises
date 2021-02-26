@@ -6,7 +6,7 @@ Improve your functional programming skills implementing various operations based
 You're supposed to be familiar with Lambdas, Stream API and Optional API
 
 ### Objectives
-* create an **infinite sream** of integers with a **custom increment** ✅
+* create an **infinite stream** of integers with a **custom increment** ✅
 * **find matching elements** within a stream ✅
 * **limit** the number of elements within a stream ✅
 * **calculate a sum** of elements of an `IntStream` ✅

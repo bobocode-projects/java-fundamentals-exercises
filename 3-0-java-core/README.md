@@ -1,2 +1,2 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Java Core
-Build core skills needed for enterprise development using Java Standard Edition features
+Build strong core skills needed for enterprise Java development
