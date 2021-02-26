@@ -3,6 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>2-2-1-node</module>
+        <module>2-2-2-stack</module>
+        <module>2-2-3-linked-queue</module>
+        <module>2-2-4-linked-list</module>
+        <module>2-2-5-array-list</module>
+        <module>data-structures-and-algorithms-util</module>
+        <module>2-2-6-binary-search-tree</module>
+    </modules>
 
     <parent>
         <groupId>com.bobocode</groupId>
