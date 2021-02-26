@@ -25,7 +25,7 @@ public class PrimeNumbers {
     public static int sum(int n) {
         return primeNumberStream()
                 .limit(n)
-                .reduce(0, Integer::sum);
+                .sum();
     }
 
     /**
