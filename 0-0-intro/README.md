@@ -1,7 +1,9 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Introduction
+Learn how to use this course to build strong skill needed for enterprise Java development 
+
 ## The only way to learn effectively is to **learn by doing!** 💪
 
-Therefore this whole repository consists of **various exercises grouped by topics**. By doing exercises you will **build strong skills and neven get stuck.** Introduction itself is an exercise, so you can undersntand the idea on the simplest example.
+Therefore, this whole repository consists of **various exercises grouped by topics**. By doing exercises you will **build strong skills and neven get stuck.** Introduction itself is an exercise, so you can understand the idea on the simplest example.
 
 Each exercise has three major parts:
 * **a task** – some logic that you implement in order build a certain skill 👨🏻‍💻
