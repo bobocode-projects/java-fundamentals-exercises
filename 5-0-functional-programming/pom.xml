@@ -3,6 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>5-1-1-crazy-lambdas</module>
+        <module>5-2-1-crazy-streams</module>
+        <module>5-3-1-crazy-optionals</module>
+        <module>5-0-1-lambda-functions-map</module>
+        <module>5-0-2-stream-sum-of-squares</module>
+        <module>5-4-1-fun-prime-numbers</module>
+    </modules>
 
     <parent>
         <groupId>com.bobocode</groupId>
