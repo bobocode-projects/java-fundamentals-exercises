@@ -13,7 +13,7 @@ You're supposed to be familiar [Linked List](https://en.wikipedia.org/wiki/Linke
 * maintain list **size** ✅
 
 ### Related Materials ℹ️
-* [Реалізовуємо LinkedList <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/knhSNO3bAHo)
+* [Реалізовуємо LinkedList | Для Чого Він Потрібен? <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/knhSNO3bAHo)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
