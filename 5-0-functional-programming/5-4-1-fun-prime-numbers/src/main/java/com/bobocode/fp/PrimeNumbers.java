@@ -1,9 +1,10 @@
 package com.bobocode.fp;
 
-import com.bobocode.util.ExerciseNotCompletedException;
-
 import java.util.List;
 import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * {@link PrimeNumbers} provides an API to work with prime numbers. It is using a stream of prime numbers.
@@ -22,8 +23,9 @@ public class PrimeNumbers {
      * @return the sum of n prime numbers
      */
     public static int sum(int n) {
-        throw new ExerciseNotCompletedException(); // todo: create an infinite stream of ints, then filter prime numbs
-
+        return primeNumberStream()
+                .limit(n)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -32,7 +34,10 @@ public class PrimeNumbers {
      * @return a list of collected prime numbers
      */
     public static List<Integer> collect(int n) {
-        throw new ExerciseNotCompletedException(); // todo: reuse the logic of prime numbers stream and collect them
+        return primeNumberStream()
+                .limit(n)
+                .boxed()
+                .collect(toList());
     }
 
     /**
@@ -42,6 +47,19 @@ public class PrimeNumbers {
      * @param consumer a logic that should be applied to the found prime number
      */
     public static void processByIndex(int idx, IntConsumer consumer) {
-        throw new ExerciseNotCompletedException(); // todo: reuse the logic of prime numbers stream then process the last one
+        primeNumberStream()
+                .limit(idx)
+                .reduce((a, b) -> b)
+                .ifPresent(consumer);
+    }
+
+    private static IntStream primeNumberStream() {
+        return IntStream.iterate(1, i -> i + 1)
+                .filter(PrimeNumbers::isPrime);
+    }
+
+    private static boolean isPrime(int n) {
+        return IntStream.range(2, n)
+                .noneMatch(i -> n % i == 0);
     }
 }
