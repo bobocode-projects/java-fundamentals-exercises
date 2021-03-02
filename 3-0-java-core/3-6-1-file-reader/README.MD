@@ -1,25 +1,15 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>File Reader exercise :muscle:
-Improve your Java SE and Clean Code skills
-### Task
-`FileReaders` is an API that allows you to read whole file content into a `String`. Your job is to 
-implement the *todo* section of that class.
-
-### Refactoring Task
-There is an dirty implementation of class `FileReaders` that **contains bad practices and code smells**. If you want to 
-practice in **refactoring** and improve your **clean code skills** you can start from branch **exercise/dirty** instead of 
-**master** and try to refactor existing implementation.
-  
-To verify your implementation, run `FileReadersTest.java`
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>File Reader
+Improve your Java SE skills by implementing a logic that reads file content using Stream API 💪
  
-### Pre-conditions :heavy_exclamation_mark:
-You're supposed to know how to work with text files and be able to write Java code
+### Pre-conditions ❗
+You're supposed to know the basics of Stream API and how to work with files in Java 
 
-### How to start :question:
-* Just clone the repository and create a branch **exercise/your_username** if you want your code to be reviewed
-* Start implementing the **todo** section and verify your changes by running tests
-* If you don't have enough knowledge about this domain, check out the [links below](#related-materials-information_source)
-* Don't worry if you got stuck, checkout the **exercise/completed** branch and see the final implementation
- 
-### Related materials :information_source:
- * [Stream API tutorial](https://github.com/bobocode-projects/java-functional-features-tutorial/tree/master/stream-api)
+### Objectives
+* **find a text file** in the classpath ✅
+* **open a** `Stream<String>` of file lines ✅
+* **collect** file content into a single `String` ✅
+* **deal with exceptions** when accessing the file ✅
+
+---
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
 
