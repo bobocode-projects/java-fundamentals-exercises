@@ -186,7 +186,7 @@ public class CrazyLambdas {
     }
 
     /**
-     * Returns {@link Supplier} of {@link Supplier} of {@link Supplier} of {@link String} "WELL DONE".
+     * Returns {@link Supplier} of {@link Supplier} of {@link Supplier} of {@link String} "WELL DONE!".
      *
      * @return a supplier instance
      */
