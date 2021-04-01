@@ -12,5 +12,8 @@ You're supposed to be familiar **Java classes** and **generics**
 * create a **list of linked nodes** ✅
 * create a **circle of linked nodes** ✅
 
+### Exercise overview 🇺🇦
+[![Linked List](https://yt-embed.herokuapp.com/embed?v=Ot5ma8NXcS0)](https://youtu.be/Ot5ma8NXcS0)
+
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)

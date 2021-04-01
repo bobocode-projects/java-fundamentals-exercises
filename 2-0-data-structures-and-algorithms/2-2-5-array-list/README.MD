@@ -16,9 +16,8 @@ Build strong skills implementing a well known Array List data structure 💪
 * **remove element** by index (shift whole array tail to the left) ✅
 * maintain list **size** ✅
 
-### Related Materials ℹ️
-
-* [Реалізовуємо ArrayList <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/jFBKToSC3ag)
+### Exercise overview 🇺🇦
+[![Linked List](https://yt-embed.herokuapp.com/embed?v=jFBKToSC3ag)](https://youtu.be/jFBKToSC3ag)
 
 ---
 

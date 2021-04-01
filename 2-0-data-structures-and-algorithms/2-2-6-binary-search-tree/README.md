@@ -14,8 +14,8 @@ Learn tree data structures and build strong skills implementing binary search tr
 * maintain tree **size** ✅
 
 
-### Related Materials ℹ️
-* [Реалізовуємо Бінарне Дерево Пошуку – Для чого потрібні дерева? <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/alxzyWswCVg)
+### Exercise overview 🇺🇦
+[![Linked List](https://yt-embed.herokuapp.com/embed?v=alxzyWswCVg)](https://youtu.be/alxzyWswCVg)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)

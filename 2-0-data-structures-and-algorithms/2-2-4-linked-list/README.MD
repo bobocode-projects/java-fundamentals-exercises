@@ -12,8 +12,8 @@ You're supposed to be familiar [Linked List](https://en.wikipedia.org/wiki/Linke
 * **remove element** by index (link prev and next nodes to get rid of the one that should be removed) ✅
 * maintain list **size** ✅
 
-### Related Materials ℹ️
-* [Реалізовуємо LinkedList | Для Чого Він Потрібен? <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/knhSNO3bAHo)
+### Exercise overview 🇺🇦
+[![Linked List](https://yt-embed.herokuapp.com/embed?v=knhSNO3bAHo)](https://youtu.be/knhSNO3bAHo)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
