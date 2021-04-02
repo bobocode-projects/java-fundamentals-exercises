@@ -5,8 +5,8 @@ on:
     types: [opened, labeled]
   pull_request:
     types: [opened, labeled]
-env:
-  GITHUB_TOKEN: ${{ secrets.PROJECT }}
+# env:
+#   GITHUB_TOKEN: ${{ secrets.PROJECT }}
 
 jobs:
   assign_one_project:
@@ -20,3 +20,4 @@ jobs:
 #         contains(github.event.issue.labels.*.name, 'java-fundamentals')
         with:
           project: 'https://github.com/orgs/bobocode-projects/projects/5'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
