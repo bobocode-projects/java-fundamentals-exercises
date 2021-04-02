@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Assign NEW issues and NEW pull requests to project 5
         uses: srggrs/assign-one-project-github-action@1.2.1
-        if: github.event.action == 'opened'  
-#         ||
-#         contains(github.event.issue.labels.*.name, 'java-fundamentals')
+        if: github.event.action == 'opened' || contains(github.event.issue.labels.*.name, 'java-fundamentals')
         with:
-          project: 'https://github.com/orgs/bobocode-projects/projects/5'
+          project: 'https://github.com/bobocode-projects/java-fundamentals-course/projects/4'
