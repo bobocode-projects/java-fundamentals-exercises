@@ -19,4 +19,4 @@ jobs:
 #         ||
 #         contains(github.event.issue.labels.*.name, 'java-fundamentals')
         with:
-          project: 'https://github.com/bobocode-projects/java-fundamentals-course/projects/4'
+          project: 'https://github.com/orgs/bobocode-projects/projects/5'
