@@ -1,9 +1,5 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Lambda exercises :muscle:
-Improve your lambda skills
-### Task
-Every package contains **an exercise (interactive tutorial) on lambdas**, where you need to write code in order 
-to complete the implementation. If you need more theory, you can **check [tutorial section](#tutorial)**. 
-To verify your solution, you should **run a corresponding test :arrow_forward:.** 
+Build hard-core skills implementing crazy lambdas 💪
 
 ### Pre-conditions :heavy_exclamation_mark:
 You're supposed to be familiar with Java 8
@@ -60,6 +56,9 @@ it can help you to simplify the code even more:
     * Prefer Lambdas to anonymous classes – Item 42
     * Prefer method reference to lambdas - Item 43
     * Favor the use of standard functional interfaces - Item 44
+
+### Exercise overview 🇺🇦
+[![Linked List](https://yt-embed.herokuapp.com/embed?v=tNizKD1JbwM)](https://youtu.be/tNizKD1JbwM)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
