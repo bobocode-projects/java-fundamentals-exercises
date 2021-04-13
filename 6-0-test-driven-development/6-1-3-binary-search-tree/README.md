@@ -20,3 +20,5 @@ and understand [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_sci
  * [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
  * [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U&t=3476s)
 
+---
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)

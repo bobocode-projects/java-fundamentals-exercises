@@ -19,3 +19,5 @@ You're supposed to know [The Three laws of TDD](https://github.com/bobocode-proj
  * [Stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
  * [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U&t=3476s)
 
+---
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)

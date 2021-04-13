@@ -16,3 +16,5 @@ You're supposed to be familiar with Java 8
  * [Stream API tutorial](https://github.com/bobocode-projects/java-functional-features-tutorial/blob/master/stream-api/README.MD) <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=20/>
  * [State of lambda (JSR 335)](http://htmlpreview.github.io/?https://github.com/bobocode-projects/resources/blob/master/java8/lambda/sotl.html)
 
+---
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
