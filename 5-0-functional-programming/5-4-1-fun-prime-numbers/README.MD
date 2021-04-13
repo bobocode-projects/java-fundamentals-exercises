@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/> Fun Prime Numbers 
 
-Improve your functional programming skills implementing various operations based on a integer stream of Prime Numbers 💪
+Improve your functional programming skills implementing various operations based on an integer stream of Prime Numbers 💪
 
 ### Pre-conditions ❗
 You're supposed to be familiar with Lambdas, Stream API and Optional API

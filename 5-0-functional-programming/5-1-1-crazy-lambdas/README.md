@@ -8,11 +8,6 @@ To verify your solution, you should **run a corresponding test :arrow_forward:.*
 ### Pre-conditions :heavy_exclamation_mark:
 You're supposed to be familiar with Java 8
 
-### How to start :question:
-* Just clone the repository and start implementing the **todo** section, verify your changes by running tests
-* If you don't have enough knowledge about this domain, check out the [links below](#related-materials-information_source)
-* Don't worry if you got stuck, checkout the **exercise/completed** branch and see the final implementation
-
 ### Tutorial 
 Java is an OOP language, so it always works with classes and **doesn't support standalone functions**. 
 In case you want to **pass some function as a method parameter**, or **store some code into a variable**, 
@@ -65,3 +60,6 @@ it can help you to simplify the code even more:
     * Prefer Lambdas to anonymous classes – Item 42
     * Prefer method reference to lambdas - Item 43
     * Favor the use of standard functional interfaces - Item 44
+
+---
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
