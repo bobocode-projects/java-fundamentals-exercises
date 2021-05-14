@@ -15,7 +15,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class PrimeNumbersTest {
 
     @ParameterizedTest
-    @CsvSource({"0,0", "1,1", "2,3", "3,6", "4,11", "5,18", "10,101", "20,569"})
+    @CsvSource({"0,0", "1,2", "2,5", "3,10", "4,17", "5,28", "10,129", "20,639"})
     void sum(int n, int sumOfPrimes) {
         int result = PrimeNumbers.sum(n);
 
