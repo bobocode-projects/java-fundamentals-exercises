@@ -16,7 +16,7 @@ public class PrimeNumbers {
 
     /**
      * Calculates the sum on first n prime numbers.
-     * E.g. if n = 5, the result should be 1 + 2 + 3 + 5 + 7 = 18
+     * E.g. if n = 5, the result should be 2 + 3 + 5 + 7 + 11 = 28
      *
      * @param n the number of first prime numbers
      * @return the sum of n prime numbers
