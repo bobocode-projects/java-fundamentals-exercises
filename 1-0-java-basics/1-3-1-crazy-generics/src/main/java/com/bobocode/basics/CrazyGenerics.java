@@ -31,13 +31,13 @@ public class CrazyGenerics {
     }
 
     /**
-     * {@link Bounded} is a container class that allows storing an actual value along with possible min and max values.
+     * {@link Limited} is a container class that allows storing an actual value along with possible min and max values.
      * It is special form of triple. All three values have a generic type that should be a subclass of {@link Number}.
      *
      * @param <T> – actual, min and max type
      */
     @Data
-    public static class Bounded { // todo: refactor class to make fields generic numbers
+    public static class Limited { // todo: refactor class to make fields generic numbers
         private final Object actual;
         private final Object min;
         private final Object max;
