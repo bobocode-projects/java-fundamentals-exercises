@@ -1,11 +1,11 @@
 package com.bobocode.basics;
 
 import com.bobocode.basics.util.BaseEntity;
-import com.bobocode.util.ExerciseNotCompletedException;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * {@link CrazyGenerics} is an exercise class. It consists of classes, interfaces and methods that should be updated
@@ -25,8 +25,8 @@ public class CrazyGenerics {
      * @param <T> – value type
      */
     @Data
-    public static class Sourced { // todo: refactor class to make value generic
-        private Object value;
+    public static class Sourced<T> { // todo: refactor class to make value generic
+        private T value;
         private String source;
     }
 
@@ -37,10 +37,10 @@ public class CrazyGenerics {
      * @param <T> – actual, min and max type
      */
     @Data
-    public static class Bounded { // todo: refactor class to make fields generic numbers
-        private final Object actual;
-        private final Object min;
-        private final Object max;
+    public static class Bounded<T extends Number> { // todo: refactor class to make fields generic numbers
+        private final T actual;
+        private final T min;
+        private final T max;
     }
 
     /**
@@ -50,8 +50,8 @@ public class CrazyGenerics {
      * @param <T> – source object type
      * @param <R> - converted result type
      */
-    public interface Converter { // todo: make interface generic
-        // todo: add convert method
+    public interface Converter<T, R> { // todo: make interface generic
+        R convert(T obj);
     }
 
     /**
@@ -61,10 +61,10 @@ public class CrazyGenerics {
      *
      * @param <T> – value type
      */
-    public static class MaxHolder { // todo: refactor class to make it generic
-        private Object max;
+    public static class MaxHolder<T extends Comparable<T>> { // todo: refactor class to make it generic
+        private T max;
 
-        public MaxHolder(Object max) {
+        public MaxHolder(T max) {
             this.max = max;
         }
 
@@ -73,11 +73,13 @@ public class CrazyGenerics {
          *
          * @param val a new value
          */
-        public void put(Object val) {
-            throw new ExerciseNotCompletedException(); // todo: update parameter and implement the method
+        public void put(T val) {
+            if (val.compareTo(max) > 0) {
+                max = val;
+            }
         }
 
-        public Object getMax() {
+        public T getMax() {
             return max;
         }
     }
@@ -88,8 +90,8 @@ public class CrazyGenerics {
      *
      * @param <T> – the type of objects that can be processed
      */
-    interface StrictProcessor { // todo: make it generic
-        void process(Object obj);
+    interface StrictProcessor<T extends Serializable & Comparable<T>> { // todo: make it generic
+        void process(T obj);
     }
 
     /**
@@ -99,10 +101,10 @@ public class CrazyGenerics {
      * @param <T> – a type of the entity that should be a subclass of {@link BaseEntity}
      * @param <C> – a type of any collection
      */
-    interface CollectionRepository { // todo: update interface according to the javadoc
-        void save(Object entity);
+    interface CollectionRepository<T extends BaseEntity, C extends Collection<T>> { // todo: update interface according to the javadoc
+        void save(T entity);
 
-        Collection<Object> getEntityCollection();
+        C getEntityCollection();
     }
 
     /**
@@ -111,7 +113,7 @@ public class CrazyGenerics {
      *
      * @param <T> – a type of the entity that should be a subclass of {@link BaseEntity}
      */
-    interface ListRepository { // todo: update interface according to the javadoc
+    interface ListRepository<T extends BaseEntity> extends CollectionRepository<T, List<T>> { // todo: update interface according to the javadoc
     }
 
 }
