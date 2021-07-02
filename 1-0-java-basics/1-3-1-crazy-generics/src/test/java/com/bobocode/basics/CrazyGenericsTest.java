@@ -59,18 +59,18 @@ public class CrazyGenericsTest {
 
     @Test
     @Order(1)
-    @DisplayName("Bounded class has one type parameter")
-    void boundedClassHasOneTypeParameter() {
-        var typeParameters = Bounded.class.getTypeParameters();
+    @DisplayName("Limited class has one type parameter")
+    void limitedClassHasOneTypeParameter() {
+        var typeParameters = Limited.class.getTypeParameters();
 
         assertThat(typeParameters.length).isEqualTo(1);
     }
 
     @Test
     @Order(1)
-    @DisplayName("Bounded class type parameter is bounded by Number")
-    void boundedClassTypeParameterIsBoundedByNumber() {
-        var typeParameters = Bounded.class.getTypeParameters();
+    @DisplayName("Limited class type parameter is bounded by Number")
+    void limitedClassTypeParameterIsBoundedByNumber() {
+        var typeParameters = Limited.class.getTypeParameters();
         assert (typeParameters.length == 1);
         var typeParam = typeParameters[0];
         assert (typeParam.getBounds().length == 1);
@@ -82,9 +82,9 @@ public class CrazyGenericsTest {
     @Test
     @SneakyThrows
     @Order(4)
-    @DisplayName("Bounded class fields have generic type \"T\"")
-    void boundedClassFieldsAreGeneric() {
-        var fields = Bounded.class.getDeclaredFields();
+    @DisplayName("Limited class fields have generic type \"T\"")
+    void limitedClassFieldsAreGeneric() {
+        var fields = Limited.class.getDeclaredFields();
 
         for (var f : fields) {
             assertThat(f.getGenericType().getTypeName()).isEqualTo(TYPE_PARAMETER_NAME);
@@ -284,7 +284,7 @@ public class CrazyGenericsTest {
     @Test
     @DisplayName("CollectionRepository second type parameter is called \"C\"")
     void collectionRepositorySecondTypeParameterIsCalledT() {
-        var typeParam = CollectionRepository.class.getTypeParameters()[0];
+        var typeParam = CollectionRepository.class.getTypeParameters()[1];
 
         assertThat(typeParam.getTypeName()).isEqualTo("C");
     }
