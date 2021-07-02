@@ -58,7 +58,7 @@ public class CrazyGenericsTest {
 
 
     @Test
-    @Order(1)
+    @Order(5)
     @DisplayName("Limited class has one type parameter")
     void limitedClassHasOneTypeParameter() {
         var typeParameters = Limited.class.getTypeParameters();
@@ -67,7 +67,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(1)
+    @Order(6)
     @DisplayName("Limited class type parameter is bounded by Number")
     void limitedClassTypeParameterIsBoundedByNumber() {
         var typeParameters = Limited.class.getTypeParameters();
@@ -81,7 +81,7 @@ public class CrazyGenericsTest {
 
     @Test
     @SneakyThrows
-    @Order(4)
+    @Order(7)
     @DisplayName("Limited class fields have generic type \"T\"")
     void limitedClassFieldsAreGeneric() {
         var fields = Limited.class.getDeclaredFields();
@@ -92,6 +92,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(8)
     @DisplayName("Converter interface has two type parameters")
     void converterInterfaceHasTwoTypeParameters() {
         var typeParameters = Converter.class.getTypeParameters();
@@ -100,6 +101,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(9)
     @DisplayName("Converter interface first type parameter is called \"T\"")
     void converterInterfaceFirstTypeParameterIsCalledT() {
         var typeParameters = Converter.class.getTypeParameters();
@@ -110,6 +112,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(10)
     @DisplayName("Converter interface second type parameter is called \"R\"")
     void converterInterfaceSecondTypeParameterIsCalledR() {
         var typeParameters = Converter.class.getTypeParameters();
@@ -121,6 +124,7 @@ public class CrazyGenericsTest {
 
     @Test
     @SneakyThrows
+    @Order(11)
     @DisplayName("Convert method parameter \"obj\" has type \"T\"")
     void converterMethodParameterHasTypeT() {
         var convertMethod = Converter.class.getDeclaredMethod("convert", Object.class);
@@ -131,6 +135,7 @@ public class CrazyGenericsTest {
 
     @Test
     @SneakyThrows
+    @Order(12)
     @DisplayName("Convert method return type is \"R\"")
     void converterMethodReturnTypeIsR() {
         var convertMethod = Converter.class.getDeclaredMethod("convert", Object.class);
@@ -139,6 +144,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(13)
     @DisplayName("MaxHolder class has one type parameter")
     void maxHolderClassHasOneTypeParameter() {
         var typeParameters = MaxHolder.class.getTypeParameters();
@@ -147,6 +153,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(14)
     @DisplayName("MaxHolder class type parameter is called \"T\"")
     void maxHolderClassTypeParameterIsCalledT() {
         var typeParameter = MaxHolder.class.getTypeParameters()[0];
@@ -155,6 +162,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(15)
     @DisplayName("MaxHolder type parameter is bound by Comparable")
     void maxHolderClassTypeParameterShouldBeBoundByComparableT() {
         var typeParameters = MaxHolder.class.getTypeParameters();
@@ -168,6 +176,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(15)
     @DisplayName("MaxHolder field has type \"T\"")
     void maxHolderFieldHasTypeT() {
         var typeParameter = MaxHolder.class.getTypeParameters()[0];
@@ -176,6 +185,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(16)
     @SneakyThrows
     @DisplayName("MaxHolder constructor param has type \"T\"")
     void maxHolderConstructorParamHasTypeT() {
@@ -187,6 +197,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(17)
     @SneakyThrows
     @DisplayName("MaxHolder put method param has type \"T\"")
     void maxHolderPutMethodParamHasTypeT() {
@@ -201,6 +212,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(18)
     @SneakyThrows
     @DisplayName("MaxHolder getMax return type is \"T\"")
     void maxHolderGetMaxReturnTypeIsT() {
@@ -210,6 +222,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(19)
     @DisplayName("StrictProcessor class has one generic type")
     void strictProcessorHasOneGenericType() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
@@ -218,6 +231,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(20)
     @DisplayName("StrictProcessor type parameter is called \"T\"")
     void strictProcessorTypeParameterIsCalledT() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
@@ -228,6 +242,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(21)
     @DisplayName("StrictProcessor type parameter is bound by both Serializable and Comparable<T>")
     void strictProcessorTypeParameterIsBoundBySerializableAndComparable() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
@@ -244,6 +259,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(22)
     @DisplayName("StrictProcessor process method parameter has type \"T\"")
     void strictProcessorProcessMethodParameterHasTypeT() {
         var processMethod = Arrays.stream(StrictProcessor.class.getMethods())
@@ -257,6 +273,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(23)
     @DisplayName("CollectionRepository has two type parameters")
     void collectionRepositoryHasTwoTypeParameters() {
         var typeParameters = CollectionRepository.class.getTypeParameters();
@@ -265,6 +282,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(24)
     @DisplayName("CollectionRepository first type parameter is called \"T\"")
     void collectionRepositoryFirstTypeParameterIsCalledT() {
         var typeParam = CollectionRepository.class.getTypeParameters()[0];
@@ -273,6 +291,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(25)
     @DisplayName("CollectionRepository first type parameter is bounded by BaseEntity")
     void collectionRepositoryFirstTypeParameterIsBoundedByBaseEntity() {
         var typeParam = CollectionRepository.class.getTypeParameters()[0];
@@ -282,6 +301,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(26)
     @DisplayName("CollectionRepository second type parameter is called \"C\"")
     void collectionRepositorySecondTypeParameterIsCalledT() {
         var typeParam = CollectionRepository.class.getTypeParameters()[1];
@@ -290,6 +310,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(27)
     @DisplayName("CollectionRepository second type parameter is bounded by Collection<T>")
     void collectionRepositorySecondTypeParameterIsBoundedByCollection() {
         var typeParam = CollectionRepository.class.getTypeParameters()[1];
@@ -300,6 +321,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(28)
     @DisplayName("CollectionRepository save method param has type \"T\"")
     @SneakyThrows
     void collectionRepositorySaveMethodParameterHasTypeT() {
@@ -313,6 +335,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(29)
     @DisplayName("CollectionRepository getEntityCollection method has return type \"C\"")
     @SneakyThrows
     void collectionRepositoryGetCollectionMethodHasReturnTypeC() {
@@ -322,6 +345,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(30)
     @DisplayName("ListRepository extends CollectionRepository")
     void listRepositoryExtendsCollectionRepository() {
         var superInterface = ListRepository.class.getInterfaces()[0];
@@ -330,6 +354,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(31)
     @DisplayName("ListRepository has one type parameter")
     void listRepositoryHasOneTypeParameter() {
         var typeParams = ListRepository.class.getTypeParameters();
@@ -338,6 +363,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(32)
     @DisplayName("ListRepository type parameter is called \"T\"")
     void listRepositoryTypeParameterIsCalledT() {
         var typeParam = ListRepository.class.getTypeParameters()[0];
@@ -346,6 +372,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(33)
     @DisplayName("ListRepository type parameter is bound by BaseEntity")
     void listRepositoryTypeParameterIsBoundByBaseEntity() {
         var typeParam = ListRepository.class.getTypeParameters()[0];
@@ -355,6 +382,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
+    @Order(34)
     @DisplayName("ListRepository parent interface has specified two types")
     void listRepositoryParentInterfaceHasSpecifiedTwoTypes() {
         var collectionInterface = ListRepository.class.getGenericInterfaces()[0];
