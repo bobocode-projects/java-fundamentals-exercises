@@ -4,6 +4,9 @@ import com.bobocode.basics.CrazyGenerics.*;
 import com.bobocode.basics.util.BaseEntity;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mockito;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -11,11 +14,13 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CrazyGenericsTest {
     final String TYPE_PARAMETER_NAME = "T";
     final String SECOND_TYPE_PARAMETER_NAME = "R";
+    final String COLLECTION_ELEMENT_TYPE_PARAMETER_NAME = "E";
 
     @Test
     @Order(1)
@@ -389,5 +394,147 @@ public class CrazyGenericsTest {
 
         assertThat(collectionInterface.getTypeName())
                 .isEqualTo(String.format("%s<T, %s<T>>", CollectionRepository.class.getTypeName(), List.class.getTypeName()));
+    }
+
+    @Test
+    @Order(35)
+    @DisplayName("ConsoleUtil is not a generic class")
+    void consoleUtilIsNotAGenericClass() {
+        var typeParams = ConsoleUtil.class.getTypeParameters();
+
+        assertThat(typeParams).isEmpty();
+    }
+
+    @Test
+    @Order(36)
+    @DisplayName("Method print param is a list of any type declared as unbounded wildcard")
+    void printParamIsAListOfAnyType() {
+        var printMethod = Arrays.stream(ConsoleUtil.class.getDeclaredMethods())
+                .filter(method -> method.getName().equals("print"))
+                .findAny().orElseThrow();
+        var listParam = printMethod.getParameters()[0];
+        var typeName = listParam.getParameterizedType().getTypeName();
+
+        assertThat(typeName).isEqualTo(String.format("%s<?>", List.class.getTypeName()));
+
+    }
+
+    @Test
+    @Order(37)
+    @DisplayName("ComparableCollection has one type parameter \"E\"")
+    void comparableCollectionIsGeneric() {
+        var typeParameters = ComparableCollection.class.getTypeParameters();
+
+        assertThat(typeParameters.length).isEqualTo(1);
+        assertThat(typeParameters[0].getName()).isEqualTo(COLLECTION_ELEMENT_TYPE_PARAMETER_NAME);
+    }
+
+    @Test
+    @Order(38)
+    @DisplayName("ComparableCollection extends Collection")
+    void comparableCollectionExtendsCollection() {
+        var collectionInterface = Arrays.stream(ComparableCollection.class.getInterfaces())
+                .filter(it -> it.getTypeName().equals(Collection.class.getTypeName()))
+                .findAny()
+                .orElseThrow();
+
+        assertThat(collectionInterface).isNotNull();
+    }
+
+    @Test
+    @Order(39)
+    @DisplayName("Type parameter is specified for a super interface Collection")
+    void comparableCollectionExtendsCollectionOfTheSameElementsType() {
+        var collectionInterface = Arrays.stream(ComparableCollection.class.getGenericInterfaces())
+                .filter(it -> it.getTypeName().equals(
+                        String.format("%s<%s>", Collection.class.getTypeName(), COLLECTION_ELEMENT_TYPE_PARAMETER_NAME)
+                ))
+                .findAny()
+                .orElseThrow();
+
+        assertThat(collectionInterface).isNotNull();
+    }
+
+    @Test
+    @Order(40)
+    @DisplayName("ComparableCollection extends Comparable")
+    void comparableCollectionExtendsComparable() {
+        var comparableInterface = Arrays.stream(ComparableCollection.class.getInterfaces())
+                .filter(it -> it.getTypeName().equals(Comparable.class.getTypeName()))
+                .findAny()
+                .orElseThrow();
+
+        assertThat(comparableInterface).isNotNull();
+    }
+
+    @Test
+    @Order(41)
+    @DisplayName("Collection of any type is specified as type parameter for a super interface Comparable")
+    void comparableCollectionExtendsComparableOfCollectionOfAnyType() {
+        var comparableInterface = Arrays.stream(ComparableCollection.class.getGenericInterfaces())
+                .filter(it -> it.getTypeName().equals(
+                        String.format("%s<%s<?>>", Comparable.class.getTypeName(), Collection.class.getTypeName())
+                ))
+                .findAny()
+                .orElseThrow();
+
+        assertThat(comparableInterface).isNotNull();
+    }
+
+    @Test
+    @Order(42)
+    @DisplayName("Method compareTo is overridden")
+    void comparableCollectionOverridesCompareToMethod() {
+        var compareToMethod = Arrays.stream(ComparableCollection.class.getDeclaredMethods())
+                .filter(method -> method.getName().equals("compareTo"))
+                .findAny()
+                .orElseThrow();
+
+        assertThat(compareToMethod).isNotNull();
+    }
+
+    @Test
+    @Order(43)
+    @DisplayName("ComparableCollection provides a default impl of compareTo method")
+    void compareToProvidesDefaultImpl() {
+        var compareToMethod = Arrays.stream(ComparableCollection.class.getDeclaredMethods())
+                .filter(method -> method.getName().equals("compareTo"))
+                .findAny()
+                .orElseThrow();
+
+        assertThat(compareToMethod.isDefault()).isTrue();
+    }
+
+    @Test
+    @Order(44)
+    @DisplayName("A parameter of method compareTo is a collection of elements of any type")
+    void compareToParamIsACollectionOfAnyType() {
+        var compareToMethod = Arrays.stream(ComparableCollection.class.getDeclaredMethods())
+                .filter(method -> method.getName().equals("compareTo"))
+                .findAny()
+                .orElseThrow();
+        var collectionParam = compareToMethod.getParameters()[0];
+
+        assertThat(collectionParam.getParameterizedType().getTypeName())
+                .isEqualTo(String.format("%s<?>", Collection.class.getTypeName()));
+    }
+
+
+    @Order(45)
+    @DisplayName("Method compareTo compares collection size")
+    @SneakyThrows
+    @ParameterizedTest
+    @ValueSource(ints = {0, 5, 10})
+    void compareToComparesSize(int size) {
+        var compareToMethod = Arrays.stream(ComparableCollection.class.getDeclaredMethods())
+                .filter(method -> method.getName().equals("compareTo"))
+                .findAny()
+                .orElseThrow();
+        var compCollectionMock = Mockito.spy(ComparableCollection.class);
+        when(compCollectionMock.size()).thenReturn(size);
+        var list = List.of(1, 2, 3, 4, 5);
+
+        assertThat(compareToMethod.invoke(compCollectionMock, list))
+                .isEqualTo(Integer.compare(size, list.size()));
     }
 }
