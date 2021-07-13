@@ -122,7 +122,7 @@ public class CrazyGenerics {
          *
          * @param list
          */
-        void print(List<Integer> list) { // todo: refactor it so the list of any type can be printed, not only integers
+        void print(List<?> list) { // todo: refactor it so the list of any type can be printed, not only integers
             list.forEach(element -> System.out.println(" – " + element));
         }
     }
@@ -137,8 +137,12 @@ public class CrazyGenerics {
      *
      * @param <E> a type of collection elements
      */
-    interface ComparableCollection { // todo: refactor it to make generic and provide a default impl of compareTo
+    interface ComparableCollection<E> extends Collection<E>, Comparable<Collection<?>> { // todo: refactor it to make generic and provide a default impl of compareTo
 
+        @Override
+        default int compareTo(Collection<?> o) {
+            return Integer.compare(this.size(), o.size());
+        }
     }
 
 
