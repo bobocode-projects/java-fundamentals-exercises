@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * {@link CrazyGenerics} is an exercise class. It consists of classes, interfaces and methods that should be updated
@@ -113,5 +114,31 @@ public class CrazyGenerics {
      */
     interface ListRepository { // todo: update interface according to the javadoc
     }
+
+    static class ConsoleUtil {
+        /**
+         * A util method that allows to print a dashed list of elements
+         *
+         * @param list
+         */
+        void print(List<Integer> list) { // todo: refactor it so the list of any type can be printed, not only integers
+            list.forEach(element -> System.out.println(" – " + element));
+        }
+    }
+
+    /**
+     * {@link ComparableCollection} is a {@link Collection} that can be compared by size. It extends a {@link Collection}
+     * interface and {@link Comparable} interface, and provides a default implementation of a compareTo method that
+     * compares collections sizes.
+     * <p>
+     * Please note that size does not depend on the elements type, so it is allowed to compare collections of different
+     * element types.
+     *
+     * @param <E> a type of collection elements
+     */
+    interface ComparableCollection { // todo: refactor it to make generic and provide a default impl of compareTo
+
+    }
+
 
 }
