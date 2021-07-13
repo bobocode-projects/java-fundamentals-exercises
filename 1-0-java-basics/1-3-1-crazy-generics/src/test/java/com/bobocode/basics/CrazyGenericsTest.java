@@ -528,10 +528,12 @@ public class CrazyGenericsTest {
     void compareToComparesSize(int size) {
         var compareToMethod = Arrays.stream(ComparableCollection.class.getDeclaredMethods())
                 .filter(method -> method.getName().equals("compareTo"))
-                .findAny()
-                .orElseThrow();
+                .findAny().orElseThrow();
         var compCollectionMock = Mockito.spy(ComparableCollection.class);
-        when(compCollectionMock.size()).thenReturn(size);
+        var sizeMethod = Arrays.stream(ComparableCollection.class.getMethods())
+                .filter(method -> method.getName().equals("size"))
+                .findAny().orElseThrow();
+        when(sizeMethod.invoke(compCollectionMock)).thenReturn(size);
         var list = List.of(1, 2, 3, 4, 5);
 
         assertThat(compareToMethod.invoke(compCollectionMock, list))
