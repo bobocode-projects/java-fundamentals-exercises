@@ -5,15 +5,23 @@ import com.bobocode.basics.util.BaseEntity;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
+import static java.time.temporal.ChronoUnit.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.Mockito.when;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -539,4 +547,174 @@ public class CrazyGenericsTest {
         assertThat(compareToMethod.invoke(compCollectionMock, list))
                 .isEqualTo(Integer.compare(size, list.size()));
     }
+
+    @Test
+    @DisplayName("Method hasNewEntities accepts a collection of any entities (BaseEntity subclasses)")
+    void hasNewEntitiesMethodParamIsAGenericCollectionOfEntities() {
+        var hasNewEntitiesMethod = getMethodByName(PersistenceUtil.class, "hasNewEntities");
+
+        var entitiesParam = hasNewEntitiesMethod.getParameters()[0];
+
+        assertThat(entitiesParam.getParameterizedType().getTypeName())
+                .isEqualTo(String.format("%s<? extends %s>", Collection.class.getTypeName(), BaseEntity.class.getTypeName()));
+    }
+
+    @ParameterizedTest
+    @MethodSource("hasNewEntitiesArgs")
+    @DisplayName("Method hasNewEntities checks id values")
+    @SneakyThrows
+    void hasNewEntitiesChecksIds(Collection<BaseEntity> entities, boolean result) {
+        var hasNewEntitiesMethod = getMethodByName(PersistenceUtil.class, "hasNewEntities");
+
+        boolean hasNewEntities = (boolean) hasNewEntitiesMethod.invoke(null, entities);
+
+        assertThat(hasNewEntities).isEqualTo(result);
+    }
+
+    private Method getMethodByName(Class<?> clazz, String methodName) {
+        return Arrays.stream(clazz.getMethods())
+                .filter(m -> m.getName().equals(methodName))
+                .findAny().orElseThrow();
+    }
+
+    static Stream<Arguments> hasNewEntitiesArgs() {
+        var newEntity = Mockito.mock(BaseEntity.class);
+        when(newEntity.getUuid()).thenReturn(null);
+        var oldEntity = Mockito.mock(BaseEntity.class);
+        when(oldEntity.getUuid()).thenReturn(UUID.randomUUID());
+
+        return Stream.of(
+                arguments(List.of(newEntity, newEntity), true),
+                arguments(List.of(newEntity, oldEntity), true),
+                arguments(List.of(oldEntity, oldEntity), false)
+        );
+    }
+
+    @Test
+    @DisplayName("Method isValidCollection accepts a collection of any entities as a first param")
+    void isValidCollectionMethodFirstParamIsAGenericCollectionOfEntities() {
+        var isValidCollectionMethod = getMethodByName(PersistenceUtil.class, "isValidCollection");
+
+        var entitiesParam = isValidCollectionMethod.getParameters()[0];
+
+        assertThat(entitiesParam.getParameterizedType().getTypeName())
+                .isEqualTo(String.format("%s<? extends %s>", Collection.class.getTypeName(), BaseEntity.class.getTypeName()));
+    }
+
+    @Test
+    @DisplayName("Method isValidCollection accepts a predicate of any BaseEntity superclasses as a second param")
+    void isValidCollectionMethodSecondParamIsAnyBaseEntitySuperClass() {
+        var isValidCollectionMethod = getMethodByName(PersistenceUtil.class, "isValidCollection");
+
+        var validationPredicate = isValidCollectionMethod.getParameters()[1];
+
+        assertThat(validationPredicate.getParameterizedType().getTypeName())
+                .isEqualTo(String.format("%s<? super %s>", Predicate.class.getTypeName(), BaseEntity.class.getTypeName()));
+    }
+
+    @Test
+    @DisplayName("hasDuplicates is a generic method")
+    void hasDuplicatesIsAGenericMethod() {
+        var hasDuplicatesMethod = getMethodByName(PersistenceUtil.class, "hasDuplicates");
+
+        assertThat(hasDuplicatesMethod.getTypeParameters()).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("hasDuplicates type parameter is called \"T\"")
+    void hasDuplicatesTypeParameterIsCalledT() {
+        var hasDuplicatesMethod = getMethodByName(PersistenceUtil.class, "hasDuplicates");
+        var typeParameter = hasDuplicatesMethod.getTypeParameters()[0];
+
+        assertThat(typeParameter.getName()).isEqualTo("T");
+    }
+
+    @Test
+    @DisplayName("hasDuplicates type parameter is bounded by BaseEntity")
+    void hasDuplicatesTypeParameterIsBoundedByBaseEntity() {
+        var hasDuplicatesMethod = getMethodByName(PersistenceUtil.class, "hasDuplicates");
+        var typeParameter = hasDuplicatesMethod.getTypeParameters()[0];
+        Type bound = typeParameter.getBounds()[0];
+
+        assertThat(bound.getTypeName()).isEqualTo(BaseEntity.class.getTypeName());
+    }
+
+    @ParameterizedTest
+    @MethodSource("hasDuplicatesArgs")
+    @DisplayName("hasDuplicates checks entity duplicates by UUID")
+    @SneakyThrows
+    void hasDuplicatesChecksEntitiesByUUID(List<? extends BaseEntity> entities, BaseEntity targetEntity, Boolean hasDuplicates) {
+        var hasDuplicatesMethod = getMethodByName(PersistenceUtil.class, "hasDuplicates");
+
+        var result = hasDuplicatesMethod.invoke(null, entities, targetEntity);
+
+        assertThat(result).isEqualTo(hasDuplicates);
+    }
+
+    static Stream<Arguments> hasDuplicatesArgs() {
+        var uniqueEntity = Mockito.mock(BaseEntity.class);
+        when(uniqueEntity.getUuid()).thenReturn(UUID.randomUUID());
+        var duplicateId = UUID.randomUUID();
+        var duplicateEntity1 = Mockito.mock(BaseEntity.class);
+        when(duplicateEntity1.getUuid()).thenReturn(duplicateId);
+        var duplicateEntity2 = Mockito.mock(BaseEntity.class);
+        when(duplicateEntity2.getUuid()).thenReturn(duplicateId);
+
+        return Stream.of(
+                arguments(List.of(uniqueEntity, duplicateEntity1), uniqueEntity, false),
+                arguments(List.of(uniqueEntity, duplicateEntity1, duplicateEntity2), duplicateEntity1, true),
+                arguments(List.of(duplicateEntity1, duplicateEntity2), duplicateEntity1, true)
+        );
+    }
+
+    @Test
+    @DisplayName("findMostRecentlyCreatedEntity is a generic method that accepts a collection of entities")
+    void findMostRecentlyCreatedEntityIsAGenericMethod() {
+        var hasDuplicatesMethod = getMethodByName(PersistenceUtil.class, "findMostRecentlyCreatedEntity");
+        var typeParameter = hasDuplicatesMethod.getTypeParameters()[0];
+        var bound = typeParameter.getBounds()[0];
+
+        assertThat(typeParameter.getName()).isEqualTo("T");
+        assertThat(bound.getTypeName()).isEqualTo(BaseEntity.class.getTypeName());
+    }
+
+    @ParameterizedTest
+    @MethodSource("findMostRecentlyCreatedEntityArgs")
+    @DisplayName("findMostRecentlyCreatedEntity returns the most recently created entity")
+    @SneakyThrows
+    void findMostRecentlyCreatedEntityReturnsEntityWithMaxCreatedOnValue(List<? extends BaseEntity> entities,
+                                                                         BaseEntity mostRecentlyCreatedEntity) {
+        var findMostRecentlyCreatedEntityMethod = getMethodByName(PersistenceUtil.class, "findMostRecentlyCreatedEntity");
+
+        var result = findMostRecentlyCreatedEntityMethod.invoke(null, entities);
+
+        assertThat(result).isEqualTo(mostRecentlyCreatedEntity);
+    }
+
+    static Stream<Arguments> findMostRecentlyCreatedEntityArgs() {
+        var yearAgoEntity = Mockito.mock(BaseEntity.class);
+        when(yearAgoEntity.getCreatedOn()).thenReturn(LocalDateTime.now().minus(1, YEARS));
+        var monthAgoEntity = Mockito.mock(BaseEntity.class);
+        when(monthAgoEntity.getCreatedOn()).thenReturn(LocalDateTime.now().minus(1, MONTHS));
+        var dayAgoEntity = Mockito.mock(BaseEntity.class);
+        when(dayAgoEntity.getCreatedOn()).thenReturn(LocalDateTime.now().minus(1, DAYS));
+
+        return Stream.of(
+                arguments(List.of(yearAgoEntity, monthAgoEntity, dayAgoEntity), dayAgoEntity),
+                arguments(List.of(yearAgoEntity, monthAgoEntity), monthAgoEntity),
+                arguments(List.of(yearAgoEntity, dayAgoEntity), dayAgoEntity),
+                arguments(List.of(dayAgoEntity, monthAgoEntity), dayAgoEntity)
+        );
+    }
+
+    @Test
+    @DisplayName("findMostRecentlyCreatedEntity throws exception when collection is empty")
+    @SneakyThrows
+    void findMostRecentlyCreatedEntityReturnsEntityThrowsException() {
+        var findMostRecentlyCreatedEntityMethod = getMethodByName(PersistenceUtil.class, "findMostRecentlyCreatedEntity");
+
+        assertThatThrownBy(() -> findMostRecentlyCreatedEntityMethod.invoke(null, Collections.emptyList()))
+                .hasCauseInstanceOf(NoSuchElementException.class);
+    }
+
 }
