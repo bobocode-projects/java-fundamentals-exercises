@@ -124,7 +124,7 @@ public class CrazyGenerics {
          *
          * @param list
          */
-        void print(List<?> list) { // todo: refactor it so the list of any type can be printed, not only integers
+        public static void print(List<?> list) { // todo: refactor it so the list of any type can be printed, not only integers
             list.forEach(element -> System.out.println(" – " + element));
         }
     }
