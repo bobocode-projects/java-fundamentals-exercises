@@ -140,5 +140,58 @@ public class CrazyGenerics {
 
     }
 
+    /**
+     * {@link PersistenceUtil} is a util class that provides persistence-related tools.
+     */
+    static class PersistenceUtil {
+        /**
+         * Util method that check if provided collection has new entities. An entity is any object
+         * that extends {@link BaseEntity}. A new entity is an entity that does not have an id assigned.
+         * (In other word, which id equals null).
+         *
+         * @param entities provided collection of entities
+         * @return true if at least one of the elements has null id
+         */
+        public static boolean hasNewEntities(Collection<BaseEntity> entities) {
+            throw new ExerciseNotCompletedException(); // todo: param and implement method
+        }
+
+        /**
+         * Util method that checks if a provided collection of entities is valid. A validation criteria can be different
+         * for different cases, so it is passed as second parameter.
+         *
+         * @param entities            provided collection of entities
+         * @param validationPredicate criteria for validation
+         * @return true if all entities fit validation criteria
+         */
+        public static boolean isValidCollection() {
+            throw new ExerciseNotCompletedException(); // todo: add method parameters and implement the logic
+        }
+
+        /**
+         * hasDuplicates is a generic util method checks if a list of entities contains target entity more than once.
+         * In other words, it checks if target entity has duplicates in the provided list. A duplicate is an entity that
+         * has the same UUID.
+         *
+         * @param entities     given list of entities
+         * @param targetEntity a target entity
+         * @param <T>          entity type
+         * @return true if entities list contains target entity more than once
+         */
+        public static boolean hasDuplicates() {
+            throw new ExerciseNotCompletedException(); // todo: update method signature and implement it
+        }
+
+        /**
+         * findMostRecentlyCreatedEntity is a generic util method that accepts a collection of entities and returns the
+         * one that is the most recently created. If collection is empty, it throws {@link java.util.NoSuchElementException}
+         *
+         * @param entities provided collection of entities
+         * @param <T>      entity type
+         * @return an entity from the given collection that has the max createdOn value
+         */
+        // todo: create a method according to the JavaDoc
+    }
+
 
 }
