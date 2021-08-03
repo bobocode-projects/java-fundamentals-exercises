@@ -1,12 +1,14 @@
 package com.bobocode.basics;
 
 import com.bobocode.basics.util.BaseEntity;
+import com.bobocode.util.ExerciseNotCompletedException;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
@@ -27,7 +29,7 @@ public class CrazyGenerics {
      * @param <T> – value type
      */
     @Data
-    public static class Sourced<T> { // todo: refactor class to make value generic
+    public static class Sourced<T> {
         private T value;
         private String source;
     }
@@ -39,7 +41,7 @@ public class CrazyGenerics {
      * @param <T> – actual, min and max type
      */
     @Data
-    public static class Limited<T extends Number> { // todo: refactor class to make fields generic numbers
+    public static class Limited<T extends Number> {
         private final T actual;
         private final T min;
         private final T max;
@@ -52,7 +54,7 @@ public class CrazyGenerics {
      * @param <T> – source object type
      * @param <R> - converted result type
      */
-    public interface Converter<T, R> { // todo: make interface generic
+    public interface Converter<T, R> {
         R convert(T obj);
     }
 
@@ -118,17 +120,6 @@ public class CrazyGenerics {
     interface ListRepository<T extends BaseEntity> extends CollectionRepository<T, List<T>> { // todo: update interface according to the javadoc
     }
 
-    static class ConsoleUtil {
-        /**
-         * A util method that allows to print a dashed list of elements
-         *
-         * @param list
-         */
-        public static void print(List<?> list) { // todo: refactor it so the list of any type can be printed, not only integers
-            list.forEach(element -> System.out.println(" – " + element));
-        }
-    }
-
     /**
      * {@link ComparableCollection} is a {@link Collection} that can be compared by size. It extends a {@link Collection}
      * interface and {@link Comparable} interface, and provides a default implementation of a compareTo method that
@@ -139,7 +130,7 @@ public class CrazyGenerics {
      *
      * @param <E> a type of collection elements
      */
-    interface ComparableCollection<E> extends Collection<E>, Comparable<Collection<?>> { // todo: refactor it to make generic and provide a default impl of compareTo
+    interface ComparableCollection<E> extends Collection<E>, Comparable<Collection<?>> {
 
         @Override
         default int compareTo(Collection<?> o) {
@@ -147,14 +138,22 @@ public class CrazyGenerics {
         }
     }
 
-    /**
-     * {@link PersistenceUtil} is a util class that provides persistence-related tools.
-     */
-    static class PersistenceUtil {
+    static class CollectionUtil {
+        static final Comparator<BaseEntity> CREATED_ON_COMPARATOR = Comparator.comparing(BaseEntity::getCreatedOn);
+
+        /**
+         * An util method that allows to print a dashed list of elements
+         *
+         * @param list
+         */
+        public static void print(List<Integer> list) {
+            list.forEach(element -> System.out.println(" – " + element));
+        }
+
         /**
          * Util method that check if provided collection has new entities. An entity is any object
          * that extends {@link BaseEntity}. A new entity is an entity that does not have an id assigned.
-         * (In other word, which id equals null).
+         * (In other word, which id value equals null).
          *
          * @param entities provided collection of entities
          * @return true if at least one of the elements has null id
@@ -172,7 +171,7 @@ public class CrazyGenerics {
          * @param validationPredicate criteria for validation
          * @return true if all entities fit validation criteria
          */
-        public static boolean isValidCollection(Collection<? extends BaseEntity> entities,
+        public static boolean isValidCollection(Collection<? extends BaseEntity> entities, 
                                                 Predicate<? super BaseEntity> validationPredicate) {
             return entities.stream()
                     .allMatch(validationPredicate);
@@ -195,19 +194,43 @@ public class CrazyGenerics {
         }
 
         /**
+         * findMax is a generic util method that accepts an {@link Iterable} and {@link Comparator} and returns an
+         * optional object, that has maximum "value" based on the given comparator.
+         *
+         * @param elements   provided iterable of elements
+         * @param comparator an object that will be used to compare elements
+         * @param <T>        type of elements
+         * @return optional max value
+         */
+        // todo: create a method and implement its logic manually without using util method from JDK
+
+        /**
          * findMostRecentlyCreatedEntity is a generic util method that accepts a collection of entities and returns the
-         * one that is the most recently created. If collection is empty, it throws {@link java.util.NoSuchElementException}
+         * one that is the most recently created. If collection is empty,
+         * it throws {@link java.util.NoSuchElementException}.
+         * <p>
+         * This method reuses findMax method and passes entities along with prepare comparator instance,
+         * that is stored as constant CREATED_ON_COMPARATOR.
          *
          * @param entities provided collection of entities
          * @param <T>      entity type
          * @return an entity from the given collection that has the max createdOn value
          */
-        public static <T extends BaseEntity> T findMostRecentlyCreatedEntity(Collection<T> entities) {
-            return entities.stream()
-                    .max(Comparator.comparing(BaseEntity::getCreatedOn))
-                    .orElseThrow();
+        // todo: create a method according to JavaDoc and implement it using previous method
+
+        /**
+         * An util method that allows to swap two elements of any list. It changes the list so the element with the index
+         * i will be located on index j, and the element with index j, will be located on the index i.
+         * Please note that in order to make it convenient and simple, it DOES NOT declare any type parameter.
+         *
+         * @param elements a list of any given type
+         * @param i        index of the element to swap
+         * @param j        index of the other element to swap
+         */
+        public static void swap(List<?> elements, int i, int j) {
+            Objects.checkIndex(i, elements.size());
+            Objects.checkIndex(j, elements.size());
+            throw new ExerciseNotCompletedException(); // todo: complete method implementation 
         }
     }
-
-
 }
