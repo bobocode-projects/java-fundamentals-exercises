@@ -1,14 +1,10 @@
 package com.bobocode.basics;
 
 import com.bobocode.basics.util.BaseEntity;
-import com.bobocode.util.ExerciseNotCompletedException;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Predicate;
 
 /**
@@ -146,7 +142,7 @@ public class CrazyGenerics {
          *
          * @param list
          */
-        public static void print(List<Integer> list) {
+        public static void print(List<?> list) {
             list.forEach(element -> System.out.println(" – " + element));
         }
 
@@ -171,7 +167,7 @@ public class CrazyGenerics {
          * @param validationPredicate criteria for validation
          * @return true if all entities fit validation criteria
          */
-        public static boolean isValidCollection(Collection<? extends BaseEntity> entities, 
+        public static boolean isValidCollection(Collection<? extends BaseEntity> entities,
                                                 Predicate<? super BaseEntity> validationPredicate) {
             return entities.stream()
                     .allMatch(validationPredicate);
@@ -202,7 +198,20 @@ public class CrazyGenerics {
          * @param <T>        type of elements
          * @return optional max value
          */
-        // todo: create a method and implement its logic manually without using util method from JDK
+        public static <T> Optional<T> findMax(Iterable<T> elements, Comparator<? super T> comparator) {
+            var iterator = elements.iterator();
+            if (!iterator.hasNext()) {
+                return Optional.empty();
+            }
+            var max = iterator.next();
+            while (iterator.hasNext()) {
+                var element = iterator.next();
+                if (comparator.compare(element, max) > 0) {
+                    max = element;
+                }
+            }
+            return Optional.of(max);
+        }
 
         /**
          * findMostRecentlyCreatedEntity is a generic util method that accepts a collection of entities and returns the
@@ -216,7 +225,10 @@ public class CrazyGenerics {
          * @param <T>      entity type
          * @return an entity from the given collection that has the max createdOn value
          */
-        // todo: create a method according to JavaDoc and implement it using previous method
+        public static <T extends BaseEntity> T findMostRecentlyCreatedEntity(Collection<T> entities) {
+            return findMax(entities, CREATED_ON_COMPARATOR)
+                    .orElseThrow();
+        }
 
         /**
          * An util method that allows to swap two elements of any list. It changes the list so the element with the index
@@ -230,7 +242,13 @@ public class CrazyGenerics {
         public static void swap(List<?> elements, int i, int j) {
             Objects.checkIndex(i, elements.size());
             Objects.checkIndex(j, elements.size());
-            throw new ExerciseNotCompletedException(); // todo: complete method implementation 
+            swapHelper(elements, i, j);
+        }
+
+        private static <T> void swapHelper(List<T> elements, int i, int j) {
+            T temp = elements.get(i);
+            elements.set(i, elements.get(j));
+            elements.set(j, temp);
         }
     }
 }
