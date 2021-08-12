@@ -39,7 +39,7 @@ class IntroductionTest {
     @SneakyThrows
     void encodeMessageExists() {
         var encodeMessageMethod = Arrays.stream(Introduction.class.getDeclaredMethods())
-                .filter(method -> method.getName().equals("messageEncoderMethod"))
+                .filter(method -> method.getName().equals("encodeMessage"))
                 .findAny();
 
         assertThat(encodeMessageMethod).isPresent();
