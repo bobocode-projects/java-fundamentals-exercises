@@ -1,8 +1,5 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Stream sum of squares
-Lear functional programming by refactoring a piece of code using Stream API 💪
- 
-### Pre-conditions ❗️
-You're supposed to be familiar with Java 8
+Learn functional programming by refactoring a piece of code using Stream API 💪
 
 ### Objectives
 * **refactor imperative-style code** with for loop using Stream API ✅

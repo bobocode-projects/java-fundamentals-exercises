@@ -1,10 +1,5 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Lambda functions map
-
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Lambda Functions Map
 Start learning functional programming in Java by writing simple math functions using Lambdas 💪
-
-### Pre-conditions ❗
-
-You're supposed to be familiar with lambdas
 
 ### Objectives
 

@@ -1,8 +1,5 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Lambda exercises :muscle:
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Crazy Lambdas
 Build hard-core skills implementing crazy lambdas 💪
-
-### Pre-conditions :heavy_exclamation_mark:
-You're supposed to be familiar with Java 8
 
 ### Tutorial 
 Java is an OOP language, so it always works with classes and **doesn't support standalone functions**. 
@@ -62,3 +59,4 @@ it can help you to simplify the code even more:
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/GcKJyr1fEGaPrrLz8)
