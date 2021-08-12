@@ -1,20 +1,17 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Account analytics exercise :muscle:
-Improve your Stream API skills
-### Task
-`AccountAnalytics` provides an API with a couple statistic methods for a list of accounts. Your job is to implement the *todo* section of that class using **Stream API**. 
-To verify your implementation, run `AccountAnalyticsTest.java`
- 
-### Pre-conditions :heavy_exclamation_mark:
-You're supposed to be familiar with Java 8
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Crazy Streams
+Take your Stream API skills to the next level 💪
 
-### How to start :question:
-* Just clone the repository and start implementing the **todo** section, verify your changes by running tests
-* If you don't have enough knowledge about this domain, check out the [links below](#related-materials-information_source)
-* Don't worry if you got stuck, checkout the **exercise/completed** branch and see the final implementation
+### Task
+`CrazyStreams` provides an API with various statistic methods for a list of accounts. 
+Your job is to implement each method of that class using **Stream API**. 
+To verify your implementation, run `CrazyStreamsTest.java`
  
-### Related materials :information_source:
- * [Stream API tutorial](https://github.com/bobocode-projects/java-functional-features-tutorial/blob/master/stream-api/README.MD) <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=20/>
- * [State of lambda (JSR 335)](http://htmlpreview.github.io/?https://github.com/bobocode-projects/resources/blob/master/java8/lambda/sotl.html)
+### Related materials ℹ️
+* [Modern Java in Action (chapters 4 - 6)](https://www.amazon.com/dp/1617293563/ref=cm_sw_r_tw_dp_XN3TPAASB945V8XQPW5F) 📕
+
+### Exercise overview 🇺🇦
+[![Linked List](https://yt-embed.herokuapp.com/embed?v=o1H6kMlCQ74)](https://youtu.be/o1H6kMlCQ74)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/K1ETyrRybV1RpfHA6) 
