@@ -16,9 +16,7 @@ public class HelloAnnotationsTest {
     @Order(1)
     @DisplayName("Annotation @Exercise exists")
     void exerciseAnnotationExists() {
-        assertThatCode(() -> Class.forName("com.bobocode.basics.Exercise"))
-                .doesNotThrowAnyException();
-
+        assertThatCode(this::getExerciseAnnotation).doesNotThrowAnyException();
     }
 
     @Test
