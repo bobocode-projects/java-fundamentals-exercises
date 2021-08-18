@@ -2,10 +2,7 @@ package com.bobocode.cs;
 
 import com.bobocode.cs.exception.EmptyStackException;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -34,6 +31,7 @@ class StackTest {
 
     @Test
     @Order(1)
+    @DisplayName("Inner class Node is created")
     void checkProperInnerClassName() {
         String name = getInnerClass().getSimpleName();
         assertThat(name).isEqualTo(PROPER_CLASSNAME);
@@ -41,34 +39,68 @@ class StackTest {
 
     @Test
     @Order(2)
-    void checkProperStackFieldNames() {
-        Field[] fields = LinkedStack.class.getDeclaredFields();
+    @DisplayName("Class Node is a generic class")
+    void noteIsAGenericClass() {
+        var nodeTypeParams = getInnerClass().getTypeParameters();
 
-        boolean hasSizeField = Arrays.stream(fields)
-                .anyMatch(SIZE_FIELD_PREDICATE);
-        boolean hasNodeField = Arrays.stream(fields)
-                .anyMatch(NODE_FIELD_PREDICATE);
-
-        assertThat(hasNodeField).isTrue();
-        assertThat(hasSizeField).isTrue();
+        assertThat(nodeTypeParams).hasSize(1);
     }
 
     @Test
     @Order(3)
-    void checkProperNodeFields() {
-        Field[] fields = getInnerClass().getDeclaredFields();
+    @DisplayName("LinkedStack class has a field that stores a reference to the first(head) element")
+    void checkProperHeadFieldName() {
+        Field[] fields = LinkedStack.class.getDeclaredFields();
 
-        boolean hasElement = Arrays.stream(fields)
-                .anyMatch(NODE_ELEMENT_FIELD);
-        boolean hasNext = Arrays.stream(fields)
-                .anyMatch(NODE_NEXT_FIELD);
+        boolean hasNodeField = Arrays.stream(fields)
+                .anyMatch(NODE_FIELD_PREDICATE);
 
-        assertThat(hasElement).isTrue();
-        assertThat(hasNext).isTrue();
+        assertThat(hasNodeField).isTrue();
     }
 
     @Test
     @Order(4)
+    @DisplayName("LinkedStack class has a field to store stack size")
+    void checkProperSizeFieldName() {
+        Field[] fields = LinkedStack.class.getDeclaredFields();
+
+        boolean hasSizeField = Arrays.stream(fields)
+                .anyMatch(SIZE_FIELD_PREDICATE);
+
+        assertThat(hasSizeField).isTrue();
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("Node class has a field to store a generic element")
+    void checkProperElementField() {
+        var fields = getInnerClass().getDeclaredFields();
+
+        var elementField = Arrays.stream(fields)
+                .filter(NODE_ELEMENT_FIELD)
+                .findAny()
+                .orElseThrow();
+        var nodeTypeParameter = getInnerClass().getTypeParameters()[0];
+
+
+        assertThat(elementField.getGenericType().getTypeName()).isEqualTo(nodeTypeParameter.getTypeName());
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("Node class has a field to store a reference to the next node")
+    void checkProperNextField() {
+        Field[] fields = getInnerClass().getDeclaredFields();
+
+        boolean hasNext = Arrays.stream(fields)
+                .anyMatch(NODE_NEXT_FIELD);
+
+        assertThat(hasNext).isTrue();
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("Method of() creates a new LinkedStack of given elements")
     void of() {
         intStack = LinkedStack.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
@@ -78,7 +110,8 @@ class StackTest {
     }
 
     @Test
-    @Order(5)
+    @Order(8)
+    @DisplayName("Method push() adds new element on top of the stack")
     void push() {
         intStack.push(55);
 
@@ -86,7 +119,8 @@ class StackTest {
     }
 
     @Test
-    @Order(6)
+    @Order(9)
+    @DisplayName("Method push() adds new element on top of the stack")
     void pushAddsElementWhenStackIsEmpty() {
         intStack.push(243);
 
@@ -94,7 +128,8 @@ class StackTest {
     }
 
     @Test
-    @Order(7)
+    @Order(10)
+    @DisplayName("Method push() adds new element on top of the stack when it's empty")
     void pushAddsElementToHeadWhenStackIsEmpty() {
         intStack.push(10);
 
@@ -105,7 +140,8 @@ class StackTest {
     }
 
     @Test
-    @Order(8)
+    @Order(11)
+    @DisplayName("Method push() adds new element on top of the stack when it's not empty")
     void pushAddsElementToHeadWhenStackIsNotEmpty() {
         intStack.push(10);
         intStack.push(15);
@@ -118,7 +154,8 @@ class StackTest {
     }
 
     @Test
-    @Order(9)
+    @Order(12)
+    @DisplayName("Method push() links new element with the previous top (head) element")
     void pushPutsHeadToNextOfNewHead() {
         fillTestStack(10, 15, 20);
 
@@ -134,19 +171,22 @@ class StackTest {
     }
 
     @Test
-    @Order(10)
+    @Order(13)
+    @DisplayName("Method push() throws exception when element is null")
     void pushThrowsExceptionWhenElementIsNull() {
         assertThatNullPointerException().isThrownBy(() -> intStack.push(null));
     }
 
     @Test
-    @Order(11)
+    @Order(14)
+    @DisplayName("Method pop() throws exception when stack is empty")
     void popElementWhenStackIsEmpty() {
         assertThrows(EmptyStackException.class, () -> intStack.pop());
     }
 
     @Test
-    @Order(12)
+    @Order(15)
+    @DisplayName("Method pop() retrieves top element from the stack (LIFO)")
     void pop() {
         fillTestStack(55, 17, 66, 234);
 
@@ -156,7 +196,8 @@ class StackTest {
     }
 
     @Test
-    @Order(13)
+    @Order(16)
+    @DisplayName("Method pop() assigns next element to be a head")
     void popResetsHeadFromNextOfOldHead() {
         fillTestStack(10, 15, 20);
         Object head = getHeadObject();
@@ -170,7 +211,8 @@ class StackTest {
     }
 
     @Test
-    @Order(14)
+    @Order(17)
+    @DisplayName("Method size() returns 0 when stack is empty")
     void sizeWhenStackIsEmpty() {
         int actualSize = getInnerSize();
 
@@ -178,7 +220,8 @@ class StackTest {
     }
 
     @Test
-    @Order(15)
+    @Order(18)
+    @DisplayName("Method size() returns number of element in the stack")
     void size() {
         fillTestStack(1, 5, 7);
 
@@ -186,7 +229,8 @@ class StackTest {
     }
 
     @Test
-    @Order(16)
+    @Order(19)
+    @DisplayName("Method size() returns correct value when stack was created via method of()")
     void sizeIncreasesWhenUseOfMethod() {
         intStack = LinkedStack.of(1, 2, 3, 4, 5, 6, 7, 8);
 
@@ -194,7 +238,8 @@ class StackTest {
     }
 
     @Test
-    @Order(17)
+    @Order(20)
+    @DisplayName("Method size() correct value when elements were added via push()")
     void sizeIncreasesWhenPush() {
         intStack.push(1);
         intStack.push(2);
@@ -204,7 +249,8 @@ class StackTest {
     }
 
     @Test
-    @Order(18)
+    @Order(21)
+    @DisplayName("Method size() correct value when elements were removed via pop()")
     void sizeDecreasesWhenPop() {
         fillTestStack(1, 2, 3, 4, 5);
         intStack.pop();
@@ -213,7 +259,8 @@ class StackTest {
     }
 
     @Test
-    @Order(19)
+    @Order(22)
+    @DisplayName("Method isEmpty() returns true when stack contains elements")
     void isEmpty() {
         fillTestStack(87, 53, 66);
 
@@ -223,7 +270,8 @@ class StackTest {
     }
 
     @Test
-    @Order(20)
+    @Order(23)
+    @DisplayName("Method isEmpty() returns false when stack contains no elements")
     void isEmptyWhenStackIsEmpty() {
         boolean stackEmpty = intStack.isEmpty();
         assertThat(stackEmpty).isEqualTo(true);
