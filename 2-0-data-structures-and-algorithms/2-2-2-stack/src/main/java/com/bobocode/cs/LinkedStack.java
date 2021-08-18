@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
- * {@link LinkedStack} represents a last-in-first-out (LIFO) stack of objects that is based on singly linked generic nodes.
+ * {@link LinkedStack} is a stack implementation that is based on singly linked generic nodes.
  * A node is implemented as inner static class {@link Node<T>}.
  *
  * @param <T> generic type parameter
