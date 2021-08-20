@@ -24,5 +24,5 @@ runtime to compile time and makes type parametrization safer.**
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
-#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/UADe1YKHiFVXQJLF8)
+#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/u6kHcecFuzxV232LA)
 
