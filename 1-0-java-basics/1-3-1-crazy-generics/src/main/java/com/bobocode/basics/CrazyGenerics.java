@@ -65,10 +65,10 @@ public class CrazyGenerics {
      *
      * @param <T> – value type
      */
-    public static class MaxHolder<T extends Comparable<T>> { // todo: refactor class to make it generic
-        private T max;
+    public static class MaxHolder { // todo: refactor class to make it generic
+        private Object max;
 
-        public MaxHolder(T max) {
+        public MaxHolder(Object max) {
             this.max = max;
         }
 
@@ -77,13 +77,11 @@ public class CrazyGenerics {
          *
          * @param val a new value
          */
-        public void put(T val) {
-            if (val.compareTo(max) > 0) {
-                max = val;
-            }
+        public void put(Object val) {
+            throw new ExerciseNotCompletedException(); // todo: update parameter and implement the method
         }
 
-        public T getMax() {
+        public Object getMax() {
             return max;
         }
     }
