@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -188,7 +189,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(15)
+    @Order(16)
     @DisplayName("MaxHolder field has type \"T\"")
     void maxHolderFieldHasTypeT() {
         var typeParameter = MaxHolder.class.getTypeParameters()[0];
@@ -197,7 +198,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(16)
+    @Order(17)
     @SneakyThrows
     @DisplayName("MaxHolder constructor param has type \"T\"")
     void maxHolderConstructorParamHasTypeT() {
@@ -209,7 +210,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(17)
+    @Order(18)
     @SneakyThrows
     @DisplayName("MaxHolder put method param has type \"T\"")
     void maxHolderPutMethodParamHasTypeT() {
@@ -220,7 +221,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(18)
+    @Order(19)
     @SneakyThrows
     @DisplayName("MaxHolder getMax return type is \"T\"")
     void maxHolderGetMaxReturnTypeIsT() {
@@ -230,7 +231,37 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(19)
+    @Order(20)
+    @SneakyThrows
+    @DisplayName("MaxHolder put stores argument value when it's greater than max")
+    void maxHolderPut() {
+        Constructor<?> constructor = MaxHolder.class.getConstructors()[0];
+        var maxHolder = constructor.newInstance(10);
+        var putMethod = getMethodByName(MaxHolder.class, "put");
+        var getMaxMethod = MaxHolder.class.getDeclaredMethod("getMax");
+
+        putMethod.invoke(maxHolder, 11);
+
+        assertThat(getMaxMethod.invoke(maxHolder)).isEqualTo(11);
+    }
+
+    @Test
+    @Order(21)
+    @SneakyThrows
+    @DisplayName("MaxHolder put keeps old value when argument is less than max")
+    void maxHolderPutWhenArgumentIsLessThanMax() {
+        Constructor<?> constructor = MaxHolder.class.getConstructors()[0];
+        var maxHolder = constructor.newInstance(10);
+        var putMethod = getMethodByName(MaxHolder.class, "put");
+        var getMaxMethod = MaxHolder.class.getDeclaredMethod("getMax");
+
+        putMethod.invoke(maxHolder, 9);
+
+        assertThat(getMaxMethod.invoke(maxHolder)).isEqualTo(10);
+    }
+
+    @Test
+    @Order(22)
     @DisplayName("StrictProcessor class has one generic type")
     void strictProcessorHasOneGenericType() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
@@ -239,7 +270,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(20)
+    @Order(23)
     @DisplayName("StrictProcessor type parameter is called \"T\"")
     void strictProcessorTypeParameterIsCalledT() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
@@ -249,7 +280,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(21)
+    @Order(24)
     @DisplayName("StrictProcessor type parameter is bound by both Serializable and Comparable<T>")
     void strictProcessorTypeParameterIsBoundBySerializableAndComparable() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
@@ -265,7 +296,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(22)
+    @Order(25)
     @DisplayName("StrictProcessor process method parameter has type \"T\"")
     void strictProcessorProcessMethodParameterHasTypeT() {
         var processMethod = getMethodByName(StrictProcessor.class, "process");
@@ -277,7 +308,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(23)
+    @Order(26)
     @DisplayName("CollectionRepository has two type parameters")
     void collectionRepositoryHasTwoTypeParameters() {
         var typeParameters = CollectionRepository.class.getTypeParameters();
@@ -286,7 +317,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(24)
+    @Order(27)
     @DisplayName("CollectionRepository first type parameter is called \"T\"")
     void collectionRepositoryFirstTypeParameterIsCalledT() {
         var typeParam = CollectionRepository.class.getTypeParameters()[0];
@@ -295,7 +326,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(25)
+    @Order(28)
     @DisplayName("CollectionRepository first type parameter is bounded by BaseEntity")
     void collectionRepositoryFirstTypeParameterIsBoundedByBaseEntity() {
         var typeParam = CollectionRepository.class.getTypeParameters()[0];
@@ -305,7 +336,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(26)
+    @Order(29)
     @DisplayName("CollectionRepository second type parameter is called \"C\"")
     void collectionRepositorySecondTypeParameterIsCalledT() {
         var typeParam = CollectionRepository.class.getTypeParameters()[1];
@@ -314,7 +345,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(27)
+    @Order(30)
     @DisplayName("CollectionRepository second type parameter is bounded by Collection<T>")
     void collectionRepositorySecondTypeParameterIsBoundedByCollection() {
         var typeParam = CollectionRepository.class.getTypeParameters()[1];
@@ -325,7 +356,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(28)
+    @Order(31)
     @DisplayName("CollectionRepository save method param has type \"T\"")
     @SneakyThrows
     void collectionRepositorySaveMethodParameterHasTypeT() {
@@ -337,7 +368,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(29)
+    @Order(32)
     @DisplayName("CollectionRepository getEntityCollection method has return type \"C\"")
     @SneakyThrows
     void collectionRepositoryGetCollectionMethodHasReturnTypeC() {
@@ -347,7 +378,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(30)
+    @Order(33)
     @DisplayName("ListRepository extends CollectionRepository")
     void listRepositoryExtendsCollectionRepository() {
         var superInterface = ListRepository.class.getInterfaces()[0];
@@ -356,7 +387,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(31)
+    @Order(34)
     @DisplayName("ListRepository has one type parameter")
     void listRepositoryHasOneTypeParameter() {
         var typeParams = ListRepository.class.getTypeParameters();
@@ -365,7 +396,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(32)
+    @Order(35)
     @DisplayName("ListRepository type parameter is called \"T\"")
     void listRepositoryTypeParameterIsCalledT() {
         var typeParam = ListRepository.class.getTypeParameters()[0];
@@ -374,7 +405,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(33)
+    @Order(36)
     @DisplayName("ListRepository type parameter is bound by BaseEntity")
     void listRepositoryTypeParameterIsBoundByBaseEntity() {
         var typeParam = ListRepository.class.getTypeParameters()[0];
@@ -384,7 +415,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(34)
+    @Order(37)
     @DisplayName("ListRepository parent interface has specified two types")
     void listRepositoryParentInterfaceHasSpecifiedTwoTypes() {
         var collectionInterface = ListRepository.class.getGenericInterfaces()[0];
@@ -394,7 +425,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(35)
+    @Order(38)
     @DisplayName("ComparableCollection has one type parameter \"E\"")
     void comparableCollectionIsGeneric() {
         var typeParameters = ComparableCollection.class.getTypeParameters();
@@ -404,7 +435,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(36)
+    @Order(39)
     @DisplayName("ComparableCollection extends Collection")
     void comparableCollectionExtendsCollection() {
         var collectionInterface = Arrays.stream(ComparableCollection.class.getInterfaces())
@@ -416,7 +447,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(37)
+    @Order(40)
     @DisplayName("Type parameter is specified for a super interface Collection")
     void comparableCollectionExtendsCollectionOfTheSameElementsType() {
         var collectionInterface = Arrays.stream(ComparableCollection.class.getGenericInterfaces())
@@ -430,7 +461,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(38)
+    @Order(41)
     @DisplayName("ComparableCollection extends Comparable")
     void comparableCollectionExtendsComparable() {
         var comparableInterface = Arrays.stream(ComparableCollection.class.getInterfaces())
@@ -442,7 +473,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(39)
+    @Order(42)
     @DisplayName("Collection of any type is specified as type parameter for a super interface Comparable")
     void comparableCollectionExtendsComparableOfCollectionOfAnyType() {
         var comparableInterface = Arrays.stream(ComparableCollection.class.getGenericInterfaces())
@@ -456,16 +487,18 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(40)
+    @Order(43)
     @DisplayName("Method compareTo is overridden")
     void comparableCollectionOverridesCompareToMethod() {
-        var compareToMethod = getMethodByName(ComparableCollection.class, "compareTo");
+        var compareToMethod = Arrays.stream(ComparableCollection.class.getDeclaredMethods())
+                .filter(m -> m.getName().equals("compareTo"))
+                .findAny();
 
-        assertThat(compareToMethod).isNotNull();
+        assertThat(compareToMethod).isPresent();
     }
 
     @Test
-    @Order(41)
+    @Order(44)
     @DisplayName("ComparableCollection provides a default impl of compareTo method")
     void compareToProvidesDefaultImpl() {
         var compareToMethod = getMethodByName(ComparableCollection.class, "compareTo");
@@ -474,7 +507,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(42)
+    @Order(45)
     @DisplayName("A parameter of method compareTo is a collection of elements of any type")
     void compareToParamIsACollectionOfAnyType() {
         var compareToMethod = getMethodByName(ComparableCollection.class, "compareTo");
@@ -484,7 +517,7 @@ public class CrazyGenericsTest {
                 .isEqualTo(String.format("%s<?>", Collection.class.getTypeName()));
     }
 
-    @Order(43)
+    @Order(46)
     @DisplayName("Method compareTo compares collection size")
     @SneakyThrows
     @ParameterizedTest
@@ -502,7 +535,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(44)
+    @Order(47)
     @DisplayName("CollectionUtil is not a generic class")
     void collectionUtilIsNotAGenericClass() {
         var typeParams = CollectionUtil.class.getTypeParameters();
@@ -511,7 +544,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(45)
+    @Order(48)
     @DisplayName("Method print param is a list of any type declared as unbounded wildcard")
     void printParamIsAListOfAnyType() {
         var printMethod = getMethodByName(CollectionUtil.class, "print");
@@ -523,7 +556,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(46)
+    @Order(49)
     @DisplayName("Method hasNewEntities accepts a collection of any entities (BaseEntity subclasses)")
     void hasNewEntitiesMethodParamIsAGenericCollectionOfEntities() {
         var hasNewEntitiesMethod = getMethodByName(CollectionUtil.class, "hasNewEntities");
@@ -535,7 +568,7 @@ public class CrazyGenericsTest {
     }
 
     @ParameterizedTest
-    @Order(47)
+    @Order(50)
     @MethodSource("hasNewEntitiesArgs")
     @DisplayName("Method hasNewEntities checks id values")
     @SneakyThrows
@@ -567,7 +600,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(48)
+    @Order(51)
     @DisplayName("Method isValidCollection accepts a collection of any entities as a first param")
     void isValidCollectionMethodFirstParamIsAGenericCollectionOfEntities() {
         var isValidCollectionMethod = getMethodByName(CollectionUtil.class, "isValidCollection");
@@ -579,7 +612,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(49)
+    @Order(52)
     @DisplayName("Method isValidCollection accepts a predicate of any BaseEntity superclasses as a second param")
     void isValidCollectionMethodSecondParamIsAnyBaseEntitySuperClass() {
         var isValidCollectionMethod = getMethodByName(CollectionUtil.class, "isValidCollection");
@@ -590,8 +623,51 @@ public class CrazyGenericsTest {
                 .isEqualTo(String.format("%s<? super %s>", Predicate.class.getTypeName(), BaseEntity.class.getTypeName()));
     }
 
+    @ParameterizedTest
+    @MethodSource("isValidCollectionArgs")
+    @Order(53)
+    @DisplayName("Method isValidCollection returns true when all entities pass validation predicate")
+    @SneakyThrows
+    void isValidCollectionReturnsTrueWhenAllEntitiesPassValidationPredicate(List<TestEntity> entities,
+                                                                            Predicate<TestEntity> validationPredicate,
+                                                                            boolean isValid) {
+        var isValidCollectionMethod = getMethodByName(CollectionUtil.class, "isValidCollection");
+
+        boolean result = (boolean) isValidCollectionMethod.invoke(null, entities, validationPredicate);
+
+        assertThat(result).isEqualTo(isValid);
+    }
+
+    private static Stream<Arguments> isValidCollectionArgs() {
+        var now = LocalDateTime.now();
+        Predicate<BaseEntity> notNullIdValidationPredicate = e -> e.getUuid() != null;
+        Predicate<BaseEntity> pastCreatedDateValidationPredicate = e -> e.getCreatedOn().compareTo(now) < 0;
+
+        return Stream.of(
+                arguments(List.of(new TestEntity(), new TestEntity()), notNullIdValidationPredicate, true),
+                arguments(List.of(new TestEntity(), new TestEntity((UUID) null)), notNullIdValidationPredicate, false),
+                arguments(
+                        List.of(
+                                new TestEntity(now.minus(1, DAYS)),
+                                new TestEntity((now.minus(1, MONTHS)))
+                        ),
+                        pastCreatedDateValidationPredicate,
+                        true
+                ),
+                arguments(
+                        List.of(
+                                new TestEntity(now.minus(1, DAYS)),
+                                new TestEntity((now.plus(2, DAYS)))
+                        ),
+                        pastCreatedDateValidationPredicate,
+                        false
+                )
+        );
+    }
+
+
     @Test
-    @Order(50)
+    @Order(54)
     @DisplayName("hasDuplicates is a generic method")
     void hasDuplicatesIsAGenericMethod() {
         var hasDuplicatesMethod = getMethodByName(CollectionUtil.class, "hasDuplicates");
@@ -600,7 +676,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(51)
+    @Order(55)
     @DisplayName("hasDuplicates type parameter is called \"T\"")
     void hasDuplicatesTypeParameterIsCalledT() {
         var hasDuplicatesMethod = getMethodByName(CollectionUtil.class, "hasDuplicates");
@@ -610,7 +686,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(52)
+    @Order(56)
     @DisplayName("hasDuplicates type parameter is bounded by BaseEntity")
     void hasDuplicatesTypeParameterIsBoundedByBaseEntity() {
         var hasDuplicatesMethod = getMethodByName(CollectionUtil.class, "hasDuplicates");
@@ -621,7 +697,7 @@ public class CrazyGenericsTest {
     }
 
     @ParameterizedTest
-    @Order(53)
+    @Order(57)
     @MethodSource("hasDuplicatesArgs")
     @DisplayName("hasDuplicates checks entity duplicates by UUID")
     @SneakyThrows
@@ -648,7 +724,7 @@ public class CrazyGenericsTest {
 
 
     @ParameterizedTest
-    @Order(54)
+    @Order(58)
     @MethodSource("findMaxArgs")
     @DisplayName("Method findMax returns the max value based on given comparator")
     @SneakyThrows
@@ -679,7 +755,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(55)
+    @Order(59)
     @DisplayName("findMostRecentlyCreatedEntity is a generic method that accepts a collection of entities")
     void findMostRecentlyCreatedEntityIsAGenericMethod() {
         var hasDuplicatesMethod = getMethodByName(CollectionUtil.class, "findMostRecentlyCreatedEntity");
@@ -691,7 +767,7 @@ public class CrazyGenericsTest {
     }
 
     @ParameterizedTest
-    @Order(56)
+    @Order(60)
     @MethodSource("findMostRecentlyCreatedEntityArgs")
     @DisplayName("findMostRecentlyCreatedEntity returns the most recently created entity")
     @SneakyThrows
@@ -718,7 +794,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(57)
+    @Order(61)
     @DisplayName("findMostRecentlyCreatedEntity throws exception when collection is empty")
     @SneakyThrows
     void findMostRecentlyCreatedEntityThrowsException() {
@@ -729,7 +805,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(58)
+    @Order(62)
     @DisplayName("Method swap does not declare type parameter")
     void swapMethodDoesNotDeclareTypeParameter() {
         var swapMethod = getMethodByName(CollectionUtil.class, "swap");
@@ -739,7 +815,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(59)
+    @Order(63)
     @DisplayName("Method swap change elements by indexes")
     @SneakyThrows
     void swapChangesElements() {

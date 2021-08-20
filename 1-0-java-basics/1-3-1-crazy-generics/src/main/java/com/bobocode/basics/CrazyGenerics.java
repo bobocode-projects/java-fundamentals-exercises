@@ -160,8 +160,9 @@ public class CrazyGenerics {
         }
 
         /**
-         * Util method that checks if a provided collection of entities is valid. A validation criteria can be different
-         * for different cases, so it is passed as second parameter.
+         * Util method that checks if a provided collection of entities is valid. An entity is any subclass of
+         * a {@link BaseEntity} A validation criteria can be different for different cases, so it is passed
+         * as second parameter.
          *
          * @param entities            provided collection of entities
          * @param validationPredicate criteria for validation
