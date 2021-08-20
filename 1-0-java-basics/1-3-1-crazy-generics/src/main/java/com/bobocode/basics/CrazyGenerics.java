@@ -65,10 +65,10 @@ public class CrazyGenerics {
      *
      * @param <T> – value type
      */
-    public static class MaxHolder { // todo: refactor class to make it generic
-        private Object max;
+    public static class MaxHolder<T extends Comparable<T>> { // todo: refactor class to make it generic
+        private T max;
 
-        public MaxHolder(Object max) {
+        public MaxHolder(T max) {
             this.max = max;
         }
 
@@ -77,11 +77,13 @@ public class CrazyGenerics {
          *
          * @param val a new value
          */
-        public void put(Object val) {
-            throw new ExerciseNotCompletedException(); // todo: update parameter and implement the method
+        public void put(T val) {
+            if (val.compareTo(max) > 0) {
+                max = val;
+            }
         }
 
-        public Object getMax() {
+        public T getMax() {
             return max;
         }
     }
@@ -160,8 +162,9 @@ public class CrazyGenerics {
         }
 
         /**
-         * Util method that checks if a provided collection of entities is valid. A validation criteria can be different
-         * for different cases, so it is passed as second parameter.
+         * Util method that checks if a provided collection of entities is valid. An entity is any subclass of
+         * a {@link BaseEntity} A validation criteria can be different for different cases, so it is passed
+         * as second parameter.
          *
          * @param entities            provided collection of entities
          * @param validationPredicate criteria for validation
