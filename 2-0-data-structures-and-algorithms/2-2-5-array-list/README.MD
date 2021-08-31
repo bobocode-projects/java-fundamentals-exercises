@@ -22,3 +22,4 @@ Build strong skills implementing a well known Array List data structure 💪
 ---
 
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/WQPxc7rDFgZK6eEk7)
