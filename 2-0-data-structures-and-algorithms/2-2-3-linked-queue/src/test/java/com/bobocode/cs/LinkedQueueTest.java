@@ -19,39 +19,27 @@ public class LinkedQueueTest {
     private static final String NODE_NAME = "Node";
     private static final String SIZE_NAME = "size";
 
-    private static final Predicate<Field> NODE_FIELD = field -> field
-            .getType().getSimpleName().equals(NODE_NAME)
-            & (field.getName().contains("next"));
+    private static final Predicate<Field> NODE_FIELD = field -> field.getType().getSimpleName().equals(NODE_NAME)
+            && (field.getName().contains("next"));
 
-    private static final Predicate<Field> ELEMENT_FIELD = field -> field
-            .getGenericType()
-            .getTypeName()
-            .equals("T")
-            & (field.getName().contains("elem")
-            | field.getName().contains("value")
-            | field.getName().contains("item"));
+    private static final Predicate<Field> ELEMENT_FIELD = field -> field.getGenericType().getTypeName().equals("T")
+            && (field.getName().contains("elem")
+            || field.getName().contains("value")
+            || field.getName().contains("item"));
 
-    private static final Predicate<Field> NEXT_FIELD = field -> field
-            .getGenericType()
-            .getTypeName()
-            .equals("Node<T>")
-            & (field.getName().contains("next"));
+    private static final Predicate<Field> NEXT_FIELD = field -> field.getGenericType().getTypeName().endsWith("Node<T>")
+            && (field.getName().contains("next"));
 
-    private static final Predicate<Field> SIZE_FIELD = field -> field
-            .getType()
-            .getSimpleName()
-            .equals("int")
-            & (field.getName().equals(SIZE_NAME));
+    private static final Predicate<Field> SIZE_FIELD = field -> field.getType().getSimpleName().equals("int")
+            && (field.getName().equals(SIZE_NAME));
 
-    private static final Predicate<Field> HEAD_FIELD = field -> field
-            .getType().getSimpleName().equals(NODE_NAME)
-            & (field.getName().contains("head")
-            | field.getName().contains("first"));
+    private static final Predicate<Field> HEAD_FIELD = field -> field.getType().getSimpleName().equals(NODE_NAME)
+            && (field.getName().contains("head")
+            || field.getName().contains("first"));
 
-    private static final Predicate<Field> TAIL_FIELD = field -> field
-            .getType().getSimpleName().equals(NODE_NAME)
-            & (field.getName().contains("tail")
-            | field.getName().contains("last"));
+    private static final Predicate<Field> TAIL_FIELD = field -> field.getType().getSimpleName().equals(NODE_NAME)
+            && (field.getName().contains("tail")
+            || field.getName().contains("last"));
 
     private Queue<Integer> integerQueue = new LinkedQueue<>();
 
@@ -281,27 +269,17 @@ public class LinkedQueueTest {
 
     @SneakyThrows
     private void addIntElementToQueue(int value) {
-        Object nodeObj = createNode(value);
-
-        Object head = getAccessibleFieldByPredicate(this.integerQueue,
-                HEAD_FIELD)
-                .get(this.integerQueue);
-
-        Object tail = getAccessibleFieldByPredicate(this.integerQueue,
-                TAIL_FIELD)
-                .get(this.integerQueue);
-
-        Integer size = (Integer) getAccessibleFieldByPredicate(this.integerQueue,
-                SIZE_FIELD)
-                .get(this.integerQueue);
+        Object newNode = createNode(value);
+        Object head = getAccessibleFieldByPredicate(this.integerQueue, HEAD_FIELD).get(this.integerQueue);
+        Object tail = getAccessibleFieldByPredicate(this.integerQueue, TAIL_FIELD).get(this.integerQueue);
+        Integer size = (Integer) getAccessibleFieldByPredicate(this.integerQueue, SIZE_FIELD).get(this.integerQueue);
 
         if (head == null) {
-            setHead(nodeObj);
-            setTail(nodeObj);
+            setHead(newNode);
         } else {
-            setNextInNode(tail, nodeObj);
-            setTail(nodeObj);
+            setNextNode(tail, newNode);
         }
+        setTail(newNode);
 
         if (size == null) {
             setInternalSize(1);
@@ -359,11 +337,9 @@ public class LinkedQueueTest {
     }
 
     @SneakyThrows
-    private void setNextInNode(Object target, Object obj) {
-        Field[] nodeFields = target.getClass().getDeclaredFields();
-        /*`nodeFields[1]` is the `next` filed*/
-        nodeFields[1].setAccessible(true);
-        nodeFields[1].set(target, obj);
+    private void setNextNode(Object current, Object next) {
+        Field nodeNextField = getAccessibleFieldByPredicate(current, NEXT_FIELD);
+        nodeNextField.set(current, next);
     }
 
     private Field getAccessibleFieldByPredicate(Object object, Predicate<Field> predicate) {
