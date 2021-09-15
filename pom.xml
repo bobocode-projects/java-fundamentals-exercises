@@ -24,6 +24,7 @@
         <module>5-0-functional-programming</module>
         <module>6-0-test-driven-development</module>
         <module>java-fundamentals-util</module>
+        <module>lesson-demo</module>
     </modules>
 
     <dependencies>
