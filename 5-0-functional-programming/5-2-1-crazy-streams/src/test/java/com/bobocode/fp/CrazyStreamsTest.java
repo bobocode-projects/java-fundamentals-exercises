@@ -4,12 +4,17 @@ import com.bobocode.fp.exception.EntityNotFoundException;
 import com.bobocode.model.Account;
 import com.bobocode.model.Sex;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
+import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -20,20 +25,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CrazyStreamsTest {
 
     private CrazyStreams streams;
-    private List<Account> accounts;
+    private static List<Account> accounts = Arrays.asList(
+            new Account(1L, "Justin", "Butler", "justin.butler@gmail.com",
+                    LocalDate.parse("2003-04-17"), Sex.MALE, LocalDate.parse("2016-06-13"), BigDecimal.valueOf(172966)),
+            new Account(2L, "Olivia", "Cardenas", "cardenas@mail.com",
+                    LocalDate.parse("1930-01-19"), Sex.FEMALE, LocalDate.parse("2014-06-21"), BigDecimal.valueOf(38029)),
+            new Account(3L, "Nolan", "Donovan", "nolandonovan@gmail.com",
+                    LocalDate.parse("1925-04-19"), Sex.MALE, LocalDate.parse("2011-03-10"), BigDecimal.valueOf(13889)),
+            new Account(4L, "Lucas", "Lynn", "lucas.lynn@yahoo.com",
+                    LocalDate.parse("1987-05-25"), Sex.MALE, LocalDate.parse("2009-03-05"), BigDecimal.valueOf(16980))
+    );
 
     @BeforeEach
     void setUp() {
-        accounts = Arrays.asList(
-                new Account(1L, "Justin", "Butler", "justin.butler@gmail.com",
-                        LocalDate.parse("2003-04-17"), Sex.MALE, LocalDate.parse("2016-06-13"), BigDecimal.valueOf(172966)),
-                new Account(2L, "Olivia", "Cardenas", "cardenas@mail.com",
-                        LocalDate.parse("1930-01-19"), Sex.FEMALE, LocalDate.parse("2014-06-21"), BigDecimal.valueOf(38029)),
-                new Account(3L, "Nolan", "Donovan", "nolandonovan@gmail.com",
-                        LocalDate.parse("1925-04-19"), Sex.MALE, LocalDate.parse("2011-03-10"), BigDecimal.valueOf(13889)),
-                new Account(4L, "Lucas", "Lynn", "lucas.lynn@yahoo.com",
-                        LocalDate.parse("1987-05-25"), Sex.MALE, LocalDate.parse("2009-03-05"), BigDecimal.valueOf(16980))
-        );
         streams = new CrazyStreams(accounts);
     }
 
@@ -220,18 +224,41 @@ public class CrazyStreamsTest {
         assertEquals(2, characterFrequencyInFirstAndLastNames.get('u').longValue());
     }
 
-    @Test
+    @MethodSource("getCharacterFrequencyIgnoreCaseInFirstAndLastNamesArgs")
+    @ParameterizedTest
     @Order(17)
-    void getCharacterFrequencyIgnoreCaseInFirstAndLastNames() {
-        Map<Character, Long> characterFrequencyInFirstAndLastNames = streams.getCharacterFrequencyIgnoreCaseInFirstAndLastNames();
+    void getCharacterFrequencyIgnoreCaseInFirstAndLastNames(int nameLengthBound, Map<Character, Long> resultMap) {
+        var characterFrequencyInFirstAndLastNames = streams.getCharacterFrequencyIgnoreCaseInFirstAndLastNames(nameLengthBound);
 
-        assertEquals(6, characterFrequencyInFirstAndLastNames.get('a').longValue());
-        assertEquals(1, characterFrequencyInFirstAndLastNames.get('b').longValue());
-        assertEquals(2, characterFrequencyInFirstAndLastNames.get('c').longValue());
-        assertEquals(5, characterFrequencyInFirstAndLastNames.get('l').longValue());
-        assertEquals(8, characterFrequencyInFirstAndLastNames.get('n').longValue());
-        assertEquals(3, characterFrequencyInFirstAndLastNames.get('u').longValue());
-        assertEquals(1, characterFrequencyInFirstAndLastNames.get('y').longValue());
+        assertThat(characterFrequencyInFirstAndLastNames).isEqualTo(resultMap);
+    }
+
+    private static Stream<Arguments> getCharacterFrequencyIgnoreCaseInFirstAndLastNamesArgs() {
+        return Stream.of(
+                Arguments.arguments(2, buildMap(accounts, 2)),
+                Arguments.arguments(5, buildMap(accounts, 5)),
+                Arguments.arguments(7, buildMap(accounts, 7))
+        );
+    }
+
+    private static Map<Character, Long> buildMap(List<Account> accounts, int nameLengthBound) {
+        var resultMap = new HashMap<Character, Long>();
+        for (var a : accounts) {
+            processName(resultMap, a.getFirstName(), nameLengthBound);
+            processName(resultMap, a.getLastName(), nameLengthBound);
+        }
+        return resultMap;
+    }
+
+    private static void processName(Map<Character, Long> resultMap, String name, int nameLengthBound) {
+        if (name.length() >= nameLengthBound) {
+            var chars = name.toLowerCase().toCharArray();
+            for (Character c : chars) {
+                if (resultMap.putIfAbsent(c, 1L) != null) {
+                    resultMap.compute(c, (k, counter) -> counter + 1L);
+                }
+            }
+        }
     }
 }
 
