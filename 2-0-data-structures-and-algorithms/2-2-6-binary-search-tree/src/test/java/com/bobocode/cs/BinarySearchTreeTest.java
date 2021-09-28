@@ -274,7 +274,7 @@ class BinarySearchTreeTest {
                  * ................\
                  * .................30
                  */
-                arguments(new Integer[]{10,6,18,4,8,12,20,5,24,26,30},5));
+                arguments(new Integer[]{10, 6, 18, 4, 8, 12, 20, 5, 24, 26, 30}, 5));
     }
 
 
