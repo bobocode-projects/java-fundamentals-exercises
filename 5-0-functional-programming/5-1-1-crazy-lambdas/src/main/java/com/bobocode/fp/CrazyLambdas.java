@@ -143,7 +143,7 @@ public class CrazyLambdas {
     }
 
     /**
-     * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in in a new thread.
+     * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in a new thread.
      *
      * @return a runnable consumer
      */
@@ -186,7 +186,7 @@ public class CrazyLambdas {
     }
 
     /**
-     * Returns {@link Supplier} of {@link Supplier} of {@link Supplier} of {@link String} "WELL DONE".
+     * Returns {@link Supplier} of {@link Supplier} of {@link Supplier} of {@link String} "WELL DONE!".
      *
      * @return a supplier instance
      */
