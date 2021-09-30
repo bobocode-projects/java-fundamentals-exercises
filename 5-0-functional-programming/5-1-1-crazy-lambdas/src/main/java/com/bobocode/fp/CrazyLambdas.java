@@ -183,7 +183,7 @@ public class CrazyLambdas {
     }
 
     /**
-     * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in in a new thread.
+     * Returns a {@link Consumer} that accepts {@link Runnable} as a parameter and runs in a new thread.
      *
      * @return a runnable consumer
      */
