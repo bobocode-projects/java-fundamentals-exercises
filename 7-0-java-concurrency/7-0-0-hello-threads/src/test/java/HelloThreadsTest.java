@@ -1,7 +1,10 @@
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,10 +17,10 @@ class HelloThreadsTest {
     void prepare() {
         concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
     }
-
+    @SneakyThrows
     @Test
     @Order(1)
-    void runningThread() throws InterruptedException {
+    void runningThread() {
         Thread runningThread = HelloThreads.runningThread(() -> concurrentLinkedQueue.add(5));
         assertEquals(0, concurrentLinkedQueue.size());
 
@@ -26,20 +29,20 @@ class HelloThreadsTest {
 
         checkContentQueue();
     }
-
+    @SneakyThrows
     @Test
     @Order(2)
-    void runningThreadViaStart() throws InterruptedException {
+    void runningThreadViaStart() {
         var thread = new Thread(() -> concurrentLinkedQueue.add(5));
         HelloThreads.runningThreadViaStart(thread);
         thread.join();
 
         checkContentQueue();
     }
-
+    @SneakyThrows
     @Test
     @Order(3)
-    void runningThreadGetNameThread() throws InterruptedException {
+    void runningThreadGetNameThread() {
         var thread = new Thread(() -> concurrentLinkedQueue.add(5), "name");
         var threadName = HelloThreads.runningThreadGetNameThread(thread);
         thread.join();
@@ -47,10 +50,10 @@ class HelloThreadsTest {
 
         checkContentQueue();
     }
-
+    @SneakyThrows
     @Test
     @Order(3)
-    void runningThreadGetStateThread() throws InterruptedException {
+    void runningThreadGetStateThread() {
         var thread = new Thread(() -> concurrentLinkedQueue.add(5));
         var state = HelloThreads.runningThreadGetStateThread(thread);
         thread.join();
@@ -59,9 +62,10 @@ class HelloThreadsTest {
         checkContentQueue();
     }
 
+    @SneakyThrows
     @Test
     @Order(4)
-    void getSomeLogicRunningTreadAndReturnThisThread() throws InterruptedException {
+    void getSomeLogicRunningTreadAndReturnThisThread()  {
         var thread = HelloThreads.getSomeLogicRunningTreadAndReturnThisThread(new Thread(() -> {
             assertEquals(0, concurrentLinkedQueue.size());
             concurrentLinkedQueue.add(5);
@@ -69,6 +73,38 @@ class HelloThreadsTest {
         thread.join();
 
         checkContentQueue();
+    }
+
+    @SneakyThrows
+    @Test
+    @Order(5)
+    void runningThreadAndWhenJoinCompleted()  {
+        HelloThreads.runningThreadAndWhenJoinCompleted(new Thread(() -> {
+            assertEquals(0, concurrentLinkedQueue.size());
+            concurrentLinkedQueue.add(5);
+        }));
+
+        checkContentQueue();
+    }
+
+    @SneakyThrows
+    @Test
+    @Order(6)
+    void runningMultipleThreadsWithOneTask()  {
+        HelloThreads.runningMultipleThreadsWithOneTask(new Thread(() ->
+                concurrentLinkedQueue.add(ThreadLocalRandom.current().nextInt(100))));
+
+        assertEquals(3, concurrentLinkedQueue.size());
+    }
+
+    @SneakyThrows
+    @Test
+    @Order(7)
+    void runningThreadAndMakeItSleep()  {
+        var thread = new Thread(() -> concurrentLinkedQueue.add(5));
+        HelloThreads.runningThreadAndMakeItSleep(thread);
+
+        assertSame(thread.getState(), Thread.State.RUNNABLE);
     }
 
     private void checkContentQueue() {
