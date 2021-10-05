@@ -24,8 +24,7 @@ public class PrimeNumbers {
      * @return the sum of n prime numbers
      */
     public static int sum(int n) {
-        return primeNumberStream()
-                .limit(n)
+        return primeNumberStream(n)
                 .sum();
     }
 
@@ -35,8 +34,7 @@ public class PrimeNumbers {
      * @return a list of collected prime numbers
      */
     public static List<Integer> collect(int n) {
-        return primeNumberStream()
-                .limit(n)
+        return primeNumberStream(n)
                 .boxed()
                 .collect(toList());
     }
@@ -48,19 +46,20 @@ public class PrimeNumbers {
      * @param consumer a logic that should be applied to the found prime number
      */
     public static void processByIndex(int idx, IntConsumer consumer) {
-        primeNumberStream()
-                .limit(idx)
-                .reduce((a, b) -> b)
+        primeNumberStream(idx + 1)
+                .skip(idx)
+                .findAny()
                 .ifPresent(consumer);
     }
 
-    private static IntStream primeNumberStream() {
-        return IntStream.iterate(1, i -> i + 1)
-                .filter(PrimeNumbers::isPrime);
+    private static IntStream primeNumberStream(int size) {
+        return IntStream.iterate(2, i -> i + 1)
+                .filter(PrimeNumbers::isPrime)
+                .limit(size);
     }
 
     private static boolean isPrime(int n) {
-        return IntStream.range(2, n)
+        return (n != 1) && IntStream.range(2, n)
                 .noneMatch(i -> n % i == 0);
     }
 }
