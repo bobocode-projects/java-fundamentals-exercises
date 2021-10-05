@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.function.IntConsumer;
 
 /**
- * {@link PrimeNumbers} provides an API to work with prime numbers. It is using a stream of prime numbers.
+ * {@link PrimeNumbers} provides an API to work with prime numbers. The implementation is based on the
+ * {@link java.util.stream.IntStream} of prime numbers. That stream is used in all public methods on this class.
  * <p>
  * See {@link OOSumOfPrimes} for a reference
  */
@@ -38,7 +39,7 @@ public class PrimeNumbers {
     /**
      * Find a prime number by index and then applies a provided consumer passing found prime number
      *
-     * @param idx      the position of a prime number (index)
+     * @param idx      the position of a prime number (index), starting from 0
      * @param consumer a logic that should be applied to the found prime number
      */
     public static void processByIndex(int idx, IntConsumer consumer) {
