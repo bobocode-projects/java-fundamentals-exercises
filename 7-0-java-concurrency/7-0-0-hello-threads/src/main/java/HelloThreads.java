@@ -1,7 +1,7 @@
+import com.bobocode.util.ExerciseNotCompletedException;
 import lombok.SneakyThrows;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HelloThreads {
     /**
@@ -10,7 +10,7 @@ public class HelloThreads {
      * @return a new thread
      */
     public static Thread runningThread(Runnable runnable) {
-        return new Thread(runnable);
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -18,7 +18,7 @@ public class HelloThreads {
      * @param thread the code you want to start thread
      */
     public static void runningThreadViaStart(Thread thread) {
-        thread.start();
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -27,8 +27,7 @@ public class HelloThreads {
      * @return the name thread
      */
     public static String runningThreadGetNameThread(Thread thread) {
-        thread.start();
-        return thread.getName();
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -37,8 +36,7 @@ public class HelloThreads {
      * @return the thread state
      */
     public static Thread.State runningThreadGetStateThread(Thread thread) {
-        thread.start();
-        return thread.getState();
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -47,9 +45,7 @@ public class HelloThreads {
      * @return this thread
      */
     public static Thread getSomeLogicRunningTreadAndReturnThisThread(Runnable runnable) {
-        var thread = new Thread(runnable);
-        thread.start();
-        return thread;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -58,9 +54,7 @@ public class HelloThreads {
      */
     @SneakyThrows
     public static void runningThreadAndWhenJoinCompleted(Runnable runnable) {
-        var thread = new Thread(runnable);
-        thread.start();
-        thread.join();
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -71,17 +65,6 @@ public class HelloThreads {
      */
     @SneakyThrows
     public static List<Thread> runningMultipleThreadsWithOneTask(Runnable runnable) {
-        var thread1 = new Thread(runnable);
-        var thread2 = new Thread(runnable);
-        var thread3 = new Thread(runnable);
-
-        var threads = List.of(thread1, thread2, thread3)
-                .stream()
-                .peek(Thread::start)
-                .collect(Collectors.toList());
-        for (Thread thread : threads) {
-            thread.join();
-        }
-        return threads;
+        throw new ExerciseNotCompletedException();
     }
 }
