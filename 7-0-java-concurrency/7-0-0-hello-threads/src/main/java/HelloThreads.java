@@ -1,5 +1,8 @@
 import lombok.SneakyThrows;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class HelloThreads {
     /**
      * Receives a {@link Runnable} parameter, and returns a {@link Thread}.
@@ -60,28 +63,25 @@ public class HelloThreads {
         thread.join();
     }
 
-    // accept a list of tasks (Runnable) and return a list of threads that are in progress
+    /**
+     * Receives a {@link Runnable} parameter, create three new {@link Thread} start it,
+     * and return list of threads that are in progress
+     * @param runnable the code you want to run in new thread and start
+     * @return list these threads
+     */
     @SneakyThrows
-    public static void runningMultipleThreadsWithOneTask(Runnable runnable) {
+    public static List<Thread> runningMultipleThreadsWithOneTask(Runnable runnable) {
         var thread1 = new Thread(runnable);
         var thread2 = new Thread(runnable);
         var thread3 = new Thread(runnable);
 
-        thread1.start();
-        thread2.start();
-        thread3.start();
-
-        thread1.join();
-        thread2.join();
-        thread3.join();
-    }
-
-    // accept a thread and make it sleep
-    @SneakyThrows
-    public static void runningThreadAndMakeItSleep(Thread thread) {
-
-//        thread.start();
-//        Thread.sleep(10000);
-//        thread.join();
+        var threads = List.of(thread1, thread2, thread3)
+                .stream()
+                .peek(Thread::start)
+                .collect(Collectors.toList());
+        for (Thread thread : threads) {
+            thread.join();
+        }
+        return threads;
     }
 }
