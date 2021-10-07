@@ -1,12 +1,12 @@
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 
-import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class HelloThreadsTest {
@@ -17,6 +17,7 @@ class HelloThreadsTest {
     void prepare() {
         concurrentLinkedQueue = new ConcurrentLinkedQueue<>();
     }
+
     @SneakyThrows
     @Test
     @Order(1)
@@ -29,6 +30,7 @@ class HelloThreadsTest {
 
         checkContentQueue();
     }
+
     @SneakyThrows
     @Test
     @Order(2)
@@ -39,6 +41,7 @@ class HelloThreadsTest {
 
         checkContentQueue();
     }
+
     @SneakyThrows
     @Test
     @Order(3)
@@ -50,6 +53,7 @@ class HelloThreadsTest {
 
         checkContentQueue();
     }
+
     @SneakyThrows
     @Test
     @Order(3)
@@ -93,18 +97,7 @@ class HelloThreadsTest {
     void runningMultipleThreadsWithOneTask()  {
         HelloThreads.runningMultipleThreadsWithOneTask(new Thread(() ->
                 concurrentLinkedQueue.add(ThreadLocalRandom.current().nextInt(100))));
-
         assertEquals(3, concurrentLinkedQueue.size());
-    }
-
-    @SneakyThrows
-    @Test
-    @Order(7)
-    void runningThreadAndMakeItSleep()  {
-        var thread = new Thread(() -> concurrentLinkedQueue.add(5));
-        HelloThreads.runningThreadAndMakeItSleep(thread);
-
-        assertSame(thread.getState(), Thread.State.RUNNABLE);
     }
 
     private void checkContentQueue() {
