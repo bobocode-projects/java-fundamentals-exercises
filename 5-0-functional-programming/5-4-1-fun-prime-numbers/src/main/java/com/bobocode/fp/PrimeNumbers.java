@@ -1,10 +1,13 @@
 package com.bobocode.fp;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+import static java.math.BigInteger.TWO;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
@@ -25,8 +28,8 @@ public class PrimeNumbers {
      * @return an infinite int stream of prime numbers
      */
     public static IntStream stream() {
-        return IntStream.iterate(2, i -> i + 1)
-                .filter(PrimeNumbers::isPrime);
+        return Stream.iterate(TWO, BigInteger::nextProbablePrime)
+                .mapToInt(BigInteger::intValue);
     }
 
     /**
@@ -92,8 +95,4 @@ public class PrimeNumbers {
                 .collect(groupingBy(x -> (int) (Math.log10(x) + 1)));
     }
 
-    private static boolean isPrime(int n) {
-        return (n != 1) && IntStream.range(2, n)
-                .noneMatch(i -> n % i == 0);
-    }
 }
