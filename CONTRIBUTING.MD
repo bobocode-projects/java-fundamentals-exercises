@@ -8,7 +8,7 @@ Before moving forward, please **make sure that you understand what is an exercis
 ## Branching strategy
 
 In this repository we maintain **two key branches** [main](https://github.com/bobocode-projects/java-fundamentals-course) and 
-[completed](https://github.com/bobocode-projects/java-fundamentals-course/completed). Since the `main` branch stores the exercises, and the `completed` stores the 
+[completed](https://github.com/bobocode-projects/java-fundamentals-course/tree/completed). Since the `main` branch stores the exercises, and the `completed` stores the 
 completed solution, the latter is always ahead of the first one. Here's the rule:
 
 #### The [Completed Solution PR](https://github.com/bobocode-projects/java-fundamentals-course/pull/33) should always show only those changes that participats implement in the scope of the exercises❗️
