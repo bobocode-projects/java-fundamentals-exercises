@@ -164,13 +164,19 @@ public class LinkedQueueTest {
     }
 
     @Test
+    @SneakyThrows
     @Order(11)
     void pollMakesQueueEmptyWhenQueueHasSingleElement() {
         addIntElementToQueue(1);
         this.integerQueue.poll();
         boolean isEmpty = isEmptyQueue();
 
+        Object tail = getAccessibleFieldByPredicate(integerQueue, TAIL_FIELD).get(integerQueue);
+        Object head = getAccessibleFieldByPredicate(integerQueue, HEAD_FIELD).get(integerQueue);
+
         assertThat(isEmpty).isEqualTo(true);
+        assertThat(tail).isNull();
+        assertThat(head).isNull();
     }
 
     @Test
