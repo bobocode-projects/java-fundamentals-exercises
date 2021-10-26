@@ -353,6 +353,8 @@ class StackTest {
 
         if (constructor.getParameters().length == 1) {
             return constructor.newInstance(element);
+        } else if (constructor.getParameters().length == 2) {
+            return constructor.newInstance(element, null);
         } else {
             Object node = constructor.newInstance();
             getNodeElementField(node).set(node, element);

@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class BinarySearchTreeTest {
+class RecursiveBinarySearchTreeTest {
 
     private static final Predicate<Field> SIZE_FIELD = field -> field.getName().toLowerCase().contains("size")
             || field.getName().toLowerCase().contains("length");
