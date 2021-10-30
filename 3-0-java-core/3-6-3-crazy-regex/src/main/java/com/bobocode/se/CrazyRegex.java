@@ -13,220 +13,204 @@ import java.util.regex.Pattern;
 public class CrazyRegex {
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find all words "Curiosity" in text
+     * A Pattern that that finds all words "Curiosity" in text
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for the word "Curiosity"
      */
     public Pattern findSpecificWord() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     *  Create Pattern that accepts String with regex inside and can
-     *  find first word in text
+     *  A Pattern that finds first word in text
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for the first word in text
      */
     public Pattern findFirstWord() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find last word in text
+     * A Pattern that finds last word in text
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for the last word in text
      */
     public Pattern findLastWord() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find all numbers in text
+     * A Pattern that finds all numbers in text. When we have "555-555", "(555)555" and "30th" in text
+     * our pattern must grab all that numbers:
+     * "555" - four times, and one "30"
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for numbers
      */
     public Pattern findAllNumbers() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * can find all dates like: 1971-11-23
+     * A Pattern that finds all dates. For instance: "1971-11-23"
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for dates
      */
     public Pattern findDates() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * different variations of word 'color'. We are looking for:
-     * 'color', 'colour', 'colors', 'colours'
+     * A Pattern that finds different variations of word "color".
+     * We are looking for: "color", "colour", "colors", "colours"
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for different variations of word "color"
      */
     public Pattern findDifferentSpellingsOfColor() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * can find all zip codes in text
+     * A Pattern that finds all zip codes in text.
+     * Zip code is a 5-digit number without any characters or special symbols.
+     * For example: 72300
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for zip codes
      */
     public Pattern findZipCodes() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find different variations of word 'link', We are looking for:
-     * 'lynk', 'link', 'l nk', 'l(nk'
+     * A Pattern that finds different variations of word "link".
+     * We are looking for: "lynk", "link", "l nk", "l(nk"
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for different variations of word "link"
      */
     public Pattern findDifferentSpellingsOfLink() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find phone number. For example: 555-555-5555
+     * A Pattern that finds phone numbers.
+     * For example: "555-555-5555"
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for phone numbers
      */
     public Pattern findSimplePhoneNumber() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * can find numbers with following requirements:
+     * A Pattern that finds numbers with following requirements:
      *  - inside the number can be only digits from 0 to 5
      *  - length 3
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for numbers with length 3 and digits from 0 to 5 in the middle
      */
     public Pattern findNumbersFromZeroToFiveWithLengthThree() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find all words in text that have length 5
+     * A Pattern that finds all words in text that have length 5
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for the words that have length 5
      */
     public Pattern findAllWordsWithFiveLength() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find words and numbers with following constraints:
+     * A Pattern that finds words and numbers with following constraints:
      *  - not shorter than two symbols
      *  - not longer than three symbols
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for words and numbers that not shorter 2 and not longer 3
      */
     public Pattern findAllLettersAndDigitsWithLengthThree() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find all words that begin with capital letter
+     * A Pattern that finds all words that begin with capital letter
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for the words that begin with capital letter
      */
     public Pattern findAllWordsWhichBeginWithCapitalLetter() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find only the following abbreviation:
+     * A Pattern that finds only the following abbreviation:
      *  - AK, AL, AR, AZ, CA, CO, CT, PR, PA, PD
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for the abbreviations above
      */
     public Pattern findAbbreviation() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find all open braces
+     * A Pattern that finds all open braces
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for all open braces
      */
     public Pattern findAllOpenBraces() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find everything inside []
+     * A Pattern that finds everything inside []
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for everything inside []
      */
     public Pattern findOnlyResources() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find all http links inside ()
+     * A Pattern that finds all https links in note.txt
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for all https links in note.txt
      */
     public Pattern findOnlyLinksInNote() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * all http links
+     * A Pattern that finds all http links in nasa.json
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for all http links in nasa.json
      */
     public Pattern findOnlyLinksInJson() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find all .com, .net and .edu emails
+     * A Pattern that finds all .com, .net and .edu emails
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for all .com, .net and .edu emails
      */
     public Pattern findAllEmails() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * can find the following examples of phone numbers:
+     * A Pattern that finds the following examples of phone numbers:
      *  -  555-555-5555
      *  -  555.555.5555
      *  -  (555)555-5555
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for phone numbers patterns above
      */
     public Pattern findAllPatternsForPhoneNumbers() {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Create Pattern that accepts String with regex inside and can
-     * find only duplicates
+     * A Pattern that finds only duplicates
      *
-     * @return Pattern with regex expression
+     * @return a pattern that looks for duplicates
      */
     public Pattern findOnlyDuplicates() {
         throw new ExerciseNotCompletedException();
@@ -265,4 +249,6 @@ public class CrazyRegex {
     public String insertLinksAndResourcesIntoHref(String links) {
         throw new ExerciseNotCompletedException();
     }
+
+
 }
