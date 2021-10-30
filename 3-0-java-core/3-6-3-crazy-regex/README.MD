@@ -1,7 +1,11 @@
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Crazy Regex
 
-### Objectives
+### Pre-conditions ❗
 You're supposed to know how to work regex and be able to build Patterns and Matchers
+
+### Objectives
+* **build Patterns to extract** necessary parts from text ✅
+* **manipulate** extracted text with **Matcher** object ✅
 
 ### Regular expressions - sequence of characters that define a search pattern for text
 
