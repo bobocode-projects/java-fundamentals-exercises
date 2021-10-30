@@ -114,7 +114,7 @@ public class CrazyRegexTest {
     void findAllLettersAndDigitsWithLengthThree() {
         String result = regexChecker(crazyRegex.findAllLettersAndDigitsWithLengthThree(), text);
         assertThat(result).isEqualTo("\nThe\nof\nthe\nand\nthe\nnot\nThe\nis\ndon\nyou\nnk\nnk\nThe\nCA\nAK\nPA\n412" +
-                "\n555\ncom\n412\n555\n412\n555\n646\n555\nof\ncom\nnet\nor\nnyu\nedu\n1Z\naaa\nOf\ncom\ncom\nwww\ncom" +
+                "\n555\ncom\n412\n555\n412\n555\n646\n555\nof\ncom\nnet\nor\nnyu\nedu\n1Z\naaa\nOf\nwww\ncom\ncom\nwww\ncom" +
                 "\nis\nis\nam\nnot\nnot\nwhy\nwhy\nam\nok\ncat\ncat\ndog\ndog");
     }
 
@@ -144,15 +144,14 @@ public class CrazyRegexTest {
     @Order(16)
     void findOnlyResources() {
         String result = regexChecker(crazyRegex.findOnlyResources(), text);
-        assertThat(result).isEqualTo("\n[Google]\n[StackOverflow]\n[Youtube]");
+        assertThat(result).isEqualTo("\nGoogle\nStackOverflow\nYoutube");
     }
 
     @Test
     @Order(17)
     void findOnlyLinksInNote() {
         String result = regexChecker(crazyRegex.findOnlyLinksInNote(), text);
-        assertThat(result).isEqualTo("\n(https://google.com)\n(https://stackoverflow.com)" +
-                "\n(https://www.youtube.com)");
+        assertThat(result).isEqualTo("\nhttps://www.google.com\nhttps://stackoverflow.com\nhttps://www.youtube.com");
     }
 
     @Test
@@ -160,9 +159,9 @@ public class CrazyRegexTest {
     void findOnlyLinksInJson() {
         String result = regexChecker(crazyRegex.findOnlyLinksInJson(), json);
         assertThat(result).isEqualTo(
-                "\nhttp://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FLB_486265257EDR_F0481570FHAZ00323M_.JPG\",\n" +
-                        "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FRB_486265257EDR_F0481570FHAZ00323M_.JPG\",\n" +
-                        "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/rcam/RLB_486265291EDR_F0481570RHAZ00323M_.JPG\","
+                "\nhttp://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FLB_486265257EDR_F0481570FHAZ00323M_.JPG\n" +
+                        "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FRB_486265257EDR_F0481570FHAZ00323M_.JPG\n" +
+                        "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/rcam/RLB_486265291EDR_F0481570RHAZ00323M_.JPG"
         );
     }
 
