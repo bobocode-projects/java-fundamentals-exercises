@@ -252,6 +252,4 @@ public class CrazyRegex {
     public String insertLinksAndResourcesIntoHref(String links) {
         throw new ExerciseNotCompletedException();
     }
-
-
 }
