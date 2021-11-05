@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
  * {@link CrazyRegex} is an exercise class. Each method returns Pattern class which
  * should be created using regex expression. Every method that is not implemented yet
  * throws {@link ExerciseNotCompletedException}
+ * @author Andriy Paliychuk
  * TODO: remove exception and implement each method of this class using java.util.regex.Pattern
  */
 public class CrazyRegex {
