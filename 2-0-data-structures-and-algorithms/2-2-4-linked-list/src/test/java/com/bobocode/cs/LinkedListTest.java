@@ -2,7 +2,10 @@ package com.bobocode.cs;
 
 
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -14,17 +17,33 @@ import java.util.function.Predicate;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
+/**
+ * A reflection-based test class for {@link LinkedList}.
+ * <p>
+ * PLEASE NOTE: we use Reflection API only for learning purposes. It should NOT be used for production tests.
+ *
+ * @author Serhii Hryhus
+ * @author Taras Boychuk
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LinkedListTest {
+    private static final Predicate<Field> NODE_FIELD = field ->
+            field.getType().getSimpleName().equals("Node");
 
-    private static final Predicate<Field> NODE_FIELD = field -> field.getType().getSimpleName().equals("Node");
-    private static final Predicate<Field> HEAD_NODE_FIELD = field -> field.getType().getSimpleName().equals("Node")
-            & (field.getName().contains("head") | field.getName().contains("first"));
-    private static final Predicate<Field> TAIL_NODE_FIELD = field -> field.getType().getSimpleName().equals("Node")
-            & (field.getName().equals("tail") | field.getName().contains("last"));
-    private static final Predicate<Field> SIZE_FIELD = field -> field.getName().equals("size");
-    private static final Predicate<Field> ELEMENT_FIELD = field -> field.getGenericType().getTypeName().equals("T")
-            & (field.getName().contains("elem") | field.getName().contains("value") | field.getName().contains("item"));
+    private static final Predicate<Field> HEAD_NODE_FIELD = field ->
+            field.getType().getSimpleName().equals("Node")
+            && (field.getName().contains("head") || field.getName().contains("first"));
+
+    private static final Predicate<Field> TAIL_NODE_FIELD = field ->
+            field.getType().getSimpleName().equals("Node")
+            && (field.getName().equals("tail") || field.getName().contains("last"));
+
+    private static final Predicate<Field> SIZE_FIELD = field ->
+            field.getName().equals("size");
+
+    private static final Predicate<Field> ELEMENT_FIELD = field ->
+            field.getGenericType().getTypeName().equals("T")
+            && (field.getName().contains("elem") || field.getName().contains("value") || field.getName().contains("item"));
 
     private LinkedList<Integer> intList = new LinkedList<>();
 
@@ -557,7 +576,8 @@ public class LinkedListTest {
         return nodeObject;
     }
 
-    private Object createNodeByConstructorWithoutParameters(int element, Constructor<?> constructor) throws InstantiationException, IllegalAccessException, java.lang.reflect.InvocationTargetException {
+    @SneakyThrows
+    private Object createNodeByConstructorWithoutParameters(int element, Constructor<?> constructor) {
         Object nodeObject;
         nodeObject = constructor.newInstance();
         Field nodeElement = getAccessibleFieldByPredicate(nodeObject, ELEMENT_FIELD);

@@ -14,6 +14,11 @@ import java.util.function.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * A test class for {@link CrazyLambdas}.
+ *
+ * @author Taras Boychuk
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CrazyLambdasTest {
 

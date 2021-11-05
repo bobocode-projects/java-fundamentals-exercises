@@ -1,5 +1,13 @@
 package com.bobocode.fp;
 
+/**
+ * An util class that provides a factory method for creating an instance of a {@link FunctionMap} filled with a list
+ * of functions.
+ * <p>
+ * todo: implement a method and verify it by running {@link FunctionsTest}
+ *
+ * @author Taras Boychuk
+ */
 public class Functions {
     /**
      * A static factory method that creates an integer function map with basic functions:
@@ -14,7 +22,7 @@ public class Functions {
     public static FunctionMap<Integer, Integer> intFunctionMap() {
         FunctionMap<Integer, Integer> intFunctionMap = new FunctionMap<>();
 
-        // todo: add simple functions to the function map (abs, sgn, increment, decrement, square)
+        // todo: according to the javadoc add functions using lambda expression
 
         return intFunctionMap;
     }

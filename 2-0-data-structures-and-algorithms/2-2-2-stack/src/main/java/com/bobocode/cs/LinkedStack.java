@@ -8,6 +8,8 @@ import com.bobocode.util.ExerciseNotCompletedException;
  * A node is implemented as inner static class {@link Node<T>}.
  *
  * @param <T> generic type parameter
+ * @author Taras Boychuk
+ * @author Serhii Hryhus
  */
 public class LinkedStack<T> implements Stack<T> {
 

@@ -12,6 +12,8 @@ import java.util.stream.IntStream;
  * {@link java.util.stream.IntStream} of prime numbers. That stream is used in all public methods on this class.
  * <p>
  * See {@link OOSumOfPrimes} for a reference
+ *
+ * @author Taras Boychuk
  */
 public class PrimeNumbers {
     private PrimeNumbers() {

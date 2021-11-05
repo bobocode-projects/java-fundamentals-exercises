@@ -5,6 +5,8 @@ package com.bobocode.fp;
  * Please note that in order to perform this calculation in OOP-style we have to use mutable variables
  * (e.g. sumOfPrimes, i, primes). Implementing the same functionality in a functional style using Steam API and lambdas,
  * you will not create and/or modify variables.
+ *
+ * @author Taras Boychuk
  */
 public class OOSumOfPrimes {
     public static void main(String[] args) {

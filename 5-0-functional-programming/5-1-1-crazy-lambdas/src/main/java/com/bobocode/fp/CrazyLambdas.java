@@ -12,6 +12,8 @@ import java.util.function.*;
  * {@link ExerciseNotCompletedException}.
  * <p>
  * TODO: remove exception and implement each method of this class using lambda or method reference
+ *
+ * @author Taras Boychuk
  */
 public class CrazyLambdas {
 

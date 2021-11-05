@@ -9,6 +9,11 @@ import org.junit.jupiter.api.TestMethodOrder;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
+/**
+ * A test class for {@link SumOfSquares}
+ *
+ * @author Taras Boychuk
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SumOfSquaresTest {
 
@@ -48,6 +53,6 @@ class SumOfSquaresTest {
     @Order(5)
     void calculateWithInvalidRange() {
         assertThatExceptionOfType(InvalidRangeException.class)
-                .isThrownBy(()-> SumOfSquares.calculateSumOfSquaresInRange(4, 1));
+                .isThrownBy(() -> SumOfSquares.calculateSumOfSquaresInRange(4, 1));
     }
 }

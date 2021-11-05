@@ -14,6 +14,8 @@ import java.util.*;
  * {@link ExerciseNotCompletedException}.
  * <p>
  * TODO: remove exception throwing and implement each method using Stream API
+ *
+ * @author Taras Boychuk
  */
 @AllArgsConstructor
 public class CrazyStreams {
@@ -168,7 +170,7 @@ public class CrazyStreams {
 
     /**
      * Returns a {@link Map} where key is a letter {@link Character}, and value is a number of its occurrences ignoring
-     * case, in all {@link Account#firstName} and {@link Account#lastName} that are equal or longer than nameLengthBound. 
+     * case, in all {@link Account#firstName} and {@link Account#lastName} that are equal or longer than nameLengthBound.
      * Inside the map, all letters should be stored in lower case.
      *
      * @return a map where key is a letter and value is its count ignoring case in all first and last names

@@ -18,8 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The helper method of this test class do not use Stream API intentionally. You should try to find a stream-based
- * solutions for {@link CrazyStreams} by yourself.
+ * A test class for {@link CrazyStreams}.
+ * <p>
+ * Please note that the helper methods of this test class do not use Stream API intentionally. You should try to find
+ * a stream-based solutions for {@link CrazyStreams} by yourself.
+ *
+ * @author Taras Boychuk
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CrazyStreamsTest {

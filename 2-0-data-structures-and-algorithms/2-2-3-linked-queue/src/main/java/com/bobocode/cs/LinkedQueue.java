@@ -8,6 +8,8 @@ import com.bobocode.util.ExerciseNotCompletedException;
  * in a constant time, it keeps to references to the head and tail of the queue.
  *
  * @param <T> a generic parameter
+ * @author Taras Boychuk
+ * @author Ivan Virchenko
  */
 public class LinkedQueue<T> implements Queue<T> {
 

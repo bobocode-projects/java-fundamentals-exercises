@@ -13,18 +13,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * A reflection-based test class for {@link LinkedStack}.
+ * <p>
+ * PLEASE NOTE: we use Reflection API only for learning purposes. It should NOT be used for production tests.
+ *
+ * @author Ivan Virchenko
+ * @author Taras Boychuk
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class StackTest {
-
+class LinkedStackTest {
     private static final String PROPER_CLASSNAME = "Node";
 
-    private static final Predicate<Field> NODE_FIELD_PREDICATE = field -> field.getType().getSimpleName().equals(PROPER_CLASSNAME)
-            && field.getName().toLowerCase().contains("head") || field.getName().toLowerCase().contains("first");
-    private static final Predicate<Field> SIZE_FIELD_PREDICATE = field -> field.getName().toLowerCase().contains("size");
-    private static final Predicate<Field> NODE_ELEMENT_FIELD = field -> field.getName().toLowerCase().contains("element")
+    private static final Predicate<Field> NODE_FIELD_PREDICATE = field ->
+            field.getType().getSimpleName().equals(PROPER_CLASSNAME)
+            && field.getName().toLowerCase().contains("head")
+            || field.getName().toLowerCase().contains("first");
+
+    private static final Predicate<Field> SIZE_FIELD_PREDICATE = field ->
+            field.getName().toLowerCase().contains("size");
+
+    private static final Predicate<Field> NODE_ELEMENT_FIELD_PREDICATE = field ->
+            field.getName().toLowerCase().contains("element")
             || field.getName().toLowerCase().contains("value")
             || field.getName().toLowerCase().contains("item");
-    private static final Predicate<Field> NODE_NEXT_FIELD = field -> field.getType().getSimpleName().equals(PROPER_CLASSNAME)
+
+    private static final Predicate<Field> NODE_NEXT_FIELD_PREDICATE = field ->
+            field.getType().getSimpleName().equals(PROPER_CLASSNAME)
             && field.getName().toLowerCase().contains("next");
 
     private Stack<Integer> intStack = new LinkedStack<>();
@@ -77,7 +92,7 @@ class StackTest {
         var fields = getInnerClass().getDeclaredFields();
 
         var elementField = Arrays.stream(fields)
-                .filter(NODE_ELEMENT_FIELD)
+                .filter(NODE_ELEMENT_FIELD_PREDICATE)
                 .findAny()
                 .orElseThrow();
         var nodeTypeParameter = getInnerClass().getTypeParameters()[0];
@@ -93,7 +108,7 @@ class StackTest {
         Field[] fields = getInnerClass().getDeclaredFields();
 
         boolean hasNext = Arrays.stream(fields)
-                .anyMatch(NODE_NEXT_FIELD);
+                .anyMatch(NODE_NEXT_FIELD_PREDICATE);
 
         assertThat(hasNext).isTrue();
     }
@@ -294,7 +309,7 @@ class StackTest {
 
     private Field getNodeElementField(Object node) {
         Field fieldElement = Arrays.stream(node.getClass().getDeclaredFields())
-                .filter(NODE_ELEMENT_FIELD)
+                .filter(NODE_ELEMENT_FIELD_PREDICATE)
                 .findAny()
                 .orElseThrow();
         fieldElement.setAccessible(true);
@@ -303,7 +318,7 @@ class StackTest {
 
     private Field getNodeNextField(Object node) {
         Field field = Arrays.stream(node.getClass().getDeclaredFields())
-                .filter(NODE_NEXT_FIELD)
+                .filter(NODE_NEXT_FIELD_PREDICATE)
                 .findAny()
                 .orElseThrow();
         field.setAccessible(true);

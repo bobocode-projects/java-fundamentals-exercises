@@ -1,12 +1,12 @@
 package com.bobocode.fp;
 
 import com.bobocode.data.Accounts;
-import com.bobocode.model.Account;
-import com.bobocode.model.CreditAccount;
 import com.bobocode.fp.exception.AccountNotFoundException;
 import com.bobocode.fp.function.AccountProvider;
 import com.bobocode.fp.function.AccountService;
 import com.bobocode.fp.function.CreditAccountProvider;
+import com.bobocode.model.Account;
+import com.bobocode.model.CreditAccount;
 import com.bobocode.util.ExerciseNotCompletedException;
 
 import javax.annotation.Nonnull;
@@ -22,6 +22,8 @@ import java.util.OptionalDouble;
  * {@link ExerciseNotCompletedException}.
  * <p>
  * TODO: remove exception and implement each method of this class using Optional API
+ *
+ * @author Taras Boychuk
  */
 public class CrazyOptionals {
 

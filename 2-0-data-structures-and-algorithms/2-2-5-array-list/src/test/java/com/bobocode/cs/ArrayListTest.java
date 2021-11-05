@@ -12,6 +12,14 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
+/**
+ * A reflection-based test class for {@link ArrayList}.
+ * <p>
+ * PLEASE NOTE: we use Reflection API only for learning purposes. It should NOT be used for production tests.
+ *
+ * @author Serhii Hryhus
+ * @author Ivan Virchenko
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ArrayListTest {
 
