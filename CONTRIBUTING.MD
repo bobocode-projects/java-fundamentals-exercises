@@ -40,24 +40,28 @@ Imagine you need to add a new `methodX()` to the exercise. Here's the list of ac
 9. Commit these changes to the `solution branch`
 10. Push the changes
 
-**If everything is fine, then you can create two pull requets:**
+**If everything is fine, then you can create two pull requests:**
 
 11. Create a pull request from the `exercise branch` to the `main`
 12. Create a pull request from the `solution branch` to the `completed`
 
 ### Branching naming convention 
-A branch name should start from the ticket or issue number if one is avaibale, following the short changes summary. Like this:
+A branch name should start from the ticket or issue number if one is available, following the short changes summary. Like this:
 
 * ```101-insane-lambdas-exercise```
 
-In case the branch targes `completed` it should has a corresponding suffix. Like this:
+In case the branch targets `completed` it should have a corresponding suffix. Like this:
 
 * ```101-insane-lambdas-exercise-completed```
 
 ### Commits
 * In case you are working on the JIRA ticket, or the GitHub issue, please make sure that you always add its full number to every commit message
-* Please provide a desctiptive messages
-* Use squash and rebease to avoid redudntant commits
+* Please provide a descriptive messages
+* Use squash and rebase to avoid redundant commits
+
+### Authors
+* if you created a new exercise, please specify your name in the javadoc as @author
+* if you did a substantial change in the class or added new tests, please add you name to the list of authors
 
 
 ## Submitting an issue

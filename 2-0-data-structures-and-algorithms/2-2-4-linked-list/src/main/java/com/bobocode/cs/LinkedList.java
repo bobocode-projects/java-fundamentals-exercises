@@ -9,6 +9,8 @@ import java.util.stream.Stream;
  * inner static class {@link Node<T>}.
  *
  * @param <T> generic type parameter
+ * @author Taras Boychuk
+ * @author Serhii Hryhus
  */
 public class LinkedList<T> implements List<T> {
     private Node<T> first;

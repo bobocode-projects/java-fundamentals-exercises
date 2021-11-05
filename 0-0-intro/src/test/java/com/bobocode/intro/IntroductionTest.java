@@ -18,6 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * PLEASE NOTE:
  * - annotation @{@link Order} is used to help you to understand which method should be implemented first.
  * - annotation @{@link DisplayName} is used to provide you more detailed instructions.
+ *
+ * @author Taras Boychuk
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class IntroductionTest {

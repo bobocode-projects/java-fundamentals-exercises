@@ -13,6 +13,8 @@ import java.util.Base64;
  * <p>
  * Throughout the course you will need to implement hundreds of methods. And this is a simple example of how it's all
  * organized. You read the Java Doc, implement a method and run the test.
+ *
+ * @author Taras Boychuk
  */
 public class Introduction {
     /**

@@ -2,6 +2,14 @@ package com.bobocode.fp;
 
 import static java.lang.Math.abs;
 
+/**
+ * An util class that provides a factory method for creating an instance of a {@link FunctionMap} filled with a list
+ * of functions.
+ * <p>
+ * todo: implement a method and verify it by running {@link FunctionsTest}
+ *
+ * @author Taras Boychuk
+ */
 public class Functions {
     /**
      * A static factory method that creates an integer function map with basic functions:

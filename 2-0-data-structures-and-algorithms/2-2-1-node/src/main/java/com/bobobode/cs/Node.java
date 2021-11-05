@@ -6,6 +6,7 @@ package com.bobobode.cs;
  * objects and build more comprehensive data structures on top of those liked nodes.
  *
  * @param <T> a generic type T
+ * @author Taras Boychuk
  */
 public class Node<T> {
     T element;

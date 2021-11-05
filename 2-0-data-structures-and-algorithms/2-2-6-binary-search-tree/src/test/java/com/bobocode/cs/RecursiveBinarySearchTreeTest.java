@@ -17,27 +17,41 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+/**
+ * A reflection-based test class for {@link ArrayList}.
+ * <p>
+ * PLEASE NOTE: we use Reflection API only for learning purposes. It should NOT be used for production tests.
+ *
+ * @author Ivan Virchenko
+ * @author Maksym Stasiuk
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class RecursiveBinarySearchTreeTest {
-
-    private static final Predicate<Field> SIZE_FIELD = field -> field.getName().toLowerCase().contains("size")
-            || field.getName().toLowerCase().contains("length");
-    private static final Predicate<Field> NODE_FIELD = field -> field.getType().getSimpleName().equals("Node");
+    private static final Predicate<Field> SIZE_FIELD = field ->
+            field.getName().toLowerCase().contains("size") || field.getName().toLowerCase().contains("length");
+    
+    private static final Predicate<Field> NODE_FIELD = field ->
+            field.getType().getSimpleName().equals("Node");
+    
     private static final Predicate<Field> ELEMENT_FIELD = field ->
             field.getName().toLowerCase().contains("element")
-                    || field.getName().toLowerCase().contains("item")
-                    || field.getName().toLowerCase().contains("value");
+            || field.getName().toLowerCase().contains("item")
+            || field.getName().toLowerCase().contains("value");
+    
     private static final Predicate<Field> LEFT_FIELD = field ->
             field.getName().toLowerCase().contains("left")
-                    && field.getType().getSimpleName().equals("Node");
+            && field.getType().getSimpleName().equals("Node");
+    
     private static final Predicate<Field> RIGHT_FIELD = field ->
             field.getName().toLowerCase().contains("right")
-                    && field.getType().getSimpleName().equals("Node");
+            && field.getType().getSimpleName().equals("Node");
 
     private static final Integer[] someElements = {10, 9, 11, 8, 12, 7};
+    
     private BinarySearchTree<Integer> tree = new RecursiveBinarySearchTree<>();
 
     @Test

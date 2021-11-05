@@ -16,6 +16,8 @@ import java.util.function.Predicate;
  * Hint: in some cases you will need to refactor the code, like replace {@link Object} with a generic type. In order
  * cases you will need to add new fields, create new classes, or add new methods. Always try to read java doc and update
  * the code according to it.
+ *
+ * @author Taras Boychuk
  */
 public class CrazyGenerics {
     /**

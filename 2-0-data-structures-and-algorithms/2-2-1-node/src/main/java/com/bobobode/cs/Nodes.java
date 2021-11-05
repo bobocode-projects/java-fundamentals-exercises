@@ -2,6 +2,8 @@ package com.bobobode.cs;
 
 /**
  * A class that consists of static methods only and provides util methods for {@link Node}.
+ *
+ * @author Taras Boychuk
  */
 public class Nodes {
     private Nodes() {

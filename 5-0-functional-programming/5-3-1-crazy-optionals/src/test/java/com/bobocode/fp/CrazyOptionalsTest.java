@@ -19,6 +19,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * A test class for {@link CrazyOptionals}.
+ *
+ * @author Taras Boychuk
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CrazyOptionalsTest {
 

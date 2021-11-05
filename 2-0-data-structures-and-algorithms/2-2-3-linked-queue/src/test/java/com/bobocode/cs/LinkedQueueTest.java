@@ -14,35 +14,42 @@ import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * A reflection-based test class for {@link LinkedQueue}.
+ * <p>
+ * PLEASE NOTE: we use Reflection API only for learning purposes. It should NOT be used for production tests.
+ *
+ * @author Victor Kuzma
+ * @author Taras Boychuk
+ * @author Ivan Virchenko
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LinkedQueueTest {
     private static final String NODE_NAME = "Node";
     private static final String SIZE_NAME = "size";
 
-    private static final Predicate<Field> NODE_FIELD = field -> field.getType().getSimpleName().equals(NODE_NAME)
-            && (field.getName().contains("next"));
+    private static final Predicate<Field> NODE_FIELD = field ->
+            field.getType().getSimpleName().equals(NODE_NAME) && (field.getName().contains("next"));
 
-    private static final Predicate<Field> ELEMENT_FIELD = field -> field.getGenericType().getTypeName().equals("T")
-            && (field.getName().contains("elem")
-            || field.getName().contains("value")
-            || field.getName().contains("item"));
+    private static final Predicate<Field> ELEMENT_FIELD = field ->
+            field.getGenericType().getTypeName().equals("T")
+            && (field.getName().contains("elem") || field.getName().contains("value") || field.getName().contains("item"));
 
-    private static final Predicate<Field> NEXT_FIELD = field -> field.getGenericType().getTypeName().endsWith("Node<T>")
-            && (field.getName().contains("next"));
+    private static final Predicate<Field> NEXT_FIELD = field ->
+            field.getGenericType().getTypeName().endsWith("Node<T>") && (field.getName().contains("next"));
 
-    private static final Predicate<Field> SIZE_FIELD = field -> field.getType().getSimpleName().equals("int")
-            && (field.getName().equals(SIZE_NAME));
+    private static final Predicate<Field> SIZE_FIELD = field ->
+            field.getType().getSimpleName().equals("int") && (field.getName().equals(SIZE_NAME));
 
-    private static final Predicate<Field> HEAD_FIELD = field -> field.getType().getSimpleName().equals(NODE_NAME)
-            && (field.getName().contains("head")
-            || field.getName().contains("first"));
+    private static final Predicate<Field> HEAD_FIELD = field ->
+            field.getType().getSimpleName().equals(NODE_NAME)
+            && (field.getName().contains("head") || field.getName().contains("first"));
 
-    private static final Predicate<Field> TAIL_FIELD = field -> field.getType().getSimpleName().equals(NODE_NAME)
-            && (field.getName().contains("tail")
-            || field.getName().contains("last"));
+    private static final Predicate<Field> TAIL_FIELD = field ->
+            field.getType().getSimpleName().equals(NODE_NAME)
+            && (field.getName().contains("tail") || field.getName().contains("last"));
 
     private Queue<Integer> integerQueue = new LinkedQueue<>();
-
 
     @Test
     @Order(1)

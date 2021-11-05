@@ -6,6 +6,8 @@ package com.bobocode.cs;
  * custom linked nodes)
  *
  * @param <T> type parameter
+ * @author Taras Boychuk
+ * @author Serhii Hryhus
  */
 public interface Stack<T> {
 

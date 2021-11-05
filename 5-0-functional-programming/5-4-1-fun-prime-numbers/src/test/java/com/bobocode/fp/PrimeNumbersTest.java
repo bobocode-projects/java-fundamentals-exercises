@@ -18,6 +18,11 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+/**
+ * A test class for {@link PrimeNumbers}.
+ *
+ * @author Taras Boychuk
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PrimeNumbersTest {
 

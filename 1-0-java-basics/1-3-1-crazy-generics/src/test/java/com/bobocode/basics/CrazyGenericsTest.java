@@ -26,8 +26,11 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.Mockito.when;
 
 /**
- * This test class uses Reflection API only for learning purposes. It should NOT be used as an example of how to write
- * production tests.
+ * A reflection-based test class for {@link CrazyGenerics}.
+ * <p>
+ * PLEASE NOTE: we use Reflection API only for learning purposes. It should NOT be used for production tests.
+ *
+ * @author Taras Boychuk
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CrazyGenericsTest {
