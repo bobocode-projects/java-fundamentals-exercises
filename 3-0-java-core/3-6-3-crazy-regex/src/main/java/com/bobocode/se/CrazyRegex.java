@@ -8,8 +8,10 @@ import java.util.regex.Pattern;
  * {@link CrazyRegex} is an exercise class. Each method returns Pattern class which
  * should be created using regex expression. Every method that is not implemented yet
  * throws {@link ExerciseNotCompletedException}
+ * <p>
+ * TODO: remove exception and implement each method of this class using {@link Pattern}
+ *
  * @author Andriy Paliychuk
- * TODO: remove exception and implement each method of this class using java.util.regex.Pattern
  */
 public class CrazyRegex {
 
@@ -23,7 +25,7 @@ public class CrazyRegex {
     }
 
     /**
-     *  A Pattern that finds first word in text
+     * A Pattern that finds first word in text
      *
      * @return a pattern that looks for the first word in text
      */
@@ -103,8 +105,8 @@ public class CrazyRegex {
 
     /**
      * A Pattern that finds numbers with following requirements:
-     *  - inside the number can be only digits from 0 to 5
-     *  - length 3
+     * - inside the number can be only digits from 0 to 5
+     * - length 3
      *
      * @return a pattern that looks for numbers with length 3 and digits from 0 to 5 in the middle
      */
@@ -123,8 +125,8 @@ public class CrazyRegex {
 
     /**
      * A Pattern that finds words and numbers with following constraints:
-     *  - not shorter than two symbols
-     *  - not longer than three symbols
+     * - not shorter than two symbols
+     * - not longer than three symbols
      *
      * @return a pattern that looks for words and numbers that not shorter 2 and not longer 3
      */
@@ -143,7 +145,7 @@ public class CrazyRegex {
 
     /**
      * A Pattern that finds only the following abbreviation:
-     *  - AK, AL, AR, AZ, CA, CO, CT, PR, PA, PD
+     * - AK, AL, AR, AZ, CA, CO, CT, PR, PA, PD
      *
      * @return a pattern that looks for the abbreviations above
      */
@@ -198,9 +200,9 @@ public class CrazyRegex {
 
     /**
      * A Pattern that finds the following examples of phone numbers:
-     *  -  555-555-5555
-     *  -  555.555.5555
-     *  -  (555)555-5555
+     * -  555-555-5555
+     * -  555.555.5555
+     * -  (555)555-5555
      *
      * @return a pattern that looks for phone numbers patterns above
      */
@@ -220,7 +222,7 @@ public class CrazyRegex {
     /**
      * You have a text where all names recorded as first name, last name.
      * Create matcher and use method replaceAll to record that names as:
-     *  - last name first name
+     * - last name first name
      *
      * @return String where all names recorded as last name first name
      */
@@ -231,7 +233,7 @@ public class CrazyRegex {
     /**
      * You have a text with phone numbers.
      * Create matcher and use method replaceAll to replace last digits:
-     *  -  555-XXX-XXXX
+     * -  555-XXX-XXXX
      *
      * @return String where in all phone numbers last 7 digits replaced to X
      */
@@ -241,9 +243,9 @@ public class CrazyRegex {
 
     /**
      * You have a text with resources and links to those resources:
-     *  - [Bobocode](https://www.bobocode.com)
+     * - [Bobocode](https://www.bobocode.com)
      * Create matcher and use method replaceAll to get the following result:
-     *  - <a href="https://www.bobocode.com">Bobocode</a>
+     * - <a href="https://www.bobocode.com">Bobocode</a>
      *
      * @return String where all resources embraced in href
      */
