@@ -11,11 +11,14 @@ import java.util.function.Predicate;
  * {@link CrazyGenerics} is an exercise class. It consists of classes, interfaces and methods that should be updated
  * using generics.
  * <p>
- * todo: go step by step from top to bottom. Read the java doc, write code and run CrazyGenericsTest to verify your impl
+ * TODO: go step by step from top to bottom. Read the java doc, write code and run CrazyGenericsTest to verify your impl
  * <p>
  * Hint: in some cases you will need to refactor the code, like replace {@link Object} with a generic type. In order
  * cases you will need to add new fields, create new classes, or add new methods. Always try to read java doc and update
  * the code according to it.
+ * <p>
+ * TODO: if you find this exercise valuable and you want to get more like it, <a href="https://www.patreon.com/bobocode">
+ *     please support us on Patreon</a>
  *
  * @author Taras Boychuk
  */

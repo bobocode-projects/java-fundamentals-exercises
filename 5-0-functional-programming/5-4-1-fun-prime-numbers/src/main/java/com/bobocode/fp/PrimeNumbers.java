@@ -13,6 +13,10 @@ import static java.util.stream.Collectors.toList;
  * {@link java.util.stream.IntStream} of prime numbers. That stream is used in all public methods on this class.
  * <p>
  * See {@link OOSumOfPrimes} for a reference
+ * TODO: implement each method according to the javadoc and verify it by running {@link PrimeNumbersTest}
+ * <p>
+ * TODO: if you find this exercise valuable and you want to get more like it, <a href="https://www.patreon.com/bobocode">
+ *     please support us on Patreon</a>
  *
  * @author Taras Boychuk
  */
