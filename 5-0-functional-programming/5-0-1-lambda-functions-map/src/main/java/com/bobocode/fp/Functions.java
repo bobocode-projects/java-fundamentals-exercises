@@ -4,11 +4,17 @@ package com.bobocode.fp;
  * An util class that provides a factory method for creating an instance of a {@link FunctionMap} filled with a list
  * of functions.
  * <p>
- * todo: implement a method and verify it by running {@link FunctionsTest}
+ * TODO: implement a method and verify it by running {@link FunctionsTest}
+ * <p>
+ * TODO: if you find this exercise valuable and you want to get more like it, <a href="https://www.patreon.com/bobocode"> 
+ *     please support us on Patreon</a>
  *
  * @author Taras Boychuk
  */
 public class Functions {
+    private Functions() {
+    }
+
     /**
      * A static factory method that creates an integer function map with basic functions:
      * - abs (absolute value)

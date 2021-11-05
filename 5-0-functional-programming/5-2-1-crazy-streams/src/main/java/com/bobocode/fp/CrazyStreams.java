@@ -14,6 +14,9 @@ import java.util.*;
  * {@link ExerciseNotCompletedException}.
  * <p>
  * TODO: remove exception throwing and implement each method using Stream API
+ * <p>
+ * TODO: if you find this exercise valuable and you want to get more like it, <a href="https://www.patreon.com/bobocode">
+ *      please support us on Patreon</a>
  *
  * @author Taras Boychuk
  */
