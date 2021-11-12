@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class HelloAnnotationsTest {
+public class HelloAnnotationsExerciseTest {
 
     @Test
     @Order(1)
