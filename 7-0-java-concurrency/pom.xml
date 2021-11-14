@@ -7,6 +7,7 @@
     <modules>
         <module>7-0-0-hello-threads</module>
     </modules>
+
     <parent>
         <artifactId>java-fundamentals-course</artifactId>
         <groupId>com.bobocode</groupId>
@@ -18,4 +19,12 @@
         <maven.compile.targer>11</maven.compile.targer>
         <maven.compile.source>11</maven.compile.source>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bobocode</groupId>
+            <artifactId>java-fundamentals-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

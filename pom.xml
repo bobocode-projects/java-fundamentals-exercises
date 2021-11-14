@@ -23,10 +23,9 @@
         <module>4-0-object-oriented-programming</module>
         <module>5-0-functional-programming</module>
         <module>6-0-test-driven-development</module>
+        <module>7-0-java-concurrency</module>
         <module>java-fundamentals-util</module>
         <module>lesson-demo</module>
-        <module>7-0-java-concurrency</module>
-        <module>7-0-java-concurrency/7-0-0-hello-threads</module>
     </modules>
 
     <dependencies>
