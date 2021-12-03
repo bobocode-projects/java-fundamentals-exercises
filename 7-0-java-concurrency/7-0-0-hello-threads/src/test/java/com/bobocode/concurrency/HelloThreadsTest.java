@@ -5,11 +5,11 @@ import org.junit.jupiter.api.*;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static java.lang.Thread.State.RUNNABLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.Mockito.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class HelloThreadsTest {
@@ -54,7 +54,6 @@ class HelloThreadsTest {
     @Order(3)
     void getThreadName() {
         var thread = new Thread(() -> concurrentLinkedQueue.add(5), "Hello Thread");
-
         var name = HelloThreads.getThreadName(thread);
 
         assertThat(name).isEqualTo("Hello Thread");
@@ -74,31 +73,35 @@ class HelloThreadsTest {
     @SneakyThrows
     @Test
     @Order(5)
-    void runInNewThreadAndWaitForExecution() {
-        HelloThreads.runInNewThreadAndWaitForExecution(new Thread(() -> {
-            concurrentLinkedQueue.add(5);
-            assertThat(concurrentLinkedQueue).hasSize(0);
-        }));
+    void waitForThreadToComplete() {
+        var thread = mock(Thread.class);
+
+        HelloThreads.waitForThreadToComplete(thread);
 
         assertAll(
-            () -> assertThat(concurrentLinkedQueue).hasSize(1),
-            () -> assertThat(concurrentLinkedQueue.element().intValue()).isEqualTo(5)
+            () -> verify(thread, times(1)).start(),
+            () -> verify(thread, times(1)).join()
         );
     }
 
     @SneakyThrows
     @Test
     @Order(6)
-    void runInMultipleThreads() {
-        var threads = HelloThreads.runInMultipleThreads(
-            new Thread(() -> concurrentLinkedQueue.add(ThreadLocalRandom.current().nextInt(100))),
-            new Thread(() -> concurrentLinkedQueue.add(ThreadLocalRandom.current().nextInt(100))),
-            new Thread(() -> concurrentLinkedQueue.add(ThreadLocalRandom.current().nextInt(100)))
-        );
+    void getListThreads() {
+        var thread1 = mock(Thread.class);
+        var thread2 = mock(Thread.class);
+        var thread3 = mock(Thread.class);
+
+        var threads = HelloThreads.getListThreads(thread1, thread2, thread3);
 
         assertAll(
-            () -> assertThat(concurrentLinkedQueue).hasSize(3),
-            () -> assertThat(threads).hasSize(3)
+            () -> assertThat(threads).hasSize(3),
+            () -> verify(thread1, times(1)).start(),
+            () -> verify(thread1, times(1)).join(),
+            () -> verify(thread2, times(1)).start(),
+            () -> verify(thread2, times(1)).join(),
+            () -> verify(thread3, times(1)).start(),
+            () -> verify(thread3, times(1)).join()
         );
     }
 }

@@ -60,27 +60,29 @@ public class HelloThreads {
     }
 
     /**
-     * Receives a {@link Runnable} parameter that holds the logic and create new {@link Thread} instance bases on it,
-     * start and wait when it has completed
+     * Receives a {@link Thread} parameter created based on {@link Runnable},
+     * start and wait when thread completed
      *
-     * @param runnable - the code you want to run in new threads
+     * @param thread the code you want run
      */
     @SneakyThrows
-    public static void runInNewThreadAndWaitForExecution(Runnable runnable) {
+    public static void waitForThreadToComplete(Thread thread) {
         throw new ExerciseNotCompletedException();
     }
 
     /**
-     * Receives three {@link Runnable} parameters that holds the logic and creates three {@link Thread} instances based on it
-     * and return list of threads that are in progress
+     * Receives three {@link Thread} parameters created based on {@link Runnable}
+     * start all threads and wait when all threads completed.
+     * You should return {@link List} of threads that have already been completed
      *
-     * @param runnable1 the code you want to run in new thread
-     * @param runnable2 the code you want to run in new thread
-     * @param runnable3 the code you want to run in new thread
+     * @param thread1 the code you want run
+     * @param thread2 the code you want run
+     * @param thread3 the code you want run
+     *
      * @return the list of running threads
      */
     @SneakyThrows
-    public static List<Thread> runInMultipleThreads(Runnable runnable1, Runnable runnable2, Runnable runnable3) {
+    public static List<Thread> getListThreads(Thread thread1, Thread thread2, Thread thread3) {
         throw new ExerciseNotCompletedException();
     }
 }
