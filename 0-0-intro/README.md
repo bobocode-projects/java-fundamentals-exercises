@@ -26,3 +26,6 @@ _(we know it's silly, but we wanted to give you a simple example 😀)_
 * switch to branch `completed` and **see the correct implementation** of the exercise
 * [join the discussion](https://github.com/bobocode-projects/java-fundamentals-course/discussions) on the GitHub
 * contact us via info@bobocode.com
+
+##
+<div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>
