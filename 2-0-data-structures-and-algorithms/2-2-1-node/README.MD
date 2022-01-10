@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Node exercise :muscle:
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Node exercise 💪
 
 Build strong skill of creating and linking **nodes – building blocks** that are used in order to create **LinkedList**, **LinkedQueue** and other
 important data structures 💪
