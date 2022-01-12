@@ -22,8 +22,7 @@ regardless if you apply them to Integer, String or any other types.** So in orde
 types we need some form of type parametrization. Of course, we can use `Object` and store anything we want, but
 it is not safe. Using `Object` requires runtime casting which can cause runtime exceptions.
 
-##
-
+---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/Q5aEmF8E86fbZ4rXA)
 
