@@ -10,7 +10,7 @@ To verify your implementation, run `CrazyOptionalsTest.java`
   * [Stream API. Optional. Курс Enterprise Java <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/yt_icon_rgb.png" height=13/>](https://youtu.be/OD0hIs1cGmY)
 
 ### Exercise overview 🇺🇦
-[![Linked List](https://yt-embed.herokuapp.com/embed?v=FLHerCscKX8)](https://youtu.be/FLHerCscKX8)
+[![Linked List](https://yt-embed.herokuapp.com/embed?v=yyhD0QZGMRs)](https://youtu.be/yyhD0QZGMRs)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
