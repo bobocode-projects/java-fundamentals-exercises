@@ -11,9 +11,5 @@
 
     <artifactId>6-1-3-binary-search-tree</artifactId>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
 
 </project>

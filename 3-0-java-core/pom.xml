@@ -16,10 +16,6 @@
         <module>3-6-3-crazy-regex</module>
     </modules>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.source>11</maven.compiler.source>
-    </properties>
 
     <dependencies>
         <dependency>
