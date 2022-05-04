@@ -3,8 +3,8 @@ package com.bobocode.data;
 import com.bobocode.model.Account;
 import com.bobocode.model.CreditAccount;
 import com.bobocode.model.Sex;
-import io.codearte.jfairy.Fairy;
-import io.codearte.jfairy.producer.person.Person;
+import com.devskiller.jfairy.Fairy;
+import com.devskiller.jfairy.producer.person.Person;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -67,7 +67,7 @@ public class Accounts {
         account.setEmail(person.getEmail());
         account.setBirthday(LocalDate.of(
                 person.getDateOfBirth().getYear(),
-                person.getDateOfBirth().getMonthOfYear(),
+                person.getDateOfBirth().getMonth(),
                 person.getDateOfBirth().getDayOfMonth()));
         account.setSex(Sex.valueOf(person.getSex().name()));
     }

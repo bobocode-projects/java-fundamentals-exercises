@@ -11,9 +11,5 @@
 
     <artifactId>3-6-2-file-stats</artifactId>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
 
 </project>
