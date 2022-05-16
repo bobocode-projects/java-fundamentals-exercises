@@ -3,7 +3,8 @@ package com.bobocode;
 public class DemoApp {
     public static void main(String[] args) {
         var head = createLinkedList(4, 3, 9, 1);
-        printReversed(head);
+        printReversedRecursively(head);
+        printReversedUsingStack(head);
     }
 
     /**
@@ -27,7 +28,21 @@ public class DemoApp {
      * @param head the first node of the list
      * @param <T>  elements type
      */
-    public static <T> void printReversed(Node<T> head) {
+    public static <T> void printReversedRecursively(Node<T> head) {
+        throw new UnsupportedOperationException("This method should be implemented according to the javadoc"); // todo
+    }
+
+    /**
+     * Prints a list in a reserved order using a {@link java.util.Stack} instance. Please note that it should not change
+     * the list, just print its elements.
+     * <p>
+     * Imagine you have a list of elements 4,3,9,1 and the current head is 4. Then the outcome should be the following:
+     * 1 -> 9 -> 3 -> 4
+     *
+     * @param head the first node of the list
+     * @param <T>  elements type
+     */
+    public static <T> void printReversedUsingStack(Node<T> head) {
         throw new UnsupportedOperationException("This method should be implemented according to the javadoc"); // todo
     }
 }
