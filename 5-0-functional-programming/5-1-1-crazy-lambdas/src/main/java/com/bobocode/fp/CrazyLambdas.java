@@ -12,9 +12,9 @@ import java.util.function.*;
  * {@link ExerciseNotCompletedException}.
  * <p>
  * TODO: remove exception and implement each method of this class using lambda or method reference
+ * <p><p>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
  * <p>
- * TODO: if you find this exercise valuable and you want to get more like it,
- * <a href="https://www.patreon.com/bobocode">please support us on Patreon</a>
  *
  * @author Taras Boychuk
  */

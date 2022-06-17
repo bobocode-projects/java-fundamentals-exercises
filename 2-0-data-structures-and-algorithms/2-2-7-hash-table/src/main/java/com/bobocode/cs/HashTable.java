@@ -18,9 +18,12 @@ import com.bobocode.util.ExerciseNotCompletedException;
  * calling method resizeTable, or it will be done automatically once the table reach resize threshold.
  * <p>
  * The initial array size (initial capacity) is 8.
+ * <p><p>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <p>
  *
- * @param <K> - key type
- * @param <V> - value type
+ * @param <K> key type
+ * @param <V> value type
  * @author Taras Boychuk
  */
 public class HashTable<K, V> implements Map<K, V> {

@@ -5,6 +5,9 @@ import com.bobocode.util.ExerciseNotCompletedException;
 /**
  * {@link ArrayList} is an implementation of {@link List} interface. This resizable data structure
  * based on an array and is simplified version of {@link java.util.ArrayList}.
+ * <p><p>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <p>
  *
  * @author Serhii Hryhus
  */
