@@ -7,6 +7,9 @@ import java.util.stream.Stream;
 /**
  * {@link LinkedStack} is a stack implementation that is based on singly linked generic nodes.
  * A node is implemented as inner static class {@link Node<T>}.
+ * <p><p>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <p>
  *
  * @param <T> generic type parameter
  * @author Taras Boychuk
