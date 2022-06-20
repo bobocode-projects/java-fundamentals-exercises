@@ -47,13 +47,18 @@ public class HashTable<K, V> implements Map<K, V> {
     }
 
     /**
-     * Adds an element to the hash table. Does not support duplicate elements.
+     * Creates a mapping between provided key and value, and returns the old value. If there was no such key, it returns
+     * null. {@link HashTable} does not support duplicate keys, so if you put the same key it just overrides the value.
+     * <p>
+     * It uses calculateIndex method to find the corresponding array index. Please note, that even different keys can
+     * produce the same array index.
      *
-     * @param element
-     * @return true if it was added
+     * @param key
+     * @param value
+     * @return old value or null
      */
     @Override
-    public V put(K element, V value) {
+    public V put(K key, V value) {
         throw new ExerciseNotCompletedException(); // todo:
     }
 
