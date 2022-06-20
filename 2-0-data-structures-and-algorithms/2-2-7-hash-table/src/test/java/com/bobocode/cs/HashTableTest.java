@@ -470,7 +470,7 @@ class HashTableTest {
 
             String tableStr = hashTable.toString();
 
-            assertThat(expectedString).isEqualTo(tableStr);
+            assertThat(tableStr).isEqualTo(expectedString);
         }
 
     }
