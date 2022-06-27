@@ -3,15 +3,15 @@
 Thank you for taking the time to contribute to the open-source education! 👏
 
 Before moving forward, please **make sure that you understand what is an exercise and how this repository is organized.** The best place to learn about that is 
-[Introduction module](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction) 🤓
+[Introduction module](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction) 🤓
 
 ## Branching strategy
 
-In this repository we maintain **two key branches** [main](https://github.com/bobocode-projects/java-fundamentals-course) and 
-[completed](https://github.com/bobocode-projects/java-fundamentals-course/tree/completed). Since the `main` branch stores the exercises, and the `completed` stores the 
+In this repository we maintain **two key branches** [main](https://github.com/bobocode-projects/java-fundamentals-exercises) and 
+[completed](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/completed). Since the `main` branch stores the exercises, and the `completed` stores the 
 completed solution, the latter is always ahead of the first one. Here's the rule:
 
-#### The [Completed Solution PR](https://github.com/bobocode-projects/java-fundamentals-course/pull/33) should always show only those changes that participats implement in the scope of the exercises❗️
+#### The [Completed Solution PR](https://github.com/bobocode-projects/java-fundamentals-exercises/pull/33) should always show only those changes that participats implement in the scope of the exercises❗️
 
 It means two things:
 * any changes that are related to the exercise task, the tests, or the project configuration should be added first to the `main` branch and then merged from `main` to `completed`
@@ -65,9 +65,9 @@ In case the branch targets `completed` it should have a corresponding suffix. Li
 
 
 ## Submitting an issue
-In case you have faced **an issue that you couldn't resolve** and/or you have **a good idea how this repository can be improved**, feel free to [submit an issue](https://github.com/bobocode-projects/java-fundamentals-course/issues/new).
+In case you have faced **an issue that you couldn't resolve** and/or you have **a good idea how this repository can be improved**, feel free to [submit an issue](https://github.com/bobocode-projects/java-fundamentals-exercises/issues/new).
 
 Please note that **if you just have a question, you can ask it in one of the three different ways** depending on the quesiton:
-* add you comment to the [Completed PR](https://github.com/bobocode-projects/java-fundamentals-course/pull/33#issue-790887000) – if you want to ask about the completed solution
-* [start a new discussion](https://github.com/bobocode-projects/java-fundamentals-course/discussions/new) under Q&A – if you have question related to this repo
+* add you comment to the [Completed PR](https://github.com/bobocode-projects/java-fundamentals-exercises/pull/33#issue-790887000) – if you want to ask about the completed solution
+* [start a new discussion](https://github.com/bobocode-projects/java-fundamentals-exercises/discussions/new) under Q&A – if you have question related to this repo
 * contact us via info@bobocode.com – if you have other questions

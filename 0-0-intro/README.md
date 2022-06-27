@@ -19,11 +19,11 @@ _(we know it's silly, but we wanted to give you a simple example 😀)_
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ## How to start ❓
-* [clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this [repository](https://github.com/bobocode-projects/java-fundamentals-course) to your computer
+* [clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) this [repository](https://github.com/bobocode-projects/java-fundamentals-exercises) to your computer
 * **open** the project via IDE
 
 ## Have questions? 🧐
 * take a look at **README** of the exercise
 * switch to branch `completed` and **see the correct implementation** of the exercise
-* [join the discussion](https://github.com/bobocode-projects/java-fundamentals-course/discussions) on the GitHub
+* [join the discussion](https://github.com/bobocode-projects/java-fundamentals-exercises/discussions) on the GitHub
 * contact us via info@bobocode.com

@@ -11,7 +11,7 @@ You're supposed to know the basics of Stream API and how to work with files in J
 * **deal with exceptions** when accessing the file ✅
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/MAfCxL1JLfY76ki9A)
 
 ##

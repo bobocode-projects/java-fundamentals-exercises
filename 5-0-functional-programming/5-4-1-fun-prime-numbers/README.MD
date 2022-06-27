@@ -13,7 +13,7 @@ You're supposed to be familiar with Lambdas, Stream API and Optional API
 * transform a stream of primitives into a stream of `Integer` objects ("**Stream boxing**") ✅
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/ndFEj5xArhTBQaRQA)
 
 ##

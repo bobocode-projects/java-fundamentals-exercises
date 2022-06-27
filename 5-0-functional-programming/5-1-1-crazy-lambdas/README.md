@@ -58,7 +58,7 @@ it can help you to simplify the code even more:
 [![Linked List](https://yt-embed.herokuapp.com/embed?v=tNizKD1JbwM)](https://youtu.be/tNizKD1JbwM)
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/GcKJyr1fEGaPrrLz8)
 
 ##

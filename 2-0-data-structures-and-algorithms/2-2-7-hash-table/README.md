@@ -10,7 +10,7 @@ Learn a Hash Table data structures and build strong skills creating a hash table
 * understand why do we need the resizing logic and how does it work ✅
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/7U9XZHuTtT5xpjXR6)
 
 ##

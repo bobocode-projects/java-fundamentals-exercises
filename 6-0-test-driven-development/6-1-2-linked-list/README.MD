@@ -11,7 +11,7 @@ To verify your implementation check if your `LinkedListTest.java` provides full 
 with **completed exercise**
  
 ### Pre-conditions❗
-You're supposed to know [The Three laws of TDD](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/6-0-test-driven-development#the-three-laws-of-tdd),
+You're supposed to know [The Three laws of TDD](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/6-0-test-driven-development#the-three-laws-of-tdd),
  be familiar with Linked List data structure, and be able to write Java code
 
 ### How to start❓
@@ -26,7 +26,7 @@ You're supposed to know [The Three laws of TDD](https://github.com/bobocode-proj
  * [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U&t=3476s)
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>

@@ -20,7 +20,7 @@ You're supposed to be familiar polymorphism and Java interfaces
 
 ---
 
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/8YUNC2YctwDi7qwP7)
 
 ##
