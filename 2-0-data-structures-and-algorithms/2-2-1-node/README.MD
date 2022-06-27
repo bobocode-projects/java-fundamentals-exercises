@@ -16,7 +16,7 @@ You're supposed to be familiar **Java classes** and **generics**
 [![Linked List](https://yt-embed.herokuapp.com/embed?v=Ot5ma8NXcS0)](https://youtu.be/Ot5ma8NXcS0)
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/JGTFw5nfwR89tmSbA)
 
 ##

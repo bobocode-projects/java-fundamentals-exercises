@@ -17,4 +17,4 @@ jobs:
         uses: srggrs/assign-one-project-github-action@1.2.1
         if: github.event.action == 'opened' || contains(github.event.issue.labels.*.name, 'java-fundamentals')
         with:
-          project: 'https://github.com/bobocode-projects/java-fundamentals-course/projects/4'
+          project: 'https://github.com/bobocode-projects/java-fundamentals-exercises/projects/4'

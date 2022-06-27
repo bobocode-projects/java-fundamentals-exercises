@@ -23,7 +23,7 @@ types we need some form of type parametrization. Of course, we can use `Object` 
 it is not safe. Using `Object` requires runtime casting which can cause runtime exceptions.
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 #### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/Q5aEmF8E86fbZ4rXA)
 
 ##

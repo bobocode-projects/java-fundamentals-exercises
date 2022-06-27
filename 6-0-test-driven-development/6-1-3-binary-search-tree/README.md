@@ -6,7 +6,7 @@ Improve your TDD skill implementing Binary Search Tree
  by practicing TDD discipline
  
 ### Pre-conditions :heavy_exclamation_mark:
-You're supposed to know [The Three laws of TDD](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/6-0-test-driven-development#the-three-laws-of-tdd),
+You're supposed to know [The Three laws of TDD](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/6-0-test-driven-development#the-three-laws-of-tdd),
 be familiar with [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree) data structure, 
 and understand [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))
 
@@ -21,7 +21,7 @@ and understand [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_sci
  * [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U&t=3476s)
 
 ---
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>
