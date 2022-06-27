@@ -27,11 +27,8 @@ public class SumOfSquares {
             throw new InvalidRangeException();
         }
 
-        // todo: refactor using functional approach – instead of using for loop, use IntStream.rangeClose()
-        int sumOfSquares = 0;
-        for (int i = startInclusive; i <= endInclusive; i++) {
-            sumOfSquares += i * i;
-        }
-        return sumOfSquares;
+        return IntStream.rangeClosed(startInclusive, endInclusive)
+                .map(a -> a * a)
+                .sum();
     }
 }
