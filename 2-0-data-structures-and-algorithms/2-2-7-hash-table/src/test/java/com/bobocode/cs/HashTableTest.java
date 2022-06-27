@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,8 +17,7 @@ import static java.lang.reflect.Modifier.isStatic;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * A Reflection-based step by step test for a {@link HashTable} class. PLEASE NOTE that Reflection API should not be used
@@ -200,31 +200,49 @@ class HashTableTest {
     class HashFunctionTest {
         @Test
         @Order(1)
-        @DisplayName("calculateIndex uses hashCode to compute an index for a given key")
-        void calculateIndexReturnDifferentValues() {
-            var key = Mockito.spy(new Object());
+        @DisplayName("calculateIndex returns the same value for the same key")
+        void calculateIndexReturnTheSameValueWhenKeyIsTheSame() {
+            var indexSet = Stream.generate(() -> "ASDFDFSD34234234")
+                    .limit(10)
+                    .map(key -> HashTable.calculateIndex(key, 8))
+                    .collect(Collectors.toSet());
 
-            HashTable.calculateIndex(key, 8);
-
-            verify(key, atLeastOnce()).hashCode();
+            assertThat(indexSet).hasSize(1);
         }
 
         @Test
         @Order(2)
-        @DisplayName("calculateIndex returns different values in array bounds")
-        void calculateIndexReturnIndexInArrayBounds() {
+        @DisplayName("calculateIndex returns different values for different keys")
+        void calculateIndexReturnDifferentValuesWheKeysAreDifferent() {
             var arrayCapacity = 8;
             var indexSet = Stream.of("A", "Aa", "AaB", "4234", "2234fasdf", "ASDFDFSD34234234", "afsd-fdfd-ae43-5gd3")
                     .map(str -> HashTable.calculateIndex(str, arrayCapacity))
                     .collect(Collectors.toSet());
 
             assertThat(indexSet)
-                    .hasSizeGreaterThan(1)
+                    .hasSizeGreaterThan(1);
+        }        
+        
+        @Test
+        @Order(3)
+        @DisplayName("calculateIndex returns values in array bounds")
+        void calculateIndexReturnIndexInArrayBounds() {
+            var arrayCapacity = 8;
+            var keys = Stream.generate(() -> ThreadLocalRandom.current().nextLong())
+                    .limit(100)
+                    .toList();
+
+            var indexes = keys.stream()
+                    .map(key -> HashTable.calculateIndex(key, arrayCapacity))
+                    .toList();
+            
+            assertThat(indexes)
+                    .isNotEmpty()
                     .allMatch(i -> i >= 0 && i < arrayCapacity);
         }
 
         @Test
-        @Order(3)
+        @Order(4)
         @DisplayName("calculateIndex return non-negative value when hashCode is negative")
         void calculateIndexReturnPositiveIndexWhenHashCodeIsNegative() {
             var key = Long.MAX_VALUE;
@@ -248,7 +266,7 @@ class HashTableTest {
         void putWhenTableIsEmpty() {
             var previousValue = hashTable.put("madmax", 833);
 
-            var keyValueExists = checkKeyValueMappingExists("madmax", 833);
+            var keyValueExists = checkKeyValueExists("madmax", 833);
 
             assertNull(previousValue);
             assertTrue(keyValueExists);
@@ -262,8 +280,8 @@ class HashTableTest {
             var table = getInternalTable(hashTable);
             var prevValueA = hashTable.put("AaAa", 123);
             var prevValueB = hashTable.put("BBBB", 456);
-            var containsKeyValueA = checkKeyValueMappingExists("AaAa", 123);
-            var containsKeyValueB = checkKeyValueMappingExists("BBBB", 456);
+            var containsKeyValueA = checkKeyValueExists("AaAa", 123);
+            var containsKeyValueB = checkKeyValueExists("BBBB", 456);
             var bucketIndexA = HashTable.calculateIndex("AaAa", table.length);
             var bucketIndexB = HashTable.calculateIndex("BBBB", table.length);
 
@@ -283,7 +301,7 @@ class HashTableTest {
 
             var previousValue = hashTable.put("madmax", 876);
             System.out.println(hashTable);
-            var containsNewValueByKey = checkKeyValueMappingExists("madmax", 876);
+            var containsNewValueByKey = checkKeyValueExists("madmax", 876);
 
             assertThat(previousValue).isEqualTo(833);
             assertTrue(containsNewValueByKey);
@@ -419,7 +437,7 @@ class HashTableTest {
             var result = hashTable.remove("madmax");
 
             assertThat(result).isEqualTo(833);
-            assertFalse(checkKeyValueMappingExists("madmaxx", 833));
+            assertFalse(checkKeyValueExists("madmaxx", 833));
         }
 
         @Test
@@ -429,6 +447,38 @@ class HashTableTest {
             var result = hashTable.remove("madmax");
 
             assertNull(result);
+        }
+
+        @Test
+        @Order(15)
+        @DisplayName("remove deletes the element when it's in the middle of the list")
+        void removeFromTheMiddleOfTheList() {
+            addToTable("AaAa", 843);
+            addToTable("BBBB", 434);
+            addToTable("AaBB", 587);
+
+            var removedValue = hashTable.remove("BBBB");
+
+            assertTrue(checkKeyValueExists("AaAa", 843));
+            assertFalse(checkKeyExists("BBBB"));
+            assertTrue(checkKeyValueExists("AaBB", 587));
+            assertThat(removedValue).isEqualTo(434);
+        }        
+        
+        @Test
+        @Order(16)
+        @DisplayName("remove deletes the element when it's in the end of the list")
+        void removeFromTheEndOfTheList() {
+            addToTable("AaAa", 843);
+            addToTable("BBBB", 434);
+            addToTable("AaBB", 587);
+
+            var removedValue = hashTable.remove("AaBB");
+
+            assertTrue(checkKeyValueExists("AaAa", 843));
+            assertTrue(checkKeyValueExists("BBBB", 434));
+            assertFalse(checkKeyExists("AaBB"));
+            assertThat(removedValue).isEqualTo(587);
         }
     }
 
@@ -452,10 +502,10 @@ class HashTableTest {
             hashTable.resizeTable(16);
 
             assertThat(getInternalTable(hashTable)).hasSize(16);
-            assertTrue(checkKeyValueMappingExists("madmax", 833));
-            assertTrue(checkKeyValueMappingExists("altea", 553));
-            assertTrue(checkKeyValueMappingExists("AaAa", 123));
-            assertTrue(checkKeyValueMappingExists("BBBB", 456));
+            assertTrue(checkKeyValueExists("madmax", 833));
+            assertTrue(checkKeyValueExists("altea", 553));
+            assertTrue(checkKeyValueExists("AaAa", 123));
+            assertTrue(checkKeyValueExists("BBBB", 456));
         }
 
         @Test
@@ -502,21 +552,30 @@ class HashTableTest {
         }
     }
 
-    @SneakyThrows
-    private boolean checkKeyValueMappingExists(Object key, Object value) {
+    private NodeProxy getNodeByKey(Object key) {
         var table = getInternalTable(hashTable);
         for (var head : table) {
             if (head != null) {
                 var current = new NodeProxy(head);
                 while (current != null) {
-                    if (current.key().equals(key) && current.value().equals(value)) {
-                        return true;
+                    if (current.key().equals(key)) {
+                        return current;
                     }
                     current = current.next();
                 }
             }
         }
-        return false;
+        return null;
+    }
+
+    private boolean checkKeyValueExists(Object key, Object value) {
+        var node = getNodeByKey(key);
+        return node != null && node.value().equals(value);
+    }
+
+    private boolean checkKeyExists(Object key) {
+        var node = getNodeByKey(key);
+        return node != null;
     }
 
     @SneakyThrows
