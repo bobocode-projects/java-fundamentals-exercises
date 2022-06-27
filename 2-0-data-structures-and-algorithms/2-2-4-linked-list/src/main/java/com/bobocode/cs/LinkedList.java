@@ -172,7 +172,7 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T remove(int index) {
         T deletedElement;
-        if (index == 0) {
+        if (index == 0 && !isEmpty()) {
             deletedElement = first.value;
             removeHead();
         } else {
