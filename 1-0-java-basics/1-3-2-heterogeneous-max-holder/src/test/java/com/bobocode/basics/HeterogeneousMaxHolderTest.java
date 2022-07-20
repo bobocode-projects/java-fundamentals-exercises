@@ -227,7 +227,7 @@ class HeterogeneousMaxHolderTest {
         assertThat(genericParamTypeNames)
                 .contains(Class.class.getTypeName() + "<T>")
                 .contains("T")
-                .contains(Comparator.class.getTypeName() + "<T>");
+                .contains(Comparator.class.getTypeName() + "<? super T>");
     }
 
     @Test
