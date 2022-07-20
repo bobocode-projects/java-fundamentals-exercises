@@ -43,7 +43,7 @@ public class HeterogeneousMaxHolder {
      * @param <T>        value type parameter
      * @return a smaller value among the provided value and the current maximum
      */
-    public <T> T put(Class<T> key, T value, Comparator<T> comparator) {
+    public <T> T put(Class<T> key, T value, Comparator<? super T> comparator) {
         var currentMax = getMax(requireNonNull(key));
         var nullSafeComparator = Comparator.nullsFirst(requireNonNull(comparator));
         requireNonNull(value);
