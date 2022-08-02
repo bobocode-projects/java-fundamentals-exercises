@@ -92,7 +92,7 @@ public class CrazyGenerics {
     }
 
     /**
-     * {@link StrictProcessor} defines a contact of a processor that can process only objects that are {@link Serializable}
+     * {@link StrictProcessor} defines a contract of a processor that can process only objects that are {@link Serializable}
      * and {@link Comparable}.
      *
      * @param <T> – the type of objects that can be processed
