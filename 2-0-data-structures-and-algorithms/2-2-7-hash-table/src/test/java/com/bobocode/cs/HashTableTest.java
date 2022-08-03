@@ -1,9 +1,12 @@
 package com.bobocode.cs;
 
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.ClassOrderer.OrderAnnotation;
-import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
+import static java.lang.reflect.Modifier.isStatic;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -12,12 +15,15 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.lang.reflect.Modifier.isStatic;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import lombok.SneakyThrows;
+import org.junit.jupiter.api.ClassOrderer.OrderAnnotation;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestClassOrder;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * A Reflection-based step by step test for a {@link HashTable} class. PLEASE NOTE that Reflection API should not be used
@@ -28,6 +34,7 @@ import static org.mockito.Mockito.*;
 @TestClassOrder(OrderAnnotation.class)
 @DisplayName("HashTable Test")
 class HashTableTest {
+
     private HashTable<String, Integer> hashTable = new HashTable<>();
 
     @Nested
@@ -126,6 +133,7 @@ class HashTableTest {
     @DisplayName("2. HashTable fields Test")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class HashTableFieldsTest {
+
         @Test
         @Order(1)
         @DisplayName("HastTable has a field 'table' which is an array of nodes")
@@ -155,6 +163,7 @@ class HashTableTest {
     @DisplayName("3. HashTable constructors Test")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class HashTableConstructorsTest {
+
         @Test
         @Order(1)
         @SneakyThrows
@@ -198,6 +207,7 @@ class HashTableTest {
     @DisplayName("4. Hash Function Test")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class HashFunctionTest {
+
         @Test
         @Order(1)
         @DisplayName("calculateIndex returns the same value for the same key")
@@ -221,8 +231,8 @@ class HashTableTest {
 
             assertThat(indexSet)
                     .hasSizeGreaterThan(1);
-        }        
-        
+        }
+
         @Test
         @Order(3)
         @DisplayName("calculateIndex returns values in array bounds")
@@ -235,7 +245,7 @@ class HashTableTest {
             var indexes = keys.stream()
                     .map(key -> HashTable.calculateIndex(key, arrayCapacity))
                     .toList();
-            
+
             assertThat(indexes)
                     .isNotEmpty()
                     .allMatch(i -> i >= 0 && i < arrayCapacity);
@@ -262,7 +272,7 @@ class HashTableTest {
         @Test
         @SneakyThrows
         @Order(1)
-        @DisplayName("put creates new entry and returns null when the table is empty")
+        @DisplayName("put creates new entry and returns null when the table is empty, should increase the table size")
         void putWhenTableIsEmpty() {
             var previousValue = hashTable.put("madmax", 833);
 
@@ -270,11 +280,12 @@ class HashTableTest {
 
             assertNull(previousValue);
             assertTrue(keyValueExists);
+            assertEquals(1, getSize());
         }
 
         @Test
         @Order(2)
-        @DisplayName("put elements adds entry to to the same bucket when the hash code is the same")
+        @DisplayName("put elements adds entry to the same bucket and increases table size when the hash code is the same")
         @SneakyThrows
         void putTwoElementsWithTheSameHashCode() {
             var table = getInternalTable(hashTable);
@@ -290,11 +301,13 @@ class HashTableTest {
             assertTrue(containsKeyValueA);
             assertTrue(containsKeyValueB);
             assertThat(bucketIndexA).isEqualTo(bucketIndexB);
+            assertEquals(2, getSize());
         }
 
         @Test
         @Order(3)
-        @DisplayName("put element updates the value and returns the previous one when key is the same")
+        @DisplayName(
+                "put element updates the value and returns the previous one when key is the same, should not increase table size")
         void putElementWithTheSameKey() {
             hashTable.put("madmax", 833);
             System.out.println(hashTable);
@@ -305,6 +318,7 @@ class HashTableTest {
 
             assertThat(previousValue).isEqualTo(833);
             assertTrue(containsNewValueByKey);
+            assertEquals(1, getSize());
         }
 
         @Test
@@ -430,14 +444,15 @@ class HashTableTest {
 
         @Test
         @Order(13)
-        @DisplayName("remove deletes the entry and returns a value")
+        @DisplayName("remove deletes the entry, decreases table size and returns a value")
         void remove() {
             addToTable("madmax", 833);
-
+            setSize(1);
             var result = hashTable.remove("madmax");
 
             assertThat(result).isEqualTo(833);
             assertFalse(checkKeyValueExists("madmaxx", 833));
+            assertEquals(0, getSize());
         }
 
         @Test
@@ -451,27 +466,32 @@ class HashTableTest {
 
         @Test
         @Order(15)
-        @DisplayName("remove deletes the element when it's in the middle of the list")
+        @DisplayName("remove deletes the element when it's in the middle of the list and decreases the size of table")
         void removeFromTheMiddleOfTheList() {
             addToTable("AaAa", 843);
             addToTable("BBBB", 434);
             addToTable("AaBB", 587);
 
+            var size = 3;
+            setSize(size);
             var removedValue = hashTable.remove("BBBB");
 
             assertTrue(checkKeyValueExists("AaAa", 843));
             assertFalse(checkKeyExists("BBBB"));
             assertTrue(checkKeyValueExists("AaBB", 587));
             assertThat(removedValue).isEqualTo(434);
-        }        
-        
+            assertEquals(size - 1, getSize());
+        }
+
         @Test
         @Order(16)
-        @DisplayName("remove deletes the element when it's in the end of the list")
+        @DisplayName("remove deletes the element when it's in the end of the list and decreases the size of table")
         void removeFromTheEndOfTheList() {
             addToTable("AaAa", 843);
             addToTable("BBBB", 434);
             addToTable("AaBB", 587);
+            var size = 3;
+            setSize(size);
 
             var removedValue = hashTable.remove("AaBB");
 
@@ -479,6 +499,7 @@ class HashTableTest {
             assertTrue(checkKeyValueExists("BBBB", 434));
             assertFalse(checkKeyExists("AaBB"));
             assertThat(removedValue).isEqualTo(587);
+            assertEquals(2, getSize());
         }
     }
 
@@ -583,6 +604,13 @@ class HashTableTest {
         var sizeField = HashTable.class.getDeclaredField("size");
         sizeField.setAccessible(true);
         sizeField.set(hashTable, size);
+    }
+
+    @SneakyThrows
+    private int getSize() {
+        var sizeField = HashTable.class.getDeclaredField("size");
+        sizeField.setAccessible(true);
+        return sizeField.getInt(hashTable);
     }
 
     private String tableToString(Object[] table) {
