@@ -1,12 +1,8 @@
 package com.bobocode.cs;
 
-import static java.lang.reflect.Modifier.isStatic;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import lombok.SneakyThrows;
+import org.junit.jupiter.api.ClassOrderer.OrderAnnotation;
+import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -15,15 +11,11 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.ClassOrderer.OrderAnnotation;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestClassOrder;
-import org.junit.jupiter.api.TestMethodOrder;
+
+import static java.lang.reflect.Modifier.isStatic;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A Reflection-based step by step test for a {@link HashTable} class. PLEASE NOTE that Reflection API should not be used
@@ -310,10 +302,8 @@ class HashTableTest {
                 "put element updates the value and returns the previous one when key is the same, should not increase table size")
         void putElementWithTheSameKey() {
             hashTable.put("madmax", 833);
-            System.out.println(hashTable);
 
             var previousValue = hashTable.put("madmax", 876);
-            System.out.println(hashTable);
             var containsNewValueByKey = checkKeyValueExists("madmax", 876);
 
             assertThat(previousValue).isEqualTo(833);
@@ -517,8 +507,6 @@ class HashTableTest {
             addToTable("altea", 553);
             addToTable("AaAa", 123);
             addToTable("BBBB", 456);
-
-            System.out.println(hashTable);
 
             hashTable.resizeTable(16);
 
