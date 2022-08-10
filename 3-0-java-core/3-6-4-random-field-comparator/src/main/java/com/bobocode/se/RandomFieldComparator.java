@@ -24,7 +24,7 @@ public class RandomFieldComparator<T> implements Comparator<T> {
 
     /**
      * Compares two objects of the class T by the value of the field that was randomly chosen. It allows null values
-     * for the fields, and it treats null value grater than a non-null value.
+     * for the fields, and it treats null value greater than a non-null value.
      *
      * @param o1
      * @param o2

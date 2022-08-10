@@ -5,7 +5,7 @@
 * implement a logic of choosing a random field to use it for comparison of objects of provided type ✅
 * implement a mechanism to check if field type is `Comparable` ✅
 * implement a method `compare` that compares two objects by randomly-provided field ✅
-* extend a method `compare` to manage null field values following condition when null value grater than a non-null value ✅
+* extend a method `compare` to manage null field values following condition when null value greater than a non-null value ✅
 * implement method `getComparingFieldName` that retrieves the name of randomly-chosen comparing field✅
 * implement method `toString` ✅
 
