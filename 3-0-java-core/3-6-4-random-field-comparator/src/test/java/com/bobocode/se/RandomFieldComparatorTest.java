@@ -1,12 +1,13 @@
 package com.bobocode.se;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.bobocode.data.Accounts;
-import com.bobocode.model.Account;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -21,29 +22,22 @@ class RandomFieldComparatorTest {
 
     @Test
     @Order(1)
-    @DisplayName("constructor should throw exception if parameter is null")
+    @DisplayName("Constructor throws an exception when parameter is null")
     void classDoesNotApplyNullInConstructor() {
         assertThrows(NullPointerException.class, () -> new RandomFieldComparator<>(null));
     }
 
     @Test
     @Order(2)
-    @DisplayName("constructor should throw exception if provided type does not contain any fields")
-    void constructorThrowsExceptionIfNoFieldsInProvidedType() {
-        assertThrows(IllegalArgumentException.class, () -> new RandomFieldComparator<>(EmptyClass.class));
-    }
-
-    @Test
-    @Order(3)
     @SneakyThrows
-    @DisplayName("target type must contain at least one field which implements Comparable interface")
+    @DisplayName("Constructor throws an exception when the target type has no Comparable fields")
     void constructorThrowsExceptionIfNoComparableFieldsInProvidedType() {
         assertThrows(IllegalArgumentException.class, () -> new RandomFieldComparator<>(ClassWithNotComparableField.class));
     }
 
     @Test
-    @Order(4)
-    @DisplayName("'compare' should throw exception if any parameter is null")
+    @Order(3)
+    @DisplayName("Method 'compare' throws an exception when any parameter is null")
     void compareWhenFirstParameterAreNull() {
 
         assertThrows(NullPointerException.class, () -> randomFieldComparator.compare(null, new Account()));
@@ -51,56 +45,47 @@ class RandomFieldComparatorTest {
     }
 
     @Test
-    @Order(5)
-    @DisplayName("'compare' should return 0 if field values of both objects are null")
+    @Order(4)
+    @DisplayName("Method 'compare' returns 0 when field values of both objects are null")
     void compareWhenBothFieldValuesIsNull() {
-        var emptyAccount1 = new Account();
-        var emptyAccount2 = new Account();
-        //set balance null as balance field has a default value
-        emptyAccount1.setBalance(null);
-        emptyAccount2.setBalance(null);
-
+        setFieldToCompare("lastName", Account.class);
         int compareResult = randomFieldComparator.compare(new Account(), new Account());
 
-        assertEquals(0, compareResult);
+        assertThat(compareResult).isZero();
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("Method compare returns positive int when the first field value is null")
+    void compareWhenFieldValuesOfFirstObjectIsNull() {
+        Account emptyAccount = new Account();
+        Account account = new Account("Sibma", "LoinKing", "simba-bimba@gmail.com", 14);
+        setFieldToCompare("email", Account.class);//set field to compare explicitly as there are int field which has default value 0
+        int compareResult = randomFieldComparator.compare(emptyAccount, account);
+
+        assertThat(compareResult).isPositive();
     }
 
     @Test
     @Order(6)
-    @DisplayName("'compare' treats null value greater than a non-null value, so it should return 1 if field value of " +
-            "first object is null")
-    void compareWhenFieldValuesOfFirstObjectIsNull() {
-        Account account = Accounts.generateAccount();
-        account.setId(1L);
+    @DisplayName("Method compare returns negative int when the second field value is null")
+    void compareWhenFieldValuesOfSecondObjectIsNull() {
+        Account account = new Account("Mufasa", "LoinKing", "simba-bimba@gmail.com", 47);
         Account emptyAccount = new Account();
-        emptyAccount.setBalance(null);
-        int compareResult = randomFieldComparator.compare(emptyAccount, account);
+        setFieldToCompare("firstName", Account.class);
+        int compareResult = randomFieldComparator.compare(account, emptyAccount);
 
-        assertEquals(1, compareResult);
+        assertThat(compareResult).isNegative();
     }
 
     @Test
     @Order(7)
-    @DisplayName("'compare' treats null value greater than a non-null value, so it should return -1 if field value of " +
-            "second object is null")
-    void compareWhenFieldValuesOfSecondObjectIsNull() {
-        Account account = Accounts.generateAccount();
-        account.setId(1L);
-        Account emptyAccount = new Account();
-        emptyAccount.setBalance(null);
-        int compareResult = randomFieldComparator.compare(account, emptyAccount);
-
-        assertEquals(-1, compareResult);
-    }
-
-    @Test
-    @Order(8)
     @SneakyThrows
-    @DisplayName("'compare' should return 1 if field value of first object is greater")
+    @DisplayName("Method 'compare' returns positive int when the first value is greater")
     void compareWhenFieldValueOfFirstObjectIsGrater() {
         var fieldToCompareName = "firstName";
-        Account account1 = Accounts.generateAccount();
-        Account account2 = Accounts.generateAccount();
+        Account account1 = new Account();
+        Account account2 = new Account();
         Field fieldToCompareAccount = account1.getClass().getDeclaredField(fieldToCompareName);
         fieldToCompareAccount.setAccessible(true);
 
@@ -110,17 +95,17 @@ class RandomFieldComparatorTest {
         setFieldToCompare(fieldToCompareName, Account.class);
         int compareResult = randomFieldComparator.compare(account1, account2);
 
-        assertEquals(1, compareResult);
+        assertThat(compareResult).isPositive();
     }
 
     @Test
-    @Order(9)
+    @Order(8)
     @SneakyThrows
-    @DisplayName("'compare' should return -1 if field value of second object is greater")
+    @DisplayName("Method 'compare' returns negative int when the first value is smaller")
     void compareWhenFieldValueOfSecondObjectIsGrater() {
         var fieldToCompareName = "firstName";
-        Account account1 = Accounts.generateAccount();
-        Account account2 = Accounts.generateAccount();
+        Account account1 = new Account();
+        Account account2 = new Account();
         Field fieldToCompareAccount = account1.getClass().getDeclaredField(fieldToCompareName);
         fieldToCompareAccount.setAccessible(true);
 
@@ -130,17 +115,17 @@ class RandomFieldComparatorTest {
         setFieldToCompare(fieldToCompareName, Account.class);
         int compareResult = randomFieldComparator.compare(account1, account2);
 
-        assertEquals(-1, compareResult);
+        assertThat(compareResult).isNegative();
     }
 
     @Test
-    @Order(10)
+    @Order(9)
     @SneakyThrows
-    @DisplayName("'compare' should return -1 if field value of second object is greater")
+    @DisplayName("Method 'compare' returns zero when the field values are equal")
     void compareWhenFieldValuesOfObjectsAreEqual() {
         var fieldToCompareName = "firstName";
-        Account account1 = Accounts.generateAccount();
-        Account account2 = Accounts.generateAccount();
+        Account account1 = new Account();
+        Account account2 = new Account();
         Field fieldToCompareAccount = account1.getClass().getDeclaredField(fieldToCompareName);
         fieldToCompareAccount.setAccessible(true);
 
@@ -150,13 +135,73 @@ class RandomFieldComparatorTest {
         setFieldToCompare(fieldToCompareName, Account.class);
         int compareResult = randomFieldComparator.compare(account1, account2);
 
-        assertEquals(0, compareResult);
+        assertThat(compareResult).isZero();
+    }
+
+    @Test
+    @Order(10)
+    @SneakyThrows
+    @DisplayName("Method 'compare' returns positive int when the first primitive value is greater")
+    void comparePrimitivesWhenFieldValueOfFirstObjectIsGrater() {
+        var fieldToCompareName = "age";
+        Account account1 = new Account();
+        Account account2 = new Account();
+        Field fieldToCompareAccount = account1.getClass().getDeclaredField(fieldToCompareName);
+        fieldToCompareAccount.setAccessible(true);
+
+        fieldToCompareAccount.setInt(account1, 7);
+        fieldToCompareAccount.setInt(account2, 3);
+
+        setFieldToCompare(fieldToCompareName, Account.class);
+        int compareResult = randomFieldComparator.compare(account1, account2);
+
+        assertThat(compareResult).isPositive();
     }
 
     @Test
     @Order(11)
     @SneakyThrows
-    @DisplayName("'getComparingFieldName' should return the name of randomly-chosen field to be compared")
+    @DisplayName("Method 'compare' returns zero when the primitive field values are equal")
+    void comparePrimitivesWhenFieldValuesOfObjectsAreEqual() {
+        var fieldToCompareName = "age";
+        Account account1 = new Account();
+        Account account2 = new Account();
+        Field fieldToCompareAccount = account1.getClass().getDeclaredField(fieldToCompareName);
+        fieldToCompareAccount.setAccessible(true);
+
+        fieldToCompareAccount.setInt(account1, 15);
+        fieldToCompareAccount.setInt(account2, 15);
+
+        setFieldToCompare(fieldToCompareName, Account.class);
+        int compareResult = randomFieldComparator.compare(account1, account2);
+
+        assertThat(compareResult).isZero();
+    }
+
+    @Test
+    @Order(12)
+    @SneakyThrows
+    @DisplayName("Method 'compare' returns negative int when the first primitive value is smaller")
+    void comparePrimitivesWhenFieldValueOfSecondObjectIsGrater() {
+        var fieldToCompareName = "age";
+        Account account1 = new Account();
+        Account account2 = new Account();
+        Field fieldToCompareAccount = account1.getClass().getDeclaredField(fieldToCompareName);
+        fieldToCompareAccount.setAccessible(true);
+
+        fieldToCompareAccount.setInt(account1, 4);
+        fieldToCompareAccount.setInt(account2, 8);
+
+        setFieldToCompare(fieldToCompareName, Account.class);
+        int compareResult = randomFieldComparator.compare(account1, account2);
+
+        assertThat(compareResult).isNegative();
+    }
+
+    @Test
+    @Order(13)
+    @SneakyThrows
+    @DisplayName("Method 'getComparingFieldName' returns the name of randomly-chosen field to be compared")
     void getComparingFieldName() {
         var fieldToCompareName = "lastName";
         setFieldToCompare(fieldToCompareName, Account.class);
@@ -165,9 +210,9 @@ class RandomFieldComparatorTest {
     }
 
     @Test
-    @Order(12)
+    @Order(14)
     @SneakyThrows
-    @DisplayName("'toString' should return the string - \"Random field comparator of class '%s' is comparing '%s'\"")
+    @DisplayName("Method toString is properly overridden")
     void toStringOverriding() {
         var expectedString = "Random field comparator of class 'Account' is comparing 'email'";
         var fieldToCompareName = "email";
@@ -178,7 +223,10 @@ class RandomFieldComparatorTest {
 
     @SneakyThrows
     private <T> void setFieldToCompare(String fieldName, Class<T> classType) {
-        Field fieldToCompare = randomFieldComparator.getClass().getDeclaredField("fieldToCompare");
+        Field fieldToCompare = Arrays.stream(randomFieldComparator.getClass().getDeclaredFields())
+                .filter(f -> f.getType().equals(Field.class))
+                .findAny()
+                .orElseThrow();
         fieldToCompare.setAccessible(true);
         fieldToCompare.set(randomFieldComparator, classType.getDeclaredField(fieldName));
     }
@@ -191,5 +239,15 @@ class RandomFieldComparatorTest {
     private static class ClassWithNotComparableField {
 
         private Object field;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    private static class Account {
+
+        private String firstName;
+        private String lastName;
+        private String email;
+        private int age;
     }
 }
