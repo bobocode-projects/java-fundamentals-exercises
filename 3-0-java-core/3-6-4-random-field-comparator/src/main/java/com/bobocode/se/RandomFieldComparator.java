@@ -1,6 +1,7 @@
 package com.bobocode.se;
 
-import com.bobocode.util.ExerciseNotCompletedException;
+import static java.util.Objects.requireNonNull;
+
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -26,8 +27,7 @@ public class RandomFieldComparator<T> implements Comparator<T> {
     private final Field fieldToCompare;
 
     public RandomFieldComparator(Class<T> targetType) {
-        Objects.requireNonNull(targetType);
-        this.targetType = targetType;
+        this.targetType = requireNonNull(targetType);
         this.fieldToCompare = chooseFieldToCompare(targetType);
     }
 
@@ -41,18 +41,11 @@ public class RandomFieldComparator<T> implements Comparator<T> {
      *         zero if objects are equals,
      *         negative int in case of first parameter {@param o1} is less than second one {@param o2}.
      */
-    @SneakyThrows
-    @SuppressWarnings("unchecked")
     @Override
     public int compare(T o1, T o2) {
         Objects.requireNonNull(o1);
         Objects.requireNonNull(o2);
-        fieldToCompare.setAccessible(true);
-
-        var field1 = (Comparable) fieldToCompare.get(o1);
-        var field2 = (Comparable) fieldToCompare.get(o2);
-
-        return Comparator.<Comparable>nullsLast(Comparator.naturalOrder()).compare(field1, field2);
+        return compareFieldValues(o1, o2);
     }
 
     /**
@@ -78,5 +71,15 @@ public class RandomFieldComparator<T> implements Comparator<T> {
         return Arrays.stream(targetType.getDeclaredFields())
                 .filter(f -> Comparable.class.isAssignableFrom(f.getType()) || f.getType().isPrimitive())
                 .findAny().orElseThrow(() -> new IllegalArgumentException("There are no fields available to compare"));
+    }
+
+    @SneakyThrows
+    @SuppressWarnings("unchecked")
+    private <U extends Comparable<? super U>> int compareFieldValues(T o1, T o2) {
+        fieldToCompare.setAccessible(true);
+        var value1 = (U) fieldToCompare.get(o1);
+        var value2 = (U) fieldToCompare.get(o2);
+        Comparator<U> comparator = Comparator.nullsLast(Comparator.naturalOrder());
+        return comparator.compare(value1, value2);
     }
 }
