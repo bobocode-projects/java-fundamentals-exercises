@@ -14,6 +14,7 @@
         <module>3-6-1-file-reader</module>
         <module>3-6-2-file-stats</module>
         <module>3-6-3-crazy-regex</module>
+        <module>3-6-4-random-field-comparator</module>
     </modules>
 
 
