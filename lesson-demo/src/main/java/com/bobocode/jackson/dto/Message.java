@@ -1,4 +1,4 @@
-package com.bobocode.dto;
+package com.bobocode.jackson.dto;
 
 import java.time.LocalDateTime;
 
