@@ -1,6 +1,7 @@
 package com.bobocode.intro;
 
-import com.bobocode.util.ExerciseNotCompletedException;
+
+import java.util.Base64;
 
 /**
  * Welcome! This is an introduction class that will show you a simple example of Bobocode exercise.
@@ -9,7 +10,7 @@ import com.bobocode.util.ExerciseNotCompletedException;
  * understand how to implement each method. So PLEASE MAKE SURE you read the Java Doc when start implementing a method.
  * <p>
  * Every exercise is covered with tests. So when you're implementing some class like {@link Introduction}, you should
- * also be able to find a corresponding class like {@link IntroductionTest}.
+ * also be able to find a corresponding class like {@link //IntroductionTest}.
  * <p>
  * Throughout the course you will need to implement hundreds of methods. And this is a simple example of how it's all
  * organized. You read the Java Doc, implement a method and run the test.
@@ -24,7 +25,7 @@ public class Introduction {
      * @return "The key to efficient learning is practice!"
      */
     public String getWelcomeMessage() {
-        throw new ExerciseNotCompletedException(); // todo: refactor it to return a message according to javadoc
+        return "The key to efficient learning is practice!";
     }
 
     /**
@@ -39,7 +40,6 @@ public class Introduction {
      * @return encoded message
      */
     public String encodeMessage(String message) {
-        // todo: switch to branch "completed" in order to see how it should be implemented
-        throw new ExerciseNotCompletedException();
+        return Base64.getEncoder().encodeToString(message.getBytes());
     }
 }

@@ -31,7 +31,6 @@ class IntroductionTest {
     @DisplayName("getWelcomeMessage method returns correct phrase")
     void getWelcomeMessage() {
         String message = introduction.getWelcomeMessage();
-
         assertThat(message).isEqualTo(EXPECTED_MESSAGE);
     }
 
