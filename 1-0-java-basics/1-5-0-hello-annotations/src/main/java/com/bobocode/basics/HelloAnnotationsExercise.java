@@ -13,5 +13,6 @@ package com.bobocode.basics;
  *
  * @author Taras Boychuk
  */
+@Exercise(value = "hello-annotation-basic")
 public class HelloAnnotationsExercise { // todo: mark class with the annotation according to the javadoc
 }
