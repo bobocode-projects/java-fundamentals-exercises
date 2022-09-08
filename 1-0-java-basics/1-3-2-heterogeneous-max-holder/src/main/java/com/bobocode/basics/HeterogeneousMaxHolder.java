@@ -3,6 +3,7 @@ package com.bobocode.basics;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * {@link HeterogeneousMaxHolder} is a multi-type container that holds maximum values per each type. It's kind of a
@@ -53,8 +54,8 @@ public class HeterogeneousMaxHolder {
     // todo: implement a method according to javadoc
     public <T> Object put(Class<T> key, T value, Comparator<? super T> comparator) {
         var max = getMax(key);
-        comparator = Comparator.nullsLast(comparator);
-        if (max == null || comparator.compare(value, max) > 0) {
+        comparator = Objects.requireNonNull(Comparator.nullsFirst(comparator));
+        if (comparator.compare(value, max) > 0) {
             map.put(key, value);
             return max;
         } else {
@@ -71,8 +72,8 @@ public class HeterogeneousMaxHolder {
      */
     // todo: implement a method according to javadoc
     public <T> T getMax(Class<T> key) {
+        Objects.requireNonNull(key);
         if (map.isEmpty()) return null;
-
-        return (T) map.get(key);
+        return key.cast(map.get(key));
     }
 }
