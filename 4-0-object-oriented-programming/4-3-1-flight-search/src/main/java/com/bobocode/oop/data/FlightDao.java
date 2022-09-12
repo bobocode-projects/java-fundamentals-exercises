@@ -1,8 +1,10 @@
 package com.bobocode.oop.data;
 
 import com.bobocode.util.ExerciseNotCompletedException;
+import lombok.NonNull;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -21,8 +23,8 @@ public class FlightDao {
      * @param flightNumber a flight number to store
      * @return {@code true} if a flight number was stored, {@code false} otherwise
      */
-    public boolean register(String flightNumber) {
-        throw new ExerciseNotCompletedException();// todo: implement this method
+    public boolean register(@NonNull String flightNumber) {
+        return flights.add(flightNumber);
     }
 
     /**
@@ -31,7 +33,6 @@ public class FlightDao {
      * @return a set of flight numbers
      */
     public Set<String> findAll() {
-        throw new ExerciseNotCompletedException();// todo: implement this method
+        return flights;
     }
-
 }

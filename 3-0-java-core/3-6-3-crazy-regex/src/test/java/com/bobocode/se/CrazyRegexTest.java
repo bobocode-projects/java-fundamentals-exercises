@@ -60,7 +60,7 @@ public class CrazyRegexTest {
     void findAllNumbers() {
         String result = regexChecker(crazyRegex.findAllNumbers(), text);
         assertThat(result).isEqualTo("\n01001\n03148\n02132\n412\n555\n1212\n412\n555" +
-                                     "\n1234\n412\n555\n1234\n646\n555\n1234\n1");
+                "\n1234\n412\n555\n1234\n646\n555\n1234\n1");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CrazyRegexTest {
     void findDates() {
         String result = regexChecker(crazyRegex.findDates(), json);
         assertThat(result).isEqualTo("\n2015-05-30\n2012-08-06\n2011-11-26\n2015-05-30\n2012-08-06\n" +
-                                     "2011-11-26\n2015-05-30\n2012-08-06\n2011-11-26");
+                "2011-11-26\n2015-05-30\n2012-08-06\n2011-11-26");
     }
 
     @Test
@@ -104,7 +104,7 @@ public class CrazyRegexTest {
     void findNumbersFromZeroToFiveWithLengthThree() {
         String result = regexChecker(crazyRegex.findNumbersFromZeroToFiveWithLengthThree(), text);
         assertThat(result).isEqualTo("\n010\n031\n021\n412\n555\n121\n412" +
-                                     "\n555\n123\n412\n555\n123\n555\n123");
+                "\n555\n123\n412\n555\n123\n555\n123");
     }
 
     @Test
@@ -119,8 +119,8 @@ public class CrazyRegexTest {
     void findAllLettersAndDigitsWithLengthThree() {
         String result = regexChecker(crazyRegex.findAllLettersAndDigitsWithLengthThree(), text);
         assertThat(result).isEqualTo("\nThe\nof\nthe\nand\nthe\nnot\nThe\nis\ndon\nyou\nnk\nnk\nThe\nCA\nAK\nPA\n412" +
-                                     "\n555\ncom\n412\n555\n412\n555\n646\n555\nof\ncom\nnet\nor\nnyu\nedu\n1Z\naaa\nOf\nwww\ncom\ncom\nwww\ncom" +
-                                     "\nis\nis\nam\nnot\nnot\nwhy\nwhy\nam\nok\ncat\ncat\ndog\ndog");
+                "\n555\ncom\n412\n555\n412\n555\n646\n555\nof\ncom\nnet\nor\nnyu\nedu\n1Z\naaa\nOf\nwww\ncom\ncom\nwww\ncom" +
+                "\nis\nis\nam\nnot\nnot\nwhy\nwhy\nam\nok\ncat\ncat\ndog\ndog");
     }
 
     @Test
@@ -128,7 +128,7 @@ public class CrazyRegexTest {
     void findAllWordsWhichBeginWithCapitalLetter() {
         String result = regexChecker(crazyRegex.findAllWordsWhichBeginWithCapitalLetter(), json);
         assertThat(result).isEqualTo("\nFront\nHazard\nAvoidance\nCamera" +
-                                     "\nCuriosity\nFront\nHazard\nAvoidance\nCamera\nCuriosity\nRear\nHazard\nAvoidance\nCamera\nCuriosity");
+                "\nCuriosity\nFront\nHazard\nAvoidance\nCamera\nCuriosity\nRear\nHazard\nAvoidance\nCamera\nCuriosity");
     }
 
     @Test
@@ -165,8 +165,8 @@ public class CrazyRegexTest {
         String result = regexChecker(crazyRegex.findOnlyLinksInJson(), json);
         assertThat(result).isEqualTo(
                 "\nhttp://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FLB_486265257EDR_F0481570FHAZ00323M_.JPG\n" +
-                "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FRB_486265257EDR_F0481570FHAZ00323M_.JPG\n" +
-                "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/rcam/RLB_486265291EDR_F0481570RHAZ00323M_.JPG"
+                        "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FRB_486265257EDR_F0481570FHAZ00323M_.JPG\n" +
+                        "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/rcam/RLB_486265291EDR_F0481570RHAZ00323M_.JPG"
         );
     }
 
@@ -175,7 +175,7 @@ public class CrazyRegexTest {
     void findAllEmails() {
         String result = regexChecker(crazyRegex.findAllEmails(), text);
         assertThat(result).isEqualTo("\njohnsmith@yahoo.com\nterek.koval@gmail.com\nterek@koval.net" +
-                                     "\nterek.koval@nyu.edu");
+                "\nterek.koval@nyu.edu");
     }
 
     @Test
@@ -190,7 +190,7 @@ public class CrazyRegexTest {
     void findOnlyDuplicates() {
         String result = regexChecker(crazyRegex.findOnlyDuplicates(), text);
         assertThat(result).isEqualTo("\nis is\ntext text\ndouble double\nI I\nnot not\nwhy why" +
-                                     "\ncat cat\ndog\ndog\nfish fish");
+                "\ncat cat\ndog\ndog\nfish fish");
     }
 
     @Test
@@ -213,13 +213,13 @@ public class CrazyRegexTest {
     @Order(24)
     void insertLinksAndResourcesIntoHref() {
         String links = "[Bobocode](https://www.bobocode.com)" +
-                       "\n[LinkedIn](https://www.linkedin.com)" +
-                       "\n[Netflix](https://www.netflix.com)";
+                "\n[LinkedIn](https://www.linkedin.com)" +
+                "\n[Netflix](https://www.netflix.com)";
         String result = crazyRegex.insertLinksAndResourcesIntoHref(links);
         assertThat(result).isEqualTo(
                 "<a href=\"https://www.bobocode.com\">Bobocode</a>\n" +
-                "<a href=\"https://www.linkedin.com\">LinkedIn</a>\n" +
-                "<a href=\"https://www.netflix.com\">Netflix</a>"
+                        "<a href=\"https://www.linkedin.com\">LinkedIn</a>\n" +
+                        "<a href=\"https://www.netflix.com\">Netflix</a>"
         );
     }
 
