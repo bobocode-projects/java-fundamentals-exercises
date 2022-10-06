@@ -1,6 +1,5 @@
 package com.bobocode;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class DemoApp {
@@ -13,7 +12,7 @@ public class DemoApp {
     }
 
 //    public static <T> T[] createGenericArray(int size) {
-//        return new T[size];
+//        return new T[size]; // it's not possible to create a generic array
 //    }
     
 }

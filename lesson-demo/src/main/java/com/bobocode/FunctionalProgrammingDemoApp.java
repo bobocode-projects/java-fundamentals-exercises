@@ -16,11 +16,14 @@ public class FunctionalProgrammingDemoApp {
     }
 
     private static <T> Collector<T, ?, Stack<T>> toStack() {
-        return null;
-        // todo:
-        //        return Collector.of(
-        //        
-        //);
+        return Collector.of(
+                Stack::new,
+                Stack::push,
+                (stack1, stack2) -> {
+                    stack2.forEach(stack1::push);
+                    return stack1;
+                }
+        );
     }
 
 }
