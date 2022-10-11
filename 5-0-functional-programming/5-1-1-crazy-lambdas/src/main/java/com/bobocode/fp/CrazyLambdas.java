@@ -26,7 +26,7 @@ public class CrazyLambdas {
      * @return a string supplier
      */
     public static Supplier<String> helloSupplier() {
-        throw new ExerciseNotCompletedException();
+    return () -> "Hello";
     }
 
     /**
