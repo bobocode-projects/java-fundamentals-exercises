@@ -62,7 +62,7 @@ public class LinkedQueueTest {
 
     @Test
     @Order(2)
-    void chekFieldsNameInNodeClass() {
+    void checkFieldsNameInNodeClass() {
         Class<?> innerClass = getInnerStaticNodeClass();
         boolean hasElementField = hasField(innerClass, ELEMENT_FIELD);
         boolean hasNodeField = hasField(innerClass, NODE_FIELD);
@@ -104,16 +104,19 @@ public class LinkedQueueTest {
     @Order(5)
     void addFillsQueueWhenItIsNotEmpty() {
         addIntElementToQueue(12);
+        addIntElementToQueue(13);
         integerQueue.add(111);
         int size = getInternalSize();
         boolean isEmpty = isEmptyQueue();
         Integer firstElement = (Integer) pollElementFromQueue();
         Integer secondElement = (Integer) pollElementFromQueue();
+        Integer tailValue = (Integer) getNodeValue(TAIL_FIELD);
 
-        assertThat(size).isEqualTo(2);
+        assertThat(size).isEqualTo(3);
         assertThat(isEmpty).isEqualTo(false);
         assertThat(firstElement).isEqualTo(12);
-        assertThat(secondElement).isEqualTo(111);
+        assertThat(secondElement).isEqualTo(13);
+        assertThat(tailValue).isEqualTo(111);
     }
 
     @Test
@@ -362,5 +365,13 @@ public class LinkedQueueTest {
                 .orElseThrow();
         field.setAccessible(true);
         return field;
+    }
+
+    @SneakyThrows
+    private Object getNodeValue(Predicate<Field> predicate) {
+        Object field = getAccessibleFieldByPredicate(integerQueue, predicate).get(integerQueue);
+        final Field value = getAccessibleFieldByPredicate(field, ELEMENT_FIELD);
+        value.setAccessible(true);
+        return value.get(field);
     }
 }
