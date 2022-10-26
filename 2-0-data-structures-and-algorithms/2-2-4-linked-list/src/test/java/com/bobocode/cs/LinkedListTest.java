@@ -408,6 +408,7 @@ public class LinkedListTest {
 
         int newLastElement = getInternalElement(getInternalSize() - 1);
         int tailElement = (int) getNodeValue(TAIL_NODE_FIELD);
+
         int size = getInternalSize();
 
         assertThat(deletedElement).isEqualTo(9);
