@@ -407,10 +407,12 @@ public class LinkedListTest {
         int deletedElement = intList.remove(getInternalSize() - 1);
 
         int newLastElement = getInternalElement(getInternalSize() - 1);
+        int tailElement = (int) getNodeValue(TAIL_NODE_FIELD);
         int size = getInternalSize();
 
         assertThat(deletedElement).isEqualTo(9);
         assertThat(newLastElement).isEqualTo(8);
+        assertThat(tailElement).isEqualTo(8);
         assertThat(size).isEqualTo(3);
     }
 
@@ -599,5 +601,13 @@ public class LinkedListTest {
                 .orElseThrow();
         field.setAccessible(true);
         return field;
+    }
+
+    @SneakyThrows
+    private Object getNodeValue(Predicate<Field> predicate) {
+        Object field = getAccessibleFieldByPredicate(intList, predicate).get(intList);
+        final Field value = getAccessibleFieldByPredicate(field, ELEMENT_FIELD);
+        value.setAccessible(true);
+        return value.get(field);
     }
 }
