@@ -35,7 +35,7 @@ Imagine you need to add a new `methodX()` to the exercise. Here's the list of ac
 4. Push the changes
 5. Checkout `completed`
 6. Create a local branch from `completed` (let's call it `solution branch`)
-7. Merge your `exercise branch` into the `solution brnach`
+7. Merge your `exercise branch` into the `solution branch`
 8. Implement `methodX()` and make sure that tests pass
 9. Commit these changes to the `solution branch`
 10. Push the changes
