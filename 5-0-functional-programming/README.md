@@ -17,7 +17,7 @@ Java SE 8+ provides a rich API that enables functional programming features base
 * Stream API
 * Optional API
 
-### At the end of this module you will be ablte to
+### At the end of this module you will be able to
 Write this
 ```java
 public List<Account> findAllGmailAccounts(List<Account> accounts) {
@@ -40,7 +40,7 @@ public List<Account> findAllGmailAccounts(List<Account> accounts) {
 ```
 Among other you will be able to
 * use **Funtional Interfaces** and **Lambdas** in order to **pass around functions** like first-class citizens ✅
-* **process data collections** in a **concise** and **easy to uderstnad** way using **Stream API** ✅
+* **process data collections** in a **concise** and **easy way to understand** using **Stream API** ✅
 * write **null-safe code** using **Optional API** ✅
 
 ### Learn or skip ? 
