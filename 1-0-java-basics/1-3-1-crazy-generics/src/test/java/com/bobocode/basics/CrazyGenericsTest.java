@@ -288,14 +288,12 @@ public class CrazyGenericsTest {
     void strictProcessorTypeParameterIsBoundBySerializableAndComparable() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
         var typeParam = typeParameters[0];
-        assert (typeParam.getBounds().length == 2);
-        var serializableBoundType = typeParam.getBounds()[0];
-        var comparableBoundType = typeParam.getBounds()[1];
 
-        assertThat(serializableBoundType.getTypeName())
-                .isEqualTo(Serializable.class.getTypeName());
-        assertThat(comparableBoundType.getTypeName())
-                .isEqualTo(String.format("%s<%s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME));
+        assertThat(typeParam.getBounds())
+                .hasSize(2)
+                .extracting(Type::getTypeName)
+                .containsExactlyInAnyOrder(Serializable.class.getTypeName(),
+                        String.format("%s<%s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME));
     }
 
     @Test
