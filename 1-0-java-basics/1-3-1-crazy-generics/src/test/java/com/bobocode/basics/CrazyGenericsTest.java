@@ -187,7 +187,7 @@ public class CrazyGenericsTest {
         var typeParam = typeParameters[0];
         var boundType = typeParam.getBounds()[0];
 
-        var expectedBoundTypeName = String.format("%s<%s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME);
+        var expectedBoundTypeName = String.format("%s<? super %s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME);
         assertThat(boundType.getTypeName()).isEqualTo(expectedBoundTypeName);
     }
 
@@ -295,7 +295,7 @@ public class CrazyGenericsTest {
         assertThat(serializableBoundType.getTypeName())
                 .isEqualTo(Serializable.class.getTypeName());
         assertThat(comparableBoundType.getTypeName())
-                .isEqualTo(String.format("%s<%s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME));
+                .isEqualTo(String.format("%s<? super %s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME));
     }
 
     @Test
