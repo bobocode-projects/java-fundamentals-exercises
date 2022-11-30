@@ -2,6 +2,7 @@ package com.bobocode.basics;
 
 import com.bobocode.basics.util.BaseEntity;
 import lombok.Data;
+import lombok.val;
 
 import java.io.Serializable;
 import java.util.*;
@@ -66,7 +67,7 @@ public class CrazyGenerics {
      *
      * @param <T> – value type
      */
-    public static class MaxHolder<T extends Comparable<T>> { // todo: refactor class to make it generic
+    public static class MaxHolder<T extends Comparable<? super T>> { // todo: refactor class to make it generic
         private T max;
 
         public MaxHolder(T max) {
@@ -95,7 +96,7 @@ public class CrazyGenerics {
      *
      * @param <T> – the type of objects that can be processed
      */
-    interface StrictProcessor<T extends Serializable & Comparable<T>> { // todo: make it generic
+    interface StrictProcessor<T extends Serializable & Comparable<? super T>> { // todo: make it generic
         void process(T obj);
     }
 
