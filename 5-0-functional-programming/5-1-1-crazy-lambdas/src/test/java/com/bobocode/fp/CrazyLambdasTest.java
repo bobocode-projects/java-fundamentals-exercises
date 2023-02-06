@@ -6,12 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -252,6 +251,29 @@ public class CrazyLambdasTest {
 
     @Test
     @Order(18)
+    void comparing() {
+        var strLengthComparator = CrazyLambdas.comparing(String::length);
+        var stringList = new ArrayList<>(List.of("Me", "I", "All of us", "They", "She"));
+
+        stringList.sort(strLengthComparator);
+
+        assertThat(stringList).isEqualTo(List.of("I", "Me", "She", "They", "All of us"));
+    }
+
+    @Test
+    @Order(19)
+    void thenComparing() {
+        var strLengthComparator = Comparator.comparing(String::length);
+        var lengthThenNaturalComparator = CrazyLambdas.thenComparing(strLengthComparator, s -> s);
+        var stringList = new ArrayList<>(List.of("Me", "I", "All of us", "They", "She", "He"));
+
+        stringList.sort(lengthThenNaturalComparator);
+
+        assertThat(stringList).isEqualTo(List.of("I", "He", "Me", "She", "They", "All of us"));
+    }
+
+    @Test
+    @Order(20)
     void trickyWellDoneSupplier() {
         Supplier<Supplier<Supplier<String>>> wellDoneSupplier = CrazyLambdas.trickyWellDoneSupplier();
 

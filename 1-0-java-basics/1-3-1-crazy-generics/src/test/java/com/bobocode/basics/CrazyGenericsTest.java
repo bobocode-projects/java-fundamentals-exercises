@@ -187,7 +187,7 @@ public class CrazyGenericsTest {
         var typeParam = typeParameters[0];
         var boundType = typeParam.getBounds()[0];
 
-        var expectedBoundTypeName = String.format("%s<%s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME);
+        var expectedBoundTypeName = String.format("%s<? super %s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME);
         assertThat(boundType.getTypeName()).isEqualTo(expectedBoundTypeName);
     }
 
@@ -288,12 +288,11 @@ public class CrazyGenericsTest {
     void strictProcessorTypeParameterIsBoundBySerializableAndComparable() {
         var typeParameters = StrictProcessor.class.getTypeParameters();
         var typeParam = typeParameters[0];
-
         assertThat(typeParam.getBounds())
                 .hasSize(2)
                 .extracting(Type::getTypeName)
                 .containsExactlyInAnyOrder(Serializable.class.getTypeName(),
-                        String.format("%s<%s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME));
+                        String.format("%s<? super %s>", Comparable.class.getTypeName(), TYPE_PARAMETER_NAME));
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.bobocode.fp;
 import com.bobocode.util.ExerciseNotCompletedException;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.function.*;
 
@@ -187,6 +188,44 @@ public class CrazyLambdas {
      * @return a high-order function that fetches a function from a function map by a given name or returns identity()
      */
     public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
+        throw new ExerciseNotCompletedException();
+    }
+
+    /**
+     * Returns a comparator of type T that is comparing values extracted using the provided mapper function.
+     * <p>
+     * E.g. imagine you need to compare accounts by their balance values.
+     * <pre>{@code
+     * Comparator<Account> balanceComparator = comparing(Account::getBalance);
+     * }</pre>
+     * <p>
+     * PLEASE NOTE, that @{@link Comparator} is a functional interface, and you should manually write a lambda expression
+     * to implement it.
+     *
+     * @param mapper a mapper function that allows to map an object to a comparable value
+     * @return a comparator instance
+     */
+    public static <T, U extends Comparable<? super U>> Comparator<T> comparing(Function<? super T, ? extends U> mapper) {
+        throw new ExerciseNotCompletedException();
+    }
+
+    /**
+     * Returns a comparator of type T that uses a provided comparator to compare objects, and only if they are equal
+     * it's comparing values extracted using the provided mapper function.
+     * <p>
+     * E.g. suppose you want to compare accounts by balance, but in case two people have the same balance you want to
+     * compare their first names:
+     * <pre>{@code
+     * Comparator<Account> accountComparator = thenComparing(balanceComparator, Account::getFirstName);
+     * }</pre>
+     * <p>
+     *
+     * @param comparator an initial comparator
+     * @param mapper     a mapper function that is used to extract values when initial comparator returns zero
+     * @return a comparator instance
+     */
+    public static <T, U extends Comparable<? super U>> Comparator<T> thenComparing(
+            Comparator<? super T> comparator, Function<? super T, ? extends U> mapper) {
         throw new ExerciseNotCompletedException();
     }
 
