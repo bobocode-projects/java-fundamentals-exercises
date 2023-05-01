@@ -14,7 +14,7 @@ public class BoxDemoApp {
         System.out.println(intBox.getValue() + intBox2.getValue());
 
         intBox.setValue(222);
-        intBox.setValue("abc"); // this should not be allowed
+        // intBox.setValue("abc"); // this should not be allowed
         // the following code will compile, but will throw runtime exception
         System.out.println(intBox.getValue() + intBox2.getValue());
     }
