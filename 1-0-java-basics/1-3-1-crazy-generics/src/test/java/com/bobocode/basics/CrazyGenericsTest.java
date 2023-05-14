@@ -765,8 +765,8 @@ public class CrazyGenericsTest {
     @Order(60)
     @DisplayName("Method findMostRecentlyCreatedEntity has public accessor type")
     void findMostRecentlyCreatedEntityHasPublicAccessorType() {
-        var findMaxMethod = getMethodByName(CollectionUtil.class, "findMostRecentlyCreatedEntity");
-        assertThat(findMaxMethod).isNotNull();
+        var findMostRecentlyCreatedEntity = getMethodByName(CollectionUtil.class, "findMostRecentlyCreatedEntity");
+        assertThat(findMostRecentlyCreatedEntity).isNotNull();
     }
 
     @Test
