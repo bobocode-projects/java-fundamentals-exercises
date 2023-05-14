@@ -724,8 +724,8 @@ public class CrazyGenericsTest {
 
     @Test
     @Order(58)
-    @DisplayName("Method findMax has public accessor type")
-    void findMaxHasPublicAccessorType() {
+    @DisplayName("Method findMax has public access type")
+    void findMaxHasPublicAccessType() {
         var findMaxMethod = getMethodByName(CollectionUtil.class, "findMax");
         assertThat(findMaxMethod).isNotNull();
     }
@@ -763,8 +763,8 @@ public class CrazyGenericsTest {
 
     @Test
     @Order(60)
-    @DisplayName("Method findMostRecentlyCreatedEntity has public accessor type")
-    void findMostRecentlyCreatedEntityHasPublicAccessorType() {
+    @DisplayName("Method findMostRecentlyCreatedEntity has public access type")
+    void findMostRecentlyCreatedEntityHasPublicAccessType() {
         var findMostRecentlyCreatedEntity = getMethodByName(CollectionUtil.class, "findMostRecentlyCreatedEntity");
         assertThat(findMostRecentlyCreatedEntity).isNotNull();
     }
