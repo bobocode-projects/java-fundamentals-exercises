@@ -722,9 +722,16 @@ public class CrazyGenericsTest {
         );
     }
 
+    @Test
+    @Order(58)
+    @DisplayName("Method findMax has public accessor type")
+    void findMaxHasPublicAccessorType() {
+        var findMaxMethod = getMethodByName(CollectionUtil.class, "findMax");
+        assertThat(findMaxMethod).isNotNull();
+    }
 
     @ParameterizedTest
-    @Order(58)
+    @Order(59)
     @MethodSource("findMaxArgs")
     @DisplayName("Method findMax returns the max value based on given comparator")
     @SneakyThrows
@@ -755,7 +762,15 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(59)
+    @Order(60)
+    @DisplayName("Method findMostRecentlyCreatedEntity has public accessor type")
+    void findMostRecentlyCreatedEntityHasPublicAccessorType() {
+        var findMaxMethod = getMethodByName(CollectionUtil.class, "findMostRecentlyCreatedEntity");
+        assertThat(findMaxMethod).isNotNull();
+    }
+
+    @Test
+    @Order(61)
     @DisplayName("findMostRecentlyCreatedEntity is a generic method that accepts a collection of entities")
     void findMostRecentlyCreatedEntityIsAGenericMethod() {
         var hasDuplicatesMethod = getMethodByName(CollectionUtil.class, "findMostRecentlyCreatedEntity");
@@ -767,7 +782,7 @@ public class CrazyGenericsTest {
     }
 
     @ParameterizedTest
-    @Order(60)
+    @Order(62)
     @MethodSource("findMostRecentlyCreatedEntityArgs")
     @DisplayName("findMostRecentlyCreatedEntity returns the most recently created entity")
     @SneakyThrows
@@ -794,7 +809,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(61)
+    @Order(63)
     @DisplayName("findMostRecentlyCreatedEntity throws exception when collection is empty")
     @SneakyThrows
     void findMostRecentlyCreatedEntityThrowsException() {
@@ -805,7 +820,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(62)
+    @Order(64)
     @DisplayName("Method swap does not declare type parameter")
     void swapMethodDoesNotDeclareTypeParameter() {
         var swapMethod = getMethodByName(CollectionUtil.class, "swap");
@@ -815,7 +830,7 @@ public class CrazyGenericsTest {
     }
 
     @Test
-    @Order(63)
+    @Order(65)
     @DisplayName("Method swap change elements by indexes")
     @SneakyThrows
     void swapChangesElements() {
