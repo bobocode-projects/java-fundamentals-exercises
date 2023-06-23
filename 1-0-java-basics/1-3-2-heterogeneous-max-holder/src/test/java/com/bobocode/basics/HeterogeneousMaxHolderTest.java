@@ -8,9 +8,10 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.mockito.Mockito;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
+import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -23,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(OrderAnnotation.class)
 class HeterogeneousMaxHolderTest {
     private HeterogeneousMaxHolder heterogeneousMaxHolder = new HeterogeneousMaxHolder();
+    private HeterogeneousMaxHolder heterogeneousMaxHolderMock = Mockito.spy(HeterogeneousMaxHolder.class);
 
     @Test
     @Order(1)
@@ -71,58 +73,53 @@ class HeterogeneousMaxHolderTest {
         var putMethod = getPutMethod();
 
         var methodTypeParameters = putMethod.getTypeParameters();
-
         assertThat(methodTypeParameters).hasSize(1);
-    }
-
-    @Test
-    @Order(6)
-    @DisplayName("put method type parameter is called 'T'")
-    void putTypeParamIsCalledT() {
-        var putMethod = getPutMethod();
 
         var typeParam = putMethod.getTypeParameters()[0];
-
         assertThat(typeParam.getName()).isEqualTo("T");
     }
 
     @Test
+    @Order(6)
+    @DisplayName("put method accepts type-safe key")
+    void putMethodAcceptsTypeSafeKeyParameter() {
+        var putMethod = getPutMethod();
+
+        var typeParam = (ParameterizedType) putMethod.getGenericParameterTypes()[0];
+        var typeArgument = typeParam.getActualTypeArguments()[0];
+
+        assertThat(typeParam.getRawType()).isEqualTo(Class.class);
+        assertThat(typeArgument.getTypeName()).isEqualTo("T");
+    }
+
+    @Test
     @Order(7)
-    @DisplayName("type parameter 'T' is declared as Comparable")
-    void typeParamIsComparable() {
+    @DisplayName("put method accepts comparable value")
+    void putMethodAcceptsComparableValueParameter() {
         var putMethod = getPutMethod();
 
         var typeParam = putMethod.getTypeParameters()[0];
-        var bound = typeParam.getBounds()[0];
+        var boundType = (ParameterizedType) typeParam.getBounds()[0];
 
-        assertThat(bound.getTypeName()).isEqualTo(Comparable.class.getTypeName() + "<? super T>");
+        assertThat(boundType.getRawType()).isEqualTo(Comparable.class);
     }
 
     @Test
     @Order(8)
-    @SneakyThrows
-    @DisplayName("put method accepts type (class) and value (object) parameters")
-    void putHasKeyValueParameters() {
-        HeterogeneousMaxHolder.class.getMethod("put", Class.class, Comparable.class);
+    @DisplayName("put method supports value that has comparable super class")
+    void putMethodAcceptsValueParameterWithComparableSuperClass() {
+        var putMethod = getPutMethod();
+
+        var typeParam = putMethod.getTypeParameters()[0];
+        var boundType = (ParameterizedType) typeParam.getBounds()[0];
+        var typeArgument = boundType.getActualTypeArguments()[0].getTypeName();
+
+        assertThat(boundType.getRawType()).isEqualTo(Comparable.class);
+        assertThat(typeArgument).isEqualTo("? super T");
     }
 
     @Test
     @Order(9)
-    @SneakyThrows
-    @DisplayName("put method params specify type arguments")
-    void putParametersSpecifyTypeArguments() {
-        var putMethod = HeterogeneousMaxHolder.class.getMethod("put", Class.class, Comparable.class);
-        var genericParamTypeNames = Arrays.stream(putMethod.getGenericParameterTypes())
-                .map(Type::getTypeName)
-                .toList();
-
-        assertThat(genericParamTypeNames)
-                .contains(Class.class.getTypeName() + "<T>")
-                .contains("T");
-    }
-
-    @Test
-    @Order(10)
     @SneakyThrows
     @DisplayName("put stores provided value when current max is null")
     void putStoresValueWhenCurrentMaxIsNull() {
@@ -133,7 +130,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(11)
+    @Order(10)
     @SneakyThrows
     @DisplayName("put returns null when current max is null")
     void putReturnsNullWhenCurrentMaxIsNull() {
@@ -143,7 +140,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(12)
+    @Order(11)
     @SneakyThrows
     @DisplayName("put stores provided value when current max is smaller than it")
     void putStoresValueWhenCurrentMaxIsSmaller() {
@@ -156,7 +153,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(13)
+    @Order(12)
     @SneakyThrows
     @DisplayName("put returns old max value when the provided value is greater than it")
     void putReturnsOldMaxValue() {
@@ -168,7 +165,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(14)
+    @Order(13)
     @SneakyThrows
     @DisplayName("put ignores provided value when the current max is greater than it")
     void putIgnoresNewValueWhenCurrentMaxIsGreater() {
@@ -181,7 +178,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(15)
+    @Order(14)
     @SneakyThrows
     @DisplayName("put returns provided value when the current max is greater than it")
     void putReturnsProvidedValueWhenCurrentMaxIsGreater() {
@@ -193,45 +190,67 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(16)
+    @Order(15)
     @SneakyThrows
-    @DisplayName("put method is overloaded with additional Comparator param")
+    @DisplayName("put method is overloaded with additional Comparator parameter")
     void putIsOverloadedWithAdditionalComparatorParam() {
-        var overloadedPutMethod = getOverloadedPutMethod();
-        var params = overloadedPutMethod.getParameters();
+        HeterogeneousMaxHolder.class.getMethod("put", Class.class, Object.class, Comparator.class);
+    }
 
-        assertThat(params[2].getType()).isEqualTo(Comparator.class);
+    @Test
+    @Order(16)
+    @DisplayName("Overloaded put method declares one type parameter T")
+    void overloadedPutDeclaresOneTypeParam() {
+        var putMethod = getOverloadedPutMethod();
 
+        var methodTypeParameters = putMethod.getTypeParameters();
+        assertThat(methodTypeParameters).hasSize(1);
+
+        var typeParam = putMethod.getTypeParameters()[0];
+        assertThat(typeParam.getName()).isEqualTo("T");
     }
 
     @Test
     @Order(17)
-    @DisplayName("Overloaded put has simple type param 'T'")
-    void overloadedPutHasSimpleTypeParameterT() {
-        var overloadedPutMethod = getOverloadedPutMethod();
+    @DisplayName("Overloaded put method accepts type-safe key")
+    void overloadedPutMethodAcceptsTypeSafeKeyParameter() {
+        var putMethod = getOverloadedPutMethod();
 
-        assertThat(overloadedPutMethod.getTypeParameters()).hasSize(1);
-        assertThat(overloadedPutMethod.getTypeParameters()[0].getTypeName()).isEqualTo("T");
+        var typeParam = (ParameterizedType) putMethod.getGenericParameterTypes()[0];
+        var typeArgument = typeParam.getActualTypeArguments()[0];
+
+        assertThat(typeParam.getRawType()).isEqualTo(Class.class);
+        assertThat(typeArgument.getTypeName()).isEqualTo("T");
     }
 
     @Test
     @Order(18)
-    @SneakyThrows
-    @DisplayName("Overloaded put method params specify type arguments")
-    void overloadedPutParametersSpecifyTypeArguments() {
-        var putMethod = HeterogeneousMaxHolder.class.getMethod("put", Class.class, Object.class, Comparator.class);
-        var genericParamTypeNames = Arrays.stream(putMethod.getGenericParameterTypes())
-                .map(Type::getTypeName)
-                .toList();
+    @DisplayName("Overloaded put method accepts value of arbitrary type T")
+    void overloadedPutMethodAcceptsAnyValue() {
+        var putMethod = getOverloadedPutMethod();
 
-        assertThat(genericParamTypeNames)
-                .contains(Class.class.getTypeName() + "<T>")
-                .contains("T")
-                .contains(Comparator.class.getTypeName() + "<? super T>");
+        var genericValueTypeParam = putMethod.getGenericParameterTypes()[1];
+        var actualValueTypeParm = putMethod.getParameterTypes()[1];
+
+        assertThat(genericValueTypeParam.getTypeName()).isEqualTo("T");
+        assertThat(actualValueTypeParm).isEqualTo(Object.class);
     }
 
     @Test
     @Order(19)
+    @SneakyThrows
+    @DisplayName("Overloaded put method supports comparator of a super type")
+    void overloadedPutAcceptsComparatorOfSuperTypes() {
+        var putMethod = HeterogeneousMaxHolder.class.getMethod("put", Class.class, Object.class, Comparator.class);
+
+        var comparatorParam = (ParameterizedType) putMethod.getGenericParameterTypes()[2];
+        var comparatorTypeArgument = comparatorParam.getActualTypeArguments()[0];
+
+        assertThat(comparatorTypeArgument.getTypeName()).isEqualTo("? super T");
+    }
+
+    @Test
+    @Order(20)
     @SneakyThrows
     @DisplayName("Overloaded put stores provided value when current max is null")
     void overloadedPutStoresValueWhenCurrentMaxIsNull() {
@@ -243,7 +262,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(20)
+    @Order(21)
     @SneakyThrows
     @DisplayName("Overloaded put returns null when current max is null")
     void overloadedPutReturnsNullWhenCurrentMaxIsNull() {
@@ -253,7 +272,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(21)
+    @Order(22)
     @SneakyThrows
     @DisplayName("Overloaded put stores provided value when current max is smaller than it")
     void overloadedPutStoresValueWhenCurrentMaxIsSmaller() {
@@ -269,7 +288,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(22)
+    @Order(23)
     @SneakyThrows
     @DisplayName("Overloaded put returns old max value when the provided value is greater than it")
     void overloadedPutReturnsOldMaxValue() {
@@ -284,7 +303,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(23)
+    @Order(24)
     @SneakyThrows
     @DisplayName("Overloaded put ignores provided value when the current max is greater than it")
     void overloadedPutIgnoresNewValueWhenCurrentMaxIsGreater() {
@@ -300,7 +319,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(24)
+    @Order(25)
     @SneakyThrows
     @DisplayName("Overloaded put returns provided value when the current max is greater")
     void overloadedPutReturnsProvidedValueWhenCurrentMaxIsGreater() {
@@ -315,7 +334,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(25)
+    @Order(26)
     @DisplayName("getMax method exists")
     void getMaxExists() {
         var getMaxMethodExists = Arrays.stream(HeterogeneousMaxHolder.class.getDeclaredMethods())
@@ -325,7 +344,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(26)
+    @Order(27)
     @DisplayName("getMax declares one simple type param 'T'")
     void getMaxDeclaresOneTypeParam() {
         var getMaxMethod = getGetMaxMethod();
@@ -337,7 +356,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(27)
+    @Order(28)
     @DisplayName("getMax has one parameter")
     void getMaxHasOneParameter() {
         var getMaxMethod = getGetMaxMethod();
@@ -349,7 +368,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(28)
+    @Order(29)
     @DisplayName("getMax param specifies type arguments")
     void getMaxParamSpecifyTypeArguments() {
         var getMaxMethod = getGetMaxMethod();
@@ -360,7 +379,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(29)
+    @Order(30)
     @DisplayName("getMax returns value when it exists")
     void getMaxReturnsValueWhenItExists() {
         givenMaxHolderWithData(String.class, "I am maximum");
@@ -371,7 +390,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(30)
+    @Order(31)
     @DisplayName("getMax returns value when it exists")
     void getMaxReturnsNullWhenNoValueByGivenTypeExists() {
         var returnedValue = callGetMax(String.class);
@@ -380,7 +399,7 @@ class HeterogeneousMaxHolderTest {
     }
 
     @Test
-    @Order(31)
+    @Order(32)
     @DisplayName("HeterogeneousMaxHolder keeps track of value one per each type")
     void maxHolderKeepsTrackOfMultipleValuesPerType() {
         callPut(String.class, "A");
