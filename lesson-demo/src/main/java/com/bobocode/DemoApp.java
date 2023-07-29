@@ -9,8 +9,8 @@ public class DemoApp {
 
         System.out.println("----------------");
         printReversedRecursively(head); // should print "5 -> 4 -> 3 -> 2 -> 1"
+        
         System.out.println("----------------");
-
         var newHead = reverseLinkedList(head);
         printLinkedList(newHead);// should print "5 -> 4 -> 3 -> 2 -> 1"
     }
@@ -81,6 +81,15 @@ public class DemoApp {
      * @return a new head of the list (old tail)
      */
     public static <T> Node<T> reverseLinkedList(Node<T> head) {
-        throw new ExerciseNotCompletedException();// todo:
+        var prev = head;
+        var current = head.next;
+        head.next = null;
+        while (current != null) {
+            var next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
     }
 }
