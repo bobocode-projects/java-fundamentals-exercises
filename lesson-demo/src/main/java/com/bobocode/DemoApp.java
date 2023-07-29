@@ -6,6 +6,7 @@ public class DemoApp {
     public static void main(String[] args) {
         var head = createLinkedList(1, 2, 3, 4, 5);
         printLinkedList(head); // should print "1 -> 2 -> 3 -> 4 -> 5"
+        printReversedRecursively(head); // should print "5 -> 4 -> 3 -> 2 -> 1"
     }
 
     static class Node<T> {
@@ -25,7 +26,13 @@ public class DemoApp {
      * @return
      */
     public static <T> Node<T> createLinkedList(T... values) {
-        throw new ExerciseNotCompletedException(); // todo:
+        var head = new Node<>(values[0]);
+        var current = head;
+        for (int i = 1; i < values.length; i++) {
+            current.next = new Node<>(values[i]);
+            current = current.next;
+        }
+        return head;
     }
 
     /**
@@ -34,6 +41,20 @@ public class DemoApp {
      * @param head a head node of the list
      */
     public static void printLinkedList(Node<?> head) {
+        var current = head;
+        while (current.next != null) {
+            System.out.print(current.elemet + " -> ");
+            current = current.next;
+        }
+        System.out.println(current.elemet);
+    }
+
+    /**
+     * Prints a provided linked list in the reversed order using the following format: "5 -> 4 -> 3 -> 2 -> 1"
+     *
+     * @param head a head node of the list
+     */
+    public static void printReversedRecursively(Node<?> head) {
         throw new ExerciseNotCompletedException(); // todo:
     }
 }
