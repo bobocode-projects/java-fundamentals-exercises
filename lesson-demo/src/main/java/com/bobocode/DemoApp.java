@@ -6,7 +6,13 @@ public class DemoApp {
     public static void main(String[] args) {
         var head = createLinkedList(1, 2, 3, 4, 5);
         printLinkedList(head); // should print "1 -> 2 -> 3 -> 4 -> 5"
+
+        System.out.println("----------------");
         printReversedRecursively(head); // should print "5 -> 4 -> 3 -> 2 -> 1"
+        System.out.println("----------------");
+
+        var newHead = reverseLinkedList(head);
+        printLinkedList(newHead);// should print "5 -> 4 -> 3 -> 2 -> 1"
     }
 
     static class Node<T> {
@@ -55,6 +61,26 @@ public class DemoApp {
      * @param head a head node of the list
      */
     public static void printReversedRecursively(Node<?> head) {
-        throw new ExerciseNotCompletedException(); // todo:
+        printReversedRecursivelyHelper(head.next);
+        System.out.println(head.elemet);
+    }
+
+    private static void printReversedRecursivelyHelper(Node<?> head) {
+        if (head != null) {
+            printReversedRecursivelyHelper(head.next);
+            System.out.print(head.elemet + " -> ");
+        }
+    }
+
+    /**
+     * Reverses a linked list by relinking next references in the reversed order. Please note, that this method
+     * DOES NOT create new nodes and does not change node values.
+     *
+     * @param head a head node of the list
+     * @param <T>
+     * @return a new head of the list (old tail)
+     */
+    public static <T> Node<T> reverseLinkedList(Node<T> head) {
+        throw new ExerciseNotCompletedException();// todo:
     }
 }
