@@ -1,7 +1,6 @@
 package com.bobocode.cs;
 
-import com.bobocode.util.ExerciseNotCompletedException;
-
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
@@ -17,33 +16,118 @@ import java.util.function.Consumer;
  * @author Maksym Stasiuk
  */
 public class RecursiveBinarySearchTree<T extends Comparable<T>> implements BinarySearchTree<T> {
+    private Node<T> root;
+    private int size;
 
+    private static class Node<T> {
+        T value;
+        Node<T> left;
+        Node<T> right;
+
+        public Node(T value) {
+            this.value = value;
+        }
+    }
+
+    @SafeVarargs
     public static <T extends Comparable<T>> RecursiveBinarySearchTree<T> of(T... elements) {
-        throw new ExerciseNotCompletedException();
+        RecursiveBinarySearchTree<T> binarySearchTree = new RecursiveBinarySearchTree<>();
+        Arrays.stream(elements).forEach(binarySearchTree::insert);
+        return binarySearchTree;
     }
 
     @Override
     public boolean insert(T element) {
-        throw new ExerciseNotCompletedException();
+        if (root == null) {
+            root = new Node<>(element);
+            size++;
+            return true;
+        } else {
+            return insert(root, element);
+        }
+    }
+
+    private boolean insert(Node<T> node, T element) {
+        int compare = element.compareTo(node.value);
+
+        if (compare < 0) {
+            if (node.left == null) {
+                node.left = new Node<>(element);
+                size++;
+                return true;
+            } else {
+                return insert(node.left, element);
+            }
+        } else if (compare > 0) {
+            if (node.right == null) {
+                node.right = new Node<>(element);
+                size++;
+                return true;
+            } else {
+                return insert(node.right, element);
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean contains(T element) {
-        throw new ExerciseNotCompletedException();
+        if (element == null) {
+            throw new NullPointerException();
+        } else if (root == null) {
+            return false;
+        } else {
+            return contains(root, element);
+        }
+
+
     }
+
+    private boolean contains(Node<T> root, T element) {
+        if (root == null)
+            return false;
+        int compare = element.compareTo(root.value);
+
+        if (compare > 0) {
+            return contains(root.right, element);
+        } else if (compare < 0) {
+            return contains(root.left, element);
+        } else return true;
+    }
+
 
     @Override
     public int size() {
-        throw new ExerciseNotCompletedException();
+        return size;
     }
 
     @Override
     public int depth() {
-        throw new ExerciseNotCompletedException();
+        return root == null ? 0 : depth(root) - 1;
+    }
+
+    private int depth(Node<T> node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftDepth = depth(node.left);
+        int rightDepth = depth(node.right);
+
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 
     @Override
     public void inOrderTraversal(Consumer<T> consumer) {
-        throw new ExerciseNotCompletedException();
+        inOrderTraversal(root, consumer);
+    }
+
+    private void inOrderTraversal(Node<T> node, Consumer<T> consumer) {
+        if (node != null) {
+            inOrderTraversal(node.left, consumer);
+            consumer.accept(node.value);
+            inOrderTraversal(node.right, consumer);
+        }
     }
 }
