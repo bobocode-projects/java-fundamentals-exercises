@@ -1,44 +1,38 @@
 package com.bobocode;
 
-import com.bobocode.util.ExerciseNotCompletedException;
-
-import java.util.function.Consumer;
+import lombok.SneakyThrows;
 
 public class DemoApp {
     public static void main(String[] args) {
-        var treeRoot = createBinarySearchTree(6, 4, 5, 2, 3, 7, 1);
-        inOrderTraversal(treeRoot, System.out::println); // should print 1,2,3,4,5,6,7
+        var person = new Person("John", "Gold", 43);
+        var personJson = covertToJson(person);
+        System.out.println(personJson); // should print {"firstName": "John", "lastName": "Gold", "age": 43}
     }
 
     /**
-     * Creates a binary search tree based on the given elements and returns the root node.
+     * Accepts and arbitrary object and returns a JSON string representing all object's data.
      *
-     * @param elements
-     * @param <T>
-     * @return
+     * @param object
+     * @return JSON string
      */
-    public static <T extends Comparable<? super T>> Node<T> createBinarySearchTree(T... elements) {
-        throw new ExerciseNotCompletedException(); //todo:
+    @SneakyThrows
+    private static String covertToJson(Object object) {
+        StringBuilder builder = new StringBuilder();
+        // todo:
+        return builder.toString();
     }
 
-    public static <T> void inOrderTraversal(Node<T> root, Consumer<? super T> consumer) {
-        if (root != null) {
-            inOrderTraversal(root.left, consumer);
-            consumer.accept(root.element);
-            inOrderTraversal(root.right, consumer);
+
+    static class Person {
+        private String firstName;
+        private String lastName;
+        private int age;
+
+        public Person(String firstName, String lastName, int age) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
         }
     }
-
-
-    static class Node<T> {
-        T element;
-        Node<T> left;
-        Node<T> right;
-
-        public Node(T element) {
-            this.element = element;
-        }
-    }
-
 
 }

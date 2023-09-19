@@ -1,6 +1,10 @@
 package com.bobocode.basics;
 
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
+
+import static java.util.Comparator.nullsFirst;
 
 /**
  * {@link HeterogeneousMaxHolder} is a multi-type container that holds maximum values per each type. It's kind of a
