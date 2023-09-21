@@ -130,10 +130,6 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
     }
 
     private void inOrderTraversal(Node<T> node, Consumer<T> consumer) {
-        if (node != null) {
-            inOrderTraversal(node.left, consumer);
-            consumer.accept(node.element);
-            inOrderTraversal(node.right, consumer);
-        }
+        // todo: implement this method using iteration
     }
 }
