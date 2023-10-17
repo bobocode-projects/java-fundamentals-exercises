@@ -201,8 +201,6 @@ class CrazyOptionalsTest {
         CrazyOptionals.retrieveBalance(() -> optionalAccountSpy);
 
         verify(optionalAccountSpy, never()).get();
-        verify(optionalAccountSpy, never()).isEmpty();
-        verify(optionalAccountSpy, times(1)).isPresent();
         verify(optionalAccountSpy, never()).orElse(any());
         verify(optionalAccountSpy, never()).orElseGet(any());
         verify(optionalAccountSpy, times(1)).map(any());
@@ -264,8 +262,6 @@ class CrazyOptionalsTest {
         CrazyOptionals.retrieveCreditBalance(() -> optionalCreditAccountSpy);
 
         verify(optionalCreditAccountSpy, never()).get();
-        verify(optionalCreditAccountSpy, never()).isEmpty();
-        verify(optionalCreditAccountSpy, times(1)).isPresent();
         verify(optionalCreditAccountSpy, never()).orElse(any());
         verify(optionalCreditAccountSpy, never()).orElseGet(any());
         verify(optionalCreditAccountSpy, times(1)).flatMap(any());
@@ -311,8 +307,6 @@ class CrazyOptionalsTest {
         CrazyOptionals.retrieveAccountGmail(() -> optionalAccountSpy);
 
         verify(optionalAccountSpy, never()).get();
-        verify(optionalAccountSpy, times(1)).isPresent();
-        verify(optionalAccountSpy, never()).isEmpty();
         verify(optionalAccountSpy, never()).orElse(any());
         verify(optionalAccountSpy, times(1)).filter(any());
     }
