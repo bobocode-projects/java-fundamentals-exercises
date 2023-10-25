@@ -240,7 +240,7 @@ class ArrayListTest {
 
     @Test
     @Order(23)
-    void setFirstElementOnEmptyTree() {
+    void setFirstElementOnEmptyList() {
         assertThatExceptionOfType(IndexOutOfBoundsException.class)
                 .isThrownBy(() -> arrayList.set(0, 34));
     }
