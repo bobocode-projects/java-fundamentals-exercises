@@ -5,7 +5,10 @@ import com.bobocode.util.ExerciseNotCompletedException;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * {@link CrazyLambdas} is an exercise class. Each method returns a functional interface and it should be implemented
@@ -20,14 +23,14 @@ import java.util.function.*;
  * @author Taras Boychuk
  */
 public class CrazyLambdas {
-
+     private static Random random = new Random();
     /**
      * Returns {@link Supplier} that always supply "Hello"
      *
      * @return a string supplier
      */
     public static Supplier<String> helloSupplier() {
-        throw new ExerciseNotCompletedException();
+        return () -> "Hello";
     }
 
     /**
@@ -36,7 +39,8 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> isEmptyPredicate() {
-        throw new ExerciseNotCompletedException();
+
+        return String::isEmpty;
     }
 
     /**
@@ -46,7 +50,9 @@ public class CrazyLambdas {
      * @return function that repeats Strings
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
-        throw new ExerciseNotCompletedException();
+        return (str,inter)-> Stream.iterate(str, x->x)
+                .limit(inter)
+                .collect(Collectors.joining(""));
     }
 
     /**
@@ -56,7 +62,7 @@ public class CrazyLambdas {
      * @return function that converts adds dollar sign
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
-        throw new ExerciseNotCompletedException();
+        return dec-> "$" + dec.toString();
     }
 
     /**
@@ -68,7 +74,7 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        throw new ExerciseNotCompletedException();
+        return (s) ->  min <= s.length() && s.length()< max  ;
     }
 
     /**
@@ -77,7 +83,7 @@ public class CrazyLambdas {
      * @return int supplier
      */
     public static IntSupplier randomIntSupplier() {
-        throw new ExerciseNotCompletedException();
+        return random::nextInt;
     }
 
 
@@ -87,7 +93,7 @@ public class CrazyLambdas {
      * @return int operation
      */
     public static IntUnaryOperator boundedRandomIntSupplier() {
-        throw new ExerciseNotCompletedException();
+        return inter -> random.nextInt(inter);
     }
 
     /**
@@ -96,7 +102,7 @@ public class CrazyLambdas {
      * @return square operation
      */
     public static IntUnaryOperator intSquareOperation() {
-        throw new ExerciseNotCompletedException();
+        return inter -> inter * inter;
     }
 
     /**
@@ -105,7 +111,7 @@ public class CrazyLambdas {
      * @return binary sum operation
      */
     public static LongBinaryOperator longSumOperation() {
-        throw new ExerciseNotCompletedException();
+        return Long::sum;
     }
 
     /**
@@ -114,7 +120,7 @@ public class CrazyLambdas {
      * @return string to int converter
      */
     public static ToIntFunction<String> stringToIntConverter() {
-        throw new ExerciseNotCompletedException();
+        return Integer::parseInt;
     }
 
     /**
@@ -125,7 +131,7 @@ public class CrazyLambdas {
      * @return a function supplier
      */
     public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-        throw new ExerciseNotCompletedException();
+        return ()-> x-> n * x;
     }
 
     /**
