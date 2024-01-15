@@ -248,7 +248,7 @@ public class CrazyOptionals {
      */
     public static double calculateTotalCreditBalance(List<CreditAccount> accounts) {
         // If you have a stream of optionals and you want to filter empty ones, you can do the trick and call
-        // `Stream#flatMap` and pass `Optional#sream`. This logic transforms each optional object into a stream of either
+        // `Stream#flatMap` and pass `Optional#stream`. This logic transforms each optional object into a stream of either
         // one of zero elements and then all those streams are flattened into one using `flatMap` which automatically
         // filters all empty optional 
         return accounts.stream()
