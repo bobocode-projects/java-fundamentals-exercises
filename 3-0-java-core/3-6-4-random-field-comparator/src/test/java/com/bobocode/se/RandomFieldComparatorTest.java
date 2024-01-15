@@ -82,7 +82,7 @@ class RandomFieldComparatorTest {
     @Order(7)
     @SneakyThrows
     @DisplayName("Method 'compare' returns positive int when the first value is greater")
-    void compareWhenFieldValueOfFirstObjectIsGreater() {
+    void compareWhenFieldValueOfFirstObjectIsGrater() {
         var fieldToCompareName = "firstName";
         Account account1 = new Account();
         Account account2 = new Account();
@@ -102,7 +102,7 @@ class RandomFieldComparatorTest {
     @Order(8)
     @SneakyThrows
     @DisplayName("Method 'compare' returns negative int when the first value is smaller")
-    void compareWhenFieldValueOfSecondObjectIsGreater() {
+    void compareWhenFieldValueOfSecondObjectIsGrater() {
         var fieldToCompareName = "firstName";
         Account account1 = new Account();
         Account account2 = new Account();
@@ -142,7 +142,7 @@ class RandomFieldComparatorTest {
     @Order(10)
     @SneakyThrows
     @DisplayName("Method 'compare' returns positive int when the first primitive value is greater")
-    void comparePrimitivesWhenFieldValueOfFirstObjectIsGreater() {
+    void comparePrimitivesWhenFieldValueOfFirstObjectIsGrater() {
         var fieldToCompareName = "age";
         Account account1 = new Account();
         Account account2 = new Account();
@@ -182,7 +182,7 @@ class RandomFieldComparatorTest {
     @Order(12)
     @SneakyThrows
     @DisplayName("Method 'compare' returns negative int when the first primitive value is smaller")
-    void comparePrimitivesWhenFieldValueOfSecondObjectIsGreater() {
+    void comparePrimitivesWhenFieldValueOfSecondObjectIsGrater() {
         var fieldToCompareName = "age";
         Account account1 = new Account();
         Account account2 = new Account();
