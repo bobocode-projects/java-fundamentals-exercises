@@ -1,8 +1,8 @@
 package com.bobocode.cs;
 
-import static java.util.Objects.requireNonNull;
-
 import lombok.ToString;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * {@link HashTable} is a simple Hashtable-based implementation of {@link Map} interface with some additional methods.
@@ -271,6 +271,7 @@ public class HashTable<K, V> implements Map<K, V> {
     public void resizeTable(int newCapacity) {
         verifyCapacity(newCapacity);
         @SuppressWarnings("unchecked") Node<K, V>[] newTable = new Node[newCapacity];
+        size = 0;
         for (var head : table) {
             var current = head;
             while (current != null) {
