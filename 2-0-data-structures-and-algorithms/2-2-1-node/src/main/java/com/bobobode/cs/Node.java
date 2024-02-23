@@ -9,5 +9,27 @@ package com.bobobode.cs;
  * @author Taras Boychuk
  */
 public class Node<T> {
-    // todo:
+    T element;
+    Node<T> reference;
+
+    public Node(T element) {
+        this.element =
+                element;
+    }
+
+    public T getElement() {
+        return element;
+    }
+
+    public void setElement(T element) {
+        this.element = element;
+    }
+
+    public Node<T> getReference() {
+        return reference;
+    }
+
+    public void setReference(Node<T> reference) {
+        this.reference = reference;
+    }
 }
