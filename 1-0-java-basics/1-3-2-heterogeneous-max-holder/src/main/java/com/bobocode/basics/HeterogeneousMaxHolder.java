@@ -9,7 +9,7 @@ import java.util.Map;
  * It's based on the {@link Map} and provides an API that allows to put a value by type, and get a max value by type.
  * <p>
  * <p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @author Taras Boychuk

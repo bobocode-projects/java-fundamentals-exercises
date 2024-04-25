@@ -23,7 +23,7 @@ import java.util.OptionalDouble;
  * <p>
  * TODO: remove exception and implement each method of this class using Optional API
  * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @author Taras Boychuk

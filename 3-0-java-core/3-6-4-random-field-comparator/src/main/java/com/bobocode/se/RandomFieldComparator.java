@@ -11,7 +11,7 @@ import java.util.Comparator;
  *
  * @param <T> the type of the objects that may be compared by this comparator
  *<p><p>
- *  <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ *  <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  *  <p>
  *
  * @author Stanislav Zabramnyi
