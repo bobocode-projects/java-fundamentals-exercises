@@ -5,7 +5,7 @@ package com.bobocode.cs;
  * class Node. In order to perform operations {@link LinkedQueue#add(Object)} and {@link LinkedQueue#poll()}
  * in a constant time, it keeps to references to the head and tail of the queue.
  * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @param <T> a generic parameter

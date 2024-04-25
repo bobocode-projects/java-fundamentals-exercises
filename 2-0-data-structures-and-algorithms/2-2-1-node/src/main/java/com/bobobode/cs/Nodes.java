@@ -3,7 +3,7 @@ package com.bobobode.cs;
 /**
  * A class that consists of static methods only and provides util methods for {@link Node}.
  * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @author Taras Boychuk

@@ -21,7 +21,7 @@ import static java.util.stream.Collectors.*;
  * <p>
  * TODO: remove exception throwing and implement each method using Stream API
  * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @author Taras Boychuk

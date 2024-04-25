@@ -21,7 +21,7 @@ import static java.util.Objects.requireNonNull;
  * <p>
  * The initial array size (initial capacity) is 8.
  * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @param <K> key type

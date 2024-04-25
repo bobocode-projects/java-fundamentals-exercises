@@ -18,7 +18,7 @@ import java.util.function.Predicate;
  * cases you will need to add new fields, create new classes, or add new methods. Always try to read java doc and update
  * the code according to it.
  * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @author Taras Boychuk

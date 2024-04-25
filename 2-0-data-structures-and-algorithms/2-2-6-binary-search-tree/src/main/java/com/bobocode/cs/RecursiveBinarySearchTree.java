@@ -9,7 +9,7 @@ import java.util.stream.Stream;
  * and recursion. A tree node is represented as a nested class {@link Node}. It holds an element (a value) and
  * two references to the left and right child nodes.
  * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com/learn">visit our website</a></strong>
+ * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
  * <p>
  *
  * @param <T> a type of elements that are stored in the tree
