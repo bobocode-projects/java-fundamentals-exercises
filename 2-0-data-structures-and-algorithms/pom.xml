@@ -10,7 +10,7 @@
         <module>2-2-3-linked-queue</module>
         <module>2-2-4-linked-list</module>
         <module>2-2-5-array-list</module>
-        <module>2-2-6-binary-search-tree</module>
+        <module>2-2-6-trees</module>
         <module>2-2-9-hash-table</module>
         <module>data-structures-and-algorithms-util</module>
     </modules>

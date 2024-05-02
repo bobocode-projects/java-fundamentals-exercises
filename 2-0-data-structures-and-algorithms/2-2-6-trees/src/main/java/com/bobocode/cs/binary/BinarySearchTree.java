@@ -1,11 +1,12 @@
-package com.bobocode.cs;
+package com.bobocode.cs.binary;
 
+import com.bobocode.cs.Tree;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
- * {@link RecursiveBinarySearchTree} is an implementation of a {@link BinarySearchTree} that is based on a linked nodes
+ * {@link BinarySearchTree} is an implementation of a {@link Tree} that is based on a linked nodes
  * and recursion. A tree node is represented as a nested class {@link Node}. It holds an element (a value) and
  * two references to the left and right child nodes.
  * <p><p>
@@ -16,14 +17,14 @@ import java.util.stream.Stream;
  * @author Taras Boychuk
  * @author Maksym Stasiuk
  */
-public class RecursiveBinarySearchTree<T extends Comparable<T>> implements BinarySearchTree<T> {
+public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
     private static class Node<T> {
-        T element;
+        T value;
         Node<T> left;
         Node<T> right;
 
-        private Node(T element) {
-            this.element = element;
+        private Node(T value) {
+            this.value = value;
         }
 
         public static <T> Node<T> valueOf(T element) {
@@ -34,8 +35,8 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
     private Node<T> root;
     private int size = 0;
 
-    public static <T extends Comparable<T>> RecursiveBinarySearchTree<T> of(T... elements) {
-        RecursiveBinarySearchTree<T> bst = new RecursiveBinarySearchTree<>();
+    public static <T extends Comparable<T>> BinarySearchTree<T> of(T... elements) {
+        BinarySearchTree<T> bst = new BinarySearchTree<>();
         Stream.of(elements).forEach(bst::insert);
         return bst;
     }
@@ -60,9 +61,9 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
     }
 
     private boolean insertIntoSubTree(Node<T> subTreeRoot, T element) {
-        if (subTreeRoot.element.compareTo(element) > 0) {
+        if (subTreeRoot.value.compareTo(element) > 0) {
             return insertIntoLeftSubtree(subTreeRoot, element);
-        } else if (subTreeRoot.element.compareTo(element) < 0) {
+        } else if (subTreeRoot.value.compareTo(element) < 0) {
             return insertIntoRightSubtree(subTreeRoot, element);
         } else {
             return false;
@@ -97,9 +98,9 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
     private Node<T> findChildNodeByElement(Node<T> node, T element) {
         if (node == null) {
             return null;
-        } else if (node.element.compareTo(element) > 0) {
+        } else if (node.value.compareTo(element) > 0) {
             return findChildNodeByElement(node.left, element);
-        } else if (node.element.compareTo(element) < 0) {
+        } else if (node.value.compareTo(element) < 0) {
             return findChildNodeByElement(node.right, element);
         } else {
             return node;
@@ -129,10 +130,21 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
         inOrderTraversal(root, consumer);
     }
 
+    @Override
+    public void preOrderTraversal(Consumer<T> consumer) {
+        preOrderTraversal(root, consumer);
+    }
+    private void preOrderTraversal(Node<T> node, Consumer<T> consumer){
+        if (node != null){
+            consumer.accept(node.value);
+            preOrderTraversal(node.left, consumer);
+            preOrderTraversal(node.right, consumer);
+        }
+    }
     private void inOrderTraversal(Node<T> node, Consumer<T> consumer) {
         if (node != null) {
             inOrderTraversal(node.left, consumer);
-            consumer.accept(node.element);
+            consumer.accept(node.value);
             inOrderTraversal(node.right, consumer);
         }
     }
