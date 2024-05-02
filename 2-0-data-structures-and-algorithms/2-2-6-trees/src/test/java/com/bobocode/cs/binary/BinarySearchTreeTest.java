@@ -1,5 +1,7 @@
-package com.bobocode.cs;
+package com.bobocode.cs.binary;
 
+import com.bobocode.cs.AbstractTreeUnitTest;
+import com.bobocode.cs.Tree;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -8,13 +10,11 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,99 +30,47 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  * @author Maksym Stasiuk
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class RecursiveBinarySearchTreeTest {
-    private static final Predicate<Field> SIZE_FIELD = field ->
-            field.getName().toLowerCase().contains("size") || field.getName().toLowerCase().contains("length");
-    
-    private static final Predicate<Field> NODE_FIELD = field ->
-            field.getType().getSimpleName().equals("Node");
-    
-    private static final Predicate<Field> ELEMENT_FIELD = field ->
-            field.getName().toLowerCase().contains("element")
-            || field.getName().toLowerCase().contains("item")
-            || field.getName().toLowerCase().contains("value");
-    
-    private static final Predicate<Field> LEFT_FIELD = field ->
-            field.getName().toLowerCase().contains("left")
-            && field.getType().getSimpleName().equals("Node");
-    
-    private static final Predicate<Field> RIGHT_FIELD = field ->
-            field.getName().toLowerCase().contains("right")
-            && field.getType().getSimpleName().equals("Node");
+class BinarySearchTreeTest extends AbstractTreeUnitTest {
 
-    private static final Integer[] someElements = {10, 9, 11, 8, 12, 7};
-    
-    private BinarySearchTree<Integer> tree = new RecursiveBinarySearchTree<>();
+    private Tree<Integer> tree = new BinarySearchTree<>();
 
     @Test
     @Order(1)
     void properNodeClassNameCheck() {
-        Class<?> innerClass = getInnerClass();
-        String name = innerClass.getSimpleName();
-
-        assertThat(name).isEqualTo("Node");
+        checkTreeNode(BinarySearchTree.class);
     }
 
     @Test
     @Order(2)
     void properTreeFieldsCheck() {
-        Class<?> treeClass = tree.getClass();
-
-        boolean hasSizeField = Arrays.stream(treeClass.getDeclaredFields())
-                .anyMatch(SIZE_FIELD);
-
-        boolean hasNodeField = Arrays.stream(treeClass.getDeclaredFields())
-                .anyMatch(NODE_FIELD);
-
-        assertThat(hasSizeField).isTrue();
-        assertThat(hasNodeField).isTrue();
+        checkTreeFieldsCheck(BinarySearchTree.class);
     }
 
     @Test
     @Order(3)
     void properNodeFieldsCheck() {
-        Class<?> innerClass = getInnerClass();
-
-        boolean isElement = Arrays.stream(innerClass.getDeclaredFields())
-                .anyMatch(ELEMENT_FIELD);
-
-        boolean isLeft = Arrays.stream(innerClass.getDeclaredFields())
-                .anyMatch(LEFT_FIELD);
-
-        boolean isRight = Arrays.stream(innerClass.getDeclaredFields())
-                .anyMatch(RIGHT_FIELD);
-
-        assertThat(isElement).isTrue();
-        assertThat(isLeft).isTrue();
-        assertThat(isRight).isTrue();
+        commonNodeFieldsCheck(BinarySearchTree.class);
     }
 
     @Test
     @Order(4)
     void of() {
-        tree = RecursiveBinarySearchTree.of(someElements);
-        for (var e : someElements) {
-            assertThat(contains(getRootObject(), e)).isTrue();
-        }
-        assertThat(getInnerSize()).isEqualTo(someElements.length);
+        tree = BinarySearchTree.of(someElements);
+        testOfMethod(tree);
     }
 
     @Test
     @Order(5)
     void insert() {
-        for (Integer e : someElements) {
-            assertThat(contains(getRootObject(), e)).isFalse(); //does not contain
-            assertThat(tree.insert(e)).isTrue(); //do insert
-            assertThat(contains(getRootObject(), e)).isTrue(); //and contains
-        }
+        testInsertMethod(tree);
     }
 
     @Test
     @Order(6)
     void insertToRootIfTreeIsEmpty() {
-        assertThat(getRootObject()).isNull();
+        assertThat(getRootObject(tree)).isNull();
         tree.insert(10);
-        assertThat(getRootObject()).isNotNull();
+        assertThat(getRootObject(tree)).isNotNull();
     }
 
     @Test
@@ -131,7 +79,7 @@ class RecursiveBinarySearchTreeTest {
         tree.insert(10); //root
         tree.insert(5); //left
 
-        assertThat(getLeftNode(getRootObject())).isNotNull();
+        assertThat(getLeftNode(getRootObject(tree))).isNotNull();
     }
 
     @Test
@@ -140,7 +88,7 @@ class RecursiveBinarySearchTreeTest {
         tree.insert(10); //root
         tree.insert(15); //right
 
-        assertThat(getRightNode(getRootObject())).isNotNull();
+        assertThat(getRightNode(getRootObject(tree))).isNotNull();
     }
 
     @Test
@@ -192,7 +140,7 @@ class RecursiveBinarySearchTreeTest {
         tree.insert(15);
         tree.insert(20);
 
-        assertThat(getInnerSize()).isEqualTo(3);
+        assertThat(getInnerSize(tree)).isEqualTo(3);
     }
 
     @Test
@@ -200,13 +148,13 @@ class RecursiveBinarySearchTreeTest {
     void sizeDoesNotGrowWhenInsertingNotUnique() {
         fillTestTree(10, 11, 12);
 
-        assertThat(getInnerSize()).isEqualTo(3);
+        assertThat(getInnerSize(tree)).isEqualTo(3);
 
         tree.insert(10);
         tree.insert(11);
         tree.insert(12);
 
-        assertThat(getInnerSize()).isEqualTo(3);
+        assertThat(getInnerSize(tree)).isEqualTo(3);
     }
 
     @Order(16)
@@ -243,10 +191,22 @@ class RecursiveBinarySearchTreeTest {
         Integer[] sortedElements = Arrays.copyOf(someElements, someElements.length);
         Arrays.sort(sortedElements);
 
-        List<Integer> traversedElements = new ArrayList<>(getInnerSize());
+        List<Integer> traversedElements = new ArrayList<>(getInnerSize(tree));
         tree.inOrderTraversal(traversedElements::add);
 
         assertThat(traversedElements).isEqualTo(List.of(sortedElements));
+    }
+
+    @Test
+    @Order(20)
+    void preOrderTraversal() {
+        fillTestTree(someElements);
+        Integer[] preOrderOfSomeElements = {10, 9, 8, 7, 11, 12};
+
+        List<Integer> traversedElements = new ArrayList<>(getInnerSize(tree));
+        tree.preOrderTraversal(traversedElements::add);
+
+        assertThat(traversedElements).isEqualTo(List.of(preOrderOfSomeElements));
     }
 
     public static Stream<Arguments> depthArguments() {
@@ -289,28 +249,6 @@ class RecursiveBinarySearchTreeTest {
                 arguments(new Integer[]{6, 2, 7, 1, 5, 8, 4, 9, 3}, 4));
     }
 
-
-    @SneakyThrows
-    private int getInnerSize() {
-        return (int) getInnerSizeField().get(tree);
-    }
-
-    private Field getInnerSizeField() {
-        Field sizeField = Arrays.stream(tree.getClass().getDeclaredFields())
-                .filter(SIZE_FIELD)
-                .findAny()
-                .orElseThrow();
-        sizeField.setAccessible(true);
-        return sizeField;
-    }
-
-    private Class<?> getInnerClass() {
-        return Arrays.stream(tree.getClass().getDeclaredClasses())
-                .filter(Class::isMemberClass)
-                .findAny()
-                .orElseThrow();
-    }
-
     @SneakyThrows
     private Field getRootField() {
         Field nodeField = Arrays.stream(tree.getClass().getDeclaredFields())
@@ -321,65 +259,13 @@ class RecursiveBinarySearchTreeTest {
         return nodeField;
     }
 
-    @SneakyThrows
-    private Object getRootObject() {
-        Field nodeField = Arrays.stream(tree.getClass().getDeclaredFields())
-                .filter(NODE_FIELD)
-                .findAny()
-                .orElseThrow();
-        nodeField.setAccessible(true);
-        return nodeField.get(tree);
-    }
 
-    @SneakyThrows
-    private boolean contains(Object node, int element) {
-        return findNodeByElement(node, element) != null;
-    }
 
-    private Object findNodeByElement(Object node, int element) {
-        if (node == null) {
-            return null;
-        }
-        if (element == getElement(node)) {
-            return node;
-        } else if (element < getElement(node)) {
-            return findNodeByElement(getLeftNode(node), element);
-        } else if (element > getElement(node)) {
-            return findNodeByElement(getRightNode(node), element);
-        } else {
-            return node;
-        }
-    }
-
-    @SneakyThrows
-    private Field getNodesField(Object node, Predicate<Field> option) {
-        Field field = Arrays.stream(node.getClass().getDeclaredFields())
-                .filter(option)
-                .findAny()
-                .orElseThrow();
-        field.setAccessible(true);
-        return field;
-    }
-
-    @SneakyThrows
-    private int getElement(Object node) {
-        return (int) getNodesField(node, ELEMENT_FIELD).get(node);
-    }
-
-    @SneakyThrows
-    private Object getLeftNode(Object node) {
-        return getNodesField(node, LEFT_FIELD).get(node);
-    }
-
-    @SneakyThrows
-    private Object getRightNode(Object node) {
-        return getNodesField(node, RIGHT_FIELD).get(node);
-    }
 
     @SneakyThrows
     private Object newNode(int element) {
         Object nodeInstance;
-        Constructor<?>[] constructors = getInnerClass().getDeclaredConstructors();
+        Constructor<?>[] constructors = getInnerClass(BinarySearchTree.class).getDeclaredConstructors();
         Constructor<?> constructor;
 
         constructor = constructors[0];
@@ -395,9 +281,9 @@ class RecursiveBinarySearchTreeTest {
     }
 
     @SneakyThrows
-    private void insertElement(int element) {
+    private void insertElement(Tree<Integer> tree, int element) {
 
-        Object root = getRootObject();
+        Object root = getRootObject(tree);
 
         if (root == null) {
             getRootField().set(tree, newNode(element));
@@ -438,10 +324,10 @@ class RecursiveBinarySearchTreeTest {
 
     @SneakyThrows
     private void fillTestTree(Integer... elements) {
-        tree = new RecursiveBinarySearchTree<>();
+        tree = new BinarySearchTree<>();
         for (Integer e : elements) {
-            insertElement(e);
+            insertElement(tree, e);
         }
-        getInnerSizeField().set(tree, elements.length);
+        getInnerSizeField(tree.getClass()).set(tree, elements.length);
     }
 }

@@ -2,7 +2,7 @@ package com.bobocode.cs;
 
 import java.util.function.Consumer;
 
-public interface BinarySearchTree<T extends Comparable<T>> {
+public interface Tree<T extends Comparable<T>> {
     /**
      * insert an element
      * @return true if element did not exist in the tree and was inserted successfully
@@ -29,4 +29,6 @@ public interface BinarySearchTree<T extends Comparable<T>> {
      * @param consumer accepts ref. to node during traversing
      */
     void inOrderTraversal(Consumer<T> consumer);
+
+    void preOrderTraversal(Consumer<T> consumer);
 }
