@@ -15,11 +15,10 @@ Learn tree data structures and build strong skills implementing binary search tr
 
 
 ### Exercise overview 🇺🇦
-[![Linked List](https://yt-embed.herokuapp.com/embed?v=alxzyWswCVg)](https://youtu.be/alxzyWswCVg)
+[![Watch the video](https://img.youtube.com/vi/alxzyWswCVg/0.jpg)](https://www.youtube.com/watch?v=alxzyWswCVg)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
-#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/7U9XZHuTtT5xpjXR6)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>

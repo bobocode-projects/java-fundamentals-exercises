@@ -17,7 +17,7 @@ Build strong skills implementing a well known Array List data structure 💪
 * maintain list **size** ✅
 
 ### Exercise overview 🇺🇦
-[![Linked List](https://yt-embed.herokuapp.com/embed?v=jFBKToSC3ag)](https://youtu.be/jFBKToSC3ag)
+[![Watch the video](https://img.youtube.com/vi/jFBKToSC3ag/0.jpg)](https://www.youtube.com/watch?v=jFBKToSC3ag)
 
 ---
 

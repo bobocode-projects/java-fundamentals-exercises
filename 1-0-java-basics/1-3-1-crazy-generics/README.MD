@@ -22,11 +22,10 @@ runtime to compile time and makes type parametrization safer.**
 * [Effective Java, Chapter 5 – Generics](https://read.amazon.com/kp/embed?asin=B078H61SCH&preview=newtab&linkCode=kpe&ref_=cm_sw_r_kb_dp_SADNB2C41TWARGY4QGKZ) 📘
 
 ### Exercise overview 🇺🇦
-[![Linked List](https://yt-embed.herokuapp.com/embed?v=EaL5KsSlEQM)](https://youtu.be/EaL5KsSlEQM)
+[![Watch the video](https://img.youtube.com/vi/EaL5KsSlEQM/0.jpg)](https://www.youtube.com/watch?v=EaL5KsSlEQM)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
-#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/u6kHcecFuzxV232LA)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>
