@@ -503,10 +503,10 @@ class HashTableTest {
         @Order(1)
         @DisplayName("resizeTable creates a new array and put there all elements")
         void resizeTable() {
-            addToTable("madmax", 833);
-            addToTable("altea", 553);
-            addToTable("AaAa", 123);
-            addToTable("BBBB", 456);
+            hashTable.put("madmax", 833);
+            hashTable.put("altea", 553);
+            hashTable.put("AaAa", 123);
+            hashTable.put("BBBB", 456);
 
             hashTable.resizeTable(16);
 
@@ -518,6 +518,20 @@ class HashTableTest {
         }
 
         @Test
+        @Order(2)
+        @DisplayName("resizeTable does not change the size")
+        void resizeTableDoesNotChangeSize() {
+            hashTable.put("madmax", 833);
+            hashTable.put("altea", 553);
+            hashTable.put("AaAa", 123);
+
+            hashTable.resizeTable(32);
+
+            assertThat(hashTable.size()).isEqualTo(3);
+        }
+
+        @Test
+        @Order(3)
         @DisplayName("toString returns a string that represents an underlying table")
         void toStringTest() {
             addToTable("madmax", 833);

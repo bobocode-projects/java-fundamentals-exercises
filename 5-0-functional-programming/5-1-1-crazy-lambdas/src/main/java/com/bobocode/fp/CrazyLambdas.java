@@ -5,6 +5,7 @@ import com.bobocode.util.ExerciseNotCompletedException;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.*;
 
 /**
@@ -27,7 +28,8 @@ public class CrazyLambdas {
      * @return a string supplier
      */
     public static Supplier<String> helloSupplier() {
-        throw new ExerciseNotCompletedException();
+        // because supplier method has NO PARAMETERS, a lambda starts with empty brackets
+        return () -> "Hello";
     }
 
     /**
@@ -36,7 +38,9 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> isEmptyPredicate() {
-        throw new ExerciseNotCompletedException();
+        // have a string parameter we can call isEmpty() and return result, e.g `str -> str.isEmpty()`  
+        // so if we only call a method, it's better to provide a reference to that method instead of lambda expression
+        return String::isEmpty;
     }
 
     /**
@@ -46,7 +50,11 @@ public class CrazyLambdas {
      * @return function that repeats Strings
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
-        throw new ExerciseNotCompletedException();
+        // Bi means two parameters (str, n), and we can implement this method using a lambda with two params
+        // e.g. `(str, n) -> str.repeat(n)`, however in this case it's also better to provide a reference instead.
+        // BiFunction method `apply` has two params, and String method `repeat` has only one, but when you use a static
+        // method reference to a non-static method it's first parameter becomes `this` 
+        return String::repeat;
     }
 
     /**
@@ -56,7 +64,8 @@ public class CrazyLambdas {
      * @return function that converts adds dollar sign
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
-        throw new ExerciseNotCompletedException();
+        // Function is a classic lambda, where parameter and return types are different 
+        return val -> "$" + val;
     }
 
     /**
@@ -68,7 +77,11 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        throw new ExerciseNotCompletedException();
+        // A lambda has one string parameter and we need to compare its length with provided min and max values.
+        // Please note, that `min` and `max` must be "effectively final" if we want to use them in lambda expression. 
+        // Try to uncomment the line below
+        // min = 1;
+        return str -> str.length() >= min && str.length() < max;
     }
 
     /**
@@ -77,7 +90,8 @@ public class CrazyLambdas {
      * @return int supplier
      */
     public static IntSupplier randomIntSupplier() {
-        throw new ExerciseNotCompletedException();
+        // This is a special Supplier for int primitive. Its method has no arguments and supplies an int value.
+        return () -> ThreadLocalRandom.current().nextInt();
     }
 
 
@@ -87,7 +101,9 @@ public class CrazyLambdas {
      * @return int operation
      */
     public static IntUnaryOperator boundedRandomIntSupplier() {
-        throw new ExerciseNotCompletedException();
+        // IntUnaryOperator is just an UnaryOperator for int primitives. Its method accepts int and returns int.
+        // So a parameter is a bound that should be used when generating a random integer 
+        return bound -> ThreadLocalRandom.current().nextInt(bound);
     }
 
     /**
@@ -96,7 +112,8 @@ public class CrazyLambdas {
      * @return square operation
      */
     public static IntUnaryOperator intSquareOperation() {
-        throw new ExerciseNotCompletedException();
+        // a classical example of lambda, we use parameter and return its square 
+        return x -> x * x;
     }
 
     /**
@@ -105,7 +122,9 @@ public class CrazyLambdas {
      * @return binary sum operation
      */
     public static LongBinaryOperator longSumOperation() {
-        throw new ExerciseNotCompletedException();
+        // LongBinaryOperator is a binary operator for long primitive. 
+        // It can be done using lambda with two params like `(a, b) -> a + b` but it's better to use method reference
+        return Long::sum;
     }
 
     /**
@@ -114,7 +133,9 @@ public class CrazyLambdas {
      * @return string to int converter
      */
     public static ToIntFunction<String> stringToIntConverter() {
-        throw new ExerciseNotCompletedException();
+        // ToIntFunction is a special form of Function that returns an int primitive. In this case we also use a simple
+        // method reference instead of a longer lambda `str -> Integer.parseInt(str)` 
+        return Integer::parseInt;
     }
 
     /**
@@ -125,7 +146,11 @@ public class CrazyLambdas {
      * @return a function supplier
      */
     public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-        throw new ExerciseNotCompletedException();
+        // As you can see we have Supplier that supplies IntUnaryOperator, which means we'll need a nested lambda.
+        // If it looks complex, you can start by implementing an inner lambda which is `x -> n * x`. Then on top of that
+        // you just need to implement a supplier that supplies that lambda above.
+        // Or you can start by implementing a supplier like `() -> ...` and then add inner lambda instead of three dots.
+        return () -> x -> n * x;
     }
 
     /**
@@ -134,7 +159,13 @@ public class CrazyLambdas {
      * @return function that composes functions with trim() function
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-        throw new ExerciseNotCompletedException();
+        // UnaryOperator has the same parameter and return type. In our case it's a function. So our job is to use
+        // that function and compose it with another function called `trim`
+        // As you can see Function provides some additional default methods, and one of them is `compose`. 
+        // So we have one parameter and we'll call compose, like `strFunction -> strFunction.compose(...)` then 
+        // instead of three dots, we need to pass another function(lambda) trim, you can pass `s -> s.trim()`, or just
+        // use a method reference to `trim`
+        return strFunction -> strFunction.compose(String::trim);
     }
 
     /**
@@ -145,7 +176,16 @@ public class CrazyLambdas {
      * @return a thread supplier
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        throw new ExerciseNotCompletedException();
+        // Having a runnable you can create and start a thread. And in this case you need to implement a supplier that
+        // will supply this running thread. The main point is that THREAD WON'T BE CREATED AND STARTED until 
+        // method `get` of the supplier is called.
+        // In this case you need to do multiple operations like create thread, call start and return it, so we need to
+        // use lambda body with curly brackets and return statement
+        return () -> {
+            Thread t = new Thread(runnable);
+            t.start();
+            return t;
+        };
     }
 
     /**
@@ -154,7 +194,10 @@ public class CrazyLambdas {
      * @return a runnable consumer
      */
     public static Consumer<Runnable> newThreadRunnableConsumer() {
-        throw new ExerciseNotCompletedException();
+        // In this case runnable is a parameter of a Consumer method. We use that parameter to create Thread 
+        // and start it. Since consumer does not return any value (void), we call method `start` right within 
+        // lambda expression. (Method `start` also returns `void`)  
+        return runnable -> new Thread(runnable).start();
     }
 
     /**
@@ -164,7 +207,13 @@ public class CrazyLambdas {
      * @return a function that transforms runnable into a thread supplier
      */
     public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-        throw new ExerciseNotCompletedException();
+        // This method is very similar to `runningThreadSupplier`. But in this case we should implement a function
+        // that accepts a runnable and then does exactly what we did before in `runningThreadSupplier`.
+        return runnable -> () -> {
+            Thread t = new Thread(runnable);
+            t.start();
+            return t;
+        };
     }
 
     /**
@@ -177,7 +226,13 @@ public class CrazyLambdas {
      * @return a binary function that receiver predicate and function and compose them to create a new function
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-        throw new ExerciseNotCompletedException();
+        // BiFunction accepts two parameters, so you can start from implementing this part
+        // `(intFunction, condition) -> ...` then the return type is `IntUnaryOperator`, and in order to implement 
+        // this result `IntUnaryOperator` we need a lambda with parameter e.g. `x`, so we can add it like
+        // `(intFunction, condition) -> x -> ...`. Now we should check the condition for `x` 
+        // `(intFunction, condition) -> x -> condition.test(x) ? ...` if it's true, we call provided `intFunction` 
+        // and return result, otherwise we just return `x`
+        return (intFunction, condition) -> x -> condition.test(x) ? intFunction.applyAsInt(x) : x;
     }
 
     /**
@@ -188,7 +243,11 @@ public class CrazyLambdas {
      * @return a high-order function that fetches a function from a function map by a given name or returns identity()
      */
     public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
-        throw new ExerciseNotCompletedException();
+        // This BiFunction accepts a map of functions and a function name, so we start form this
+        // `(functionMap, functionName) -> ...` then using a name we need to extract a function from map and return it
+        // or return `IntUnaryOperator.identity()` if no function was found. For this use case there is a default method
+        // of a class `Map` called `getOrDefault`
+        return (functionMap, functionName) -> functionMap.getOrDefault(functionName, IntUnaryOperator.identity());
     }
 
     /**
@@ -206,7 +265,7 @@ public class CrazyLambdas {
      * @return a comparator instance
      */
     public static <T, U extends Comparable<? super U>> Comparator<T> comparing(Function<? super T, ? extends U> mapper) {
-        throw new ExerciseNotCompletedException();
+        return (o1, o2) -> mapper.apply(o1).compareTo(mapper.apply(o2));
     }
 
     /**
@@ -226,7 +285,13 @@ public class CrazyLambdas {
      */
     public static <T, U extends Comparable<? super U>> Comparator<T> thenComparing(
             Comparator<? super T> comparator, Function<? super T, ? extends U> mapper) {
-        throw new ExerciseNotCompletedException();
+        return (o1, o2) -> {
+            var initialResult = comparator.compare(o1, o2);
+            if (initialResult != 0) {
+                return initialResult;
+            }
+            return mapper.apply(o1).compareTo(mapper.apply(o2));
+        };
     }
 
     /**
@@ -235,7 +300,8 @@ public class CrazyLambdas {
      * @return a supplier instance
      */
     public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-        throw new ExerciseNotCompletedException();
+        // You just need to create a couple of nested lambdas like `() -> () -> ...`
+        return () -> () -> () -> "WELL DONE!";
     }
 }
 

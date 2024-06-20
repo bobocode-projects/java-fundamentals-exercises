@@ -1,7 +1,6 @@
 package com.bobocode.fp;
 
 import com.bobocode.fp.exception.InvalidFunctionNameException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
