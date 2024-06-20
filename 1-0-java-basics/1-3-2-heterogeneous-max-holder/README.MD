@@ -9,9 +9,11 @@
 * implement a generic method getMax that retrieves a max value by its type ✅
 * wrap a comparator instance to make it null-safe ✅
 
+### Exercise overview 🇺🇦
+[![Watch the video](https://img.youtube.com/vi/jQnGDgH-Zfg/0.jpg)](https://www.youtube.com/watch?v=jQnGDgH-Zfg)
+
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
-#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/u6kHcecFuzxV232LA)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>

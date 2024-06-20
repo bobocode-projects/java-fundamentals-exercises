@@ -55,11 +55,10 @@ it can help you to simplify the code even more:
     * Favor the use of standard functional interfaces - Item 44
 
 ### Exercise overview 🇺🇦
-[![Linked List](https://yt-embed.herokuapp.com/embed?v=tNizKD1JbwM)](https://youtu.be/tNizKD1JbwM)
+[![Watch the video](https://img.youtube.com/vi/tNizKD1JbwM/0.jpg)](https://www.youtube.com/watch?v=tNizKD1JbwM)
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
-#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/GcKJyr1fEGaPrrLz8)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>
