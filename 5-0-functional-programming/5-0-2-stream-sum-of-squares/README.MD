@@ -9,7 +9,6 @@ Learn functional programming by refactoring a piece of code using Stream API �
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
-#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/7GaNdgTDWhaSh4fc7)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>

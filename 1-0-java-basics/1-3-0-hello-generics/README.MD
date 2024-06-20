@@ -24,7 +24,6 @@ it is not safe. Using `Object` requires runtime casting which can cause runtime 
 
 ---
 #### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
-#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/Q5aEmF8E86fbZ4rXA)
 
 ##
 <div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>
