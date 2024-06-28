@@ -716,7 +716,7 @@ public class CrazyGenericsTest {
         var duplicateEntity2 = new TestEntity(duplicateId);
 
         return Stream.of(
-                arguments(List.of(uniqueEntity, duplicateEntity1), uniqueEntity, false),
+                arguments(List.of(uniqueEntity, duplicateEntity1, duplicateEntity2), uniqueEntity, false),
                 arguments(List.of(uniqueEntity, duplicateEntity1, duplicateEntity2), duplicateEntity1, true),
                 arguments(List.of(duplicateEntity1, duplicateEntity2), duplicateEntity1, true)
         );
