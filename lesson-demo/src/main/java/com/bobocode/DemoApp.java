@@ -14,4 +14,5 @@ public class DemoApp {
     // todo: DISABLE AI Assistant
     // todo: implement a custom method comparing
     // todo: implement a custom method max
+    // todo: post a screenshot of your code to zoom chat
 }
