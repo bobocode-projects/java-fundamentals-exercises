@@ -3,7 +3,6 @@ package com.bobocode;
 import com.bobocode.data.Accounts;
 import com.bobocode.model.Account;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
@@ -33,9 +32,20 @@ public class DemoApp {
         }
         return maxElement;
     }
-    
-    // todo: implement a custom method thenComparing
 
-    
+    // todo: implement a custom method thenComparing
+    private static <T, U extends Comparable<? super U>> Comparator<T> thenComparing(
+            Comparator<? super T> comparator, 
+            Function<? super T, ? extends U> mappingFunction) {
+        return (o1, o2) ->{
+            var result = comparator.compare(o1, o2);
+            if (result != 0) {
+                return result;
+            }
+            return mappingFunction.apply(o1).compareTo(mappingFunction.apply(o2));
+        };
+    }
+
+
     // todo: post a screenshot of your code to zoom chat
 }

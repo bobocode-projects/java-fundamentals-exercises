@@ -4,6 +4,7 @@ import com.bobocode.data.Accounts;
 import com.bobocode.model.Account;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ProblemDemoApp {
@@ -68,7 +69,7 @@ public class ProblemDemoApp {
     // class-level type parametrisation
     // making generics covariant/contravariant -> wildcards and extends/super 
     // PECS -> Producer extends, Consumer super
-    private static <T extends Comparable<? super T>> T max(List<T> list) {
+    private static <T extends Object & Comparable<? super T>> T max(List<T> list) {
         T maxElement = list.get(0);
         for (var e : list) {
             if (e.compareTo(maxElement) > 0) {
