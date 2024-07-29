@@ -5,20 +5,20 @@ package com.bobocode.basics;
  * is flexible, because we can store anything we want there. But it is not safe, because it requires runtime casting
  * and there is no guarantee that we know the type of the stored value.
  * <p>
- * todo: refactor this class so it uses generic type "T" and run {@link com.bobocode.basics.BoxTest} to verify it
+ * todo: refactor this class so it uses generic type "T" and run {@link com.bobocode.basics} to verify it
  */
-public class Box {
-    private Object value;
+public class Box<T> {
+    private T value;
 
-    public Box(Object value) {
-        this.value = value;
+    public Box(T value) {
+        this.value =  value;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(T value) {
         this.value = value;
     }
 }
