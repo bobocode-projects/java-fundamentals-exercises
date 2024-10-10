@@ -3,6 +3,7 @@ package com.bobocode.basics;
 import com.bobocode.basics.util.BaseEntity;
 import com.bobocode.util.ExerciseNotCompletedException;
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -10,85 +11,39 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * {@link CrazyGenerics} is an exercise class. It consists of classes, interfaces and methods that should be updated
- * using generics.
- * <p>
- * TODO: go step by step from top to bottom. Read the java doc, write code and run CrazyGenericsTest to verify your impl
- * <p>
- * Hint: in some cases you will need to refactor the code, like replace {@link Object} with a generic type. In order
- * cases you will need to add new fields, create new classes, or add new methods. Always try to read java doc and update
- * the code according to it.
- * <p><p>
- * <strong>TODO: to get the most out of your learning, <a href="https://www.bobocode.com">visit our website</a></strong>
- * <p>
- *
- * @author Taras Boychuk
- */
 public class CrazyGenerics {
-    /**
-     * {@link Sourced} is a container class that allows storing any object along with the source of that data.
-     * The value type can be specified by a type parameter "T".
-     *
-     * @param <T> – value type
-     */
+
     @Data
-    public static class Sourced { // todo: refactor class to introduce type parameter and make value generic
-        private Object value;
+    public static class Sourced<T> {
+        private T value;
         private String source;
     }
 
-    /**
-     * {@link Limited} is a container class that allows storing an actual value along with possible min and max values.
-     * It is special form of triple. All three values have a generic type that should be a subclass of {@link Number}.
-     *
-     * @param <T> – actual, min and max type
-     */
     @Data
-    public static class Limited {
-        // todo: refactor class to introduce type param bounded by number and make fields generic numbers
-        private final Object actual;
-        private final Object min;
-        private final Object max;
+    public static class Limited<T extends Number> {
+        private final T actual;
+        private final T min;
+        private final T max;
     }
 
-    /**
-     * {@link Converter} interface declares a typical contract of a converter. It works with two independent generic types.
-     * It defines a convert method which accepts one parameter of one type and returns a converted result of another type.
-     *
-     * @param <T> – source object type
-     * @param <R> - converted result type
-     */
-    public interface Converter { // todo: introduce type parameters
-        // todo: add convert method
+    public interface Converter {
+        R convert(T obj);
     }
 
-    /**
-     * {@link MaxHolder} is a container class that keeps track of the maximum value only. It works with comparable objects
-     * and allows you to put new values. Every time you put a value, it is stored only if the new value is greater
-     * than the current max.
-     *
-     * @param <T> – value type
-     */
-    public static class MaxHolder { // todo: refactor class to make it generic
-        private Object max;
+    @Getter
+    public static class MaxHolder <T extends Comparable<? super T>> {
+        private T max;
 
-        public MaxHolder(Object max) {
+        public MaxHolder(T max) {
             this.max = max;
         }
 
-        /**
-         * Puts a new value to the holder. A new value is stored to the max, only if it is greater than current max value.
-         *
-         * @param val a new value
-         */
-        public void put(Object val) {
-            throw new ExerciseNotCompletedException(); // todo: update parameter and implement the method
+        public void put(T val) {
+            if (val.compareTo(max) > 0) {
+                max = val;
+            }
         }
 
-        public Object getMax() {
-            return max;
-        }
     }
 
     /**
@@ -97,8 +52,8 @@ public class CrazyGenerics {
      *
      * @param <T> – the type of objects that can be processed
      */
-    interface StrictProcessor { // todo: make it generic
-        void process(Object obj);
+    interface StrictProcessor<T> { // todo: make it generic
+        void process(T obj);
     }
 
     /**
