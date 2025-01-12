@@ -3,6 +3,7 @@ package com.bobocode.intro;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +39,7 @@ class ExerciseIntroductionTest {
     @Order(2)
     @DisplayName("encodeMessage returns correct encoded message")
     @SneakyThrows
-    void encodeMessageReturnsCorrectPhrase() {
+    void encodeMessageReturnsCorrectPhrase() throws InvocationTargetException, IllegalAccessException {
         var encodeMessageMethod = Arrays.stream(ExerciseIntroduction.class.getDeclaredMethods())
                 .filter(method -> method.getName().equals("encodeMessage"))
                 .findAny()
