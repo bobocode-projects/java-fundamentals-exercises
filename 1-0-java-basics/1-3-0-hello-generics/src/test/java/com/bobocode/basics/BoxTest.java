@@ -41,7 +41,7 @@ public class BoxTest {
     @SneakyThrows
     @Order(4)
     @DisplayName("Field \"value\" is \"T\"")
-    void valueFieldIsGeneric() {
+    void valueFieldIsGeneric() throws NoSuchFieldException {
         var valueField = Box.class.getDeclaredField("value");
         var genericType = valueField.getGenericType();
 
@@ -64,7 +64,7 @@ public class BoxTest {
     @SneakyThrows
     @Order(6)
     @DisplayName("Getter return type is \"T\"")
-    void getterReturnTypeIsGeneric() {
+    void getterReturnTypeIsGeneric() throws NoSuchMethodException {
         var getter = Box.class.getDeclaredMethod("getValue");
 
         assertThat(getter.getGenericReturnType().getTypeName()).isEqualTo(TYPE_PARAMETER_NAME);
@@ -74,7 +74,7 @@ public class BoxTest {
     @SneakyThrows
     @Order(7)
     @DisplayName("Setter parameter type is \"T\"")
-    void setterParameterIsGeneric() {
+    void setterParameterIsGeneric() throws NoSuchMethodException {
         var setter = Box.class.getDeclaredMethod("setValue", Object.class);
         assert (setter.getParameters().length == 1);
         var parameter = setter.getParameters()[0];

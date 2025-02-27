@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -70,7 +71,7 @@ public class CrazyGenericsTest {
     @SneakyThrows
     @Order(4)
     @DisplayName("Sourced class field \"value\" has generic type \"T\"")
-    void valueFieldIsGeneric() {
+    void valueFieldIsGeneric() throws NoSuchFieldException {
         var valueField = Sourced.class.getDeclaredField("value");
         var genericType = valueField.getGenericType();
 
@@ -144,7 +145,7 @@ public class CrazyGenericsTest {
     @SneakyThrows
     @Order(11)
     @DisplayName("Convert method parameter \"obj\" has type \"T\"")
-    void converterMethodParameterHasTypeT() {
+    void converterMethodParameterHasTypeT() throws NoSuchMethodException {
         var convertMethod = Converter.class.getDeclaredMethod("convert", Object.class);
         var objParam = convertMethod.getParameters()[0];
 
@@ -155,7 +156,7 @@ public class CrazyGenericsTest {
     @SneakyThrows
     @Order(12)
     @DisplayName("Convert method return type is \"R\"")
-    void converterMethodReturnTypeIsR() {
+    void converterMethodReturnTypeIsR() throws NoSuchMethodException {
         var convertMethod = Converter.class.getDeclaredMethod("convert", Object.class);
 
         assertThat(convertMethod.getGenericReturnType().getTypeName()).isEqualTo(SECOND_TYPE_PARAMETER_NAME);
@@ -237,7 +238,7 @@ public class CrazyGenericsTest {
     @Order(20)
     @SneakyThrows
     @DisplayName("MaxHolder put stores argument value when it's greater than max")
-    void maxHolderPut() {
+    void maxHolderPut() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Constructor<?> constructor = MaxHolder.class.getConstructors()[0];
         var maxHolder = constructor.newInstance(10);
         var putMethod = getMethodByName(MaxHolder.class, "put");
@@ -787,7 +788,7 @@ public class CrazyGenericsTest {
     @DisplayName("findMostRecentlyCreatedEntity returns the most recently created entity")
     @SneakyThrows
     void findMostRecentlyCreatedEntityReturnsEntityWithMaxCreatedOnValue(List<? extends BaseEntity> entities,
-                                                                         BaseEntity mostRecentlyCreatedEntity) {
+                                                                         BaseEntity mostRecentlyCreatedEntity) throws InvocationTargetException, IllegalAccessException {
         var findMostRecentlyCreatedEntityMethod = getMethodByName(CollectionUtil.class, "findMostRecentlyCreatedEntity");
 
         var result = findMostRecentlyCreatedEntityMethod.invoke(null, entities);

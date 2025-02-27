@@ -18,4 +18,12 @@ public abstract class BaseEntity {
         this.uuid = uuid;
         this.createdOn = LocalDateTime.now();
     }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
 }

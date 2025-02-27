@@ -2,6 +2,8 @@ package com.bobocode.fp;
 
 import com.bobocode.fp.exception.InvalidRangeException;
 
+import java.util.stream.IntStream;
+
 /**
  * This class allow to calculate a sum of squares of integer number in a certain range. It was implemented using
  * OO approach. Your job is to refactor it using functional approach. E.g. avoid using mutable variables
@@ -26,10 +28,6 @@ public class SumOfSquares {
         }
 
         // todo: refactor using functional approach – instead of using for loop, use IntStream.rangeClose()
-        int sumOfSquares = 0;
-        for (int i = startInclusive; i <= endInclusive; i++) {
-            sumOfSquares += i * i;
-        }
-        return sumOfSquares;
+        return IntStream.rangeClosed(startInclusive,endInclusive).map(x->x*x).sum();
     }
 }
