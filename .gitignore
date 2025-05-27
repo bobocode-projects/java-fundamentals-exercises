@@ -1,3 +1,12 @@
 .idea
 **/*.iml
 **/target
+.DS_Store
+0-0-intro/
+1-0-java-basics/1-5-0-hello-annotations/
+2-0-data-structures-and-algorithms/
+3-0-java-core/3-6-1-file-reader/
+3-0-java-core/3-6-2-file-stats/
+3-0-java-core/3-6-3-crazy-regex/
+4-0-object-oriented-programming/
+6-0-test-driven-development/

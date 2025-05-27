@@ -1,2 +1,0 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Data Structures & Angorithms
-Learn Data Structures & Algorithms and build strong related skills needed for enterprise Java development 💪 

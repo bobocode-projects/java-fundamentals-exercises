@@ -1,2 +1,0 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Java Object-Oriented Programming
-Build strong object-oriented programming skills needed for enterprise Java development 💪
