@@ -24,7 +24,8 @@ public class ExerciseIntroduction {
      */
     public String getWelcomeMessage() {
         // todo: implement a method and return a message according to javadoc
-        throw new ExerciseNotCompletedException(); 
+            return "The key to efficient learning is practice!";
+
     }
 
     /**
