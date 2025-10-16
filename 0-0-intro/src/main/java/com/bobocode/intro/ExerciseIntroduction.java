@@ -1,5 +1,7 @@
 package com.bobocode.intro;
 
+import java.util.Base64;
+
 import com.bobocode.util.ExerciseNotCompletedException;
 
 /**
@@ -20,11 +22,12 @@ public class ExerciseIntroduction {
      * This method returns a very important message. If understood well, it can save you years of inefficient learning,
      * and unlock your potential!
      *
-     * @return "The key to efficient learning is practice!"
+     * 
      */
     public String getWelcomeMessage() {
         // todo: implement a method and return a message according to javadoc
-        throw new ExerciseNotCompletedException(); 
+    //    throw new ExerciseNotCompletedException(); 
+        return "The key to efficient learning is practice!";
     }
 
     /**
@@ -40,6 +43,7 @@ public class ExerciseIntroduction {
      */
     public String encodeMessage(String message) {
         // todo: switch to branch "completed" in order to see how it should be implemented
-        throw new ExerciseNotCompletedException();
+        // throw new ExerciseNotCompletedException();
+        return Base64.getEncoder().encodeToString(message.getBytes());
     }
 }
