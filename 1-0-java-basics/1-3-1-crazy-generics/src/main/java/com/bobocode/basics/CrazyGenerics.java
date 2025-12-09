@@ -137,7 +137,7 @@ public class CrazyGenerics {
     interface ComparableCollection<E> extends Collection<E>, Comparable<Collection<?>> { // todo: refactor it to make generic and provide a default impl of compareTo
         @Override
         default int compareTo(Collection<?> o){
-            return Integer.compare(this.size(), o.size())
+            return Integer.compare(this.size(), o.size());
         }
     }
 
