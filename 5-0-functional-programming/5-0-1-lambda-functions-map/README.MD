@@ -1,18 +1,48 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Lambda Functions Map
-Start learning functional programming in Java by writing simple math functions using Lambdas 💪
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.IntUnaryOperator;
 
-### Objectives
+public class LambdaFunctionsMap {
 
-* implement **abs** (absolute) function using lambda ✅
-* implement **sgn** (signum) function using lambda ✅
-* implement **increment** function using lambda ✅
-* implement **decrement** function using lambda ✅
-* implement **square** function using lambda ✅
-* add all those functions to the function map ✅
+    private final Map<String, IntUnaryOperator> functionMap = new HashMap<>();
 
----
+    public LambdaFunctionsMap() {
+        
+        IntUnaryOperator abs = x -> x >= 0 ? x : -x;
 
-#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-exercises/tree/main/0-0-intro#introduction)
+        
+        IntUnaryOperator sgn = x -> x > 0 ? 1 : (x < 0 ? -1 : 0);
 
-##
-<div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>
+        
+        IntUnaryOperator increment = x -> x + 1;
+
+        
+        IntUnaryOperator decrement = x -> x - 1;
+
+        
+        IntUnaryOperator square = x -> x * x;
+
+        
+        functionMap.put("abs", abs);
+        functionMap.put("sgn", sgn);
+        functionMap.put("increment", increment);
+        functionMap.put("decrement", decrement);
+        functionMap.put("square", square);
+    }
+
+    
+    public Map<String, IntUnaryOperator> getFunctionMap() {
+        return functionMap;
+    }
+
+    
+    public static void main(String[] args) {
+        LambdaFunctionsMap lfm = new LambdaFunctionsMap();
+
+        System.out.println("abs(-5) = " + lfm.getFunctionMap().get("abs").applyAsInt(-5));
+        System.out.println("sgn(-5) = " + lfm.getFunctionMap().get("sgn").applyAsInt(-5));
+        System.out.println("increment(7) = " + lfm.getFunctionMap().get("increment").applyAsInt(7));
+        System.out.println("decrement(7) = " + lfm.getFunctionMap().get("decrement").applyAsInt(7));
+        System.out.println("square(4) = " + lfm.getFunctionMap().get("square").applyAsInt(4));
+    }
+}
