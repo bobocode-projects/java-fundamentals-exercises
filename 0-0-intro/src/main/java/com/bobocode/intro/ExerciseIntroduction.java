@@ -2,6 +2,8 @@ package com.bobocode.intro;
 
 import com.bobocode.util.ExerciseNotCompletedException;
 
+import java.util.Base64;
+
 /**
  * Welcome! This is an introduction exercise that will show you a simple example of Bobocode exercises.
  * <p>
@@ -23,8 +25,7 @@ public class ExerciseIntroduction {
      * @return "The key to efficient learning is practice!"
      */
     public String getWelcomeMessage() {
-        // todo: implement a method and return a message according to javadoc
-        throw new ExerciseNotCompletedException(); 
+        return "The key to efficient learning is practice!";
     }
 
     /**
@@ -39,7 +40,6 @@ public class ExerciseIntroduction {
      * @return encoded message
      */
     public String encodeMessage(String message) {
-        // todo: switch to branch "completed" in order to see how it should be implemented
-        throw new ExerciseNotCompletedException();
+        return Base64.getEncoder().encodeToString(message.getBytes());
     }
 }
