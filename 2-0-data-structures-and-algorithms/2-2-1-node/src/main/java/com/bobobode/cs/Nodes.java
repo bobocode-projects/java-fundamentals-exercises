@@ -1,6 +1,7 @@
 package com.bobobode.cs;
 
-import com.bobocode.util.ExerciseNotCompletedException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class that consists of static methods only and provides util methods for {@link Node}.
@@ -11,6 +12,7 @@ import com.bobocode.util.ExerciseNotCompletedException;
  * @author Taras Boychuk
  */
 public class Nodes {
+
     private Nodes() {
     }
 
@@ -22,7 +24,7 @@ public class Nodes {
      * @return a new instance of {@link Node}
      */
     public static <T> Node<T> create(T element) {
-        throw new ExerciseNotCompletedException(); // todo:
+        return new Node<>(element);
     }
 
     /**
@@ -33,7 +35,8 @@ public class Nodes {
      * @param <T>    a genetic type
      */
     public static <T> void link(Node<T> first, Node<T> second) {
-        throw new ExerciseNotCompletedException(); // todo:
+        if (first == null || second == null) { return; }
+        first.setNext(second);
     }
 
     /**
@@ -46,7 +49,7 @@ public class Nodes {
      * @return a reference to a first node created based on firstElement
      */
     public static <T> Node<T> pairOf(T firstElement, T secondElement) {
-        throw new ExerciseNotCompletedException(); // todo:
+        return new Node<>(firstElement, new Node<>(secondElement));
     }
 
     /**
@@ -60,7 +63,11 @@ public class Nodes {
      * @return a reference to the first node
      */
     public static <T> Node<T> closedPairOf(T firstElement, T secondElement) {
-        throw new ExerciseNotCompletedException(); // todo:
+        var firstNode = new Node<>(firstElement);
+        var secondNode = new Node<>(secondElement);
+        firstNode.setNext(secondNode);
+        secondNode.setNext(firstNode);
+        return firstNode;
     }
 
     /**
@@ -72,7 +79,20 @@ public class Nodes {
      * @return a reference to the first element of the chain
      */
     public static <T> Node<T> chainOf(T... elements) {
-        throw new ExerciseNotCompletedException(); // todo:
+        List<T> elementsList = List.of(elements);
+        List<Node> nodes = new ArrayList<>(elementsList.size());
+        for (int i = 0; i <= elementsList.size() - 1; i++) {
+            if (i == elementsList.size() - 1) {
+                nodes.add(new Node<>(elementsList.get(i)));
+            } else {
+                var firstNode = i != 0 ? nodes.getLast() : new Node<>(elementsList.get(i));
+                var nextNode = new Node<>(elementsList.get(i + 1));
+                firstNode.setNext(nextNode);
+                nodes.add(firstNode);
+                nodes.add(nextNode);
+            }
+        }
+        return nodes.getFirst();
     }
 
     /**
@@ -85,6 +105,19 @@ public class Nodes {
      * @return a reference to the first element of the chain
      */
     public static <T> Node<T> circleOf(T... elements) {
-        throw new ExerciseNotCompletedException(); // todo:
+        List<T> elementsList = List.of(elements);
+        List<Node> nodes = new ArrayList<>(elementsList.size());
+        for (int i = 0; i <= elementsList.size() - 1; i++) {
+            if (i == elementsList.size() - 1) {
+                nodes.getLast().setNext(nodes.getFirst());
+            } else {
+                var firstNode = i != 0 ? nodes.getLast() : new Node<>(elementsList.get(i));
+                var nextNode = new Node<>(elementsList.get(i + 1));
+                firstNode.setNext(nextNode);
+                nodes.add(firstNode);
+                nodes.add(nextNode);
+            }
+        }
+        return nodes.getFirst();
     }
 }
