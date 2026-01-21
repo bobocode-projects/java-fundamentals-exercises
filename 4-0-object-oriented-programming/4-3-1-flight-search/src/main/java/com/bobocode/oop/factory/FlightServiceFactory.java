@@ -16,6 +16,6 @@ public class FlightServiceFactory {
      * @return FlightService
      */
     public FlightService creteFlightService() {
-        throw new ExerciseNotCompletedException();
+        return new FlightService();
     }
 }
