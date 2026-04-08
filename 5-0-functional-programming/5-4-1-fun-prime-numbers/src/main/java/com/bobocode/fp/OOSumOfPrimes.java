@@ -23,7 +23,7 @@ public class OOSumOfPrimes {
         System.out.println("Sum of first 20 primes: " + sumOfPrimes);
     }
 
-    private static boolean isPrime(int n) {
+    public static boolean isPrime(int n) {
         for (int i = 2; i < n; i++) {
             if (n % i == 0) {
                 return false;
