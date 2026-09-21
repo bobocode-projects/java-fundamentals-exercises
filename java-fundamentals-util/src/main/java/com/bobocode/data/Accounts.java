@@ -28,7 +28,7 @@ public class Accounts {
         Person person = generatePerson();
         CreditAccount account = convertToCreditAccount(person);
         fillCommonRandomFields(account);
-        account.setCreditBalance(randomBigDecimal(MAX_BALANCE_VALUE));
+        //account.setCreditBalance(randomBigDecimal(MAX_BALANCE_VALUE));
         return account;
     }
 
@@ -62,20 +62,20 @@ public class Accounts {
     }
 
     private static void fillAccount(Account account, Person person) {
-        account.setFirstName(person.getFirstName());
-        account.setLastName(person.getLastName());
-        account.setEmail(person.getEmail());
-        account.setBirthday(LocalDate.of(
-                person.getDateOfBirth().getYear(),
-                person.getDateOfBirth().getMonth(),
-                person.getDateOfBirth().getDayOfMonth()));
-        account.setSex(Sex.valueOf(person.getSex().name()));
+        //account.setFirstName(person.getFirstName());
+        //account.setLastName(person.getLastName());
+        //account.setEmail(person.getEmail());
+        //account.setBirthday(LocalDate.of(
+                //person.getDateOfBirth().getYear(),
+                //person.getDateOfBirth().getMonth(),
+                //person.getDateOfBirth().getDayOfMonth()));
+        //account.setSex(Sex.valueOf(person.getSex().name()));
     }
 
     private static void fillCommonRandomFields(Account account) {
         BigDecimal balance = randomBigDecimal(MAX_BALANCE_VALUE);
-        account.setBalance(balance);
-        account.setCreationDate(LocalDate.now());
+        //account.setBalance(balance);
+        //account.setCreationDate(LocalDate.now());
     }
 
     private static BigDecimal randomBigDecimal(int max) {
