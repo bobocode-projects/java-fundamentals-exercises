@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Oct 05 10:46:06 EEST 2026
+mockito-inline-5.2.0-sources.jar>central=
+mockito-inline-5.2.0.jar>central=
+mockito-inline-5.2.0.pom>central=

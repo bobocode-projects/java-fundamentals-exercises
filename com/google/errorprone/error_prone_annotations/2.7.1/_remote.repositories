@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Oct 05 10:46:03 EEST 2026
+error_prone_annotations-2.7.1-sources.jar>central=
+error_prone_annotations-2.7.1.jar>central=
+error_prone_annotations-2.7.1.pom>central=
